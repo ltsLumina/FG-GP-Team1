@@ -1,4 +1,4 @@
-name: Sync Designer-Playground with Main
+name: Sync Design-Playground with Main
 
 on:
   push:
@@ -23,6 +23,6 @@ jobs:
 
       - name: Sync with main
         run: |
-          git checkout Designer-Playground
+          git checkout Design-Playground
           git pull origin main || true # Pull from main, ignore errors if nothing to pull
-          git push origin Designer-Playground
+          git push origin Design-Playground
