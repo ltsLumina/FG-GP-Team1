@@ -9,4 +9,4 @@ jobs:
       - name: Sync Branch
         uses: remarkablemark/sync-branch@v1
         with:
-          base: Design-Playground
+          base: Design
