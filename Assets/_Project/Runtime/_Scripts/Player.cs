@@ -57,7 +57,6 @@ public class Player : MonoBehaviour
         Rotate();
         
         if (!rock) return;
-
         if (rock.Grabbed)
         {
             var dir = (rock.transform.position - transform.position).normalized;
