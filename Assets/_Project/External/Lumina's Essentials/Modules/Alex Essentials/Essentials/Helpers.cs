@@ -1,6 +1,8 @@
 #region
+using System;
 using UnityEngine;
 using static UnityEngine.Object;
+using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 #endregion
 
@@ -89,6 +91,16 @@ namespace Lumina.Essentials.Modules
         /// <returns></returns>
         public static T Find<T>()
             where T : Object => FindAnyObjectByType<T>();
+
+        public static Object Find(Type type)
+        {
+            Object[] objectsOfType = FindObjectsByType(type, FindObjectsSortMode.None);
+            return objectsOfType.Length != 0 ? objectsOfType[0] : (Object) null;
+        }
+
+        public static T[] FindMultiple<T>(FindObjectsSortMode sortMode = FindObjectsSortMode.None) where T : Object => FindObjectsByType<T>(sortMode);
+        
+        public static Object[] FindMultiple(Type type, FindObjectsSortMode sortMode = FindObjectsSortMode.None) => FindObjectsByType(type, sortMode);
         #endregion
     }
 }

@@ -1,4 +1,5 @@
 #region
+using Lumina.Essentials.Modules;
 using UnityEngine;
 #endregion
 
@@ -50,7 +51,7 @@ public class SingletonPersistent<T> : MonoBehaviour
         {
             if (Application.isEditor)
             {
-                instance = (T) FindObjectOfType(typeof(T));
+                instance = (T) Helpers.Find(typeof(T));
                 return instance;
             }
             

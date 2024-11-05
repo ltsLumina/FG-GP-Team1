@@ -1,4 +1,6 @@
 #region
+using System.Collections;
+using DG.Tweening;
 using Lumina.Essentials.Attributes;
 using UnityEngine;
 using UnityEngine.Custom.Attributes;
@@ -9,11 +11,21 @@ using static Lumina.Essentials.Modules.Helpers;
 [Author("Alex", "alexander.andrejeff@edu.futuregames.se"), DisallowMultipleComponent]
 public class Player : MonoBehaviour
 {
+    [Header("Multiplayer")]
     [SerializeField, ReadOnly] int playerID;
+    
+    [Header("Movement")]
     [SerializeField] float moveSpeed;
     [Tooltip("The amount of push force applied when the player dives. \nA higher value will make it tougher to dive down.")]
-    [SerializeField] float diveForce;
-    [SerializeField] float dashForce;
+    [SerializeField] float diveForce = 15f;
+    
+    [Header("Dash")]
+    [SerializeField] float dashForce = 25f;
+    [SerializeField] float dashDuration = 0.05f;
+    [SerializeField] float dashDampingStart;
+    [SerializeField] float dashDampingEnd = 2.5f;
+    
+    // <- Cached Components ->
     
     InputManager input;
     PlayerInput playerInput;
@@ -36,14 +48,21 @@ public class Player : MonoBehaviour
         input       = GetComponentInChildren<InputManager>();
     }
 
+    Resource rock;
+
     void Update()
     {
         Move();
         StayInBounds();
+        Rotate();
         
-        // var rock = Find<Rock>();
-        // var dir = (rock.transform.position - transform.position).normalized;
-        // rock.GetComponent<Rigidbody>().AddForce(-dir * 50, ForceMode.Acceleration);
+        if (!rock) return;
+
+        if (rock.Grabbed)
+        {
+            var dir = (rock.transform.position - transform.position).normalized;
+            rock.GetComponent<Rigidbody>().AddForce(-dir * 5000, ForceMode.Impulse);
+        }
     }
 
     void Move()
@@ -65,16 +84,22 @@ public class Player : MonoBehaviour
     public void Dash()
     {
         Debug.Log("Dash");
-        
-        // dash in moveinput direction with a force of 10
-        var dir = input.MoveInput.normalized;
-        var rb  = GetComponent<Rigidbody>();
-        rb.AddForce(dir * dashForce, ForceMode.Impulse);
+        StartCoroutine(DashRoutine(GetComponent<Rigidbody>())); // TODO: Cache
     }
 
-    void Grab()
+    IEnumerator DashRoutine(Rigidbody rb)
     {
-        
+        rb.linearDamping = dashDampingStart;
+        var dir = input.MoveInput.normalized;
+        rb.AddForce(dir * dashForce, ForceMode.Impulse);
+        yield return new WaitForSeconds(dashDuration);
+        DOVirtual.Float(rb.linearDamping, dashDampingEnd, dashDuration, x => rb.linearDamping = x);
+    }
+
+    public void Grab()
+    {
+        var resource = Find<Resource>();
+        resource.Grab();
     }
 
     void StayInBounds()
@@ -89,6 +114,11 @@ public class Player : MonoBehaviour
                 transform.position = new (25, transform.position.y);
                 break;
         }
+    }
+
+    void Rotate()
+    {
+        
     }
 
     void OnDrawGizmos()
