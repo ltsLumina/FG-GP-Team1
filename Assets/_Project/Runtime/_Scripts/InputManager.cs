@@ -10,7 +10,6 @@ public class InputManager : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         MoveInput = context.ReadValue<Vector2>(); 
-        Debug.Log("cant move");
     }
 
     public void OnDash(InputAction.CallbackContext context)
