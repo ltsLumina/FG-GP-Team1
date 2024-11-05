@@ -43,7 +43,7 @@ public class Boid : MonoBehaviour
     private void Start()
     {
 
-        transform.right = new Vector3(Random.Range(-1f,1f), 0, Random.Range(-1f, 1f)).normalized;
+        transform.forward = new Vector3(Random.Range(-1f,1f), 0, Random.Range(-1f, 1f)).normalized;
 
         updateTimer = Random.Range(0, updateTimer);
 
@@ -82,9 +82,9 @@ public class Boid : MonoBehaviour
             timer = updateTimer;
         }
 
-        transform.right = Vector3.MoveTowards(transform.right, targetDir, currentTurnSpeed * Time.deltaTime);
+        transform.forward = Vector3.MoveTowards(transform.forward, targetDir, currentTurnSpeed * Time.deltaTime);
 
-        transform.position += transform.right * currentMoveSpeed * Time.deltaTime;
+        transform.position += transform.forward * currentMoveSpeed * Time.deltaTime;
 
     }
 
@@ -100,14 +100,14 @@ public class Boid : MonoBehaviour
 
         RaycastHit hit;
 
-        if (Physics.Raycast(transform.position, transform.right, out hit, wallContext, groundLayer))
+        if (Physics.Raycast(transform.position, transform.forward, out hit, wallContext, groundLayer))
         {
-            //Debug.DrawRay(transform.position, transform.right * hit.distance, Color.red);
-            sumForces = transform.right * -1;
+            //Debug.DrawRay(transform.position, transform.forward * hit.distance, Color.red);
+            sumForces = transform.forward * -1;
         }
         else
         {
-            //Debug.DrawRay(transform.position, transform.right * wallContext, Color.green);
+            //Debug.DrawRay(transform.position, transform.forward * wallContext, Color.green);
             sumForces += Seperation() * seperationStrength;
             sumForces += Alignment() * alignmentStrength;
             sumForces += Cohesion() * cohesionStrength;
