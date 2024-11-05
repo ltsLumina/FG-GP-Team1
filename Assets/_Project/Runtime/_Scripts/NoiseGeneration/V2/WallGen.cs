@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 
@@ -34,15 +35,20 @@ public class WallGen : MonoBehaviour
     GridDS grid2;
     Mesh mesh2;
 
+    private RowData _lastRow;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        grid1 = new GridDS(transform.position, Width, Height, CellSize, HeightMultiplier, ScaleX, ScaleY, Offset, GlobalOffset, GlobalScale, GlobalAmplitude, Octaves, Persistance, Lacunarity, 0);
-        grid2 = new GridDS(transform.position, Width, Height, CellSize, HeightMultiplier, ScaleX, ScaleY, Offset, GlobalOffset, GlobalScale, GlobalAmplitude, Octaves, Persistance, Lacunarity, 0);
+        grid1 = new GridDS(Curve, transform.position, Width, Height, CellSize, HeightMultiplier, ScaleX, ScaleY, Offset, GlobalOffset, GlobalScale, GlobalAmplitude, Octaves, Persistance, Lacunarity, 0);
+        grid2 = new GridDS(Curve, transform.position, Width, Height, CellSize, HeightMultiplier, ScaleX, ScaleY, Offset, GlobalOffset, GlobalScale, GlobalAmplitude, Octaves, Persistance, Lacunarity, 0);
 
         grid1.SetupWall();
         mesh1 = grid1.GenerateMesh(mesh1, transform.position);
         plane1.sharedMesh = mesh1;
+        _lastRow = grid1.GetLastRow();
+        Offset.y += (Height);
+        GlobalOffset.y += (Height);
         StartCoroutine(newWall(false, transform.position));
     }
 
@@ -52,6 +58,8 @@ public class WallGen : MonoBehaviour
         if (mesh2 != null)
         {
             plane2.sharedMesh = mesh2;
+            Vector3 newPosition = new Vector3(transform.position.x, transform.position.y - ((Height-2) * CellSize), transform.position.z);
+            plane2.gameObject.transform.position = newPosition;
         }
     }
 
@@ -69,6 +77,7 @@ public class WallGen : MonoBehaviour
             newGrid = grid2;
             newGrid.Clear();
         }
+        newGrid.SetOffset(Offset, GlobalOffset);
 
         int numRowsPerFrame = (int)Mathf.Ceil(Height / (float)numberOfFrameToCalculateOver);
         int totalRowsCalculated = 0;
@@ -81,9 +90,12 @@ public class WallGen : MonoBehaviour
                     newGrid.GenerateNextRow();
                     totalRowsCalculated++;
                 }
-            } 
-            else
+            }
+            if (i == numberOfFrameToCalculateOver - 1)
             {
+                newGrid.CullExtraRows();
+                newGrid.SetFirstRow(_lastRow);
+                
                 if (bufferFlag)
                 {
                     mesh1 = newGrid.GenerateMesh(mesh1, position);
@@ -92,6 +104,10 @@ public class WallGen : MonoBehaviour
                 {
                     mesh2 = newGrid.GenerateMesh(mesh2, position);
                 }
+
+                _lastRow = newGrid.GetLastRow();
+                Offset.y += (Height);
+                GlobalOffset.y += (Height);
             }
             yield return null;
         }

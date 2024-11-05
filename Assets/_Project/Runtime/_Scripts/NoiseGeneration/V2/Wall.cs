@@ -45,7 +45,7 @@ public class Wall : MonoBehaviour
 
         _numRowsAdded = 0;
 
-        _grid = new GridDS(transform.position, Width, Height, CellSize, HeightMultiplier, ScaleX, ScaleY, Offset, GlobalOffset, GlobalScale, GlobalAmplitude, Octaves, Persistance, Lacunarity, 0);
+        _grid = new GridDS(Curve, transform.position, Width, Height, CellSize, HeightMultiplier, ScaleX, ScaleY, Offset, GlobalOffset, GlobalScale, GlobalAmplitude, Octaves, Persistance, Lacunarity, 0);
 
 
         _grid.SetupWall();
