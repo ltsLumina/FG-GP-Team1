@@ -25,6 +25,8 @@ public class Boid : MonoBehaviour
     private float fleeContext;
     private float fleeTime;
 
+    private int rayPoints;
+
     private bool fleeing = false;
 
     private BoidSpawner spawner;
@@ -76,20 +78,30 @@ public class Boid : MonoBehaviour
     {
 
         CheckWalls(transform.forward);
-        
 
-     
+
+
+
+        if (timer < 0)
+        {
+            UpdateBehaviour();
+            timer = updateTimer;
+        }
+
+        Move();
+
     }
 
     private void CheckWalls(Vector3 dir)
     {
+
+        
         RaycastHit hit;
 
         if (Physics.Raycast(transform.position, dir, out hit, wallContext, groundLayer))
         {
             Debug.DrawRay(transform.position, dir * hit.distance, Color.red);
-            targetDir = new Vector3(dir.x, dir.y+0.4f, dir.z);
-            
+            targetDir = new Vector3(dir.x, dir.y+0.4f, dir.z);      
             Move();
         }
         else
@@ -98,13 +110,6 @@ public class Boid : MonoBehaviour
             timer -= Time.deltaTime;
             currentTurnSpeed = turnSpeed;
 
-            if (timer < 0)
-            {
-                UpdateBehaviour();
-                timer = updateTimer;
-            }
-
-            Move();
         }
     }
 

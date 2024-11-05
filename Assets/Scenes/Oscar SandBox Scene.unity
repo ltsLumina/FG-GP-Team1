@@ -877,7 +877,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 335ff94347b21584e8711a6cbb0c2e62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amountOfBoids: 300
+  amountOfBoids: 250
   spawnRangeX: 100
   spawnRangeY: 50
   spawnRangeZ: 100
@@ -891,7 +891,7 @@ Transform:
   m_GameObject: {fileID: 1069414809}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 173.9, y: -96.2, z: -8.5}
+  m_LocalPosition: {x: 173.9, y: -84.8, z: -8.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1693,7 +1693,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 335ff94347b21584e8711a6cbb0c2e62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amountOfBoids: 300
+  amountOfBoids: 250
   spawnRangeX: 100
   spawnRangeY: 50
   spawnRangeZ: 100
