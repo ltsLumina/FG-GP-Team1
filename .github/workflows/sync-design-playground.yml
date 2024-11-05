@@ -1,28 +1,42 @@
-name: Sync Design-Playground with Main
+name: Sync Branch with Main
 
 on:
   push:
     branches:
       - main
-  schedule:
-    - cron: '0 0 * * *' # Runs daily at midnight UTC, adjust as needed
 
 jobs:
-  sync-branches:
+  sync_branch:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0 # Fetch all history for the branches
+        uses: actions/checkout@v4  # Updated to the latest version
 
-      - name: Configure Git user
+      - name: Configure Git
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Sync with main
+      - name: Fetch all branches
+        run: git fetch --all
+
+      - name: Check if sync is needed
+        id: check_sync
         run: |
           git checkout Design-Playground
-          git pull origin main || true # Pull from main, ignore errors if nothing to pull
+          if git merge-base --is-ancestor main Design-Playground; then
+            echo "sync_needed=false" >> $GITHUB_ENV
+          else
+            echo "sync_needed=true" >> $GITHUB_ENV
+          fi
+
+      - name: Merge main into Design-Playground
+        if: env.sync_needed == 'true'
+        run: |
+          git merge main -m "Sync Design-Playground with main"
+
+      - name: Push changes to Design-Playground
+        if: env.sync_needed == 'true'
+        run: |
           git push origin Design-Playground

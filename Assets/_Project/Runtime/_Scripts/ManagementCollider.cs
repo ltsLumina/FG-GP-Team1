@@ -1,5 +1,6 @@
 using System;
 using DG.Tweening;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -94,7 +95,7 @@ public class ManagementCollider : MonoBehaviour
         // move component to top
 #if UNITY_EDITOR
         if (Application.isPlaying) return;
-        UnityEditorInternal.ComponentUtility.MoveComponentUp(this);
+        ComponentUtility.MoveComponentUp(this);
 #endif
         
         var col = GetComponent<BoxCollider>();
