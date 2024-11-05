@@ -1870,17 +1870,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb993bc7ebac35549be7ec30e7a9ed59, type: 3}
---- !u!114 &1525494810 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6312155803036534471, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
-  m_PrefabInstance: {fileID: 4565025280417043590}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c4eef3296164d54eae4bdae2f91944b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1754602628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2535,34 +2524,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5684678089997041182, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5684678089997041182, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5684678089997041182, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1525494810}
-    - target: {fileID: 5684678089997041182, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5684678089997041182, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnInteract
-      objectReference: {fileID: 0}
-    - target: {fileID: 5684678089997041182, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: InputManager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 5684678089997041182, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 8848661024979553184, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
       propertyPath: m_Name
       value: Player
@@ -2599,6 +2560,10 @@ PrefabInstance:
     - target: {fileID: 1505193886760754658, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
       propertyPath: m_Name
       value: Train
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: speed
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
       propertyPath: debugMode
