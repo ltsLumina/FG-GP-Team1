@@ -49,6 +49,7 @@ public sealed class AuthorAttribute : Attribute
     }
 }
 
+
 [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
 public sealed class MaxValueAttribute : Attribute
 {

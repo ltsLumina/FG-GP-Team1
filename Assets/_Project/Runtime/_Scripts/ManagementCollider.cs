@@ -161,6 +161,7 @@ public class ManagementCollider : MonoBehaviour
         else
         {
             onTaskComplete?.Invoke(task);
+            
         }
     }
 

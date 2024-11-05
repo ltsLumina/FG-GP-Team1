@@ -16,7 +16,7 @@ public class Train : MonoBehaviour
 {
 #pragma warning disable 0414
 
-    public enum Task
+    public enum Task 
     {
         Clean,
         Refuel,
