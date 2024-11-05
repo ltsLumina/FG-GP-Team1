@@ -11,9 +11,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0 # Ensure the full history is fetched
+        uses: actions/checkout@v4  # Updated to the latest version
 
       - name: Configure Git
         run: |
@@ -28,14 +26,17 @@ jobs:
         run: |
           git checkout Design-Playground
           if git merge-base --is-ancestor main Design-Playground; then
-            echo "Branch is already in sync with main."
-            exit 0
+            echo "sync_needed=false" >> $GITHUB_ENV
+          else
+            echo "sync_needed=true" >> $GITHUB_ENV
           fi
 
       - name: Merge main into Design-Playground
+        if: env.sync_needed == 'true'
         run: |
           git merge main -m "Sync Design-Playground with main"
-      
+
       - name: Push changes to Design-Playground
-        if: success() && steps.check_sync.outputs.sync_needed == 'true'
-        run: git push origin Design-Playground
+        if: env.sync_needed == 'true'
+        run: |
+          git push origin Design-Playground
