@@ -22,7 +22,7 @@ public class BoidDataSO : ScriptableObject
     [SerializeField, Range(0.0f, 30)] public float fleeContext = 5;
     [SerializeField, Range(0.0f, 2)] public float fleeTimeSeconds = 0.2f;
     [Header("Visuals")]
-    [SerializeField] public Mesh model;
+    [SerializeField] public GameObject prefab;
     [SerializeField] public Material material;
 }
  
