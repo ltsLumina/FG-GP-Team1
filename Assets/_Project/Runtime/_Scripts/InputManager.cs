@@ -18,10 +18,8 @@ public class InputManager : MonoBehaviour
         player.Dash();
     }
     
-    public void OnInteract(InputAction.CallbackContext context)
+    public void OnAction(InputAction.CallbackContext context)
     {
         Debug.Log("Action");
-        var player = GetComponentInParent<Player>();
-        player.Grab();
     }
 }
