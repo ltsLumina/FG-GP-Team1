@@ -55,6 +55,11 @@ public class GridDS
         _gridCellLength = gridCellLength;
     }
 
+    public void Clear()
+    {
+        _meshData.Clear();
+    }
+
     public void SetupWall()
     {
         _offset.y = -(_height * _gridCellLength / 2);
@@ -67,8 +72,7 @@ public class GridDS
     public void GenerateNextRow()
     {
         float[,] heightMap = BetterNoise.GetNoiseMap(_width, _totalRows, _totalRows+2, _scaleX, _scaleY, new Vector2(0,0), _globalOffset, _globalScale, _globalAmplitude, _octaves, _persistance, _lacunarity, _seed);
-
-
+        
         float topLeftX = _position.x - (_width * _gridCellLength / 2);
         float topLeftZ = _offset.y;
 
@@ -107,13 +111,19 @@ public class GridDS
         _offset.y += _gridCellLength;
     }
 
-    public Mesh GenerateMesh()
+    public Mesh GenerateMesh(Mesh mesh, Vector3 position)
     {
-        Mesh outMesh = new Mesh();
+        if (mesh == null)
+        {
+            mesh = new Mesh();
+        }
+        //Mesh outmesh = new Mesh();
 
         Vector3[] vertices = new Vector3[_width * _height];
         Vector2[] UVs = new Vector2[_width * _height];
         int[] triangles = new int[(_width - 1) * (_height - 1) * 6];
+
+        float zPos = position.z - _height * _gridCellLength / 2;
 
         int vertexIndex = 0;
         int triangleIndex = 0;
@@ -135,7 +145,9 @@ public class GridDS
                 int triangleOffset = vertexIndex;
                 for (int i = 0; i < rowLength / 2; i++)
                 {
-                    vertices[vertexIndex] = row.Vertices[i];
+                    Vector3 rowVerts = row.Vertices[i];
+                    rowVerts.z = zPos;
+                    vertices[vertexIndex] = rowVerts;
                     UVs[vertexIndex] = row.UVs[i];
                     vertexIndex++;
                 }
@@ -151,7 +163,9 @@ public class GridDS
                 int triangleOffset = vertexIndex;
                 for (int i = 0; i < rowLength; i++)
                 {
-                    vertices[vertexIndex] = row.Vertices[i];
+                    Vector3 rowVerts = row.Vertices[i];
+                    rowVerts.z = zPos;
+                    vertices[vertexIndex] = rowVerts;
                     UVs[vertexIndex] = row.UVs[i];
                     vertexIndex++;
                 }
@@ -161,14 +175,16 @@ public class GridDS
                     triangleIndex++;
                 }
             }
+            zPos += _gridCellLength;
         }
 
-        outMesh.vertices = vertices;
-        outMesh.triangles = triangles;
-        outMesh.uv = UVs;
-        outMesh.RecalculateNormals();
+        mesh.vertices = vertices;
+        mesh.triangles = triangles;
+        mesh.uv = UVs;
+        mesh.RecalculateNormals();
+        mesh.RecalculateBounds();
 
-        return outMesh;
+        return mesh;
     }
 
 }
@@ -196,15 +212,4 @@ public class RowData
         Triangles[triangleIndex + 2] = c;
         triangleIndex += 3;
     }
-
-    public Mesh CreateMesh()
-    {
-        Mesh mesh = new Mesh();
-        mesh.vertices = Vertices;
-        mesh.triangles = Triangles;
-        mesh.uv = UVs;
-        mesh.RecalculateNormals();
-        return mesh;
-    }
-
 }
