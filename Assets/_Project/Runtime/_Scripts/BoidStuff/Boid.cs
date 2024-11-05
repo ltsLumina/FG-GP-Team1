@@ -88,8 +88,8 @@ public class Boid : MonoBehaviour
         if (Physics.Raycast(transform.position, dir, out hit, wallContext, groundLayer))
         {
             Debug.DrawRay(transform.position, dir * hit.distance, Color.red);
-            targetDir = dir * -1;
-            currentTurnSpeed = turnSpeed * 99;
+            targetDir = new Vector3(dir.x, dir.y+0.4f, dir.z);
+            
             Move();
         }
         else
