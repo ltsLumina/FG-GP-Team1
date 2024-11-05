@@ -281,6 +281,7 @@ GameObject:
   m_Component:
   - component: {fileID: 371218063552686938}
   - component: {fileID: 3460641147627518562}
+  - component: {fileID: 2498330145617561162}
   - component: {fileID: 7800650524447749218}
   - component: {fileID: 7927158544815500917}
   - component: {fileID: 1519423553194101693}
@@ -328,6 +329,22 @@ MonoBehaviour:
   dashDuration: 0.05
   dashDampingStart: 0
   dashDampingEnd: 2.5
+--- !u!114 &2498330145617561162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8848661024979553184}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c423adc068a814a3abcdc2e0c95f7b08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  comments:
+  - subject: dive force
+    author: turner
+    comments: Dive Force should be 2.4 * ship speed to maintain speed with the ship.
 --- !u!65 &7800650524447749218
 BoxCollider:
   m_ObjectHideFlags: 0
