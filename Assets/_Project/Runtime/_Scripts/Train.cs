@@ -7,7 +7,9 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Custom.Attributes;
 using UnityEngine.Events;
+#if UNITY_EDITOR
 using VHierarchy.Libs;
+#endif
 using VInspector;
 #endregion
 
@@ -23,9 +25,11 @@ public class Train : MonoBehaviour
         Repair,
         Recharge,
     }
-    
+
+#if UNITY_EDITOR
     [UsedImplicitly] // This is used by the VInspector. Don't remove it and don't remove 'public'. 
     public VInspectorData vInspectorData;
+#endif
 
     [Header("Train Settings")]
     [SerializeField] float speed = 5;
@@ -197,7 +201,8 @@ public class Train : MonoBehaviour
         get => power;
         set => power = value;
     }
-    
+
+#if UNITY_EDITOR
     void OnGUI()
     {
         if (!showDebugInfo) return;
@@ -214,6 +219,7 @@ public class Train : MonoBehaviour
             GUILayout.Label($"Jellyfish Spawn Interval: {jellyfishSpawnInterval}", style);
         }
     }
+#endif
 
     void Start()
     {
@@ -394,9 +400,11 @@ public class Train : MonoBehaviour
 
     [Button, UsedImplicitly, ShowIf(nameof(debugMode))]
     void c_Recharge() => Power = 100;
-    
+
+#if UNITY_EDITOR
     [Button, UsedImplicitly, ShowIf(nameof(debugMode))]
     void c_ShowManagementColliders() => TrainEditorWindow.Open();
+#endif
 
     [Serializable]
     struct DirtinessStage
