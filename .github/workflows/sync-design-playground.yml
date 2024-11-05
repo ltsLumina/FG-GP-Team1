@@ -1,17 +1,17 @@
-name: Sync Branch with Main
+name: Sync Design-Playground to Main
 
 on:
   push:
     branches:
-      - main
+      - Design-Playground
 
 jobs:
-  sync_branch:
+  sync-branch:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4  # Updated to the latest version
+        uses: actions/checkout@v3
 
       - name: Configure Git
         run: |
@@ -21,22 +21,12 @@ jobs:
       - name: Fetch all branches
         run: git fetch --all
 
-      - name: Check if sync is needed
-        id: check_sync
+      - name: Merge Design-Playground into main
         run: |
-          git checkout Design-Playground
-          if git merge-base --is-ancestor main Design-Playground; then
-            echo "sync_needed=false" >> $GITHUB_ENV
-          else
-            echo "sync_needed=true" >> $GITHUB_ENV
-          fi
+          git checkout main
+          git merge Design-Playground --ff-only || echo "No changes to merge"
 
-      - name: Merge main into Design-Playground
-        if: env.sync_needed == 'true'
-        run: |
-          git merge main -m "Sync Design-Playground with main"
-
-      - name: Push changes to Design-Playground
-        if: env.sync_needed == 'true'
-        run: |
-          git push origin Design-Playground
+      - name: Push changes to main
+        run: git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
