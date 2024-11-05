@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using JetBrains.Annotations;
-using Lumina.Essentials.Modules;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Custom.Attributes;
 using UnityEngine.Events;
@@ -16,14 +14,6 @@ public class Train : MonoBehaviour
 {
 #pragma warning disable 0414
 
-    public enum Task
-    {
-        Clean,
-        Refuel,
-        Repair,
-        Recharge,
-    }
-    
     [UsedImplicitly] // This is used by the VInspector. Don't remove it and don't remove 'public'. 
     public VInspectorData vInspectorData;
 
@@ -40,14 +30,9 @@ public class Train : MonoBehaviour
     [SerializeField] float fuelDepletionRate = 1;
     [Tooltip("The multipliers for the fuel depletion rate per dirtiness level.")]
     [SerializeField] List<FuelDepletionRateMultiplier> fuelDepletionRateMultipliers;
-
-    [Header("Algae")]
-    [Tooltip("The amount of algae restored by the algae.")]
-    [Range(1, 50)]
-    [SerializeField] int algaeRestoreAmount = 10;
     
     [Header("Dirtiness")]
-    [SerializeField] List<DirtinessStage> dirtinessStages = new (5);
+    [SerializeField] List<Dirtiness> dirtinessStages = new (5);
     [Tooltip("The current dirtiness stage of the train.")]
     [Range(1, 5)]
     [SerializeField] int dirtinessStage = 1;
@@ -58,20 +43,23 @@ public class Train : MonoBehaviour
     [Range(0f, 5f)]
     [SerializeField] float dirtinessRate = 1;
     
-    [Header("Cleaning")]
-    [RangeResettable(0, 100)]
-    [SerializeField] float dirtinessCleanAmount = 25;
+    [Header("Algae")]
+    [Tooltip("The amount of algae restored by the algae.")]
+    [Range(1, 50)]
+    [SerializeField] int algaeRestoreAmount = 10;
 
     [Tab("Hull")]
     [Tooltip("The hull integrity of the train.")]
-    [RangeResettable(0, 3)] 
-    [SerializeField] int hullIntegrity = 3; // Takes 3 hits before it breaks and you lose.
+    [RangeResettable(0, 100)]
+    [SerializeField] float hullIntegrity = 100; // "Repair" task.
     [Tooltip("The rate at which the train is repaired. One unit per second.")]
-    [Range(1f, 3f)]
-    [SerializeField] int repairAmount = 1;
+    [Range(0.1f, 5f)]
+    [SerializeField] float repairRate = 1;
     [Tooltip("The amount of hull breaches the train has.")]
-    [Range(0,3)]
+    [Range(0,10)]
     [SerializeField] int hullBreaches;
+    [Tooltip("The rate at which the hull integrity depletes. One unit per second.")]
+    [SerializeField] List<HullIntegrityDepletionRate> hullIntegrityDepletionRate;
 
     [Tab("Power")]
     [Tooltip("The amount of power/electricity the train has. A low power level will dim the lights.")]
@@ -82,7 +70,7 @@ public class Train : MonoBehaviour
     [SerializeField] float powerDepletionRate = 1;
     [Tooltip("The rate at which power regenerates upon gathering a jellyfish. One unit per second.")]
     [Range(0f, 5f)]
-    [SerializeField] float powerRechargeAmount = 1;
+    [SerializeField] float powerRegenerationRate = 1;
 
     [Header("Lighting")]
     [Tooltip("The intensity of the light.")]
@@ -114,10 +102,13 @@ public class Train : MonoBehaviour
     [SerializeField] float jellyfishSpeed = 5;
     [Tooltip("The amount of power restored by a single jellyfish.")]
     [Range(1, 50)]
-    [SerializeField] int jellyfishRestoreAmount = 25;
+    [SerializeField] int jellyfishRestoreAmount = 10;
     [Tooltip("The duration of the stun when the player bumps into a jellyfish.")]
     [Range(1, 5)]
     [SerializeField] float jellyfishStunDuration = 1;
+    [Tooltip("The amount of hull breaches caused by a single jellyfish hit.")]
+    [Range(1, 5)]
+    [SerializeField] int jellyfishHullBreachesPerHit = 1;
 
     [Tab("Rocks")]
     [SerializeField] string inDevelopment = "Yes.";
@@ -128,15 +119,14 @@ public class Train : MonoBehaviour
     [SerializeField] UnityEvent onFuelRestored;
     [SerializeField] UnityEvent<int> onDirtinessStageChanged;
     [Foldout("Hull")]
-    [SerializeField] UnityEvent<int> onHullBreach;
-    [SerializeField] UnityEvent<int> onHullIntegrityChanged;
     [SerializeField] UnityEvent onDeath;
     [Foldout("Power")]
     [SerializeField] UnityEvent onPowerDepleted;
     [SerializeField] UnityEvent onPowerRestored;
     [SerializeField] UnityEvent OnLightDim;
+    [SerializeField] UnityEvent<int> onHullBreach;
     [Foldout("Rocks")]
-    [SerializeField] UnityEvent<Rock> onRockCollision;
+    [SerializeField] UnityEvent<GameObject> onRockCollision;
 
     [Tab("Settings")]
     [Header("Settings")]
@@ -153,12 +143,10 @@ public class Train : MonoBehaviour
     [SerializeField] List<float> hullIntegrityDepletionDefaults = new () { 1, 5f, 7.5f, 10f, 15f };
 
     // <- Cached references. ->
-    ManagementCollider[] managementColliders;
     
     // <- Properties ->
 
-    [MaxValue(100)]
-    public float Fuel
+    float Fuel
     {
         get => fuel;
         set
@@ -168,36 +156,17 @@ public class Train : MonoBehaviour
         }
     }
     
-    [MaxValue(100)]
-    public float Dirtiness
+    float HullIntegrity
     {
-        get => dirtiness;
-        set => dirtiness = value;
-    }
-
-    [MaxValue(3)]
-    public int HullIntegrity
-    {
-        get
-        {
-            if (hullIntegrity <= 0) onDeath.Invoke();
-            return hullIntegrity;
-        }
+        get => hullIntegrity;
         set
         {
             if (invincible) return;
-            hullIntegrity = Mathf.Clamp(value, 0, 3);
+            hullIntegrity = Mathf.Clamp(value, 0, 100);
             if (hullIntegrity <= 0) onDeath.Invoke();
         }
     }
 
-    [MaxValue(100)]
-    public float Power
-    {
-        get => power;
-        set => power = value;
-    }
-    
     void OnGUI()
     {
         if (!showDebugInfo) return;
@@ -206,10 +175,10 @@ public class Train : MonoBehaviour
         using (new GUILayout.VerticalScope("box"))
         {
             GUILayout.Label($"Speed: {speed}", style);
-            GUILayout.Label($"Fuel: {Fuel.Round()}", style);
-            GUILayout.Label($"Hull Integrity: {HullIntegrity}", style);
+            GUILayout.Label($"Fuel: {fuel.Round()}", style);
+            GUILayout.Label($"Hull Integrity: {hullIntegrity.Round()}", style);
             GUILayout.Label($"Dirtiness: {dirtiness.Round()} (Stage {dirtinessStage})", style);
-            GUILayout.Label($"Power: {Power.Round()}", style);
+            GUILayout.Label($"Power: {power.Round()}", style);
             GUILayout.Label($"Jellyfish Spawn Rate: {jellyfishSpawnRate}", style);
             GUILayout.Label($"Jellyfish Spawn Interval: {jellyfishSpawnInterval}", style);
         }
@@ -237,43 +206,37 @@ public class Train : MonoBehaviour
         {
             case 1: // No dirtiness. (0-19)
                 Fuel -= fuelDepletionRate * fuelDepletionRateMultipliers[0].multiplier * Time.deltaTime;
-                DebugDirtiness(false);
+                Debug.Log("No dirtiness.");
                 onDirtinessStageChanged.Invoke(1);
                 break;
 
             case 2: // Low dirtiness. (20-39)
                 Fuel -= fuelDepletionRate * fuelDepletionRateMultipliers[1].multiplier * Time.deltaTime;
-                DebugDirtiness(false);
+                Debug.Log("Low dirtiness.");
                 onDirtinessStageChanged.Invoke(2);
                 break;
 
             case 3: // Medium dirtiness. (40-59)
                 Fuel -= fuelDepletionRate * fuelDepletionRateMultipliers[2].multiplier * Time.deltaTime;
-                DebugDirtiness(false);
+                Debug.Log("Medium dirtiness.");
                 onDirtinessStageChanged.Invoke(3);
                 break;
 
             case 4: // High dirtiness. (60-79)
                 Fuel -= fuelDepletionRate * fuelDepletionRateMultipliers[3].multiplier * Time.deltaTime;
-                DebugDirtiness(false);
+                Debug.Log("High dirtiness.");
                 onDirtinessStageChanged.Invoke(4);
                 break;
 
             case 5: // Very high dirtiness. (80-100)
                 Fuel -= fuelDepletionRate * fuelDepletionRateMultipliers[4].multiplier * Time.deltaTime;
-                DebugDirtiness(false);
+                Debug.Log("Very high dirtiness.");
                 onDirtinessStageChanged.Invoke(5);
                 break;
         }
+        
+        HullIntegrity -= hullBreaches * hullIntegrityDepletionRate[hullBreaches].value * Time.deltaTime;
     }
-
-    #region Utility
-    void DebugDirtiness(bool enable)
-    {
-        if (!enable) return;
-        Debug.Log($"Dirtiness: {dirtiness} (Stage {dirtinessStage})");
-    }
-    #endregion
     
     void Dive()
     {
@@ -282,76 +245,46 @@ public class Train : MonoBehaviour
         transform.position += dir * (speed * Time.deltaTime);
     }
 
-    #region Tasks
-    public void SetTaskStatus(Task task)
+    void Clean()
     {
-        switch (task)
-        {
-            case Task.Clean:
-                Dirtiness -= 25f; // TODO: Change this to a variable.
-                break;
-
-            case Task.Refuel:
-                Fuel += algaeRestoreAmount;
-                break;
-
-            case Task.Repair:
-                hullBreaches--;
-                HullIntegrity += repairAmount;
-                onHullIntegrityChanged.Invoke(HullIntegrity);
-                break;
-
-            case Task.Recharge:
-                Power += powerRechargeAmount;
-                break;
-        }
+        // TODO: Clean engine by standing behind it.
+        // dirtiness -= example * Time.deltaTime;
+        //
+        // // Check if the current dirtiness stage will change
+        // for (int i = 0; i < dirtinessStages.Count; i++)
+        // {
+        //     if (dirtiness < dirtinessStages[i].threshold)
+        //     {
+        //         onDirtinessStageChanged.Invoke(i + 1);
+        //         break;
+        //     }
+        // }
     }
-
-    bool holdingItem; // temp
-
-    public bool CanPerformTask(Task task) => task switch
-    { Task.Clean    => Dirtiness > 0,
-      Task.Refuel   => Fuel          < 100 && holdingItem,
-      Task.Repair   => HullIntegrity < 3   && hullBreaches > 0,
-      Task.Recharge => Power < 100,
-      _             => false };
     
-    public bool IsTaskComplete(Task task) => task switch
-    { Task.Clean    => Dirtiness     <= 20,
-      Task.Refuel   => Fuel          >= 100,
-      Task.Repair   => HullIntegrity >= 3,
-      Task.Recharge => Power         >= 100,
-      _             => false };
-    #endregion
-
-    #region Collision/Trigger
     void OnCollision(GameObject collision)
     {
+        onRockCollision.Invoke(collision);
+        
         switch (collision.tag)
         {
             case "Jellyfish":
-                hullBreaches++;
-                onHullBreach.Invoke(hullBreaches);
+                hullBreaches  += jellyfishHullBreachesPerHit;
                 break;
             
             case "Rock":
                 hullBreaches++;
-                HullIntegrity = Mathf.Max(0, 3 - hullBreaches);
-                onHullBreach.Invoke(hullBreaches);
-                onHullIntegrityChanged.Invoke(HullIntegrity);
-                onRockCollision.Invoke(collision.GetComponent<Rock>());
                 break;
         }
     }
-
+    
     void OnTriggerEnter(Collider other)
     {
         switch (other.tag)
         {
             case "Jellyfish":
                 // TODO: Separate jellyfish return logic and jellyfish collision logic.
-                // This is the jellyfish return logic. 
-                Power += jellyfishRestoreAmount;
+                    // This is the jellyfish return logic. 
+                power += jellyfishRestoreAmount;
                 onPowerRestored.Invoke();
                 Destroy(other.gameObject);
                 
@@ -373,39 +306,35 @@ public class Train : MonoBehaviour
         {
             case "Rock":
                 OnCollision(other.gameObject);
-                break;
+            break;
         }
     }
-    #endregion
 
     [EndTab]
     
     [Button, UsedImplicitly, ShowIf(nameof(debugMode))]
-    void c_Refuel() => Fuel = 100;
+    void c_Refuel() => fuel = 100;
 
     [Button, UsedImplicitly, ShowIf(nameof(debugMode))]
     void c_Clean() => dirtiness = 0;
 
     [Button, UsedImplicitly, ShowIf(nameof(debugMode))]
-    void c_Repair() => HullIntegrity = 100;
+    void c_Repair() => hullIntegrity = 100;
 
     [Button, UsedImplicitly, ShowIf(nameof(debugMode))]
-    void c_Damage() => HullIntegrity -= 1;
+    void c_Damage() => hullIntegrity -= 25f;
 
     [Button, UsedImplicitly, ShowIf(nameof(debugMode))]
-    void c_Recharge() => Power = 100;
-    
-    [Button, UsedImplicitly, ShowIf(nameof(debugMode))]
-    void c_ShowManagementColliders() => TrainEditorWindow.Open();
+    void c_Recharge() => power = 100;
 
     [Serializable]
-    struct DirtinessStage
+    struct Dirtiness
     {
         [HideInInspector, UsedImplicitly]
         public string name;
         public int threshold;
 
-        public DirtinessStage(int threshold = 0)
+        public Dirtiness(int threshold = 0)
         {
             name           = "Stage";
             this.threshold = threshold;
@@ -425,6 +354,20 @@ public class Train : MonoBehaviour
             this.multiplier = multiplier;
         }
     }
+    
+    [Serializable]
+    struct HullIntegrityDepletionRate
+    {
+        [HideInInspector, UsedImplicitly]
+        public string name;
+        public float value;
+
+        public HullIntegrityDepletionRate(float value = 1)
+        {
+            name           = "Stage";
+            this.value = value;
+        }
+    }
   
     #region Validation/Editor
     void OnValidate()
@@ -434,14 +377,16 @@ public class Train : MonoBehaviour
 
         ValidateDirtiness();
         ValidateFuelDepletionRateMultipliers();
-        
-        HullIntegrity = Mathf.Max(0, 3 - hullBreaches);
+        ValidateHullIntegrityDepletionRate();
+
+        // this is a test
     }
 
     void Reset()
     {
         ValidateDirtiness(); 
         ValidateFuelDepletionRateMultipliers();
+        ValidateHullIntegrityDepletionRate();
     }
 
     #region Utility
@@ -454,14 +399,14 @@ public class Train : MonoBehaviour
         {
             dirtinessStages.Clear();
              
-            List<DirtinessStage> defaults = new () { new (20), new (40), new (60), new (80), new (100) };
+            List<Dirtiness> defaults = new () { new (20), new (40), new (60), new (80), new (100) };
             dirtinessStages = defaults;
         }
 
         // Set the name of each dirtiness stage
         for (int i = 0; i < dirtinessStages.Count; i++)
         {
-            DirtinessStage stage = dirtinessStages[i];
+            Dirtiness stage = dirtinessStages[i];
             stage.name     = $"Stage {i + 1}";
             dirtinessStages[i] = stage;
         }
@@ -497,38 +442,27 @@ public class Train : MonoBehaviour
             fuelDepletionRateMultipliers[i] = multiplier;
         }
     }
-    #endregion
-    #endregion
-}
 
-#if UNITY_EDITOR
-public class TrainEditorWindow : EditorWindow
-{
-    public static void Open()
+    void ValidateHullIntegrityDepletionRate()
     {
-        TrainEditorWindow window = GetWindow<TrainEditorWindow>();
-        window.titleContent = new ("Train Editor");
-        window.Show();
-    }
-
-    Vector2 scrollPos;
-
-    void OnGUI()
-    {
-        scrollPos = GUILayout.BeginScrollView(scrollPos);
-
-        foreach (var managementCollider in Helpers.FindMultiple<ManagementCollider>())
+        if (hullIntegrityDepletionRate == null) return;
+        
+        // Ensure hullIntegrityDepletionRate always has 5 elements
+        if (hullIntegrityDepletionRate.Count != 5)
         {
-            GUILayout.Space(25);
-            GUILayout.Label("", GUI.skin.horizontalSlider);
-            GUILayout.Space(25);
+            hullIntegrityDepletionRate.Clear();
             
-            // draw editor for each management collider
-            var editor = Editor.CreateEditor(managementCollider);
-            editor.OnInspectorGUI();
+            hullIntegrityDepletionRate = hullIntegrityDepletionDefaults.ConvertAll(m => new HullIntegrityDepletionRate(m));
         }
 
-        GUILayout.EndScrollView();
+        // Set the name of each hull integrity depletion rate
+        for (int i = 0; i < hullIntegrityDepletionRate.Count; i++)
+        {
+            HullIntegrityDepletionRate rate = hullIntegrityDepletionRate[i];
+            rate.name                 = $"Stage {i + 1}";
+            hullIntegrityDepletionRate[i] = rate;
+        }
     }
+    #endregion
+    #endregion
 }
-#endif

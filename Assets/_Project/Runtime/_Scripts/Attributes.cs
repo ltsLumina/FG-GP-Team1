@@ -48,17 +48,4 @@ public sealed class AuthorAttribute : Attribute
         Email = email;
     }
 }
-
-[AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
-public sealed class MaxValueAttribute : Attribute
-{
-    public float Value { get; }
-
-    /// <summary>
-    /// A marker attribute to indicate the maximum value of a field or property.
-    /// <remarks>This attribute does not change the behavior of the field or property.</remarks>
-    /// </summary>
-    /// <param name="value">The maximum value of the field or property.</param>
-    public MaxValueAttribute(float value) { Value = value; }
-}
 }
