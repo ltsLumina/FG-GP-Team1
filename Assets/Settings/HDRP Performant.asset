@@ -17,7 +17,7 @@ MonoBehaviour:
     supportSSR: 0
     supportSSRTransparent: 0
     supportSSAO: 1
-    supportSSGI: 0
+    supportSSGI: 1
     supportSubsurfaceScattering: 1
     sssSampleBudget:
       m_Values: 140000002800000050000000
@@ -27,7 +27,7 @@ MonoBehaviour:
       m_Values: 000000000000000000000000
       m_SchemaId:
         m_Id: With3Levels
-    supportVolumetrics: 0
+    supportVolumetrics: 1
     supportVolumetricClouds: 0
     supportLightLayers: 1
     renderingLayerMaskBuffer: 0
@@ -82,9 +82,9 @@ MonoBehaviour:
     supportProbeVolumeScenarios: 0
     supportProbeVolumeScenarioBlending: 1
     probeVolumeBlendingMemoryBudget: 128
-    supportRayTracing: 0
+    supportRayTracing: 1
     supportVFXRayTracing: 0
-    supportedRayTracingMode: 3
+    supportedRayTracingMode: 1
     lightLoopSettings:
       cookieAtlasSize: 512
       cookieFormat: 74
@@ -312,7 +312,7 @@ MonoBehaviour:
       - 0.5
       - 0.5
     gpuResidentDrawerSettings:
-      mode: 0
+      mode: 1
       smallMeshScreenPercentage: 0
       enableOcclusionCullingInCameras: 0
       useDepthPrepassForOccluders: 1
@@ -546,4 +546,4 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 11400000, guid: 2b7005ba3a4d8474b8cdc34141ad766e, type: 2}
-  m_PrefilterUseLegacyLightmaps: 0
+  m_PrefilterUseLegacyLightmaps: 1
