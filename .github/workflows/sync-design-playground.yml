@@ -1,0 +1,41 @@
+name: Sync Branch with Main
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sync_branch:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Ensure the full history is fetched
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Fetch all branches
+        run: git fetch --all
+
+      - name: Check if sync is needed
+        id: check_sync
+        run: |
+          git checkout Design-Playground
+          if git merge-base --is-ancestor main Design-Playground; then
+            echo "Branch is already in sync with main."
+            exit 0
+          fi
+
+      - name: Merge main into Design-Playground
+        run: |
+          git merge main -m "Sync Design-Playground with main"
+      
+      - name: Push changes to Design-Playground
+        if: success() && steps.check_sync.outputs.sync_needed == 'true'
+        run: git push origin Design-Playground
