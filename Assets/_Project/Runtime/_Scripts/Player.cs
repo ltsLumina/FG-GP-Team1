@@ -53,21 +53,12 @@ public class Player : MonoBehaviour
         rb          = GetComponent<Rigidbody>();
     }
 
-    Resource rock;
-
     void Update()
     {
         Move();
         Dive();
         StayInBounds();
         Rotate();
-        
-        if (!rock) return;
-        if (rock.Grabbed)
-        {
-            var dir = (rock.transform.position - transform.position).normalized;
-            rock.GetComponent<Rigidbody>().AddForce(-dir * 5000, ForceMode.Impulse);
-        }
     }
 
     void Dive()
@@ -105,10 +96,39 @@ public class Player : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Check if the player is holding an item.
+    /// </summary>
+    /// <param name="heldResource"> The held resource. </param>
+    /// <returns></returns>
+    public static bool HoldingResource(out Resource heldResource)
+    {
+        if (Find<Resource>() == null)
+        {
+            heldResource = null;
+            return false;
+        }
+        
+        heldResource = Find<Resource>();
+        return heldResource.Grabbed;
+    }
+
     public void Grab()
     {
         var resource = Find<Resource>();
-        resource.Grab();
+        if (resource.Reach > Vector3.Distance(transform.position, resource.transform.position))
+        {
+            resource.Grab();
+        }
+    }
+    
+    public void Release()
+    {
+        var resource = Find<Resource>();
+        if (resource.Grabbed)
+        {
+            resource.Release();
+        }
     }
 
     void StayInBounds()
@@ -127,14 +147,6 @@ public class Player : MonoBehaviour
 
     void Rotate()
     {
-        
-    }
-
-    void OnDrawGizmos()
-    {
-        // draw line to nearest rock
-        var rock = Find<Rock>();
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, rock.transform.position);
+        // TODO: @korben - please implement
     }
 }

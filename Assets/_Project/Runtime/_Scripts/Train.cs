@@ -45,8 +45,12 @@ public class Train : MonoBehaviour
     [Tooltip("The multipliers for the fuel depletion rate per dirtiness level.")]
     [SerializeField] List<FuelDepletionRateMultiplier> fuelDepletionRateMultipliers;
 
+    [Header("Kelp")]
+    [Range(1, 50)]
+    [SerializeField] int kelpRestoreAmount = 25;
+    
     [Header("Algae")]
-    [Tooltip("The amount of algae restored by the algae.")]
+    [Tooltip("The amount of dirtiness restored by the algae.")]
     [Range(1, 50)]
     [SerializeField] int algaeRestoreAmount = 10;
     
@@ -155,7 +159,7 @@ public class Train : MonoBehaviour
 
     [SerializeField] List<float> fuelDepletionDefaults = new () { 1, 1.5f, 2, 2.5f, 3 };
     [SerializeField] List<float> hullIntegrityDepletionDefaults = new () { 1, 5f, 7.5f, 10f, 15f };
-
+    
     // <- Cached references. ->
     ManagementCollider[] managementColliders;
     
@@ -299,6 +303,8 @@ public class Train : MonoBehaviour
 
             case Task.Refuel:
                 Fuel += algaeRestoreAmount;
+                Player.HoldingResource(out Resource heldItem);
+                Destroy(heldItem.gameObject);
                 break;
 
             case Task.Repair:
@@ -313,11 +319,9 @@ public class Train : MonoBehaviour
         }
     }
 
-    bool holdingItem; // temp
-
     public bool CanPerformTask(Task task) => task switch
     { Task.Clean    => Dirtiness > 0,
-      Task.Refuel   => Fuel          < 100 && holdingItem,
+      Task.Refuel   => Fuel          < 100 && Player.HoldingResource(out Resource _),
       Task.Repair   => HullIntegrity < 3   && hullBreaches > 0,
       Task.Recharge => Power < 100,
       _             => false };
@@ -346,29 +350,6 @@ public class Train : MonoBehaviour
                 onHullBreach.Invoke(hullBreaches);
                 onHullIntegrityChanged.Invoke(HullIntegrity);
                 onRockCollision.Invoke(collision.GetComponent<Rock>());
-                break;
-        }
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        switch (other.tag)
-        {
-            case "Jellyfish":
-                // TODO: Separate jellyfish return logic and jellyfish collision logic.
-                // This is the jellyfish return logic. 
-                Power += jellyfishRestoreAmount;
-                onPowerRestored.Invoke();
-                Destroy(other.gameObject);
-                
-                // This is the jellyfish collision logic.
-                // StartCoroutine(OnCollision("Jellyfish"));
-                break;
-
-            case "Algae":
-                Fuel += 25f;
-                onFuelRestored.Invoke();
-                Destroy(other.gameObject);
                 break;
         }
     }
