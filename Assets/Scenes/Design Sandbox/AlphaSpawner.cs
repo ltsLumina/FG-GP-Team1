@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using Lumina.Essentials.Modules;
+using UnityEngine;
 
 public class AlphaSpawner : MonoBehaviour
 {
-
-    [SerializeField] private List<ResourceWaves> spawnWaves = new List<ResourceWaves>();
+    [SerializeField]
+    private List<ResourceWaves> spawnWaves = new List<ResourceWaves>();
 
     public float baseSpawnRate = 1.0f; // The base rate for spawning objects
     public float randomAdjustment = 1.0f; // Maximum adjustment to the base rate
@@ -19,44 +19,61 @@ public class AlphaSpawner : MonoBehaviour
 
     private ResourceWaves currentWave;
 
-
     private void Start()
     {
+        if (spawnWaves.Count <= 0)
+        {
+            Debug.LogError("No waves to spawn");
+            enabled = false;
+            return;
+        }
         currentWave = spawnWaves[0];
         spawnWaves.Remove(currentWave);
+        startLocalX = transform.localPosition.x;
     }
 
     private void Update()
     {
+        if (currentWave == null)
+        {
+            return;
+        }
 
         timer += Time.deltaTime;
 
-
         for (int i = 0; i < currentWave.spawnObjects.Count; i++)
         {
-            if (Mathf.Repeat(timer, 2/currentWave.spawnObjects[i].spawnRate) >= 2/ currentWave.spawnObjects[i].spawnRate - Time.deltaTime)
+            if (
+                Mathf.Repeat(timer, 2 / currentWave.spawnObjects[i].spawnRate)
+                >= 2 / currentWave.spawnObjects[i].spawnRate - Time.deltaTime
+            )
             {
-                Instantiate(currentWave.spawnObjects[i].objectToSpawn, spawnPos(), Quaternion.identity);
+                Instantiate(
+                    currentWave.spawnObjects[i].objectToSpawn,
+                    spawnPos(),
+                    Quaternion.identity
+                );
             }
         }
 
-        for(int i = 0;i < spawnWaves.Count; i++)
+        for (int i = 0; i < spawnWaves.Count; i++)
         {
-            if(Helpers.Find<Train>().Depth < spawnWaves[i].depth)
+            if (Helpers.Find<Train>().Depth < spawnWaves[i].depth)
             {
                 currentWave = spawnWaves[i];
                 spawnWaves.Remove(currentWave);
             }
         }
-
     }
 
     private Vector3 spawnPos()
     {
-        return new Vector3(Random.Range(-moveLength, moveLength), transform.position.y, transform.position.z);
+        return new Vector3(
+            Random.Range(-moveLength, moveLength),
+            transform.position.y,
+            transform.position.z
+        );
     }
-
-
 
     // Draw the movement range in the editor
     private void OnDrawGizmos()
@@ -66,5 +83,4 @@ public class AlphaSpawner : MonoBehaviour
         Vector3 end = transform.position - Vector3.right * moveLength;
         Gizmos.DrawLine(start, end);
     }
-
 }

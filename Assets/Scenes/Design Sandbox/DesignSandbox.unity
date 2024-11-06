@@ -93,7 +93,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 4441000a78b7f5946a45e3918d73be75, type: 2}
+  m_LightingDataAsset: {fileID: 112000000, guid: a8e42cf63ba5d464cbe2eb02fdc3801e, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: c36c04815661a0842b18c17c99723f7b, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -1319,7 +1319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b488d58b75ecf449b845615ff119bbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToSpawn: {fileID: 7114551074614332808, guid: 9f72534f2dad6314c88a03de3280eaf2, type: 3}
+  spawnWaves: []
   baseSpawnRate: 1
   randomAdjustment: 1
   moveLength: 40
@@ -1720,17 +1720,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb993bc7ebac35549be7ec30e7a9ed59, type: 3}
---- !u!114 &1525494810 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6312155803036534471, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
-  m_PrefabInstance: {fileID: 4565025280417043590}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c4eef3296164d54eae4bdae2f91944b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1641731428
 GameObject:
   m_ObjectHideFlags: 0
@@ -2601,15 +2590,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 371218063552686938, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 371218063552686938, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 371218063552686938, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 371218063552686938, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2622,46 +2611,6 @@ PrefabInstance:
     - target: {fileID: 371218063552686938, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3460641147627518562, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
-      propertyPath: dashForce
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 3460641147627518562, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
-      propertyPath: diveForce
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 5684678089997041182, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5684678089997041182, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5684678089997041182, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1525494810}
-    - target: {fileID: 5684678089997041182, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5684678089997041182, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnInteract
-      objectReference: {fileID: 0}
-    - target: {fileID: 5684678089997041182, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: InputManager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 5684678089997041182, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 7927158544815500917, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
-      propertyPath: m_Drag
-      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 8848661024979553184, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
       propertyPath: m_Name
