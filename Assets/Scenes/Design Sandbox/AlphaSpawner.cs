@@ -6,12 +6,25 @@ using UnityEngine;
 public class AlphaSpawner : MonoBehaviour
 {
     [SerializeField]
+    // Transform to track
+    private Transform trackTransform;
+
+    [SerializeField]
     private List<ResourceWaves> spawnWaves = new List<ResourceWaves>();
 
-    public float baseSpawnRate = 1.0f; // The base rate for spawning objects
-    public float randomAdjustment = 1.0f; // Maximum adjustment to the base rate
-    public float moveLength = 5.0f;
-    public float moveSpeed = 2.0f; // Speed of the left-right movement
+    [SerializeField]
+    float baseSpawnRate = 1.0f; // The base rate for spawning objects
+
+    [SerializeField]
+    float randomAdjustment = 1.0f; // Maximum adjustment to the base rate
+
+    [SerializeField]
+    float moveLength = 5.0f;
+
+    [SerializeField]
+    float moveSpeed = 2.0f; // Speed of the left-right movement
+
+    private float startYOffset; // Starting Y offset of the spawner
 
     private float startLocalX; // Starting local X position of the spawner
 
@@ -27,6 +40,16 @@ public class AlphaSpawner : MonoBehaviour
             enabled = false;
             return;
         }
+
+        if (trackTransform == null)
+        {
+            Debug.LogError("No track transform assigned");
+            enabled = false;
+            return;
+        }
+
+        // Get the distance from the spawner to the tracked object
+        startYOffset = transform.position.y - trackTransform.position.y;
         currentWave = spawnWaves[0];
         spawnWaves.Remove(currentWave);
         startLocalX = transform.localPosition.x;
@@ -35,9 +58,14 @@ public class AlphaSpawner : MonoBehaviour
     private void Update()
     {
         if (currentWave == null)
-        {
             return;
-        }
+
+        // track the transform's y position with the spawners y-offset
+        transform.position = new Vector3(
+            transform.position.x,
+            trackTransform.position.y + startYOffset,
+            transform.position.z
+        );
 
         timer += Time.deltaTime;
 
