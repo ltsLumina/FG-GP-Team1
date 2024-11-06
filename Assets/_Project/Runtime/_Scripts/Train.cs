@@ -515,3 +515,8 @@ public class TrainEditorWindow : EditorWindow
     }
 }
 #endif
+
+internal static class TrainExtensions
+{
+    public static float Round(this float value) => Mathf.Round(value);
+}

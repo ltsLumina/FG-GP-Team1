@@ -58,7 +58,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         Move();
-        StayInBounds();
+        //StayInBounds();
         Rotate();
     }
 
