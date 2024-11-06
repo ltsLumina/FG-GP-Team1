@@ -19,7 +19,7 @@ public class ControlManager : MonoBehaviour
         { "Down", KeyCode.S },
         { "Left", KeyCode.A },
         { "Right", KeyCode.D },
-        { "Dash", KeyCode.Space }
+        { "Dash", KeyCode.Space }   
     };
 
     void Start()

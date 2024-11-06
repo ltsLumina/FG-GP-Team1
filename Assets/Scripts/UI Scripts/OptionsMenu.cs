@@ -14,8 +14,9 @@ public class OptionsMenu : MonoBehaviour
     public Slider masterSlider, musicSlider, sfxSlider;
 
     //Resolution
-    [Header("Resolution")]
     public List<Resolution> resolutions;
+
+    [Header("Resolution")]
     public TMP_Dropdown resolutionDropdown;
     public Toggle fullscreenToggle;
     public Toggle vsyncToggle;
@@ -133,12 +134,12 @@ public class OptionsMenu : MonoBehaviour
         QualitySettings.SetQualityLevel(graphicsIndex);
         PlayerPrefs.SetInt("Graphics", graphicsIndex);
     }
-    public void SetBrightness(float brightness)
+    private void SetBrightness(float brightness)
     {
         RenderSettings.ambientLight = Color.white * brightness;
         PlayerPrefs.SetFloat("Brightness", brightness);
     }
-    public void SetShadows(bool enableShadows)
+    private void SetShadows(bool enableShadows)
     {
         QualitySettings.shadows = enableShadows ? ShadowQuality.All : ShadowQuality.Disable;
         PlayerPrefs.SetInt("Shadows", enableShadows ? 1 : 0);
@@ -146,12 +147,15 @@ public class OptionsMenu : MonoBehaviour
 
     void ApplySavedSettings()
     {
+        // Vsync
         int savedVSync = PlayerPrefs.GetInt("VSync", 1);
         QualitySettings.vSyncCount = savedVSync == 1 ? 1 : 0;
 
+        // Graphics
         QualitySettings.SetQualityLevel(PlayerPrefs.GetInt("GraphicsQuality", QualitySettings.GetQualityLevel()));
         RenderSettings.ambientLight = Color.white * PlayerPrefs.GetFloat("Brightness", 1f);
 
+        // Shadows
         bool shadowsEnabled = PlayerPrefs.GetInt("Shadows", 1) == 1;
         QualitySettings.shadows = shadowsEnabled ? ShadowQuality.All : ShadowQuality.Disable;
     }
