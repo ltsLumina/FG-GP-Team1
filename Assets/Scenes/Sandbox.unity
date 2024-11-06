@@ -2671,6 +2671,14 @@ PrefabInstance:
       propertyPath: allowDynamicResolution
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6635521576301228563, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: allowDeepLearningSuperSampling
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6635521576301228563, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: allowFidelityFX2SuperResolution
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6750989291407133015, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
       propertyPath: m_AllowDynamicResolution
       value: 1
