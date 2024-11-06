@@ -5134,6 +5134,7 @@ MonoBehaviour:
     multiplier: 2.5
   - name: Stage 5
     multiplier: 3
+  kelpRestoreAmount: 25
   algaeRestoreAmount: 10
   dirtinessStages:
   - name: Stage 1
