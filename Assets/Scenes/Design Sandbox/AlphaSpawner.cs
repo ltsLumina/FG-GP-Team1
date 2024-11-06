@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Lumina.Essentials.Modules;
 
 public class AlphaSpawner : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class AlphaSpawner : MonoBehaviour
     private void Start()
     {
         currentWave = spawnWaves[0];
+        spawnWaves.Remove(currentWave);
     }
 
     private void Update()
@@ -38,7 +40,14 @@ public class AlphaSpawner : MonoBehaviour
             }
         }
 
-
+        for(int i = 0;i < spawnWaves.Count; i++)
+        {
+            if(Helpers.Find<Train>().Depth < spawnWaves[i].depth)
+            {
+                currentWave = spawnWaves[i];
+                spawnWaves.Remove(currentWave);
+            }
+        }
 
     }
 

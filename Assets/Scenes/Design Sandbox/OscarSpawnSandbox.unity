@@ -1322,6 +1322,7 @@ MonoBehaviour:
   spawnWaves:
   - {fileID: 11400000, guid: 2f9cdfb5861796f49840d8f6efa3aedf, type: 2}
   - {fileID: 11400000, guid: feb5a09cb67d7b446be069f2fed94100, type: 2}
+  - {fileID: 11400000, guid: c35e2770c1c210544bbcf7d1973a74b4, type: 2}
   baseSpawnRate: 2
   randomAdjustment: 1
   moveLength: 40

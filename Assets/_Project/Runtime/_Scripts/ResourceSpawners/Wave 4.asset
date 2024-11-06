@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 35a8c9e13e169f54aae58c1e16119a65, type: 3}
-  m_Name: New Resource Spawner
+  m_Name: Wave 4
   m_EditorClassIdentifier: 
-  depth: -20
+  depth: -40
   spawnObjects:
-  - objectToSpawn: {fileID: 919132149155446097, guid: 3dc322310265f6b439c210d37b484b3f, type: 3}
-    spawnRate: 9.27
+  - objectToSpawn: {fileID: 3390846207703573358, guid: bdafdd214f650c540bc6c5f7d52cf7c2, type: 3}
+    spawnRate: 10
