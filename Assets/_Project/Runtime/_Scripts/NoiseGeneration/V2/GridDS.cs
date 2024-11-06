@@ -143,7 +143,17 @@ public class GridDS
         }
     }
 
-    public Mesh GenerateMesh(Mesh mesh, Vector3 position)
+    public Vector3 GetPosition()
+    {
+        return _position;
+    }
+
+    public void SetPosition(Vector3 position)
+    {
+        _position = position;
+    }
+
+    public Mesh GenerateMesh(Mesh mesh)
     {
         if (mesh == null)
         {
@@ -154,7 +164,7 @@ public class GridDS
         Vector2[] UVs = new Vector2[_width * _height];
         int[] triangles = new int[(_width - 1) * (_height - 1) * 6];
 
-        float zPos = position.z - (_height * _gridCellLength / 2);
+        float zPos = -(_height * _gridCellLength / 2);
 
         int vertexIndex = 0;
         int triangleIndex = 0;
@@ -168,10 +178,12 @@ public class GridDS
             }
         }
         RowData last = _meshData.Last.Value;
+        int index = 0;
+        int lastRowIndex = _meshData.Count - 1;
 
         foreach (RowData row in _meshData)
         {
-            if (row.rowNumber < last.rowNumber)
+            if (index < lastRowIndex)
             {
                 int rowLength = row.Vertices.Length;
                 int triangleOffset = vertexIndex;
@@ -208,6 +220,7 @@ public class GridDS
                 }
             }
             zPos += _gridCellLength;
+            index++;
         }
 
         mesh.vertices = vertices;
@@ -215,7 +228,6 @@ public class GridDS
         mesh.uv = UVs;
         mesh.RecalculateNormals();
         mesh.RecalculateBounds();
-
         return mesh;
     }
 

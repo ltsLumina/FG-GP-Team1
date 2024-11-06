@@ -51,7 +51,7 @@ public class Wall : MonoBehaviour
         _grid.SetupWall();
 
 
-        Display.DrawMesh(_grid.GenerateMesh(Display.mesh, transform.position));
+        //Display.DrawMesh(_grid.GenerateMesh(Display.mesh, transform.position));
     }
 
     /*
@@ -77,6 +77,6 @@ public class Wall : MonoBehaviour
         }
 
 
-        Display.DrawMesh(_grid.GenerateMesh(Display.mesh, transform.position));
+        //Display.DrawMesh(_grid.GenerateMesh(Display.mesh, transform.position));
     }
 }
