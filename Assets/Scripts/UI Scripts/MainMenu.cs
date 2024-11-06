@@ -13,14 +13,20 @@ public class MainMenu : MonoBehaviour
 
     }
 
+    public void StartGame()
+    {
+        // Replace later with what scene is the game scene
+        SceneManager.LoadScene("Birkan Sandbox");
+    }
+
     public void Exit()
     {
         Application.Quit();
     }
 
-    public void StartGame()
+    void Death()
     {
-        SceneManager.LoadScene("Sandbox"); // Replace later with what scene is the game scene
+
     }
 
     void ShowCredits()

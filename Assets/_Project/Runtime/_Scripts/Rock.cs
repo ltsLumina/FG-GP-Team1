@@ -6,21 +6,29 @@ public class Rock : MonoBehaviour
     [SerializeField] Vector3 direction = Vector3.one;
     [SerializeField] float force = 10;
     [SerializeField] float torque = 10;
-    [SerializeField] float approachSpeed = 0.1f;
+    [Tooltip("The weight of the magnetization towards the train. A higher value will make the rock move faster.")]
+    [SerializeField] float magnetizationStrength = 0.1f;
+    [Tooltip("The maximum distance at which the magnetization effect kicks in.")]
+    [SerializeField] float magnetizationDistance = 5f;
 
     void FixedUpdate()
     {
-        // Move towards the train very slightly
-        var   train = Helpers.Find<Train>();
-        var   dir   = (train.transform.position - transform.position).normalized;
-        transform.position += dir * approachSpeed;
+        // Move towards the train very slightly if within the magnetization distance
+        var train    = Helpers.Find<Train>();
+        var distance = Vector3.Distance(train.transform.position, transform.position);
+
+        if (distance <= magnetizationDistance)
+        {
+            var dir = (train.transform.position - transform.position).normalized;
+            transform.position += dir * magnetizationStrength / 100;
+        }
     }
 
     void OnCollisionEnter(Collision other)
     {
         // add force and torque to the rock
         var rb = GetComponent<Rigidbody>();
-        rb.AddForce(direction * force, ForceMode.Impulse);
+        rb.AddForce(direction   * force, ForceMode.Impulse);
         rb.AddTorque(Vector3.up * torque, ForceMode.Impulse);
     }
 }
