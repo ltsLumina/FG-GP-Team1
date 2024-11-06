@@ -1,9 +1,12 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class AlphaSpawner : MonoBehaviour
 {
-    public GameObject objectToSpawn;
+
+    [SerializeField] private List<ResourceWaves> spawnWaves = new List<ResourceWaves>();
+
     public float baseSpawnRate = 1.0f; // The base rate for spawning objects
     public float randomAdjustment = 1.0f; // Maximum adjustment to the base rate
     public float moveLength = 5.0f;
@@ -11,51 +14,40 @@ public class AlphaSpawner : MonoBehaviour
 
     private float startLocalX; // Starting local X position of the spawner
 
+    private float timer;
+
+    private ResourceWaves currentWave;
+
+
     private void Start()
     {
-        // Store the initial local X position
-        startLocalX = transform.localPosition.x;
-        StartCoroutine(SpawnObject());
-        StartCoroutine(MoveBackAndForth());
+        currentWave = spawnWaves[0];
     }
 
-    // Coroutine to move the spawner back and forth on the local X-axis
-    private IEnumerator MoveBackAndForth()
+    private void Update()
     {
-        while (true)
-        {
-            // Move to the right
-            while (transform.localPosition.x < startLocalX + moveLength)
-            {
-                transform.localPosition += Vector3.right * moveSpeed * Time.deltaTime;
-                yield return null;
-            }
 
-            // Move to the left
-            while (transform.localPosition.x > startLocalX - moveLength)
+        timer += Time.deltaTime;
+
+
+        for (int i = 0; i < currentWave.spawnObjects.Count; i++)
+        {
+            if (Mathf.Repeat(timer, 2/currentWave.spawnObjects[i].spawnRate) >= 2/ currentWave.spawnObjects[i].spawnRate - Time.deltaTime)
             {
-                transform.localPosition -= Vector3.right * moveSpeed * Time.deltaTime;
-                yield return null;
+                Instantiate(currentWave.spawnObjects[i].objectToSpawn, spawnPos(), Quaternion.identity);
             }
         }
+
+
+
     }
 
-    // Spawning coroutine with randomized spawn rate
-    private IEnumerator SpawnObject()
+    private Vector3 spawnPos()
     {
-        while (true)
-        {
-            // Spawn the object at the current position of the spawner
-            Instantiate(objectToSpawn, transform.position, Quaternion.identity);
-
-            // Calculate a random spawn rate based on the base rate and adjustment
-            float spawnTimer = baseSpawnRate + Random.Range(-randomAdjustment, randomAdjustment);
-            spawnTimer = Mathf.Max(0.1f, spawnTimer); // Ensure the timer is not less than 0.1 seconds
-
-            // Wait for the calculated random duration
-            yield return new WaitForSeconds(spawnTimer);
-        }
+        return new Vector3(Random.Range(-moveLength, moveLength), transform.position.y, transform.position.z);
     }
+
+
 
     // Draw the movement range in the editor
     private void OnDrawGizmos()
@@ -65,4 +57,5 @@ public class AlphaSpawner : MonoBehaviour
         Vector3 end = transform.position - Vector3.right * moveLength;
         Gizmos.DrawLine(start, end);
     }
+
 }
