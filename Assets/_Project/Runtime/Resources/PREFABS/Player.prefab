@@ -163,7 +163,19 @@ MonoBehaviour:
     m_ActionId: 6c2ab1b8-8984-453a-af3d-a3c78ae1679a
     m_ActionName: 'Player/Attack[/Mouse/leftButton,/Keyboard/enter]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6312155803036534471}
+        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+        m_MethodName: OnInteract
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 852140f2-7766-474d-8707-702459ba45f3
     m_ActionName: 'Player/Interact[/Keyboard/e]'
   - m_PersistentCalls:
@@ -310,12 +322,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerID: 0
-  moveSpeed: 1000
+  moveSpeed: 5000
   diveForce: 12
-  dashForce: 25
-  dashDuration: 0.05
+  dashForce: 150
+  dashDuration: 0.1
   dashDampingStart: 0
-  dashDampingEnd: 2.5
+  dashDampingEnd: 4
   dashCooldown: 1
 --- !u!65 &7800650524447749218
 BoxCollider:
@@ -347,7 +359,7 @@ Rigidbody:
   m_GameObject: {fileID: 8848661024979553184}
   serializedVersion: 4
   m_Mass: 5
-  m_Drag: 1
+  m_Drag: 4
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}

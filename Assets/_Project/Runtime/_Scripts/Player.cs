@@ -13,22 +13,33 @@ using static Lumina.Essentials.Modules.Helpers;
 public class Player : MonoBehaviour
 {
     [Header("Multiplayer")]
-    [SerializeField, ReadOnly] int playerID;
-    
+    [SerializeField, ReadOnly]
+    int playerID;
+
     [Header("Movement")]
-    [SerializeField] float moveSpeed;
-    
+    [SerializeField]
+    float moveSpeed;
+
     [Header("Dash")]
-    [SerializeField] float dashForce = 25f;
-    [SerializeField] float dashDuration = 0.05f;
-    [SerializeField] float dashDampingStart;
-    [SerializeField] float dashDampingEnd = 2.5f;
-    [SerializeField] float dashCooldown = 1f;
+    [SerializeField]
+    float dashForce = 25f;
+
+    [SerializeField]
+    float dashDuration = 0.05f;
+
+    [SerializeField]
+    float dashDampingStart;
+
+    [SerializeField]
+    float dashDampingEnd = 2.5f;
+
+    [SerializeField]
+    float dashCooldown = 1f;
 
     float dashTimer;
-    
+
     // <- Cached Components ->
-    
+
     InputManager input;
     PlayerInput playerInput;
     Rigidbody rb;
@@ -48,8 +59,8 @@ public class Player : MonoBehaviour
     void Awake()
     {
         playerInput = GetComponentInChildren<PlayerInput>();
-        input       = GetComponentInChildren<InputManager>();
-        rb          = GetComponent<Rigidbody>();
+        input = GetComponentInChildren<InputManager>();
+        rb = GetComponent<Rigidbody>();
     }
 
     // Player moves in parallel with the train if it's a child of the train. Simplest solution.
@@ -64,13 +75,17 @@ public class Player : MonoBehaviour
 
     void Move()
     {
-        var dir  = input.MoveInput.normalized;
-        rb.AddForce(new Vector3(dir.x, dir.y) * (moveSpeed * Time.deltaTime), ForceMode.Acceleration);
+        var dir = input.MoveInput.normalized;
+        rb.AddForce(
+            new Vector3(dir.x, dir.y) * (moveSpeed * Time.deltaTime),
+            ForceMode.Acceleration
+        );
     }
 
     public void Dash()
     {
-        if (dashTimer > 0) return;
+        if (dashTimer > 0)
+            return;
         StartCoroutine(DashRoutine(rb));
     }
 
@@ -90,7 +105,7 @@ public class Player : MonoBehaviour
             yield return null;
         }
     }
-    
+
     static Resource heldResource;
 
     /// <summary>
@@ -104,8 +119,8 @@ public class Player : MonoBehaviour
         {
             heldResource = null;
             return false;
-        } 
-        
+        }
+
         heldResource = Player.heldResource;
         return heldResource is { Grabbed: true };
     }
@@ -119,15 +134,21 @@ public class Player : MonoBehaviour
     Resource[] ClosestResources()
     {
         Resource[] resources = FindMultiple<Resource>();
-        Array.Sort(resources, (a, b) => Vector3.Distance(a.transform.position, transform.position)
-                                        .CompareTo(Vector3.Distance(b.transform.position, transform.position)));
+        Array.Sort(
+            resources,
+            (a, b) =>
+                Vector3
+                    .Distance(a.transform.position, transform.position)
+                    .CompareTo(Vector3.Distance(b.transform.position, transform.position))
+        );
         return resources;
     }
 
     public void Grab()
     {
-        if (heldResource != null) return;
-        
+        if (heldResource != null)
+            return;
+
         var resources = ClosestResources();
         var closest = resources[0];
         if (closest.Reach > Vector3.Distance(transform.position, closest.transform.position))
@@ -136,11 +157,12 @@ public class Player : MonoBehaviour
             heldResource = closest;
         }
     }
-    
+
     public void Release()
     {
-        if (heldResource == null) return;
-        
+        if (heldResource == null)
+            return;
+
         heldResource.Release();
         heldResource = null;
     }
@@ -150,17 +172,17 @@ public class Player : MonoBehaviour
         switch (transform.position.x)
         {
             case < -25:
-                transform.position = new (-25, transform.position.y);
+                transform.position = new(-25, transform.position.y);
                 break;
 
             case > 25:
-                transform.position = new (25, transform.position.y);
+                transform.position = new(25, transform.position.y);
                 break;
         }
     }
 
     void Rotate()
     {
-        
+        // TODO: @korben - please implement
     }
 }
