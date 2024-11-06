@@ -161,9 +161,14 @@ public class Train : MonoBehaviour
     [SerializeField] List<float> hullIntegrityDepletionDefaults = new () { 1, 5f, 7.5f, 10f, 15f };
     
     // <- Cached references. ->
-    ManagementCollider[] managementColliders;
     
     // <- Properties ->
+
+    #region Depth
+    public float Depth => transform.position.y;
+    public string DepthString => $"{Depth.Round()}m";
+    public string DepthStringFormatted => Depth.Round() < 0 ? $"{Mathf.Abs(Depth.Round())}m below sea level" : $"{Depth.Round()}m above sea level";
+    #endregion
 
     [MaxValue(100)]
     public float Fuel
