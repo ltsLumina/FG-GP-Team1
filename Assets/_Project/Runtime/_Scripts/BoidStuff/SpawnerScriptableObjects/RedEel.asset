@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f393c73292781f34092d5f6eb761d454, type: 3}
   m_Name: RedEel
   m_EditorClassIdentifier: 
-  moveSpeed: 8
-  turnSpeed: 7
+  moveSpeed: 20
+  turnSpeed: 10
   wallContext: 5
   seperationContext: 3
   seperationStrength: 5

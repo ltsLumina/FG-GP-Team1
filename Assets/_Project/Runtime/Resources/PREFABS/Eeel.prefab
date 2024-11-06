@@ -47,5 +47,5 @@ MonoBehaviour:
   bodyPartAmount: 15
   mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
   radius: 1
-  moveSpeed: 8
+  moveSpeed: 20
   material: {fileID: 2100000, guid: 66738c0d32b4b0c41ab16ad9fd4ad5e1, type: 2}
