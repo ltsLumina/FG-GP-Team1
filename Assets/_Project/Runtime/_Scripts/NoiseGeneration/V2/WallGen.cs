@@ -82,6 +82,7 @@ public class WallGen : MonoBehaviour
 
         Vector3 newPosition = new Vector3(transform.position.x, transform.position.y - ((Height - 2) * CellSize * _levelCount), transform.position.z);
         StartCoroutine(newWall(1, newPosition));
+        _levelCount++;
     }
 
     // Update is called once per frame
@@ -110,8 +111,6 @@ public class WallGen : MonoBehaviour
 
         if (_updateWalls)
         {
-            Debug.Log((_currentWallIndex + 1) % 3);
-
             Vector3 newPosition = new Vector3(transform.position.x, transform.position.y - ((Height - 2) * CellSize * _levelCount), transform.position.z);
             StartCoroutine(newWall((_currentWallIndex + 1) % 3, newPosition));
             _levelCount++;
@@ -166,21 +165,6 @@ public class WallGen : MonoBehaviour
         int numberOfFrameToCalculateOver = 60;
         GridDS newGrid = _grids[index];
 
-        /*
-        switch (index)
-        {
-            case 0:
-                newGrid = grid1;
-                break;
-            case 1:
-                newGrid = grid2;
-                break;
-            case 2:
-                newGrid = grid3;
-                break;     
-        }
-        */
-
         newGrid.Clear();
         newGrid.SetOffset(Offset, GlobalOffset);
         newGrid.SetPosition(position);
@@ -201,9 +185,6 @@ public class WallGen : MonoBehaviour
             {
                 newGrid.CullExtraRows();
                 newGrid.SetFirstRow(_lastRow);
-
-                //_meshs[index] = newGrid.GenerateMesh(_meshs[index]);
-                //Debug.Log(_meshs[index]);
                 
                 switch (index)
                 {
