@@ -4,6 +4,11 @@ using UnityEngine;
 using UnityEngine.Custom.Attributes;
 #endregion
 
+internal interface ILifetime
+{
+    
+}
+
 [Author("Alex"), DisallowMultipleComponent]
 public class GameManager : SingletonPersistent<GameManager>
 {

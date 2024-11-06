@@ -71,7 +71,6 @@ public class WallGen : MonoBehaviour
         _meshs.Add(mesh2);
         _meshs.Add(mesh3);
 
-
         grid1.SetupWall();
         mesh1 = grid1.GenerateMesh(mesh1);
         plane1.sharedMesh = mesh1;
@@ -84,7 +83,7 @@ public class WallGen : MonoBehaviour
         StartCoroutine(newWall(1, newPosition));
         _levelCount++;
     }
-
+    
     // Update is called once per frame
     void Update()
     {
@@ -116,7 +115,8 @@ public class WallGen : MonoBehaviour
             _levelCount++;
         }
 
-
+        var child1 = transform.GetChild(0);
+        child1.GetComponent<MeshCollider>().sharedMesh = mesh1;
     }
 
     private void CheckMeshInlineWithPlayer()
