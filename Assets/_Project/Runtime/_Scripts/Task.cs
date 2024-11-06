@@ -1,20 +1,35 @@
 using System;
+using System.Collections;
 using DG.Tweening;
+using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.Custom.Attributes;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using VInspector;
 
+public enum Tasks
+{
+    Clean,
+    Refuel,
+    Repair,
+    Recharge,
+}
+
+[Author("Alex")]
 [DisallowMultipleComponent, RequireComponent(typeof(BoxCollider))]
-public class ManagementCollider : MonoBehaviour
+public class Task : MonoBehaviour
 {
     #pragma warning disable 0414
-    
-    [HideInInspector, Tooltip("DO NOT REMOVE! This is used by VInspector")]
+
+    #region vInspector (hide)
+    [HideInInspector, UsedImplicitly, Tooltip("DO NOT REMOVE! This is used by VInspector")]
     public VInspectorData vInspectorData;
+    #endregion
     
-    [SerializeField] Train.Task task = Train.Task.Refuel;
-    
+    [SerializeField] Tasks task = Tasks.Refuel;
+
+    #region Collider
     [Tab("Collider")]
     [Space]
     [Header("Size")]
@@ -30,21 +45,23 @@ public class ManagementCollider : MonoBehaviour
     [SerializeField] float offsetX;
     [RangeResettable(-10, 10)]
     [SerializeField] float offsetY;
-
+    #endregion
+    
+    #region Task
     [Tab("Task")]
     [Header("Timers")]
     [Tooltip("This is just a spacer variable because of how VInspector works")]
     //[SerializeField, ReadOnly, TextArea] string spacer;
-    [ShowIf(nameof(task), Train.Task.Clean)]
+    [ShowIf(nameof(task), Tasks.Clean)]
     [RangeResettable(1, 10)]
     [SerializeField] float cleanTime = 5f;
-    [ShowIf(nameof(task), Train.Task.Refuel)]
+    [ShowIf(nameof(task), Tasks.Refuel)]
     [RangeResettable(1, 10)]
     [SerializeField] float refuelTime = 5f;
-    [ShowIf(nameof(task), Train.Task.Repair)]
+    [ShowIf(nameof(task), Tasks.Repair)]
     [RangeResettable(1, 10)]
     [SerializeField] float repairTime = 5f;
-    [ShowIf(nameof(task), Train.Task.Recharge)]
+    [ShowIf(nameof(task), Tasks.Recharge)]
     [RangeResettable(1, 10)]
     [SerializeField] float rechargeTime = 5f;
     [EndIf]
@@ -54,8 +71,10 @@ public class ManagementCollider : MonoBehaviour
     [SerializeField] float waitOnTaskCompletion = 1f;
     [Space(15)]
     [SerializeField] UnityEvent onTaskPerformed;
-    [SerializeField] UnityEvent<Train.Task> onTaskComplete;
-    
+    [SerializeField] UnityEvent<Tasks> onTaskComplete;
+    #endregion
+
+    #region UI
     [Space(10)]
     [Tab("UI")]
     [SerializeField] Image chargeCircle;
@@ -63,6 +82,7 @@ public class ManagementCollider : MonoBehaviour
     [SerializeField] Color completedColor = Color.green;
     [ColorUsage(false, true)]
     [SerializeField] Color baseColor = Color.grey;
+    #endregion
 
     // <- Cached Components ->
     
@@ -72,10 +92,10 @@ public class ManagementCollider : MonoBehaviour
     // <- Properties ->
     
     public float TimeToCompleteTask => task switch
-    { Train.Task.Clean    => cleanTime,
-      Train.Task.Refuel   => refuelTime,
-      Train.Task.Repair   => repairTime,
-      Train.Task.Recharge => rechargeTime,
+    { Tasks.Clean    => cleanTime,
+      Tasks.Refuel   => refuelTime,
+      Tasks.Repair   => repairTime,
+      Tasks.Recharge => rechargeTime,
       _                   => 0 
     };
     
@@ -84,7 +104,7 @@ public class ManagementCollider : MonoBehaviour
     void OnValidate()
     {
         name = task.ToString();
-        string[] validNames = Enum.GetNames(typeof(Train.Task));
+        string[] validNames = Enum.GetNames(typeof(Tasks));
         if (name != validNames[(int) task])
         {
             Logger.LogError($"Name must be the same as the task: {string.Join(", ", validNames)}");
@@ -101,13 +121,15 @@ public class ManagementCollider : MonoBehaviour
         col.size = new (width, height, depth);
         col.center = new (offsetX, offsetY);
     }
+    
+    Coroutine taskCoroutine;
 
     void Awake() => train = GetComponentInParent<Train>();
     
     void Start()
     {
         Debug.Assert(chargeCircle != null, "Charge circle is null");
-        chargeCircle.color      = baseColor;
+        chargeCircle.color = baseColor;
         chargeCircle.fillAmount = 0;
 
         onTaskPerformed.AddListener
@@ -115,7 +137,6 @@ public class ManagementCollider : MonoBehaviour
         {
             onTaskCompleteSequence = DOTween.Sequence();
             onTaskCompleteSequence.OnStart(() => chargeCircle.color = completedColor);
-
             onTaskCompleteSequence.AppendInterval(waitOnTaskCompletion).OnComplete
             (() =>
             {
@@ -130,32 +151,44 @@ public class ManagementCollider : MonoBehaviour
         if (!train.CanPerformTask(task)) return;
         if (train.IsTaskComplete(task)) return;
 
-        // Start task
-        LogFormatted("ing"); // Log "Cleaning!" for example
-        PerformTask();
+        taskCoroutine = StartCoroutine(PerformTask());
     }
 
-    void OnTriggerStay(Collider other)
-    {
-        //TODO: Check if the condition is met to start the task while the player is still in the collider
-    }
+    void PerformPerformTask() => taskCoroutine = StartCoroutine(PerformTask());
 
-    void PerformTask()
+    IEnumerator PerformTask()
     {
-        chargeCircle.DOColor(completedColor, TimeToCompleteTask);
-        chargeCircle.DOFillAmount(1, TimeToCompleteTask).OnComplete(CompleteTask);
+        chargeCircle.color = completedColor;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < TimeToCompleteTask)
+        {
+            if (!train.CanPerformTask(task))
+            {
+                chargeCircle.DOKill();
+                chargeCircle.color      = baseColor;
+                chargeCircle.fillAmount = 0;
+                yield break; // Exit the coroutine
+            }
+
+            elapsedTime += Time.deltaTime;
+            chargeCircle.fillAmount =  elapsedTime / TimeToCompleteTask;
+            yield return null;
+        }
+
+        CompleteTask();
     }
 
     void CompleteTask()
     {
+        LogFormatted();
         train.SetTaskStatus(task);
-        LogFormatted("ed");
         onTaskPerformed?.Invoke();
 
         // If the task is still not complete, wait for onTaskCompleteSequence (animation) to finish and then start the task again
         if (!train.IsTaskComplete(task))
         {
-            onTaskCompleteSequence.OnComplete(PerformTask);
+            onTaskCompleteSequence.OnComplete(PerformPerformTask);
         }
         else
         {
@@ -166,17 +199,36 @@ public class ManagementCollider : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
+        if (taskCoroutine != null) StopCoroutine(taskCoroutine);
+        
+        chargeCircle.DOKill();
+        chargeCircle.color      = baseColor;
         chargeCircle.fillAmount = 0;
     }
 
     #region Utility
-    void LogFormatted(string append)
+    void LogFormatted()
     {
-        if (task.ToString().EndsWith("e"))
+        var taskName = task.ToString();
+        switch (taskName.EndsWith("e") ? taskName : taskName + "e")
         {
-            string formattedString = task.ToString()[..(task.ToString().Length - 1)];
-            Debug.Log($"{formattedString}{append}!");
+            case "Clean":
+                Logger.Log("Cleaning!");
+                break;
+            
+            case "Refuel":
+                Logger.Log("Refueling!");
+                break;
+            
+            case "Repair":
+                Logger.Log("Repairing!");
+                break;
+            
+            case "Recharge":
+                Logger.Log("Recharging!");
+                break;
         }
+      
     }
     #endregion
 }

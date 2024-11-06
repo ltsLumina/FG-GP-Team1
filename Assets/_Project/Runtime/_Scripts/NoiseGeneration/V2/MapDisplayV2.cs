@@ -19,4 +19,6 @@ public class MapDisplayV2 : MonoBehaviour
         meshFilter.sharedMesh = meshData;
     }
 
+    public Mesh mesh => meshFilter.sharedMesh;
+
 }
