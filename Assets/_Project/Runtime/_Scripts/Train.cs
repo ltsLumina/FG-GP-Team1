@@ -17,20 +17,10 @@ using VInspector;
 public class Train : MonoBehaviour
 {
 #pragma warning disable 0414
-
-    public enum Task 
-    {
-        Clean,
-        Refuel,
-        Repair,
-        Recharge,
-    }
-
-#if UNITY_EDITOR
+    
     [UsedImplicitly] // This is used by the VInspector. Don't remove it and don't remove 'public'. 
     public VInspectorData vInspectorData;
-#endif
-
+    
     [Header("Train Settings")]
     [SerializeField] float speed = 5;
     [SerializeField] float maxSpeed = 10;
@@ -158,7 +148,6 @@ public class Train : MonoBehaviour
     [EndIf]
 
     [SerializeField] List<float> fuelDepletionDefaults = new () { 1, 1.5f, 2, 2.5f, 3 };
-    [SerializeField] List<float> hullIntegrityDepletionDefaults = new () { 1, 5f, 7.5f, 10f, 15f };
     
     // <- Cached references. ->
     
@@ -298,45 +287,45 @@ public class Train : MonoBehaviour
     }
 
     #region Tasks
-    public void SetTaskStatus(Task task)
+    public void SetTaskStatus(Tasks tasks)
     {
-        switch (task)
+        switch (tasks)
         {
-            case Task.Clean:
+            case Tasks.Clean:
                 Dirtiness -= 25f; // TODO: Change this to a variable.
                 break;
 
-            case Task.Refuel:
+            case Tasks.Refuel:
                 Fuel += algaeRestoreAmount;
-                Player.HoldingResource(out Resource heldItem);
-                Destroy(heldItem.gameObject);
+
+                if (Player.HoldingResource(out Resource heldItem)) Destroy(heldItem.gameObject);
                 break;
 
-            case Task.Repair:
+            case Tasks.Repair:
                 hullBreaches--;
                 HullIntegrity += repairAmount;
                 onHullIntegrityChanged.Invoke(HullIntegrity);
                 break;
 
-            case Task.Recharge:
+            case Tasks.Recharge:
                 Power += powerRechargeAmount;
                 break;
         }
     }
 
-    public bool CanPerformTask(Task task) => task switch
-    { Task.Clean    => Dirtiness > 0,
-      Task.Refuel   => Fuel          < 100 && Player.HoldingResource(out Resource _),
-      Task.Repair   => HullIntegrity < 3   && hullBreaches > 0,
-      Task.Recharge => Power < 100,
-      _             => false };
+    public bool CanPerformTask(Tasks tasks) => tasks switch
+    { Tasks.Clean    => Dirtiness > 0,
+      Tasks.Refuel   => Fuel          < 100 && Player.HoldingResource(out Resource kelp) && kelp.Item == IGrabbable.Items.Kelp,
+      Tasks.Repair   => HullIntegrity < 3   && hullBreaches > 0,
+      Tasks.Recharge => Power         < 100 && Player.HoldingResource(out Resource battery) && battery.Item == IGrabbable.Items.Battery,
+      _              => false };
     
-    public bool IsTaskComplete(Task task) => task switch
-    { Task.Clean    => Dirtiness     <= 20,
-      Task.Refuel   => Fuel          >= 100,
-      Task.Repair   => HullIntegrity >= 3,
-      Task.Recharge => Power         >= 100,
-      _             => false };
+    public bool IsTaskComplete(Tasks tasks) => tasks switch
+    { Tasks.Clean    => Dirtiness     <= 20,
+      Tasks.Refuel   => Fuel          >= 100,
+      Tasks.Repair   => HullIntegrity >= 3,
+      Tasks.Recharge => Power         >= 100,
+      _                   => false };
     #endregion
 
     #region Collision/Trigger
@@ -389,7 +378,7 @@ public class Train : MonoBehaviour
 
 #if UNITY_EDITOR
     [Button, UsedImplicitly, ShowIf(nameof(debugMode))]
-    void c_ShowManagementColliders() => TrainEditorWindow.Open();
+    void c_ShowTasks() => TrainEditorWindow.Open();
 #endif
 
     [Serializable]
@@ -511,7 +500,7 @@ public class TrainEditorWindow : EditorWindow
     {
         scrollPos = GUILayout.BeginScrollView(scrollPos);
 
-        foreach (var managementCollider in Helpers.FindMultiple<ManagementCollider>())
+        foreach (var managementCollider in Helpers.FindMultiple<Task>())
         {
             GUILayout.Space(25);
             GUILayout.Label("", GUI.skin.horizontalSlider);

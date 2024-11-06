@@ -1,9 +1,12 @@
 using System;
+using System.Collections;
 using JetBrains.Annotations;
 using Lumina.Essentials.Attributes;
+using Unity.VisualScripting;
 using UnityEngine;
 using VInspector;
 using static Lumina.Essentials.Modules.Helpers;
+using Object = UnityEngine.Object;
 
 public interface IGrabbable
 {
@@ -26,7 +29,9 @@ public class Resource : MonoBehaviour, IGrabbable
 
     Action onGrabbed;
     Action onReleased;
-    
+
+    public IGrabbable.Items Item => item;
+
     public bool Grabbed => grabbed;
 
     public float Reach => reach;
@@ -35,43 +40,52 @@ public class Resource : MonoBehaviour, IGrabbable
 
     void OnEnable()
     {
-        onGrabbed += GrabState;
-        onReleased += () => transform.localScale = Vector3.one * 2;
+        onGrabbed  += ResetVelocity;
+        onReleased += () =>
+        {
+            ResetVelocity();
+            transform.localScale = Vector3.one * 2;
+        };
     }
 
-    void OnDisable() => onGrabbed -= GrabState;
+    void OnDisable() => onGrabbed -= ResetVelocity;
 
-    void GrabState()
+    void ResetVelocity()
     {
         TryGetComponent(out Rigidbody rb);
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
     }
 
+    void Destroy() => Destroy(gameObject);
+
     public void Grab()
     {
+        CancelInvoke(nameof(Destroy));
+        
         grabbed = true;
         onGrabbed?.Invoke();
     }
     
     public void Release()
     {
+        Invoke(nameof(Destroy), Lifetime);
+        
         grabbed = false;
         onReleased?.Invoke();
     }
 
     void Start()
     {
-        GetComponent<MeshRenderer>().materials[0].color = item == IGrabbable.Items.Kelp ? Color.green : Color.yellow;
+        GetComponent<MeshRenderer>().materials[0].color = Item == IGrabbable.Items.Kelp ? Color.green : Color.yellow;
 
-        if (Lifetime <= 5) Debug.LogWarning("Lifetime is set too low. Please set it to a larger number.");
+        if (Lifetime <= 5) Debug.LogWarning("Lifetime is set too low. Object will likely be destroyed before it has left the screen bounds.");
+        Invoke(nameof(Destroy), Lifetime);
     }
 
     void Update()
     {
-        Destroy(gameObject, Lifetime);
-        
-        if (!grabbed) return;
+        if (!Grabbed) return;
 
         var player = Find<Player>();
         var moveInput = player.GetComponentInChildren<InputManager>().MoveInput;
