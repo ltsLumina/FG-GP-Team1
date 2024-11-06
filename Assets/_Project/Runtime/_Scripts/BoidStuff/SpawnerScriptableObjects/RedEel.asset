@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f393c73292781f34092d5f6eb761d454, type: 3}
-  m_Name: RedFishStandard
+  m_Name: RedEel
   m_EditorClassIdentifier: 
   moveSpeed: 8
   turnSpeed: 7
@@ -24,5 +24,5 @@ MonoBehaviour:
   fleeingMoveSpeedMult: 3
   fleeContext: 5
   fleeTimeSeconds: 0.2
-  prefab: {fileID: 919132149155446097, guid: 252ed390f482ad742b9aff5ebb22ff82, type: 3}
+  prefab: {fileID: 8611983429417115528, guid: 4871ee3ad9336104c82f941a0e8abcb2, type: 3}
   material: {fileID: 2100000, guid: 7a87e8a073137c94b8df1516c461fb83, type: 2}
