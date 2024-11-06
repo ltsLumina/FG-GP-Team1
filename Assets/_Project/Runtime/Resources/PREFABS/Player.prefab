@@ -323,9 +323,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerID: 0
   moveSpeed: 5000
-  diveForce: 24
-  dashForce: 100
-  dashDuration: 0.05
+  diveForce: 12
+  dashForce: 150
+  dashDuration: 0.1
   dashDampingStart: 0
   dashDampingEnd: 4
   dashCooldown: 1
