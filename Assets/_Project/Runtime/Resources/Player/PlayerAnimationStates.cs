@@ -11,7 +11,6 @@ public class PlayerAnimationStates : MonoBehaviour
     private void Start()
     {
         anim = GetComponent<Animator>();
-        // Get parent gameobject and get component in children
         input = transform.parent.GetComponentInChildren<InputManager>();
     }
 
@@ -22,27 +21,32 @@ public class PlayerAnimationStates : MonoBehaviour
 
     public void Grab(GameObject grabbedObject)
     {
-        anim.SetTrigger("Grab");
+        Debug.Log("Grab animation not implemented");
+        // anim.SetTrigger("Grab");
     }
 
     public void Release()
     {
-        anim.SetTrigger("Release");
+        Debug.Log("Release animation not implemented");
+        // anim.SetTrigger("Release");
     }
 
     public void Die()
     {
-        anim.SetTrigger("Die");
+        Debug.Log("Die animation not implemented");
+        // anim.SetTrigger("Die");
     }
 
     public void Spawn()
     {
-        anim.SetTrigger("Spawn");
+        Debug.Log("Spawn animation not implemented");
+        // anim.SetTrigger("Spawn");
     }
 
     public void Stun()
     {
-        anim.SetTrigger("Stun");
+        Debug.Log("Stun animation not implemented");
+        // anim.SetTrigger("Stun");
     }
 
     private void Update()
