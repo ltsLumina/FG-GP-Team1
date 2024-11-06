@@ -121,13 +121,15 @@ public class Task : MonoBehaviour
         col.size = new (width, height, depth);
         col.center = new (offsetX, offsetY);
     }
+    
+    Coroutine taskCoroutine;
 
     void Awake() => train = GetComponentInParent<Train>();
     
     void Start()
     {
         Debug.Assert(chargeCircle != null, "Charge circle is null");
-        chargeCircle.color      = baseColor;
+        chargeCircle.color = baseColor;
         chargeCircle.fillAmount = 0;
 
         onTaskPerformed.AddListener
@@ -149,13 +151,10 @@ public class Task : MonoBehaviour
         if (!train.CanPerformTask(task)) return;
         if (train.IsTaskComplete(task)) return;
 
-        StartCoroutine(PerformTask());
+        taskCoroutine = StartCoroutine(PerformTask());
     }
 
-    void PerformPerformTask()
-    {
-        StartCoroutine(PerformTask());
-    }
+    void PerformPerformTask() => taskCoroutine = StartCoroutine(PerformTask());
 
     IEnumerator PerformTask()
     {
@@ -172,7 +171,7 @@ public class Task : MonoBehaviour
                 yield break; // Exit the coroutine
             }
 
-            elapsedTime             += Time.deltaTime;
+            elapsedTime += Time.deltaTime;
             chargeCircle.fillAmount =  elapsedTime / TimeToCompleteTask;
             yield return null;
         }
@@ -200,7 +199,8 @@ public class Task : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        StopCoroutine(PerformTask());
+        if (taskCoroutine != null) StopCoroutine(taskCoroutine);
+        
         chargeCircle.DOKill();
         chargeCircle.color      = baseColor;
         chargeCircle.fillAmount = 0;
