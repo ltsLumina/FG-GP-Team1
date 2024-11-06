@@ -25,6 +25,8 @@ public class Boid : MonoBehaviour
     private float fleeContext;
     private float fleeTime;
 
+    private int rayPoints;
+
     private bool fleeing = false;
 
     private BoidSpawner spawner;
@@ -43,7 +45,7 @@ public class Boid : MonoBehaviour
     private void Start()
     {
 
-        transform.forward = new Vector3(Random.Range(-1f,1f), 0, Random.Range(-1f, 1f)).normalized;
+        transform.forward = new Vector3(Random.Range(-1f,1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
 
         updateTimer = Random.Range(0, updateTimer);
 
@@ -75,17 +77,47 @@ public class Boid : MonoBehaviour
     private void FixedUpdate()
     {
 
-        timer -= Time.deltaTime;
-        if(timer < 0)
+        CheckWalls(transform.forward);
+
+
+
+
+        if (timer < 0)
         {
             UpdateBehaviour();
             timer = updateTimer;
         }
 
+        Move();
+
+    }
+
+    private void CheckWalls(Vector3 dir)
+    {
+
+        
+        RaycastHit hit;
+
+        if (Physics.Raycast(transform.position, dir, out hit, wallContext, groundLayer))
+        {
+            Debug.DrawRay(transform.position, dir * hit.distance, Color.red);
+            targetDir = new Vector3(dir.x, dir.y+0.4f, dir.z);      
+            Move();
+        }
+        else
+        {
+            Debug.DrawRay(transform.position, dir * wallContext, Color.green);
+            timer -= Time.deltaTime;
+            currentTurnSpeed = turnSpeed;
+
+        }
+    }
+
+
+    private void Move()
+    {
         transform.forward = Vector3.MoveTowards(transform.forward, targetDir, currentTurnSpeed * Time.deltaTime);
-
         transform.position += transform.forward * currentMoveSpeed * Time.deltaTime;
-
     }
 
     private void UpdateBehaviour()
@@ -98,20 +130,12 @@ public class Boid : MonoBehaviour
 
         Vector3 sumForces = Vector3.zero;
 
-        RaycastHit hit;
 
-        if (Physics.Raycast(transform.position, transform.forward, out hit, wallContext, groundLayer))
-        {
-            //Debug.DrawRay(transform.position, transform.forward * hit.distance, Color.red);
-            sumForces = transform.forward * -1;
-        }
-        else
-        {
-            //Debug.DrawRay(transform.position, transform.forward * wallContext, Color.green);
-            sumForces += Seperation() * seperationStrength;
-            sumForces += Alignment() * alignmentStrength;
-            sumForces += Cohesion() * cohesionStrength;
-        }
+
+        sumForces += Seperation() * seperationStrength;
+        sumForces += Alignment() * alignmentStrength;
+        sumForces += Cohesion() * cohesionStrength;
+
 
         targetDir = sumForces;
     }
