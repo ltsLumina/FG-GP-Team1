@@ -14,11 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   depth: 0
   spawnObjects:
-  - objectToSpawn: {fileID: 7114551074614332808, guid: 9f72534f2dad6314c88a03de3280eaf2, type: 3}
-    spawnRate: 0
-  - objectToSpawn: {fileID: 919132149155446097, guid: fb81e2abc1a3efc4f951b627bababbdd, type: 3}
-    spawnRate: 0
-  - objectToSpawn: {fileID: 3946153144515543689, guid: af7ff768530a8e54a9cded759dd6fde4, type: 3}
+  - objectToSpawn: {fileID: 5581981930496451382, guid: feb31393fc9cd08459262f0f3deda43b, type: 3}
     spawnRate: 8.78
   - objectToSpawn: {fileID: 2674712487651699950, guid: 0e3ce7408240cd347beb5d5464077061, type: 3}
     spawnRate: 0.34

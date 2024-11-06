@@ -15,4 +15,4 @@ MonoBehaviour:
   depth: -40
   spawnObjects:
   - objectToSpawn: {fileID: 3390846207703573358, guid: bdafdd214f650c540bc6c5f7d52cf7c2, type: 3}
-    spawnRate: 10
+    spawnRate: 3.66
