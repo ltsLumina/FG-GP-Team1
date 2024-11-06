@@ -9,7 +9,7 @@ public class ResourceWaves : ScriptableObject
     [Header("Depth for this wave")]
     [SerializeField] public int depth;
 
-    [Header("Enemy types in this wave")]
+    [Header("Spawn types in this wave")]
     [SerializeField] public List<RandomizeObjectsSpawn> spawnObjects = new List<RandomizeObjectsSpawn>();
 
 }
