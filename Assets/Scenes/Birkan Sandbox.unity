@@ -11074,6 +11074,7 @@ MonoBehaviour:
     multiplier: 2.5
   - name: Stage 5
     multiplier: 3
+  kelpRestoreAmount: 25
   algaeRestoreAmount: 10
   dirtinessStages:
   - name: Stage 1
@@ -11146,12 +11147,6 @@ MonoBehaviour:
   - 2
   - 2.5
   - 3
-  hullIntegrityDepletionDefaults:
-  - 1
-  - 5
-  - 7.5
-  - 10
-  - 15
 --- !u!114 &1555046371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13904,9 +13899,13 @@ MonoBehaviour:
     tab: 
     size: 30
     space: 0
+  - name: C _ Show Tasks
+    tab: 
+    size: 30
+    space: 0
   rootTab:
     name: 
-    selectedSubtabIndex: 0
+    selectedSubtabIndex: 4
     subtabs:
     - rid: 5409262534149014100
     - rid: 5409262534149014101
@@ -21985,6 +21984,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 530164785}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: LoadGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
