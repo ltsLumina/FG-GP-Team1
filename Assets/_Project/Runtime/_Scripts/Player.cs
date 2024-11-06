@@ -24,11 +24,15 @@ public class Player : MonoBehaviour
     [SerializeField] float dashDuration = 0.05f;
     [SerializeField] float dashDampingStart;
     [SerializeField] float dashDampingEnd = 2.5f;
+    [SerializeField] float dashCooldown = 1f;
+
+    float dashTimer;
     
     // <- Cached Components ->
     
     InputManager input;
     PlayerInput playerInput;
+    Rigidbody rb;
 
     /// <summary>
     /// The player index.
@@ -46,59 +50,85 @@ public class Player : MonoBehaviour
     {
         playerInput = GetComponentInChildren<PlayerInput>();
         input       = GetComponentInChildren<InputManager>();
+        rb          = GetComponent<Rigidbody>();
     }
-
-    Resource rock;
 
     void Update()
     {
         Move();
+        Dive();
         StayInBounds();
         Rotate();
-        
-        if (!rock) return;
-        if (rock.Grabbed)
-        {
-            var dir = (rock.transform.position - transform.position).normalized;
-            rock.GetComponent<Rigidbody>().AddForce(-dir * 5000, ForceMode.Impulse);
-        }
+    }
+
+    void Dive()
+    {
+        var down = Vector3.down * (diveForce * Time.deltaTime);
+        rb.AddForce(down, ForceMode.Force);
     }
 
     void Move()
     {
         var dir  = input.MoveInput.normalized;
-        var down = diveForce * Time.deltaTime;
-        //transform.position += new Vector3(dir.x, dir.y - down) * (moveSpeed * Time.deltaTime);
-        var rb = GetComponent<Rigidbody>();
-        rb.AddForce(new Vector3(dir.x, dir.y - down) * (moveSpeed * Time.deltaTime), ForceMode.Acceleration);
-
-        // var trainPosY = Find<Train>().transform.position.y;
-        //
-        // if (transform.position.y < trainPosY + 5)
-        // {
-        //     transform.position = new Vector3(transform.position.x, trainPosY + 5);
-        // }
+        rb.AddForce(new Vector3(dir.x, dir.y * 1.5f) * (moveSpeed * Time.deltaTime), ForceMode.Acceleration);
     }
 
     public void Dash()
     {
-        Debug.Log("Dash");
-        StartCoroutine(DashRoutine(GetComponent<Rigidbody>())); // TODO: Cache
+        if (dashTimer > 0) return;
+        StartCoroutine(DashRoutine(rb));
     }
 
     IEnumerator DashRoutine(Rigidbody rb)
     {
+        dashTimer = dashCooldown;
+
         rb.linearDamping = dashDampingStart;
         var dir = input.MoveInput.normalized;
         rb.AddForce(dir * dashForce, ForceMode.Impulse);
         yield return new WaitForSeconds(dashDuration);
-        DOVirtual.Float(rb.linearDamping, dashDampingEnd, dashDuration, x => rb.linearDamping = x);
+        DOVirtual.Float(dashDampingStart, dashDampingEnd, dashDuration, x => rb.linearDamping = x);
+
+        while (dashTimer > 0)
+        {
+            dashTimer -= Time.deltaTime;
+            yield return null;
+        }
+    }
+
+    /// <summary>
+    /// Check if the player is holding an item.
+    /// </summary>
+    /// <param name="heldResource"> The held resource. </param>
+    /// <returns></returns>
+    public static bool HoldingResource(out Resource heldResource)
+    {
+        if (Find<Resource>() == null)
+        {
+            heldResource = null;
+            return false;
+        }
+        
+        heldResource = Find<Resource>();
+        return heldResource.Grabbed;
     }
 
     public void Grab()
     {
         var resource = Find<Resource>();
-        resource.Grab();
+        if (resource.Reach > Vector3.Distance(transform.position, resource.transform.position))
+        {
+            resource.Grab();
+        }
+    }
+    
+    public void Release()
+    {
+        var resource = Find<Resource>();
+        if (resource.Grabbed)
+        {
+            resource.Release();
+        }
     }
 
     void StayInBounds()
@@ -117,14 +147,6 @@ public class Player : MonoBehaviour
 
     void Rotate()
     {
-        
-    }
-
-    void OnDrawGizmos()
-    {
-        // draw line to nearest rock
-        var rock = Find<Rock>();
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, rock.transform.position);
+        // TODO: @korben - please implement
     }
 }

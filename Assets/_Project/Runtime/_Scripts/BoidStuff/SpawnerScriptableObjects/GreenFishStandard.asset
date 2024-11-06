@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f393c73292781f34092d5f6eb761d454, type: 3}
   m_Name: GreenFishStandard
   m_EditorClassIdentifier: 
-  moveSpeed: 8
+  moveSpeed: 7
   turnSpeed: 7
   wallContext: 5
   seperationContext: 3
