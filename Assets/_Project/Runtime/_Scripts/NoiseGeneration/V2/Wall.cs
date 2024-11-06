@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,6 +33,8 @@ public class Wall : MonoBehaviour
     private GridDS _grid;
     private int _numRowsAdded;
 
+    [SerializeField] public float WallSpeed;
+
 
 
     // Start is called before the first frame update
@@ -42,18 +45,29 @@ public class Wall : MonoBehaviour
 
         _numRowsAdded = 0;
 
-        _grid = new GridDS(transform.position, Width, Height, CellSize, HeightMultiplier, ScaleX, ScaleY, Offset, GlobalOffset, GlobalScale, GlobalAmplitude, Octaves, Persistance, Lacunarity, 0);
+        _grid = new GridDS(Curve, transform.position, Width, Height, CellSize, HeightMultiplier, ScaleX, ScaleY, Offset, GlobalOffset, GlobalScale, GlobalAmplitude, Octaves, Persistance, Lacunarity, 0);
 
 
         _grid.SetupWall();
 
 
-        Display.DrawMesh(_grid.GenerateMesh());
+        //Display.DrawMesh(_grid.GenerateMesh(Display.mesh, transform.position));
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    /*
+    private void Update()
     {
+        Vector3 newPosition = new Vector3(transform.position.x, transform.position.y - WallSpeed * Time.deltaTime, transform.position.z);
+        transform.position = newPosition;
+    }
+    */
+
+    // Update is called once per frame
+    void Update()
+    {
+        Vector3 newPosition = new Vector3(transform.position.x, transform.position.y - WallSpeed * Time.deltaTime, transform.position.z);
+        transform.position = newPosition;
+
         float cameraDiff = Mathf.Abs(_cameraTranform.position.y - _initialCameraPos);
         int numberRowsRequired = (int)Mathf.Floor(cameraDiff / CellSize);
         while (numberRowsRequired > _numRowsAdded)
@@ -63,6 +77,6 @@ public class Wall : MonoBehaviour
         }
 
 
-        Display.DrawMesh(_grid.GenerateMesh());
+        //Display.DrawMesh(_grid.GenerateMesh(Display.mesh, transform.position));
     }
 }

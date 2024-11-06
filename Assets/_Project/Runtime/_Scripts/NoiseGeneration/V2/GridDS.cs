@@ -26,9 +26,12 @@ public class GridDS
 
     private Vector3 _position;
     private float _heightMultiplier;
+    private AnimationCurve _curve;
 
-    public GridDS(Vector3 position, int width, int height, float gridCellLength, float heightMultiplier, float scaleX, float scaleY, Vector2 offset, Vector2 globalOffset, float globalScale, float globalAmplitude, int octaves, float persistance, float lacunarity, int seed)
+
+    public GridDS(AnimationCurve curve, Vector3 position, int width, int height, float gridCellLength, float heightMultiplier, float scaleX, float scaleY, Vector2 offset, Vector2 globalOffset, float globalScale, float globalAmplitude, int octaves, float persistance, float lacunarity, int seed)
     {
+        _curve = curve;
         _position = position;
         _heightMultiplier = heightMultiplier;
 
@@ -49,20 +52,46 @@ public class GridDS
         _gridCellLength = gridCellLength;
     }
 
+    public void Clear()
+    {
+        _meshData.Clear();
+    }
+
     public void SetupWall()
     {
-        _offset.y = -(_height * _gridCellLength / 2);
+        _offset.y = 0;//-(_height * _gridCellLength / 2);
         for (int i = 0; i < _height - 1; i++)
         {
             GenerateNextRow();
         }
     }
 
+    public void SetOffset(Vector2 offset, Vector2 globalOffset)
+    {
+        _offset = offset;
+        _globalOffset = globalOffset;
+    }
+
+    public RowData GetLastRow()
+    {
+        return _meshData.Last.Value;
+    }
+
+    public void SetFirstRow(RowData row)
+    {
+        _meshData.RemoveFirst();
+        _meshData.AddFirst(row);
+    }
+
+    public int GetRowCount()
+    {
+        return _meshData.Count;
+    }
+
     public void GenerateNextRow()
     {
-        float[,] heightMap = BetterNoise.GetNoiseMap(_width, _totalRows, _totalRows+2, _scaleX, _scaleY, new Vector2(0,0), _globalOffset, _globalScale, _globalAmplitude, _octaves, _persistance, _lacunarity, _seed);
-
-
+        float[,] heightMap = BetterNoise.GetNoiseMap(_width, _totalRows, _totalRows+2, _scaleX, _scaleY, _offset, _globalOffset, _globalScale, _globalAmplitude, _octaves, _persistance, _lacunarity, _seed);
+        
         float topLeftX = _position.x - (_width * _gridCellLength / 2);
         float topLeftZ = _offset.y;
 
@@ -77,8 +106,11 @@ public class GridDS
         {
             for (int x = 0; x < _width; x++)
             {
+                float heightMapVal = heightMap[x, y];
+                float vertexVal = heightMapVal;//Mathf.Pow(heightMapVal, 3);
+
                 float VertexX = topLeftX + (x * _gridCellLength);
-                float VertexY = heightMap[x, y] * _heightMultiplier;
+                float VertexY = vertexVal * _heightMultiplier;
                 float VertexZ = topLeftZ - (y * _gridCellLength);
 
                 newRow.Vertices[vertexIndex] = new Vector3(VertexX, VertexY, VertexZ);
@@ -96,40 +128,70 @@ public class GridDS
 
         _meshData.AddLast(newRow);
 
-
         _totalRows++;
         _offset.y += _gridCellLength;
     }
 
-    public Mesh GenerateMesh()
+    public void CullExtraRows()
     {
-        Mesh outMesh = new Mesh();
+        if (_meshData.Count >= _height)
+        {
+            while (_meshData.Count >= _height)
+            {
+                _meshData.RemoveFirst();
+            }
+        }
+    }
+
+    public Vector3 GetPosition()
+    {
+        return _position;
+    }
+
+    public void SetPosition(Vector3 position)
+    {
+        _position = position;
+    }
+
+    public Mesh GenerateMesh(Mesh mesh)
+    {
+        if (mesh == null)
+        {
+            mesh = new Mesh();
+        }
 
         Vector3[] vertices = new Vector3[_width * _height];
         Vector2[] UVs = new Vector2[_width * _height];
         int[] triangles = new int[(_width - 1) * (_height - 1) * 6];
 
+        float zPos = -(_height * _gridCellLength / 2);
+
         int vertexIndex = 0;
         int triangleIndex = 0;
 
-        if (_meshData.Count >= _height - 1)
+        if (_meshData.Count >= _height)
         {
-            while (_meshData.Count >= _height - 1)
+            while (_meshData.Count >= _height)
             {
+                Debug.Log("Row Removed");
                 _meshData.RemoveFirst();
             }
         }
         RowData last = _meshData.Last.Value;
+        int index = 0;
+        int lastRowIndex = _meshData.Count - 1;
 
         foreach (RowData row in _meshData)
         {
-            if (row.rowNumber < last.rowNumber - 1)
+            if (index < lastRowIndex)
             {
                 int rowLength = row.Vertices.Length;
                 int triangleOffset = vertexIndex;
                 for (int i = 0; i < rowLength / 2; i++)
                 {
-                    vertices[vertexIndex] = row.Vertices[i];
+                    Vector3 rowVerts = row.Vertices[i];
+                    rowVerts.z = zPos;
+                    vertices[vertexIndex] = rowVerts;
                     UVs[vertexIndex] = row.UVs[i];
                     vertexIndex++;
                 }
@@ -145,7 +207,9 @@ public class GridDS
                 int triangleOffset = vertexIndex;
                 for (int i = 0; i < rowLength; i++)
                 {
-                    vertices[vertexIndex] = row.Vertices[i];
+                    Vector3 rowVerts = row.Vertices[i];
+                    rowVerts.z = zPos;
+                    vertices[vertexIndex] = rowVerts;
                     UVs[vertexIndex] = row.UVs[i];
                     vertexIndex++;
                 }
@@ -155,14 +219,16 @@ public class GridDS
                     triangleIndex++;
                 }
             }
+            zPos += _gridCellLength;
+            index++;
         }
 
-        outMesh.vertices = vertices;
-        outMesh.triangles = triangles;
-        outMesh.uv = UVs;
-        outMesh.RecalculateNormals();
-
-        return outMesh;
+        mesh.vertices = vertices;
+        mesh.triangles = triangles;
+        mesh.uv = UVs;
+        mesh.RecalculateNormals();
+        mesh.RecalculateBounds();
+        return mesh;
     }
 
 }
@@ -190,15 +256,4 @@ public class RowData
         Triangles[triangleIndex + 2] = c;
         triangleIndex += 3;
     }
-
-    public Mesh CreateMesh()
-    {
-        Mesh mesh = new Mesh();
-        mesh.vertices = Vertices;
-        mesh.triangles = Triangles;
-        mesh.uv = UVs;
-        mesh.RecalculateNormals();
-        return mesh;
-    }
-
 }
