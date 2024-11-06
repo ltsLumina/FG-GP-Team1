@@ -134,6 +134,7 @@ public class Player : MonoBehaviour
     {
         // draw line to nearest rock
         var rock = Find<Rock>();
+        if (!rock) return;
         Gizmos.color = Color.red;
         Gizmos.DrawLine(transform.position, rock.transform.position);
     }
