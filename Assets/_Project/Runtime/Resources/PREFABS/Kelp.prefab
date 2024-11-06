@@ -51,7 +51,7 @@ MonoBehaviour:
   item: 0
   grabbed: 0
   reach: 10
-  lifetime: 10
+  lifetime: 60
 --- !u!33 &5644459682663835806
 MeshFilter:
   m_ObjectHideFlags: 0

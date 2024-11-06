@@ -311,11 +311,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerID: 0
   moveSpeed: 1000
-  diveForce: 25
+  diveForce: 12
   dashForce: 25
   dashDuration: 0.05
   dashDampingStart: 0
   dashDampingEnd: 2.5
+  dashCooldown: 1
 --- !u!65 &7800650524447749218
 BoxCollider:
   m_ObjectHideFlags: 0
