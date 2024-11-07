@@ -239,11 +239,11 @@ public class Train : MonoBehaviour
         void Init()
         {
             onFuelDepleted.AddListener(() => onDeath.Invoke());
-            onPowerDepleted.AddListener(() => onDeath.Invoke());
             onDeath.AddListener
             (() =>
             {
                 GameManager.Instance.GameStateChanger(GameManager.GameState.GameOver);
+                Debug.Log("DOED");
             });
 
             DOTween.SetTweensCapacity(1000, 5);
@@ -286,10 +286,15 @@ public class Train : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            StartCoroutine(RGBLights());
+        }
+        
         Dive();
 
         #region Dirtiness
-        dirtiness      = Mathf.Clamp(dirtiness                                               + dirtinessRate * Time.deltaTime, 0, 100);
+        dirtiness      = Mathf.Clamp(dirtiness + dirtinessRate * Time.deltaTime, 0, 100);
         dirtinessStage = Mathf.Clamp(dirtinessStages.FindIndex(d => dirtiness < d.threshold) + 1, 1, fuelDepletionRateMultipliers.Count);
 
         switch (dirtinessStage)
