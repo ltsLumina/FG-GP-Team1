@@ -93,7 +93,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 9d86832a9eb27a24c85bdaeeca2a38e7, type: 2}
+  m_LightingDataAsset: {fileID: 112000000, guid: d04a83d0782f01c4189fd8cbcf1a583b, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: c36c04815661a0842b18c17c99723f7b, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -602,7 +602,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 8000
   m_UseColorTemperature: 1
-  m_BoundingSphereOverride: {x: 3.93e-41, y: 2.524355e-29, z: 0, w: 2.2e-44}
+  m_BoundingSphereOverride: {x: 3.6764e-41, y: 2.524355e-29, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ForceVisible: 0
@@ -6471,6 +6471,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 54be7fb6aeeaf434aa2c9373b47390e5, type: 2}
+    - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: fuel
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
       propertyPath: depth
       value: 24.7
