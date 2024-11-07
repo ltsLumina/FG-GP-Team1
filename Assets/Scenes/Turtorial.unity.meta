@@ -1,5 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scenes/Korben Wall Playground.meta
+guid: cd6980a07fff930479b8dc1c50346334
+folderAsset: yes
+========
 guid: 2b2b695d916498245aea0bde5a75a555
+>>>>>>>> origin/GameManager:Assets/Scenes/Turtorial.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
