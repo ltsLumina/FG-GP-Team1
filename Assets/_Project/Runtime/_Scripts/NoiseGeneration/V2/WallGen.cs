@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Lumina.Essentials.Modules;
 using UnityEngine;
 
 public class WallGen : MonoBehaviour
 {
     [SerializeField] public MapDisplayV2 Display;
-    [SerializeField] Camera MainCam;
 
     [SerializeField] MeshFilter plane1;
     [SerializeField] MeshFilter plane2;
@@ -33,7 +33,7 @@ public class WallGen : MonoBehaviour
 
     private List<GridDS> _grids = new List<GridDS>();
 
-    private List<Mesh> _meshs = new List<Mesh>();
+    private List<Mesh> _meshes = new List<Mesh>();
 
     GridDS grid1;
     Mesh mesh1 = null;
@@ -67,9 +67,9 @@ public class WallGen : MonoBehaviour
         _grids.Add(grid2);
         _grids.Add(grid3);
 
-        _meshs.Add(mesh1);
-        _meshs.Add(mesh2);
-        _meshs.Add(mesh3);
+        _meshes.Add(mesh1);
+        _meshes.Add(mesh2);
+        _meshes.Add(mesh3);
 
         grid1.SetupWall();
         mesh1 = grid1.GenerateMesh(mesh1);
@@ -115,8 +115,11 @@ public class WallGen : MonoBehaviour
             _levelCount++;
         }
 
-        var child1 = transform.GetChild(0);
-        child1.GetComponent<MeshCollider>().sharedMesh = mesh1;
+        // TODO: Optimize/Refactor this. For whatever reason a for loop doesn't work.
+        var meshColliders = GetComponentsInChildren<MeshCollider>();
+        meshColliders[0].sharedMesh = mesh1;
+        meshColliders[1].sharedMesh = mesh2;
+        meshColliders[2].sharedMesh = mesh3;
     }
 
     private void CheckMeshInlineWithPlayer()
@@ -129,7 +132,7 @@ public class WallGen : MonoBehaviour
             float lowerBound = grid.GetPosition().y - (Height * CellSize / 2f);
             //Debug.Log(upperBound + " " + lowerBound);
 
-            if (MainCam.transform.position.y < upperBound && MainCam.transform.position.y > lowerBound)
+            if (Helpers.CameraMain.transform.position.y < upperBound && Helpers.CameraMain.transform.position.y > lowerBound)
             {
                 _currentWall = grid;
                 _currentWallIndex = index;
@@ -142,7 +145,7 @@ public class WallGen : MonoBehaviour
 
     private void CamBelowHalfOfCurrentWall()
     {
-        if (MainCam.transform.position.y < _currentWall.GetPosition().y)
+        if (Helpers.CameraMain.transform.position.y < _currentWall.GetPosition().y)
         {
             _inSecondHalf = true;
             if (_inSecondHalf != _inSecondHalfTrailing)

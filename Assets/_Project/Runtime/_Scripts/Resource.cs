@@ -17,7 +17,7 @@ public interface IGrabbable
     }
 }
 
-public class Resource : MonoBehaviour, IGrabbable
+public class Resource : MonoBehaviour, IGrabbable, IDestructible
 {
     [SerializeField] IGrabbable.Items item;
     [SerializeField, ReadOnly] bool grabbed;
@@ -37,6 +37,13 @@ public class Resource : MonoBehaviour, IGrabbable
     public float Reach => reach;
 
     public float Lifetime => lifetime;
+
+    bool bypass;
+    public bool Bypass
+    {
+        get => bypass;
+        set => bypass = value;
+    }
 
     void OnEnable()
     {
@@ -65,16 +72,12 @@ public class Resource : MonoBehaviour, IGrabbable
 
     public void Grab()
     {
-        CancelInvoke(nameof(Destroy));
-        
         grabbed = true;
         onGrabbed?.Invoke();
     }
     
     public void Release()
     {
-        Invoke(nameof(Destroy), Lifetime);
-        
         grabbed = false;
         onReleased?.Invoke();
     }
@@ -82,7 +85,7 @@ public class Resource : MonoBehaviour, IGrabbable
     void Start()
     {
         if (Lifetime <= 5) Debug.LogWarning("Lifetime is set too low. Object will likely be destroyed before it has left the screen bounds.");
-        Invoke(nameof(Destroy), Lifetime);
+        Bypass = item == IGrabbable.Items.Battery; // Don't destroy the battery. (obviously, lol)
     }
 
     void Update()

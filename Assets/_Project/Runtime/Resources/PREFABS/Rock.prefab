@@ -49,10 +49,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: {x: 1, y: 1, z: 1}
-  force: 0.75
+  force: 1.25
   torque: 0.2
-  magnetizationStrength: 0.1
-  magnetizationDistance: 5
+  magnetizationStrength: 15
+  magnetizationDistance: 25
 --- !u!33 &1510486877578719971
 MeshFilter:
   m_ObjectHideFlags: 0
