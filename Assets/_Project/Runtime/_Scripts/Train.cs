@@ -238,6 +238,8 @@ public class Train : MonoBehaviour
             onFuelDepleted.AddListener(() => onDeath.Invoke());
             onPowerDepleted.AddListener(() => onDeath.Invoke());
             onDeath.AddListener(() => Debug.Log("The train has died."));
+
+            DOTween.SetTweensCapacity(1000, 5);
             
             OnLightDim.AddListener
             (light =>
