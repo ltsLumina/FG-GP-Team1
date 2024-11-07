@@ -1,3 +1,4 @@
+using Lumina.Essentials.Modules;
 using TMPro;
 using UnityEngine;
 
@@ -28,11 +29,11 @@ public class ScoreManager : MonoBehaviour
 
     public void Update()
     {
-        currentDepthScore.text = depthScore.ToString();
-        currentAlgaeCollected.text = algaeCollected.ToString();
-        currentHolesRepaired.text = holesRepaired.ToString();
+        currentDepthScore.text         = Helpers.Find<Train>().DepthString;
+        currentAlgaeCollected.text     = algaeCollected.ToString();
+        currentHolesRepaired.text      = holesRepaired.ToString();
         currentJellyfishCollected.text = jellyfishCollected.ToString();
-        currentLifeformsScanned.text = lifeformsScanned.ToString();
+        currentLifeformsScanned.text   = lifeformsScanned.ToString();
     }
 
     public void AddDepthScore(int amount)

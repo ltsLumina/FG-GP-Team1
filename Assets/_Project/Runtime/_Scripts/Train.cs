@@ -244,6 +244,7 @@ public class Train : MonoBehaviour
             (() =>
             {
                 GameManager.Instance.GameStateChanger(GameManager.GameState.GameOver);
+                Debug.Log("DOED");
             });
 
             DOTween.SetTweensCapacity(1000, 5);
@@ -289,7 +290,7 @@ public class Train : MonoBehaviour
         Dive();
 
         #region Dirtiness
-        dirtiness      = Mathf.Clamp(dirtiness                                               + dirtinessRate * Time.deltaTime, 0, 100);
+        dirtiness      = Mathf.Clamp(dirtiness + dirtinessRate * Time.deltaTime, 0, 100);
         dirtinessStage = Mathf.Clamp(dirtinessStages.FindIndex(d => dirtiness < d.threshold) + 1, 1, fuelDepletionRateMultipliers.Count);
 
         switch (dirtinessStage)

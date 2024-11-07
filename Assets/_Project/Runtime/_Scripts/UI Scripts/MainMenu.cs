@@ -1,5 +1,6 @@
 using System;
 using DG.Tweening;
+using Lumina.Essentials.Modules;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -42,7 +43,9 @@ public class MainMenu : MonoBehaviour
     {
         GameManager.Instance.GameStateChanger(GameManager.GameState.Play);
         SceneManager.LoadScene(2);
+        highScoreManager = Helpers.Find<HighScoreManager>();
         highScoreManager.SaveHighScores();
+        scoreManager = Helpers.Find<ScoreManager>();
         scoreManager.ResetGame();
     }
 
