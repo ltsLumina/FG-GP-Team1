@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerAnimationStates : MonoBehaviour
+public class PlayerAnimation : MonoBehaviour
 {
     [SerializeField]
     float animationTiming = 0.5f;
