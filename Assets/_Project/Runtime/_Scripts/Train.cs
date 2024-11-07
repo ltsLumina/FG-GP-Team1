@@ -230,6 +230,9 @@ public class Train : MonoBehaviour
 
     void Start()
     {
+        // TODO: for alpha
+        GameManager.Instance.GameStateChanger(GameManager.GameState.Play);
+        
         Init();
 
         return;

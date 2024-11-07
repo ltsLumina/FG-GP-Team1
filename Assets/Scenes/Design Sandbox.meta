@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scenes/Design Sandbox.meta
 guid: 5f13202c86a1f4b50b997e823e06c70e
+========
+guid: 652c7cfb3b038744fa51c49591378ce3
+>>>>>>>> 24713c5 (Update GameManager done):Assets/_Project/Runtime/_Scripts/GameManager.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
