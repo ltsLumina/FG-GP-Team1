@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Scenes/Jakob Sanbox.meta
 guid: 7035e5c651718444aa74c8050d6addc2
-========
-guid: 652c7cfb3b038744fa51c49591378ce3
->>>>>>>> origin/GameManager:Assets/_Project/Runtime/_Scripts/GameManager.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
