@@ -20,10 +20,15 @@ public class GameManager : SingletonPersistent<GameManager>
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            GameStateChanger(GameState.GameOver);
+        }
+
         switch (state)
         {
+
             case GameState.Play:
-                isGameOver = false;
                 if (Input.GetKeyDown(KeyCode.Escape))
                 {
                     GameStateChanger(GameState.Pause);
@@ -68,8 +73,7 @@ public class GameManager : SingletonPersistent<GameManager>
                 Time.timeScale = 0f;
                 break;
             case GameState.GameOver:
-                // mainMenu = FindAnyObjectByType<MainMenu>();
-                // mainMenu.GameOverPanel.SetActive(true);
+                SceneManagerExtended.LoadScene(0);
                 break;
         }
     }

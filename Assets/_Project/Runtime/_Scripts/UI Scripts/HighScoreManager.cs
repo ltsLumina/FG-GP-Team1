@@ -1,4 +1,3 @@
-using Lumina.Essentials.Modules;
 using TMPro;
 using UnityEngine;
 
@@ -15,6 +14,7 @@ public class HighScoreManager : MonoBehaviour
 
     [Header("High Score Values")]
     [SerializeField] int highScoreDepth;
+    public int HighDepthScore => highScoreDepth;
 
     [SerializeField] int highScoreAlgae;
     public int HighAlgaeCollected => highScoreAlgae;
@@ -32,11 +32,11 @@ public class HighScoreManager : MonoBehaviour
     {
         scoreManager = GetComponent<ScoreManager>();
         LoadHighScores();
-        highScoreDepthText.text     = highScoreDepthText.ToString();
-        highScoreAlgaeText.text     = highScoreAlgae.ToString();
-        highScoreRepairText.text    = highScoreRepair.ToString();
+        highScoreDepthText.text = highScoreDepth.ToString();
+        highScoreAlgaeText.text = highScoreAlgae.ToString();
+        highScoreRepairText.text = highScoreRepair.ToString();
         highScoreJellyFishText.text = highScoreJellyFish.ToString();
-        highScoreLifeFormText.text  = highScoreLifeForm.ToString();
+        highScoreLifeFormText.text = highScoreLifeForm.ToString();
     }
 
     public void SaveHighScores()

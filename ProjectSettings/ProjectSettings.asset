@@ -836,7 +836,6 @@ PlayerSettings:
   webWasm2023: 0
   scriptingDefineSymbols:
     Standalone: UNITY_PIPELINE_HDRP
-    WebGL: UNITY_PIPELINE_HDRP
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:

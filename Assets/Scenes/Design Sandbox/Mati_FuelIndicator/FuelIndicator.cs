@@ -1,23 +1,30 @@
-#region
+using System.Collections;
+using System.Collections.Generic;
+using Lumina.Essentials.Modules;
 using UnityEngine;
 using UnityEngine.UI;
-#endregion
 
 public class FuelIndicator : MonoBehaviour
 {
 #pragma warning disable 0414
-    Train train;
-    Slider slider;
+    private Train train;
+    private Slider slider;
+     
 
-    void Awake()
+    private void Awake()
     {
         train = FindFirstObjectByType<Train>();
-        if (train == null) Debug.Log("Fuel indicator couldnt find train object");
-
+        if (train == null) 
+            Debug.Log("Fuel indicator couldnt find train object");
+            
         slider = GetComponent<Slider>();
-        if (train == null) Debug.Log("Fuel indicator couldnt find slider in the components list");
-        if (slider == null || train == null) enabled = false;
+        if (train == null) 
+            Debug.Log("Fuel indicator couldnt find slider in the components list");
+        if (slider == null || train == null) this.enabled = false;    
     }
 
-    void Update() => slider.value = train.Fuel / 100f;
+    private void Update()
+    {
+        slider.value = train.Fuel / 100f;
+    }
 }
