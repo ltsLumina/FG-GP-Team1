@@ -13,11 +13,20 @@ public class HighScoreManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI highScoreLifeFormText;
 
     [Header("High Score Values")]
-    public int highScoreDepth;
-    public int highScoreAlgae;
-    public int highScoreRepair;
-    public int highScoreJellyFish;
-    public int highScoreLifeForm;
+    [SerializeField] int highScoreDepth;
+    public int HighDepthScore => highScoreDepth;
+
+    [SerializeField] int highScoreAlgae;
+    public int HighAlgaeCollected => highScoreAlgae;
+
+    [SerializeField] int highScoreRepair;
+    public int HighHolesRepaired => highScoreRepair;
+
+    [SerializeField] int highScoreJellyFish;
+    public int HighJellyfishCollected => highScoreJellyFish;
+
+    [SerializeField] int highScoreLifeForm;
+    public int HighLifeformsScanned => highScoreLifeForm;
 
     void Start()
     {
