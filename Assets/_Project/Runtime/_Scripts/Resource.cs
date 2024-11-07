@@ -17,7 +17,7 @@ public interface IGrabbable
     }
 }
 
-public class Resource : MonoBehaviour, IGrabbable
+public class Resource : MonoBehaviour, IGrabbable, IDestructible
 {
     [SerializeField] IGrabbable.Items item;
     [SerializeField, ReadOnly] bool grabbed;
@@ -38,13 +38,24 @@ public class Resource : MonoBehaviour, IGrabbable
 
     public float Lifetime => lifetime;
 
+    bool bypass;
+    public bool Bypass
+    {
+        get => bypass;
+        set => bypass = value;
+    }
+
     void OnEnable()
     {
-        onGrabbed  += ResetVelocity;
+        onGrabbed += () =>
+        {
+            SetMesh(true);
+            ResetVelocity();
+        };
         onReleased += () =>
         {
+            SetMesh(true);
             ResetVelocity();
-            transform.localScale = Vector3.one * 2;
         };
     }
 
@@ -61,48 +72,41 @@ public class Resource : MonoBehaviour, IGrabbable
 
     public void Grab()
     {
-        CancelInvoke(nameof(Destroy));
-        
         grabbed = true;
         onGrabbed?.Invoke();
     }
     
     public void Release()
     {
-        Invoke(nameof(Destroy), Lifetime);
-        
         grabbed = false;
         onReleased?.Invoke();
     }
 
     void Start()
     {
-        GetComponent<MeshRenderer>().materials[0].color = Item == IGrabbable.Items.Kelp ? Color.green : Color.yellow;
-
         if (Lifetime <= 5) Debug.LogWarning("Lifetime is set too low. Object will likely be destroyed before it has left the screen bounds.");
-        Invoke(nameof(Destroy), Lifetime);
+        Bypass = item == IGrabbable.Items.Battery; // Don't destroy the battery. (obviously, lol)
     }
 
     void Update()
     {
         if (!Grabbed) return;
-
+        
         var player = Find<Player>();
         var moveInput = player.GetComponentInChildren<InputManager>().MoveInput;
         var offset = new Vector3(moveInput.x * 3f, moveInput.y * 3f);
-
-        // TODO: THIS IS TEMPORARY FOR VISUAL INDICATION
-        if (moveInput == Vector2.zero)
-        {
-            offset  = new (3, 3);
-            transform.localScale = Vector3.one;
-        }
-        else
-        {
-            transform.localScale = Vector3.one * 2; 
-        }
+        if (moveInput == Vector2.zero) offset = new (2, 2);
 
         transform.position = player.transform.position + offset;
+    }
+    
+    void SetMesh(bool useGrabbedMesh)
+    {
+        var regularMesh = transform.GetChild(0);
+        var grabbedMesh = transform.GetChild(1);
+        
+        regularMesh.gameObject.SetActive(!useGrabbedMesh);
+        grabbedMesh.gameObject.SetActive(useGrabbedMesh);
     }
 
     void OnDrawGizmos()

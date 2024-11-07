@@ -101,6 +101,12 @@ namespace Lumina.Essentials.Modules
         public static T[] FindMultiple<T>(FindObjectsSortMode sortMode = FindObjectsSortMode.None) where T : Object => FindObjectsByType<T>(sortMode);
         
         public static Object[] FindMultiple(Type type, FindObjectsSortMode sortMode = FindObjectsSortMode.None) => FindObjectsByType(type, sortMode);
+        
+        public static T GetParentComponent<T>(this Component component) where T : Component => component.GetComponentInParent<T>();
+        public static Component GetParentComponent(this Component component, Type type) => component.GetComponentInParent(type);
+        
+        public static Component GetChildComponent<T>(this Component component) where T : Component => component.GetComponentInChildren<T>();
+        public static Component GetChildComponent(this Component component, Type type) => component.GetComponentInChildren(type);
         #endregion
     }
 }

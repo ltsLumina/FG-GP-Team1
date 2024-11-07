@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using DG.Tweening;
 using Lumina.Essentials.Attributes;
+using Lumina.Essentials.Modules;
 using UnityEngine;
 using UnityEngine.Custom.Attributes;
 using UnityEngine.InputSystem;

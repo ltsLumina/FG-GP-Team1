@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class AlphaSpawner : MonoBehaviour
 {
+    #pragma warning disable 0414
+    
     [SerializeField]
     // Transform to track
     private Transform trackTransform;
