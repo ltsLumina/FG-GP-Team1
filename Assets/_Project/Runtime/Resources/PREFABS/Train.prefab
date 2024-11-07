@@ -5394,19 +5394,17 @@ MonoBehaviour:
   hullIntegrity: 3
   repairAmount: 1
   hullBreaches: 0
+  lights:
+    serializedKvps: []
+    dividerPos: 0.33
+  lightSwitchThresholds:
+    serializedKvps: []
+    dividerPos: 0.33
   power: 100
   powerDepletionRate: 1
   powerRechargeAmount: 1
   lightIntensity: 1
   lightRadius: 5
-  powerDimThreshold: 25
-  lightDimMultiplier: 0.5
-  spawnInterval: 0
-  jellyfishSpawnRate: 1
-  jellyfishSpawnInterval: 10
-  jellyfishSpeed: 5
-  jellyfishRestoreAmount: 25
-  jellyfishStunDuration: 1
   inDevelopment: Yes.
   onFuelDepleted:
     m_PersistentCalls:
@@ -5441,6 +5439,7 @@ MonoBehaviour:
   debugMode: 0
   invincible: 0
   showDebugInfo: 0
+  partyMode: 0
   fuelDepletionDefaults:
   - 1
   - 1.5
