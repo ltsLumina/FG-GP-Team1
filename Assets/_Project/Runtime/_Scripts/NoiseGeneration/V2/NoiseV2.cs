@@ -47,7 +47,9 @@ public static class BetterNoise
                     float sampleX = x / scaleX * frequency + (octaveOffsets[i].x / scaleX);
                     float sampleY = y / scaleY * frequency + (octaveOffsets[i].y / scaleY);
 
-                    float perlinValue = Mathf.PerlinNoise(sampleX, sampleY) * 2 - 1;
+                    float noiseVal = Mathf.PerlinNoise(sampleX, sampleY) * 2 - 1;
+
+                    float perlinValue = Mathf.Pow(noiseVal, 3) + 0.1f * noiseVal;
 
                     noiseHeight += perlinValue * amplitude;
 
@@ -67,16 +69,7 @@ public static class BetterNoise
                 noiseMap[x, y - startHeight] = noiseHeight;
             }
         }
-
-        /*
-        for (int x = 0; x < width; x++)
-        {
-            for (int y = 0; y < height; y++)
-            {
-                //noiseMap[x, y] = Mathf.InverseLerp(minNoiseHeight, maxNoiseHeight, noiseMap[x, y]) * 2 - 1;
-            }
-        }
-        */
+        
         return noiseMap;
     }
 
