@@ -305,6 +305,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6955198144518571652}
+  - {fileID: 5425014332352787703}
   - {fileID: 3340321906732198938}
   - {fileID: 1163592691996433890}
   m_Father: {fileID: 0}
@@ -323,7 +324,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerID: 0
   moveSpeed: 5000
-  diveForce: 12
   dashForce: 150
   dashDuration: 0.1
   dashDampingStart: 0
@@ -391,6 +391,92 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   label: Add this component to the parent object you want the selection to highlight
     when selected.
+--- !u!1001 &1929789565325795760
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 371218063552686938}
+    m_Modifications:
+    - target: {fileID: 2947457788077488910, guid: 727894c7ee2894887aa8678f5c1e7b12, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5760572333843415453, guid: 727894c7ee2894887aa8678f5c1e7b12, type: 3}
+      propertyPath: m_Name
+      value: Animation
+      objectReference: {fileID: 0}
+    - target: {fileID: 5876767227943163207, guid: 727894c7ee2894887aa8678f5c1e7b12, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -13.683037
+      objectReference: {fileID: 0}
+    - target: {fileID: 5876767227943163207, guid: 727894c7ee2894887aa8678f5c1e7b12, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -7.455002
+      objectReference: {fileID: 0}
+    - target: {fileID: 5876767227943163207, guid: 727894c7ee2894887aa8678f5c1e7b12, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -20.970207
+      objectReference: {fileID: 0}
+    - target: {fileID: 5876767227943163207, guid: 727894c7ee2894887aa8678f5c1e7b12, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5876767227943163207, guid: 727894c7ee2894887aa8678f5c1e7b12, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5876767227943163207, guid: 727894c7ee2894887aa8678f5c1e7b12, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5876767227943163207, guid: 727894c7ee2894887aa8678f5c1e7b12, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5876767227943163207, guid: 727894c7ee2894887aa8678f5c1e7b12, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5876767227943163207, guid: 727894c7ee2894887aa8678f5c1e7b12, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5876767227943163207, guid: 727894c7ee2894887aa8678f5c1e7b12, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6843224961146285920, guid: 727894c7ee2894887aa8678f5c1e7b12, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6843224961146285920, guid: 727894c7ee2894887aa8678f5c1e7b12, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6843224961146285920, guid: 727894c7ee2894887aa8678f5c1e7b12, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6843224961146285920, guid: 727894c7ee2894887aa8678f5c1e7b12, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8181237697279080662, guid: 727894c7ee2894887aa8678f5c1e7b12, type: 3}
+      propertyPath: animationTiming
+      value: 0.25
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 727894c7ee2894887aa8678f5c1e7b12, type: 3}
+--- !u!4 &5425014332352787703 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5876767227943163207, guid: 727894c7ee2894887aa8678f5c1e7b12, type: 3}
+  m_PrefabInstance: {fileID: 1929789565325795760}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3013344033797245937
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -458,6 +544,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 252ed390f482ad742b9aff5ebb22ff82, type: 3}
       propertyPath: m_Name
       value: Geo_Robot_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 252ed390f482ad742b9aff5ebb22ff82, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

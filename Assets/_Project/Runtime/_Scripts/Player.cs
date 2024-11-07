@@ -1,7 +1,9 @@
 #region
+using System;
 using System.Collections;
 using DG.Tweening;
 using Lumina.Essentials.Attributes;
+using Lumina.Essentials.Modules;
 using UnityEngine;
 using UnityEngine.Custom.Attributes;
 using UnityEngine.InputSystem;
@@ -18,12 +20,6 @@ public class Player : MonoBehaviour
     [Header("Movement")]
     [SerializeField]
     float moveSpeed;
-
-    [Tooltip(
-        "The amount of push force applied when the player dives. \nA higher value will make it tougher to dive down."
-    )]
-    [SerializeField]
-    float diveForce = 15f;
 
     [Header("Dash")]
     [SerializeField]
@@ -68,25 +64,21 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
+    // Player moves in parallel with the train if it's a child of the train. Simplest solution.
+    void Start() => transform.SetParent(Find<Train>().transform);
+
     void Update()
     {
         Move();
-        Dive();
-        StayInBounds();
+        //StayInBounds();
         Rotate();
-    }
-
-    void Dive()
-    {
-        var down = Vector3.down * (diveForce * Time.deltaTime);
-        rb.AddForce(down, ForceMode.Force);
     }
 
     void Move()
     {
         var dir = input.MoveInput.normalized;
         rb.AddForce(
-            new Vector3(dir.x, dir.y * 1.5f) * (moveSpeed * Time.deltaTime),
+            new Vector3(dir.x, dir.y) * (moveSpeed * Time.deltaTime),
             ForceMode.Acceleration
         );
     }
@@ -115,6 +107,8 @@ public class Player : MonoBehaviour
         }
     }
 
+    static Resource heldResource;
+
     /// <summary>
     /// Check if the player is holding an item.
     /// </summary>
@@ -122,32 +116,56 @@ public class Player : MonoBehaviour
     /// <returns></returns>
     public static bool HoldingResource(out Resource heldResource)
     {
-        if (Find<Resource>() == null)
+        if (Player.heldResource == null)
         {
             heldResource = null;
             return false;
         }
 
-        heldResource = Find<Resource>();
-        return heldResource.Grabbed;
+        heldResource = Player.heldResource;
+        return heldResource is { Grabbed: true };
+    }
+
+    /// <summary>
+    ///     Find the closest resource to the player.
+    /// </summary>
+    /// <returns> An array of resources sorted by distance to the player.
+    ///     <para> The closest resource is at index 0. </para>
+    /// </returns>
+    Resource[] ClosestResources()
+    {
+        Resource[] resources = FindMultiple<Resource>();
+        Array.Sort(
+            resources,
+            (a, b) =>
+                Vector3
+                    .Distance(a.transform.position, transform.position)
+                    .CompareTo(Vector3.Distance(b.transform.position, transform.position))
+        );
+        return resources;
     }
 
     public void Grab()
     {
-        var resource = Find<Resource>();
-        if (resource.Reach > Vector3.Distance(transform.position, resource.transform.position))
+        if (heldResource != null)
+            return;
+
+        var resources = ClosestResources();
+        var closest = resources[0];
+        if (closest.Reach > Vector3.Distance(transform.position, closest.transform.position))
         {
-            resource.Grab();
+            closest.Grab();
+            heldResource = closest;
         }
     }
 
     public void Release()
     {
-        var resource = Find<Resource>();
-        if (resource.Grabbed)
-        {
-            resource.Release();
-        }
+        if (heldResource == null)
+            return;
+
+        heldResource.Release();
+        heldResource = null;
     }
 
     void StayInBounds()
