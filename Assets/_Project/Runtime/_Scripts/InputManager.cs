@@ -23,9 +23,6 @@ public class InputManager : MonoBehaviour
         player.Dash();
     }
 
-    bool pressed;
-    bool held;
-
     public void OnInteract(InputAction.CallbackContext context)
     {
         switch (context.interaction)

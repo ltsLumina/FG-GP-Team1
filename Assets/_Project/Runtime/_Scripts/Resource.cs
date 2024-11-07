@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using DG.Tweening;
 using JetBrains.Annotations;
 using Lumina.Essentials.Attributes;
 using Unity.VisualScripting;
@@ -21,6 +22,10 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
 {
     [SerializeField] IGrabbable.Items item;
     [SerializeField, ReadOnly] bool grabbed;
+
+    [Header("Mesh")]
+    [SerializeField] MeshRenderer standardMesh;
+    [SerializeField] MeshRenderer grabbedMesh;
     
     [Header("Settings")]
     [SerializeField] float reach;
@@ -38,12 +43,7 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
 
     public float Lifetime => lifetime;
 
-    bool bypass;
-    public bool Bypass
-    {
-        get => bypass;
-        set => bypass = value;
-    }
+    public bool Bypass { get; set; }
 
     void OnEnable()
     {
@@ -64,11 +64,10 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
     void ResetVelocity()
     {
         TryGetComponent(out Rigidbody rb);
+        if (rb == null) return;
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
     }
-
-    void Destroy() => Destroy(gameObject);
 
     public void Grab()
     {
@@ -84,6 +83,9 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
 
     void Start()
     {
+        Debug.Assert(standardMesh != null, "Standard mesh is not set. Please set it in the inspector.", this);
+        Debug.Assert(grabbedMesh != null, "Grabbed mesh is not set. Please set it in the inspector.", this);
+        
         if (Lifetime <= 5) Debug.LogWarning("Lifetime is set too low. Object will likely be destroyed before it has left the screen bounds.");
         Bypass = item == IGrabbable.Items.Battery; // Don't destroy the battery. (obviously, lol)
     }
@@ -94,22 +96,18 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
         
         var player = Find<Player>();
         var moveInput = player.GetComponentInChildren<InputManager>().MoveInput;
-        var offset = new Vector3(moveInput.x * 3f, moveInput.y * 3f);
-        if (moveInput == Vector2.zero) offset = new (2, 2);
-
+        var offset = new Vector3(moveInput.x * 2f, 3f);
+        
         transform.position = player.transform.position + offset;
     }
     
     void SetMesh(bool useGrabbedMesh)
     {
-        var regularMesh = transform.GetChild(0);
-        var grabbedMesh = transform.GetChild(1);
-        
-        regularMesh.gameObject.SetActive(!useGrabbedMesh);
+        standardMesh.gameObject.SetActive(!useGrabbedMesh);
         grabbedMesh.gameObject.SetActive(useGrabbedMesh);
     }
 
-    void OnDrawGizmos()
+    void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, reach);

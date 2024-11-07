@@ -26,12 +26,10 @@ public class GridDS
 
     private Vector3 _position;
     private float _heightMultiplier;
-    private AnimationCurve _curve;
 
 
-    public GridDS(AnimationCurve curve, Vector3 position, int width, int height, float gridCellLength, float heightMultiplier, float scaleX, float scaleY, Vector2 offset, Vector2 globalOffset, float globalScale, float globalAmplitude, int octaves, float persistance, float lacunarity, int seed)
+    public GridDS(Vector3 position, int width, int height, float gridCellLength, float heightMultiplier, float scaleX, float scaleY, Vector2 offset, Vector2 globalOffset, float globalScale, float globalAmplitude, int octaves, float persistance, float lacunarity, int seed)
     {
-        _curve = curve;
         _position = position;
         _heightMultiplier = heightMultiplier;
 
