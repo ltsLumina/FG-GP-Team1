@@ -1,12 +1,15 @@
 #region
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using JetBrains.Annotations;
 using Lumina.Essentials.Modules;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Custom.Attributes;
 using UnityEngine.Events;
+using UnityEngine.Rendering.HighDefinition;
 #if UNITY_EDITOR
 using VHierarchy.Libs;
 #endif
@@ -72,50 +75,51 @@ public class Train : MonoBehaviour
     [SerializeField] int hullBreaches;
 
     [Tab("Power")]
+    [Tooltip("Whether the headlights are active, and which ones are active.")]
+    [SerializeField] SerializedDictionary<GameObject, bool> lights;
+
+    [Tooltip("The thresholds for the power level when the lights start to dim.")]
+    [SerializeField] SerializedDictionary<GameObject, float> lightSwitchThresholds;
+        
     [Tooltip("The amount of power/electricity the train has. A low power level will dim the lights.")]
     [RangeResettable(0, 100)]
-    [SerializeField] float power = 100; // Also known as "Light".
+    [SerializeField] float power = 100;
     [Tooltip("The rate at which power depletes. One unit per second.")]
     [Range(0f, 5f)]
     [SerializeField] float powerDepletionRate = 1;
-    [Tooltip("The rate at which power regenerates upon gathering a jellyfish. One unit per second.")]
-    [Range(0f, 5f)]
-    [SerializeField] float powerRechargeAmount = 1;
+
+    [Header("Battery")]
+    [Range(1, 50)]
+    [SerializeField] float powerRechargeAmount = 25;
 
     [Header("Lighting")]
     [Tooltip("The intensity of the light.")]
-    [Range(0.1f, 5f)]
-    [SerializeField] float lightIntensity = 1;
+    [Range(0, 100000)]
+    [SerializeField] float lightIntensity = 20000;
     [Tooltip("The radius of the light.")]
-    [Range(0.1f, 10f)]
-    [SerializeField] float lightRadius = 5;
-    [Tooltip("The threshold for the power level when the light starts to dim.")]
     [Range(0, 100)]
-    [SerializeField] int powerDimThreshold = 25;
-    [Tooltip("A multiplier for the intensity and radius of the light when the power is low.")]
-    [Range(0.1f, 1f)]
-    [SerializeField] float lightDimMultiplier = 0.5f;
+    [SerializeField] float lightRadius = 50;
 
-    [Header("Jellyfish")]
-    [Tooltip("Whether to have a spawn rate or an interval.")]
-    [SerializeField] bool spawnInterval;
-
-    [Tooltip("The rate at which jellyfish spawn. One spawn per minute.")]
-    [Range(1f, 60f), HideIf(nameof(spawnInterval))]
-    [SerializeField] float jellyfishSpawnRate = 1; // TODO: Might move this to a separate script. 
-    [Tooltip("Alternatively, the interval between jellyfish spawns.")]
-    [Range(1f, 60f), ShowIf(nameof(spawnInterval))]
-    [SerializeField] float jellyfishSpawnInterval = 10;
-    [EndIf]
-    [Tooltip("The speed of the jellyfish.")]
-    [Range(1, 10)]
-    [SerializeField] float jellyfishSpeed = 5;
-    [Tooltip("The amount of power restored by a single jellyfish.")]
-    [Range(1, 50)]
-    [SerializeField] int jellyfishRestoreAmount = 25;
-    [Tooltip("The duration of the stun when the player bumps into a jellyfish.")]
-    [Range(1, 5)]
-    [SerializeField] float jellyfishStunDuration = 1;
+    // [Header("Jellyfish")]
+    // [Tooltip("Whether to have a spawn rate or an interval.")]
+    // [SerializeField] bool spawnInterval;
+    //
+    // [Tooltip("The rate at which jellyfish spawn. One spawn per minute.")]
+    // [Range(1f, 60f), HideIf(nameof(spawnInterval))]
+    // [SerializeField] float jellyfishSpawnRate = 1; // TODO: Might move this to a separate script. 
+    // [Tooltip("Alternatively, the interval between jellyfish spawns.")]
+    // [Range(1f, 60f), ShowIf(nameof(spawnInterval))]
+    // [SerializeField] float jellyfishSpawnInterval = 10;
+    // [EndIf]
+    // [Tooltip("The speed of the jellyfish.")]
+    // [Range(1, 10)]
+    // [SerializeField] float jellyfishSpeed = 5;
+    // [Tooltip("The amount of power restored by a single jellyfish.")]
+    // [Range(1, 50)]
+    // [SerializeField] int jellyfishRestoreAmount = 25;
+    // [Tooltip("The duration of the stun when the player bumps into a jellyfish.")]
+    // [Range(1, 5)]
+    // [SerializeField] float jellyfishStunDuration = 1;
 
     [Tab("Rocks")]
     [SerializeField] string inDevelopment = "Yes.";
@@ -132,7 +136,7 @@ public class Train : MonoBehaviour
     [Foldout("Power")]
     [SerializeField] UnityEvent onPowerDepleted;
     [SerializeField] UnityEvent onPowerRestored;
-    [SerializeField] UnityEvent OnLightDim;
+    [SerializeField] UnityEvent<Light> OnLightDim;
     [Foldout("Rocks")]
     [SerializeField] UnityEvent<Rock> onRockCollision;
 
@@ -145,6 +149,7 @@ public class Train : MonoBehaviour
     [Tooltip("The train wont take damage. Might break the game.")]
     [SerializeField] bool invincible;
     [SerializeField] bool showDebugInfo;
+    [SerializeField] bool partyMode;
     [EndIf]
 
     [SerializeField] List<float> fuelDepletionDefaults = new () { 1, 1.5f, 2, 2.5f, 3 };
@@ -197,7 +202,11 @@ public class Train : MonoBehaviour
     public float Power
     {
         get => power;
-        set => power = value;
+        set
+        {
+            power = Mathf.Clamp(value, 0, 100);
+            if (power <= 0) onPowerDepleted.Invoke();
+        }
     }
 
 #if UNITY_EDITOR
@@ -213,20 +222,61 @@ public class Train : MonoBehaviour
             GUILayout.Label($"Hull Integrity: {HullIntegrity}", style);
             GUILayout.Label($"Dirtiness: {dirtiness.Round()} (Stage {dirtinessStage})", style);
             GUILayout.Label($"Power: {Power.Round()}", style);
-            GUILayout.Label($"Jellyfish Spawn Rate: {jellyfishSpawnRate}", style);
-            GUILayout.Label($"Jellyfish Spawn Interval: {jellyfishSpawnInterval}", style);
+            //GUILayout.Label($"Jellyfish Spawn Rate: {jellyfishSpawnRate}", style);
+            //GUILayout.Label($"Jellyfish Spawn Interval: {jellyfishSpawnInterval}", style);
         }
     }
 #endif
 
     void Start()
     {
+        // TODO: for alpha
+        GameManager.Instance.GameStateChanger(GameManager.GameState.Play);
+        
         Init();
 
         return;
         void Init()
         {
+            onFuelDepleted.AddListener(() => onDeath.Invoke());
+            onPowerDepleted.AddListener(() => onDeath.Invoke());
             onDeath.AddListener(() => Debug.Log("The train has died."));
+
+            DOTween.SetTweensCapacity(1000, 5);
+            
+            OnLightDim.AddListener
+            (light =>
+            {
+                var hdLightData = light.GetComponent<HDAdditionalLightData>();
+                DOVirtual.Float(hdLightData.volumetricDimmer, 0, 1, x => hdLightData.volumetricDimmer = x).OnComplete(() => { lights[light.gameObject] = false; });
+            });
+
+            onPowerRestored.AddListener
+            (() =>
+            {
+                foreach (var light in lights)
+                {
+                    var hdLightData = light.Key.GetComponent<HDAdditionalLightData>();
+                    DOVirtual.Float(hdLightData.volumetricDimmer, 1, 1, x => hdLightData.volumetricDimmer = x).OnComplete(() => { lights[light.Key] = true; });
+                }
+            });
+            
+            if (partyMode)
+            {
+                StartCoroutine(RGBLights());
+            }
+        }
+    }
+    
+    IEnumerator RGBLights()
+    {
+        while (true)
+        {
+            foreach (var light in lights)
+            {
+                light.Key.GetComponent<Light>().color = new Color(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value);
+            }
+            yield return new WaitForSeconds(0.25f);
         }
     }
 
@@ -234,7 +284,8 @@ public class Train : MonoBehaviour
     {
         Dive();
 
-        dirtiness      = Mathf.Clamp(dirtiness + dirtinessRate * Time.deltaTime, 0, 100);
+        #region Dirtiness
+        dirtiness      = Mathf.Clamp(dirtiness                                               + dirtinessRate * Time.deltaTime, 0, 100);
         dirtinessStage = Mathf.Clamp(dirtinessStages.FindIndex(d => dirtiness < d.threshold) + 1, 1, fuelDepletionRateMultipliers.Count);
 
         switch (dirtinessStage)
@@ -269,6 +320,25 @@ public class Train : MonoBehaviour
                 onDirtinessStageChanged.Invoke(5);
                 break;
         }
+        #endregion
+
+        foreach (var light in lights)
+        {
+            Power -= powerDepletionRate * Time.deltaTime;
+            if (Power <= lightSwitchThresholds[light.Key])
+            {
+                OnLightDim.Invoke(light.Key.GetComponent<Light>());
+            }
+            else // Power has been restored above the threshold
+            {
+                onPowerRestored.Invoke();
+            }
+        }
+
+        foreach (var light in lights)
+        {
+            light.Key.SetActive(light.Value);
+        }
     }
 
     #region Utility
@@ -292,11 +362,11 @@ public class Train : MonoBehaviour
         switch (tasks)
         {
             case Tasks.Clean:
-                Dirtiness -= 25f; // TODO: Change this to a variable.
+                Dirtiness -= algaeRestoreAmount;
                 break;
 
             case Tasks.Refuel:
-                Fuel += algaeRestoreAmount;
+                Fuel += kelpRestoreAmount;
 
                 if (Player.HoldingResource(out Resource heldItem)) Destroy(heldItem.gameObject);
                 break;
