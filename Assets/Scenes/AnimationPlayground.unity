@@ -419,6 +419,131 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &139624217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89b7ac12dedcd467992b1d9eb3139ab5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttons:
+  - name: C _ Refuel
+    tab: 
+    size: 30
+    space: 0
+  - name: C _ Clean
+    tab: 
+    size: 30
+    space: 0
+  - name: C _ Repair
+    tab: 
+    size: 30
+    space: 0
+  - name: C _ Damage
+    tab: 
+    size: 30
+    space: 0
+  - name: C _ Recharge
+    tab: 
+    size: 30
+    space: 0
+  - name: C _ Show Tasks
+    tab: 
+    size: 30
+    space: 0
+  rootTab:
+    name: 
+    selectedSubtabIndex: 0
+    subtabs:
+    - rid: 3861983091428688000
+    - rid: 3861983091428688001
+    - rid: 3861983091428688002
+    - rid: 3861983091428688003
+    - rid: 3861983091428688004
+    - rid: 3861983091428688005
+    subtabsDrawn: 1
+  rootFoldout:
+    name: 
+    expanded: 1
+    subfoldouts:
+    - rid: 3861983091428688006
+    - rid: 3861983091428688007
+    - rid: 3861983091428688008
+    - rid: 3861983091428688009
+  references:
+    version: 2
+    RefIds:
+    - rid: 3861983091428688000
+      type: {class: VInspectorData/Tab, ns: VInspector, asm: VInspector}
+      data:
+        name: Fuel
+        selectedSubtabIndex: 0
+        subtabs: []
+        subtabsDrawn: 0
+    - rid: 3861983091428688001
+      type: {class: VInspectorData/Tab, ns: VInspector, asm: VInspector}
+      data:
+        name: Hull
+        selectedSubtabIndex: 0
+        subtabs: []
+        subtabsDrawn: 0
+    - rid: 3861983091428688002
+      type: {class: VInspectorData/Tab, ns: VInspector, asm: VInspector}
+      data:
+        name: Power
+        selectedSubtabIndex: 0
+        subtabs: []
+        subtabsDrawn: 0
+    - rid: 3861983091428688003
+      type: {class: VInspectorData/Tab, ns: VInspector, asm: VInspector}
+      data:
+        name: Rocks
+        selectedSubtabIndex: 0
+        subtabs: []
+        subtabsDrawn: 0
+    - rid: 3861983091428688004
+      type: {class: VInspectorData/Tab, ns: VInspector, asm: VInspector}
+      data:
+        name: Events
+        selectedSubtabIndex: 0
+        subtabs: []
+        subtabsDrawn: 0
+    - rid: 3861983091428688005
+      type: {class: VInspectorData/Tab, ns: VInspector, asm: VInspector}
+      data:
+        name: Settings
+        selectedSubtabIndex: 0
+        subtabs: []
+        subtabsDrawn: 0
+    - rid: 3861983091428688006
+      type: {class: VInspectorData/Foldout, ns: VInspector, asm: VInspector}
+      data:
+        name: Fuel
+        expanded: 0
+        subfoldouts: []
+    - rid: 3861983091428688007
+      type: {class: VInspectorData/Foldout, ns: VInspector, asm: VInspector}
+      data:
+        name: Hull
+        expanded: 0
+        subfoldouts: []
+    - rid: 3861983091428688008
+      type: {class: VInspectorData/Foldout, ns: VInspector, asm: VInspector}
+      data:
+        name: Power
+        expanded: 0
+        subfoldouts: []
+    - rid: 3861983091428688009
+      type: {class: VInspectorData/Foldout, ns: VInspector, asm: VInspector}
+      data:
+        name: Rocks
+        expanded: 0
+        subfoldouts: []
 --- !u!1001 &208152952
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -710,115 +835,6 @@ Transform:
   - {fileID: 1214224303}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &776078610
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 776078611}
-  - component: {fileID: 776078614}
-  - component: {fileID: 776078613}
-  - component: {fileID: 776078612}
-  m_Layer: 0
-  m_Name: Face
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &776078611
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 776078610}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.70722324, z: -0.70699036, w: 0}
-  m_LocalPosition: {x: 0.01499939, y: 0.41900015, z: 0.5550003}
-  m_LocalScale: {x: 0.09538089, y: 0.08082441, z: 0.08082441}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 852274869}
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
---- !u!64 &776078612
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 776078610}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &776078613
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 776078610}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: b93f8d354e239004a8bf8f6857ec17eb, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &776078614
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 776078610}
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &852274868
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -867,51 +883,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3612032446531295934, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4917923898647514832, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4917923898647514832, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4917923898647514832, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4917923898647514832, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7732228886085589350, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
-      propertyPath: motorSpeed
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7732228886085589350, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
-      propertyPath: animationTiming
-      value: 0.25
-      objectReference: {fileID: 0}
     - target: {fileID: 8848661024979553184, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 4917923898647514832, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
-      insertIndex: 0
-      addedObject: {fileID: 776078611}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
---- !u!4 &852274869 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4917923898647514832, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
-  m_PrefabInstance: {fileID: 852274868}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &896011914
 GameObject:
   m_ObjectHideFlags: 0
@@ -2205,6 +2185,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: speed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: vInspectorData
+      value: 
+      objectReference: {fileID: 139624217}
     - target: {fileID: 3250338207582518953, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
       propertyPath: m_IsActive
       value: 0
