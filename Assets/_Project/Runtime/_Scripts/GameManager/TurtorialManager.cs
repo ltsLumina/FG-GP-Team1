@@ -3,6 +3,7 @@ using UnityEngine;
 public class TurtorialManager : MonoBehaviour
 {
     public GameObject pausePanel;
+    MainMenu mainMenu;
 
     public GameState state;
 
@@ -29,14 +30,16 @@ public class TurtorialManager : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.Escape))
                 {
                     GameStateChanger(GameState.Pause);
-                    pausePanel.SetActive(true);
+                    mainMenu = FindAnyObjectByType<MainMenu>();
+                    mainMenu.PausePanel.SetActive(true);
                 }
                 break;
             case GameState.Pause:
                 if (Input.GetKeyDown(KeyCode.Escape))
                 {
                     GameStateChanger(GameState.Play);
-                    pausePanel.SetActive(false);
+                    mainMenu = FindAnyObjectByType<MainMenu>();
+                    mainMenu.PausePanel.SetActive(false);
                 }
                 break;
             case GameState.Movement:

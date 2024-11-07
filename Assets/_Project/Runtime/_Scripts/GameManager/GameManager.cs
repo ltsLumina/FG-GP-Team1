@@ -10,44 +10,8 @@ using static GameManager;
 [DisallowMultipleComponent]
 public class GameManager : SingletonPersistent<GameManager>
 {
-    HighScoreManager highScoreManager;
-    ScoreManager scoreManager;
-
-    [Header("UI Elements")]
-    public GameObject mainMenuPanel;
-    public GameObject pausePanel;
-    public GameObject gameOverPanel;
-
+    MainMenu mainMenu;
     public bool isGameOver = false;
-
-
-    #region Singleton
-    private static GameManager _instance;
-    public static GameManager Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                Debug.LogError("GameManager instance not found!");
-            }
-            return _instance;
-        }
-    }
-
-    void Awake()
-    {
-        if (_instance != null && _instance != this)
-        {
-            Destroy(gameObject);
-            Debug.LogError("Singleton already exist");
-            return;
-        }
-
-        _instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
-    #endregion
 
     public GameState state;
 
@@ -59,37 +23,39 @@ public class GameManager : SingletonPersistent<GameManager>
         // Add more game states if needed
     }
 
-    void Start()
-    {
-        mainMenuPanel.SetActive(true);
-        gameOverPanel.SetActive(false);
-        pausePanel.SetActive(false);
-    }
-
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            GameStateChanger(GameState.GameOver);
+        }
+
         switch (state)
         {
+
             case GameState.Play:
                 if (Input.GetKeyDown(KeyCode.Escape))
                 {
                     GameStateChanger(GameState.Pause);
-                    pausePanel.SetActive(true);
+                    mainMenu = FindAnyObjectByType<MainMenu>();
+                    mainMenu.PausePanel.SetActive(true);
                 }
                 break;
             case GameState.Pause:
                 if (Input.GetKeyDown(KeyCode.Escape))
                 {
                     GameStateChanger(GameState.Play);
-                    pausePanel.SetActive(false);
+                    mainMenu = FindAnyObjectByType<MainMenu>();
+                    mainMenu.PausePanel.SetActive(false);
                 }
                 break;
             case GameState.GameOver:
-                if (!isGameOver && Input.GetKeyDown(KeyCode.K))
+                if (!isGameOver)
                 {
                     isGameOver = true;
                     GameStateChanger(GameState.Pause);
-                    gameOverPanel.SetActive(true);
+                    mainMenu = FindAnyObjectByType<MainMenu>();
+                    mainMenu.GameOverPanel.SetActive(true);
                     Debug.Log("Game Over");
                 }
                 break;
@@ -112,24 +78,7 @@ public class GameManager : SingletonPersistent<GameManager>
                 Time.timeScale = 0f;
                 break;
             case GameState.GameOver:
-                Time.timeScale = 0f;
                 break;
         }
-    }
-
-    public void StartGame()
-    {
-        GameStateChanger(GameState.Play);
-    }
-
-    public void PauseGame()
-    {
-        GameStateChanger(GameState.Pause);
-    }
-
-    public void GameOver()
-    {
-        highScoreManager.SaveHighScores();
-        GameStateChanger(GameState.GameOver);
     }
 }

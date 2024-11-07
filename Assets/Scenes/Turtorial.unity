@@ -4059,6 +4059,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 752f73e008521414a8b6cdcedf960df8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainMenuPanel: {fileID: 3962154438072573146}
+  pausePanel: {fileID: 1037984599}
+  gameOverPanel: {fileID: 1466686712}
 --- !u!1 &224090082
 GameObject:
   m_ObjectHideFlags: 0
@@ -7667,9 +7670,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f6d54e7c12100145b9cf3a8b86e068b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainMenuPanel: {fileID: 0}
-  pausePanel: {fileID: 0}
-  gameOverPanel: {fileID: 0}
   isGameOver: 0
   state: 0
 --- !u!114 &530164786
@@ -16222,7 +16222,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1037984600
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16437,7 +16437,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1085162100
 RectTransform:
   m_ObjectHideFlags: 0
@@ -28992,9 +28992,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f6d54e7c12100145b9cf3a8b86e068b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainMenuPanel: {fileID: 7407327896625588074}
-  pausePanel: {fileID: 1085162099}
-  gameOverPanel: {fileID: 835118295}
   isGameOver: 0
   state: 0
 --- !u!114 &2031856055
