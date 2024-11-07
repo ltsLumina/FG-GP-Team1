@@ -5,6 +5,12 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField]
     float animationTiming = 0.5f;
 
+    [SerializeField]
+    float motorSpeed = 1f;
+
+    [SerializeField]
+    float dashMotorSpeed = 5.0f;
+
     Animator anim;
     InputManager input;
 
@@ -12,11 +18,24 @@ public class PlayerAnimation : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         input = transform.parent.GetComponentInChildren<InputManager>();
+        SetMotorSpeed(motorSpeed);
     }
 
     public void Dash()
     {
         anim.SetTrigger("Dash");
+        SetMotorSpeed(dashMotorSpeed);
+    }
+
+    public void StopDash()
+    {
+        SetMotorSpeed(motorSpeed);
+    }
+
+    private void SetMotorSpeed(float speed)
+    {
+        Debug.Log("Setting motor speed to " + speed);
+        anim.SetFloat("MotorSpeed", speed);
     }
 
     public void Grab(GameObject grabbedObject)

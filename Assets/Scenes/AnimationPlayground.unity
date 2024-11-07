@@ -710,131 +710,6 @@ Transform:
   - {fileID: 1214224303}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &565326312
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89b7ac12dedcd467992b1d9eb3139ab5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buttons:
-  - name: C _ Refuel
-    tab: 
-    size: 30
-    space: 0
-  - name: C _ Clean
-    tab: 
-    size: 30
-    space: 0
-  - name: C _ Repair
-    tab: 
-    size: 30
-    space: 0
-  - name: C _ Damage
-    tab: 
-    size: 30
-    space: 0
-  - name: C _ Recharge
-    tab: 
-    size: 30
-    space: 0
-  - name: C _ Show Tasks
-    tab: 
-    size: 30
-    space: 0
-  rootTab:
-    name: 
-    selectedSubtabIndex: 0
-    subtabs:
-    - rid: 3861983091271663616
-    - rid: 3861983091271663617
-    - rid: 3861983091271663618
-    - rid: 3861983091271663619
-    - rid: 3861983091271663620
-    - rid: 3861983091271663621
-    subtabsDrawn: 0
-  rootFoldout:
-    name: 
-    expanded: 1
-    subfoldouts:
-    - rid: 3861983091271663622
-    - rid: 3861983091271663623
-    - rid: 3861983091271663624
-    - rid: 3861983091271663625
-  references:
-    version: 2
-    RefIds:
-    - rid: 3861983091271663616
-      type: {class: VInspectorData/Tab, ns: VInspector, asm: VInspector}
-      data:
-        name: Fuel
-        selectedSubtabIndex: 0
-        subtabs: []
-        subtabsDrawn: 0
-    - rid: 3861983091271663617
-      type: {class: VInspectorData/Tab, ns: VInspector, asm: VInspector}
-      data:
-        name: Hull
-        selectedSubtabIndex: 0
-        subtabs: []
-        subtabsDrawn: 0
-    - rid: 3861983091271663618
-      type: {class: VInspectorData/Tab, ns: VInspector, asm: VInspector}
-      data:
-        name: Power
-        selectedSubtabIndex: 0
-        subtabs: []
-        subtabsDrawn: 0
-    - rid: 3861983091271663619
-      type: {class: VInspectorData/Tab, ns: VInspector, asm: VInspector}
-      data:
-        name: Rocks
-        selectedSubtabIndex: 0
-        subtabs: []
-        subtabsDrawn: 0
-    - rid: 3861983091271663620
-      type: {class: VInspectorData/Tab, ns: VInspector, asm: VInspector}
-      data:
-        name: Events
-        selectedSubtabIndex: 0
-        subtabs: []
-        subtabsDrawn: 0
-    - rid: 3861983091271663621
-      type: {class: VInspectorData/Tab, ns: VInspector, asm: VInspector}
-      data:
-        name: Settings
-        selectedSubtabIndex: 0
-        subtabs: []
-        subtabsDrawn: 0
-    - rid: 3861983091271663622
-      type: {class: VInspectorData/Foldout, ns: VInspector, asm: VInspector}
-      data:
-        name: Fuel
-        expanded: 0
-        subfoldouts: []
-    - rid: 3861983091271663623
-      type: {class: VInspectorData/Foldout, ns: VInspector, asm: VInspector}
-      data:
-        name: Hull
-        expanded: 0
-        subfoldouts: []
-    - rid: 3861983091271663624
-      type: {class: VInspectorData/Foldout, ns: VInspector, asm: VInspector}
-      data:
-        name: Power
-        expanded: 0
-        subfoldouts: []
-    - rid: 3861983091271663625
-      type: {class: VInspectorData/Foldout, ns: VInspector, asm: VInspector}
-      data:
-        name: Rocks
-        expanded: 0
-        subfoldouts: []
 --- !u!1 &776078610
 GameObject:
   m_ObjectHideFlags: 0
@@ -853,7 +728,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &776078611
 Transform:
   m_ObjectHideFlags: 0
@@ -1011,6 +886,10 @@ PrefabInstance:
     - target: {fileID: 4917923898647514832, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7732228886085589350, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
+      propertyPath: motorSpeed
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7732228886085589350, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
       propertyPath: animationTiming
@@ -1970,6 +1849,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f6d54e7c12100145b9cf3a8b86e068b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isGameOver: 0
+  state: 0
 --- !u!1 &2053068228
 GameObject:
   m_ObjectHideFlags: 0
@@ -2322,9 +2203,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1505193886760754658, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3250338207582518953, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3510903577485919023, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}

@@ -37,6 +37,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     float dashCooldown = 1f;
 
+    [SerializeField]
+    PlayerAnimation playerAnimation;
+
     float dashTimer;
 
     // <- Cached Components ->
@@ -75,13 +78,18 @@ public class Player : MonoBehaviour
     void Move()
     {
         Vector2 dir = input.MoveInput.normalized;
-        rb.AddForce(new Vector3(dir.x, dir.y) * (moveSpeed * Time.deltaTime), ForceMode.Acceleration);
+        rb.AddForce(
+            new Vector3(dir.x, dir.y) * (moveSpeed * Time.deltaTime),
+            ForceMode.Acceleration
+        );
     }
 
     public void Dash()
     {
-        if (dashTimer > 0) return;
+        if (dashTimer > 0)
+            return;
         StartCoroutine(DashRoutine(rb));
+        playerAnimation.Dash();
     }
 
     IEnumerator DashRoutine(Rigidbody rb)
@@ -93,12 +101,12 @@ public class Player : MonoBehaviour
         rb.AddForce(dir * dashForce, ForceMode.Impulse);
         yield return new WaitForSeconds(dashDuration);
         DOVirtual.Float(dashDampingStart, dashDampingEnd, dashDuration, x => rb.linearDamping = x);
-
         while (dashTimer > 0)
         {
             dashTimer -= Time.deltaTime;
             yield return null;
         }
+        playerAnimation.StopDash();
     }
 
     static Resource heldResource;
@@ -131,20 +139,22 @@ public class Player : MonoBehaviour
         Resource[] resources = FindMultiple<Resource>();
         Array.Sort(
             resources,
-            (a, b) => Vector3
-                     .Distance(a.transform.position, transform.position)
-                     .CompareTo(Vector3.Distance(b.transform.position, transform.position))
+            (a, b) =>
+                Vector3
+                    .Distance(a.transform.position, transform.position)
+                    .CompareTo(Vector3.Distance(b.transform.position, transform.position))
         );
-        
+
         return resources;
     }
 
     public void Grab()
     {
-        if (heldResource != null) return;
+        if (heldResource != null)
+            return;
 
         var resources = ClosestResources();
-        var closest   = resources[0];
+        var closest = resources[0];
 
         if (closest.Reach > Vector3.Distance(transform.position, closest.transform.position))
         {
@@ -155,7 +165,8 @@ public class Player : MonoBehaviour
 
     public void Release()
     {
-        if (heldResource == null) return;
+        if (heldResource == null)
+            return;
 
         heldResource.Release();
         heldResource = null;
