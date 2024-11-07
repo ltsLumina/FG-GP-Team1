@@ -193,7 +193,6 @@ public class Task : MonoBehaviour
         else
         {
             onTaskComplete?.Invoke(task);
-            
         }
     }
 
