@@ -11,11 +11,20 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI currentLifeformsScanned;
 
     [Header("Current Scores")]
-    public int depthScore;
-    public int algaeCollected;
-    public int holesRepaired;
-    public int jellyfishCollected;
-    public int lifeformsScanned;
+    [SerializeField] int depthScore;
+    public int DepthScore => depthScore;
+
+    [SerializeField] int algaeCollected;
+    public int AlgaeCollected => algaeCollected;
+
+    [SerializeField] int holesRepaired;
+    public int HolesRepaired => holesRepaired;
+
+    [SerializeField] int jellyfishCollected;
+    public int JellyfishCollected => jellyfishCollected;
+
+    [SerializeField] int lifeformsScanned;
+    public int LifeformsScanned => lifeformsScanned;
 
     public void Update()
     {
