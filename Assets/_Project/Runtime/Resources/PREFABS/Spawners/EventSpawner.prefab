@@ -46,9 +46,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnObjects:
   - eventToTrigger: {fileID: 5046989585341447171, guid: cfb755397703f7d46982b91c48194337, type: 3}
-    eventChance: 13.9
+    eventChance: 13.2
   - eventToTrigger: {fileID: 6532089933403552921, guid: c31e4c4dedccce045b53e2b995d44a03, type: 3}
-    eventChance: 84.2
+    eventChance: 79.3
   baseSpawnRate: 15
   randomAdjustment: 5
   moveLength: 2
