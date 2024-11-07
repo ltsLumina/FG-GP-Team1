@@ -1,10 +1,5 @@
 #region
-using System;
-using TMPro;
 using UnityEngine;
-using UnityEngine.Custom.Attributes;
-using UnityEngine.SceneManagement;
-using static GameManager;
 #endregion
 
 [DisallowMultipleComponent]
