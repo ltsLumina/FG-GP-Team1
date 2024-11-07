@@ -41,11 +41,11 @@ public class HighScoreManager : MonoBehaviour
 
     public void SaveHighScores()
     {
-        if (scoreManager.depthScore > highScoreDepth) highScoreDepth = scoreManager.depthScore;
-        if (scoreManager.algaeCollected > highScoreAlgae) highScoreAlgae = scoreManager.algaeCollected;
-        if (scoreManager.holesRepaired > highScoreRepair) highScoreRepair = scoreManager.holesRepaired;
-        if (scoreManager.jellyfishCollected > highScoreJellyFish) highScoreJellyFish = scoreManager.jellyfishCollected;
-        if (scoreManager.lifeformsScanned > highScoreLifeForm) highScoreLifeForm = scoreManager.lifeformsScanned;
+        if (scoreManager.DepthScore > highScoreDepth) highScoreDepth = scoreManager.DepthScore;
+        if (scoreManager.AlgaeCollected > highScoreAlgae) highScoreAlgae = scoreManager.AlgaeCollected;
+        if (scoreManager.HolesRepaired > highScoreRepair) highScoreRepair = scoreManager.HolesRepaired;
+        if (scoreManager.JellyfishCollected > highScoreJellyFish) highScoreJellyFish = scoreManager.JellyfishCollected;
+        if (scoreManager.LifeformsScanned > highScoreLifeForm) highScoreLifeForm = scoreManager.LifeformsScanned;
 
         PlayerPrefs.SetInt("HighDepthScore", highScoreDepth);
         PlayerPrefs.SetInt("HighAlgaeCollected", highScoreAlgae);

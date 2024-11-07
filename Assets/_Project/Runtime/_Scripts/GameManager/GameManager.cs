@@ -61,7 +61,7 @@ public class GameManager : SingletonPersistent<GameManager>
 
     void Start()
     {
-        mainMenuPanel.SetActive(false);
+        mainMenuPanel.SetActive(true);
         gameOverPanel.SetActive(false);
         pausePanel.SetActive(false);
     }
