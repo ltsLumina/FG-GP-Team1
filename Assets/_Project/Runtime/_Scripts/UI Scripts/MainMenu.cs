@@ -1,3 +1,5 @@
+using System;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,10 +17,15 @@ public class MainMenu : MonoBehaviour
     [SerializeField] GameObject gameOverPanel;
     public GameObject GameOverPanel => gameOverPanel;
 
+    void Start()
+    {
+        DOTween.KillAll();
+    }
+
     public void StartTurtorialGame()
     {
         // Replace later with what scene is the game scene
-        SceneManager.LoadScene("Turtorial");
+        SceneManager.LoadScene(1);
     }
 
     public void Exit()
@@ -29,20 +36,20 @@ public class MainMenu : MonoBehaviour
 
     public void SkipTutorial()
     {
-        SceneManager.LoadScene("Birkan Sandbox");
+        SceneManager.LoadScene(2);
     }
 
     public void Retry()
     {
         GameManager.Instance.GameStateChanger(GameManager.GameState.Play);
-        SceneManager.LoadScene("Birkan Sandbox");
+        SceneManager.LoadScene(2);
         highScoreManager.SaveHighScores();
         scoreManager.ResetGame();
     }
 
     public void BackToMain()
     {
-        SceneManager.LoadScene("Main Menu");
+        SceneManager.LoadScene(0);
     }
 
     public void StartGame()
