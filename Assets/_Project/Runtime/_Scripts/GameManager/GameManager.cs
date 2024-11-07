@@ -73,6 +73,7 @@ public class GameManager : SingletonPersistent<GameManager>
                 Time.timeScale = 0f;
                 break;
             case GameState.GameOver:
+                SceneManagerExtended.LoadScene(0);
                 break;
         }
     }
