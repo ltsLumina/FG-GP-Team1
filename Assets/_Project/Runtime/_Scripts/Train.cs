@@ -232,7 +232,7 @@ public class Train : MonoBehaviour
     {
         // TODO: for alpha
         GameManager.Instance.GameStateChanger(GameManager.GameState.Play);
-
+        
         Init();
 
         return;
@@ -240,11 +240,7 @@ public class Train : MonoBehaviour
         {
             onFuelDepleted.AddListener(() => onDeath.Invoke());
             onPowerDepleted.AddListener(() => onDeath.Invoke());
-            onDeath.AddListener
-            (() =>
-            {
-                GameManager.Instance.GameStateChanger(GameManager.GameState.GameOver);
-            });
+            onDeath.AddListener(() => Debug.Log("The train has died."));
 
             DOTween.SetTweensCapacity(1000, 5);
             
