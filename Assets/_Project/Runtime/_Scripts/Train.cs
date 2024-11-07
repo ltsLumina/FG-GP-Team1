@@ -239,7 +239,6 @@ public class Train : MonoBehaviour
         void Init()
         {
             onFuelDepleted.AddListener(() => onDeath.Invoke());
-            onPowerDepleted.AddListener(() => onDeath.Invoke());
             onDeath.AddListener
             (() =>
             {
@@ -287,6 +286,11 @@ public class Train : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            StartCoroutine(RGBLights());
+        }
+        
         Dive();
 
         #region Dirtiness
