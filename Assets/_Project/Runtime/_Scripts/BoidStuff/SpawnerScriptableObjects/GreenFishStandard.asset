@@ -21,8 +21,8 @@ MonoBehaviour:
   alignmentStrength: 2.8
   cohesionContext: 13.4
   cohesionStrength: 2
-  fleeingMoveSpeedMult: 3
-  fleeContext: 5
+  fleeingMoveSpeedMult: 1.3
+  fleeContext: 2
   fleeTimeSeconds: 0.2
   prefab: {fileID: 4879454075420634684, guid: affcf4c96e901a649b77edafbd789b74, type: 3}
   material: {fileID: 2100000, guid: 66738c0d32b4b0c41ab16ad9fd4ad5e1, type: 2}

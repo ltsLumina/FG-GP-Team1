@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6853330203180495217}
   - component: {fileID: 8326504605297044164}
+  - component: {fileID: 8987579383849114939}
   m_Layer: 0
   m_Name: EelSpawner
   m_TagString: Untagged
@@ -49,3 +50,15 @@ MonoBehaviour:
   spawnRangeY: 35
   spawnRangeZ: 28
   boidDataSO: {fileID: 11400000, guid: 01b5edabbbc16d248868688aff2b7901, type: 2}
+--- !u!114 &8987579383849114939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5046989585341447171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31c6b1841e7e54b418ceddc4505a23ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
