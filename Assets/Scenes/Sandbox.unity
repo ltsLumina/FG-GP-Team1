@@ -93,7 +93,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 4f883519d21b9d843974d2df542e64b5, type: 2}
+  m_LightingDataAsset: {fileID: 112000000, guid: 19b0076e827991841842810e9165c209, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: c36c04815661a0842b18c17c99723f7b, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -3569,7 +3569,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 8000
   m_UseColorTemperature: 1
-  m_BoundingSphereOverride: {x: 3.097271e+27, y: 7.0927006e+22, z: 1.8512109e+28, w: 1.8334325e+31}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ForceVisible: 0
@@ -24738,11 +24738,13 @@ MonoBehaviour:
   rightKeyText: {fileID: 1704110700}
   leftKeyText: {fileID: 787218602}
   dashKeyText: {fileID: 564726619}
+  grabKeyText: {fileID: 0}
   downKeyButton: {fileID: 20864839}
   upKeyButton: {fileID: 733308741}
   rightKeyButton: {fileID: 1207315946}
   leftKeyButton: {fileID: 2127306070}
   dashKeyButton: {fileID: 93491903}
+  grabKeyButton: {fileID: 0}
 --- !u!114 &1423688757
 MonoBehaviour:
   m_ObjectHideFlags: 0

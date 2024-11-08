@@ -231,7 +231,7 @@ public class Train : MonoBehaviour
     void Start()
     {
         // TODO: for alpha
-        GameManager.Instance.GameStateChanger(GameManager.GameState.Play);
+        //GameManager.Instance.GameStateChanger(GameManager.GameState.Play);
 
         Init();
 
@@ -246,7 +246,7 @@ public class Train : MonoBehaviour
                 Debug.Log("DOED");
             });
 
-            DOTween.SetTweensCapacity(1000, 5);
+            //DOTween.SetTweensCapacity(1000, 5);
             
             OnLightDim.AddListener
             (light =>

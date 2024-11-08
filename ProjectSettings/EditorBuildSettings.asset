@@ -6,11 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Main Menu.unity
-    guid: dc14a0f53c674094d8f4c5c416e10f62
+    path: Assets/Scenes/UI Scenes/Main Menu.unity
+    guid: 42537695ddbd28b4ea5c70049c2943cf
   - enabled: 1
-    path: Assets/Scenes/Turtorial.unity
-    guid: 2b2b695d916498245aea0bde5a75a555
+    path: Assets/Scenes/Birkans Scenes/Tutorial.unity
+    guid: bfcf82d17e20b674f80c679a407fa6cb
   - enabled: 1
     path: Assets/Scenes/Sandbox.unity
     guid: a573342851c63f34fad844a398fc2921

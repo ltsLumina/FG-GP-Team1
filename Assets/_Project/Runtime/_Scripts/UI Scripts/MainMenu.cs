@@ -17,6 +17,8 @@ public class MainMenu : MonoBehaviour
     public GameObject PausePanel => pausePanel;
     [SerializeField] GameObject gameOverPanel;
     public GameObject GameOverPanel => gameOverPanel;
+    [SerializeField] GameObject skipTutorialButton;
+    public GameObject SkipTutorialButton => skipTutorialButton;
 
     void Start()
     {
@@ -32,6 +34,7 @@ public class MainMenu : MonoBehaviour
     public void Exit()
     {
         Application.Quit();
+        UnityEditor.EditorApplication.isPlaying = false;
     }
 
     public void SkipTutorial()

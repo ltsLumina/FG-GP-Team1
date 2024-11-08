@@ -29,6 +29,7 @@ public class GameManager : SingletonPersistent<GameManager>
                     GameStateChanger(GameState.Pause);
                     mainMenu = FindAnyObjectByType<MainMenu>();
                     mainMenu.PausePanel.SetActive(true);
+                    mainMenu.SkipTutorialButton.SetActive(false);
                 }
                 break;
             case GameState.Pause:
@@ -37,6 +38,7 @@ public class GameManager : SingletonPersistent<GameManager>
                     GameStateChanger(GameState.Play);
                     mainMenu = FindAnyObjectByType<MainMenu>();
                     mainMenu.PausePanel.SetActive(false);
+                    mainMenu.SkipTutorialButton.SetActive(true);
                 }
                 break;
             case GameState.GameOver:
