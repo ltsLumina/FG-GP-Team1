@@ -70,23 +70,17 @@ public class Player : MonoBehaviour
     void Update()
     {
         Move();
-        //StayInBounds();
-        Rotate();
     }
 
     void Move()
     {
-        var dir = input.MoveInput.normalized;
-        rb.AddForce(
-            new Vector3(dir.x, dir.y) * (moveSpeed * Time.deltaTime),
-            ForceMode.Acceleration
-        );
+        Vector2 dir = input.MoveInput.normalized;
+        rb.AddForce(new Vector3(dir.x, dir.y) * (moveSpeed * Time.deltaTime), ForceMode.Acceleration);
     }
 
     public void Dash()
     {
-        if (dashTimer > 0)
-            return;
+        if (dashTimer > 0) return;
         StartCoroutine(DashRoutine(rb));
     }
 
@@ -137,21 +131,21 @@ public class Player : MonoBehaviour
         Resource[] resources = FindMultiple<Resource>();
         Array.Sort(
             resources,
-            (a, b) =>
-                Vector3
-                    .Distance(a.transform.position, transform.position)
-                    .CompareTo(Vector3.Distance(b.transform.position, transform.position))
+            (a, b) => Vector3
+                     .Distance(a.transform.position, transform.position)
+                     .CompareTo(Vector3.Distance(b.transform.position, transform.position))
         );
+        
         return resources;
     }
 
     public void Grab()
     {
-        if (heldResource != null)
-            return;
+        if (heldResource != null) return;
 
         var resources = ClosestResources();
-        var closest = resources[0];
+        var closest   = resources[0];
+
         if (closest.Reach > Vector3.Distance(transform.position, closest.transform.position))
         {
             closest.Grab();
@@ -161,29 +155,9 @@ public class Player : MonoBehaviour
 
     public void Release()
     {
-        if (heldResource == null)
-            return;
+        if (heldResource == null) return;
 
         heldResource.Release();
         heldResource = null;
-    }
-
-    void StayInBounds()
-    {
-        switch (transform.position.x)
-        {
-            case < -25:
-                transform.position = new(-25, transform.position.y);
-                break;
-
-            case > 25:
-                transform.position = new(25, transform.position.y);
-                break;
-        }
-    }
-
-    void Rotate()
-    {
-        // TODO: @korben - please implement
     }
 }
