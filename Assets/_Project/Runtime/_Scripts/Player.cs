@@ -1,7 +1,10 @@
 #region
+using System;
 using System.Collections;
 using DG.Tweening;
 using Lumina.Essentials.Attributes;
+using Lumina.Essentials.Modules;
+using NUnit.Framework.Constraints;
 using UnityEngine;
 using UnityEngine.Custom.Attributes;
 using UnityEngine.InputSystem;
@@ -12,13 +15,11 @@ using static Lumina.Essentials.Modules.Helpers;
 public class Player : MonoBehaviour
 {
     [Header("Multiplayer")]
-    [SerializeField, ReadOnly] int playerID;
-    
+    [SerializeField] [ReadOnly] int playerID;
+
     [Header("Movement")]
     [SerializeField] float moveSpeed;
-    [Tooltip("The amount of push force applied when the player dives. \nA higher value will make it tougher to dive down.")]
-    [SerializeField] float diveForce = 15f;
-    
+
     [Header("Dash")]
     [SerializeField] float dashForce = 25f;
     [SerializeField] float dashDuration = 0.05f;
@@ -27,12 +28,13 @@ public class Player : MonoBehaviour
     [SerializeField] float dashCooldown = 1f;
 
     float dashTimer;
-    
+    bool canMove = true;
+
     // <- Cached Components ->
-    
+
     InputManager input;
-    PlayerInput playerInput;
     Rigidbody rb;
+    PlayerAnimation playerAnimation;
 
     /// <summary>
     /// The player index.
@@ -44,39 +46,63 @@ public class Player : MonoBehaviour
         set => playerID = value + 1;
     }
 
-    public PlayerInput PlayerInput => playerInput;
+    public PlayerInput PlayerInput { get; private set; }
 
+    Action<bool> onDash;
+    Action<bool> onDashEnd;
+    
     void Awake()
     {
-        playerInput = GetComponentInChildren<PlayerInput>();
-        input       = GetComponentInChildren<InputManager>();
-        rb          = GetComponent<Rigidbody>();
+        PlayerInput = GetComponentInChildren<PlayerInput>();
+        input = GetComponentInChildren<InputManager>();
+        rb = GetComponent<Rigidbody>();
+        playerAnimation = GetComponentInChildren<PlayerAnimation>();
     }
 
-    void Update()
+    #region Dash Animation Helper
+    void OnEnable()
     {
-        Move();
-        Dive();
-        StayInBounds();
-        Rotate();
+        onDash += DashAnims;
+        onDashEnd += DashAnims;
     }
 
-    void Dive()
+    void OnDisable()
     {
-        var down = Vector3.down * (diveForce * Time.deltaTime);
-        rb.AddForce(down, ForceMode.Force);
+        onDash -= DashAnims;
+        onDashEnd -= DashAnims;
     }
 
+    void DashAnims(bool dashing)
+    {
+        if (dashing) playerAnimation.Dash();
+        else playerAnimation.StopDash();
+    }
+    #endregion
+
+    // Player moves in parallel with the train if it's a child of the train. Simplest solution.
+    void Start() => transform.SetParent(Find<Train>().transform);
+
+    void Update() => Move();
+
+    public void Freeze(bool freeze) => canMove = !freeze;
+
+    
     void Move()
     {
-        var dir  = input.MoveInput.normalized;
-        rb.AddForce(new Vector3(dir.x, dir.y * 1.5f) * (moveSpeed * Time.deltaTime), ForceMode.Acceleration);
+        if (!canMove) return;
+        Vector2 dir = input.MoveInput.normalized;
+        rb.AddForce(
+            new Vector3(dir.x, dir.y) * (moveSpeed * Time.deltaTime),
+            ForceMode.Acceleration
+        );
     }
 
     public void Dash()
     {
         if (dashTimer > 0) return;
         StartCoroutine(DashRoutine(rb));
+        onDash?.Invoke(true);
+        playerAnimation.Dash();
     }
 
     IEnumerator DashRoutine(Rigidbody rb)
@@ -88,13 +114,16 @@ public class Player : MonoBehaviour
         rb.AddForce(dir * dashForce, ForceMode.Impulse);
         yield return new WaitForSeconds(dashDuration);
         DOVirtual.Float(dashDampingStart, dashDampingEnd, dashDuration, x => rb.linearDamping = x);
-
         while (dashTimer > 0)
         {
             dashTimer -= Time.deltaTime;
             yield return null;
         }
+
+        onDashEnd?.Invoke(false);
     }
+
+    static Resource heldResource;
 
     /// <summary>
     /// Check if the player is holding an item.
@@ -103,50 +132,66 @@ public class Player : MonoBehaviour
     /// <returns></returns>
     public static bool HoldingResource(out Resource heldResource)
     {
-        if (Find<Resource>() == null)
+        if (Player.heldResource == null)
         {
             heldResource = null;
             return false;
         }
-        
-        heldResource = Find<Resource>();
-        return heldResource.Grabbed;
+
+        heldResource = Player.heldResource;
+        return heldResource is { Grabbed: true };
+    }
+
+    /// <summary>
+    ///     Find the closest resource to the player.
+    /// </summary>
+    /// <returns> An array of resources sorted by distance to the player.
+    ///     <para> The closest resource is at index 0. </para>
+    /// </returns>
+    Resource[] ClosestResources()
+    {
+        Resource[] resources = FindMultiple<Resource>();
+        Array.Sort(
+            resources,
+            (a, b) =>
+                Vector3
+                    .Distance(a.transform.position, transform.position)
+                    .CompareTo(Vector3.Distance(b.transform.position, transform.position))
+        );
+
+        return resources;
     }
 
     public void Grab()
     {
-        var resource = Find<Resource>();
-        if (resource.Reach > Vector3.Distance(transform.position, resource.transform.position))
+        if (heldResource != null)
+            return;
+
+        var resources = ClosestResources();
+        var closest = resources[0];
+
+        if (closest.Reach > Vector3.Distance(transform.position, closest.transform.position))
         {
-            resource.Grab();
+            closest.Grab();
+            heldResource = closest;
         }
     }
-    
+
     public void Release()
     {
-        var resource = Find<Resource>();
-        if (resource.Grabbed)
+        if (heldResource == null) return;
+
+        if (heldResource.Item == IGrabbable.Items.Battery)
         {
-            resource.Release();
-        }
-    }
+           if (!heldResource.GetComponent<Battery>().Deposit()) return;
 
-    void StayInBounds()
-    {
-        switch (transform.position.x)
+           heldResource.Release();
+           heldResource = null;
+        }
+        else
         {
-            case < -25:
-                transform.position = new (-25, transform.position.y);
-                break;
-
-            case > 25:
-                transform.position = new (25, transform.position.y);
-                break;
+            heldResource.Release();
+            heldResource = null;
         }
-    }
-
-    void Rotate()
-    {
-        // TODO: @korben - please implement
     }
 }

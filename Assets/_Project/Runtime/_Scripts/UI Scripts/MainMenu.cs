@@ -1,16 +1,32 @@
+using System;
+using DG.Tweening;
+using Lumina.Essentials.Modules;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    HighScoreManager highScoreManager;
+    ScoreManager scoreManager;
+
+
+    [Header("UI Elements")]
+    [SerializeField] GameObject mainMenuPanel;
+    public GameObject MainMenuPanel => mainMenuPanel;
+    [SerializeField] GameObject pausePanel;
+    public GameObject PausePanel => pausePanel;
+    [SerializeField] GameObject gameOverPanel;
+    public GameObject GameOverPanel => gameOverPanel;
+
     void Start()
     {
-
+        DOTween.KillAll();
     }
 
-    void Update()
+    public void StartTurtorialGame()
     {
-
+        // Replace later with what scene is the game scene
+        SceneManager.LoadScene(1);
     }
 
     public void Exit()
@@ -18,18 +34,48 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
+    public void SkipTutorial()
+    {
+        SceneManager.LoadScene(2);
+    }
+
+    public void Retry()
+    {
+        GameManager.Instance.GameStateChanger(GameManager.GameState.Play);
+        SceneManager.LoadScene(2);
+        highScoreManager = Helpers.Find<HighScoreManager>();
+        highScoreManager.SaveHighScores();
+        scoreManager = Helpers.Find<ScoreManager>();
+        scoreManager.ResetGame();
+    }
+
+    public void BackToMain()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     public void StartGame()
     {
-        SceneManager.LoadScene("Sandbox"); // Replace later with what scene is the game scene
+        GameManager.Instance.GameStateChanger(GameManager.GameState.Play);
+        mainMenuPanel.SetActive(false);
+        gameOverPanel.SetActive(false);
+        pausePanel.SetActive(false);
     }
 
-    void ShowCredits()
+    public void UnPauseGame()
     {
-
+        GameManager.Instance.GameStateChanger(GameManager.GameState.Play);
+        pausePanel.SetActive(false);
+        gameOverPanel.SetActive(false);
+        mainMenuPanel.SetActive(false);
     }
 
-    void HighScore()
+    public void GameOver()
     {
-
+        highScoreManager.SaveHighScores();
+        GameManager.Instance.GameStateChanger(GameManager.GameState.GameOver);
+        gameOverPanel.SetActive(false);
+        pausePanel.SetActive(false);
+        mainMenuPanel.SetActive(false);
     }
 }

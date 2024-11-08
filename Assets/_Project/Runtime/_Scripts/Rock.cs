@@ -1,7 +1,7 @@
 using Lumina.Essentials.Modules;
 using UnityEngine;
 
-public class Rock : MonoBehaviour
+public class Rock : MonoBehaviour, IDestructible
 {
     [SerializeField] Vector3 direction = Vector3.one;
     [SerializeField] float force = 10;

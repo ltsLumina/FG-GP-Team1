@@ -1,12 +1,19 @@
+name: Sync branch
+
 on:
   push:
     branches:
       - main
+
 jobs:
   sync-branch:
+    name: Update Design branch
     runs-on: ubuntu-latest
     steps:
-      - name: Sync Branch
-        uses: remarkablemark/sync-branch@v1
+      - name: Checkout repository
+        uses: actions/checkout@master
+      - uses: connor-baer/action-sync-branch@main
         with:
-          base: Design
+          branch: Design
+          token: ${{ secrets.SYNC_BRANCH_TOKEN }}
+          force: false

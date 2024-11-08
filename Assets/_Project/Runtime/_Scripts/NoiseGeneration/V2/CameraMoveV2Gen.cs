@@ -13,7 +13,7 @@ public class CameraMoveV2Gen : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         transform.position = new Vector3(transform.position.x, transform.position.y - CameraSpeed * Time.deltaTime, transform.position.z);
     }
