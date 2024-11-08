@@ -179,8 +179,7 @@ public class Player : MonoBehaviour
 
     public void Grab()
     {
-        if (heldResource != null)
-            return;
+        if (heldResource != null) return;
 
         var resources = ClosestResources();
         var closest = resources[0];

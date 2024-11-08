@@ -5412,7 +5412,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vInspectorData: {fileID: 0}
-  speed: 0
+  speed: 5
   maxSpeed: 10
   fuel: 100
   fuelDepletionRate: 3
@@ -5477,7 +5477,7 @@ MonoBehaviour:
       index: 2
       isKeyRepeated: 0
     dividerPos: 0.33
-  power: 0
+  power: 100
   powerDepletionRate: 1
   batteryChargeRate: 25
   lightIntensity: 20000
@@ -11115,9 +11115,10 @@ GameObject:
   - component: {fileID: 7223694263872748342}
   - component: {fileID: 4944935668799653503}
   - component: {fileID: 3146501963480999516}
+  - component: {fileID: 9134469541386498661}
   m_Layer: 0
   m_Name: Battery
-  m_TagString: Kelp
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11154,7 +11155,6 @@ MonoBehaviour:
   startPos: {fileID: 8301346294357929385}
   batteryReturnDistance: 10
   charge: 100
-  chargeRate: 25
 --- !u!114 &4944935668799653503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11195,6 +11195,20 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &9134469541386498661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7584022963353752610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f0554478ecd1524ea43ab4960a62b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  label: Add this component to the parent object you want the selection to highlight
+    when selected.
 --- !u!1 &7842908178690448038
 GameObject:
   m_ObjectHideFlags: 0

@@ -22,7 +22,7 @@ public class InputManager : MonoBehaviour
     {
         player.Dash();
     }
-
+    
     public void OnInteract(InputAction.CallbackContext context)
     {
         switch (context.interaction)

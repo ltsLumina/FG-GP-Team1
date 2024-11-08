@@ -439,6 +439,7 @@ MonoBehaviour:
   dashDampingStart: 0
   dashDampingEnd: 4
   dashCooldown: 1
+  stunDuration: 1
 --- !u!114 &8160497689056147793
 MonoBehaviour:
   m_ObjectHideFlags: 0
