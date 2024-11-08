@@ -1,13 +1,7 @@
 using System;
-using System.Collections;
-using DG.Tweening;
-using JetBrains.Annotations;
 using Lumina.Essentials.Attributes;
-using Unity.VisualScripting;
 using UnityEngine;
-using VInspector;
 using static Lumina.Essentials.Modules.Helpers;
-using Object = UnityEngine.Object;
 
 public interface IGrabbable
 {
@@ -29,6 +23,8 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
     
     [Header("Settings")]
     [SerializeField] float reach;
+    [SerializeField] float throwForce;
+    
     [Range(1,60)]
     [SerializeField] float lifetime = 10f;
 
@@ -43,8 +39,11 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
 
     public float Lifetime => lifetime;
 
-    public bool Bypass { get; set; }
+    public bool Bypass { get; private set; }
 
+    // Duct-tape fix
+    public bool GrabbedMeshActive => grabbedMesh.gameObject.activeSelf;
+    
     void OnEnable()
     {
         onGrabbed += () =>
@@ -55,11 +54,14 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
         onReleased += () =>
         {
             SetMesh(true);
-            ResetVelocity();
+            Throw();
         };
     }
 
-    void OnDisable() => onGrabbed -= ResetVelocity;
+    void OnDisable()
+    {
+        onGrabbed -= ResetVelocity;
+    }
 
     void ResetVelocity()
     {
@@ -67,6 +69,23 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
         if (rb == null) return;
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
+    }
+
+    void Throw()
+    {
+        TryGetComponent(out Rigidbody rb);
+        if (rb == null) return;
+        var moveInput = Find<Player>().GetComponentInChildren<InputManager>().MoveInput;
+        if (moveInput == Vector2.down)
+        {
+            const float y = 8f; // don't change
+            transform.position += Vector3.down * y;
+            rb.AddForce(Vector3.down * throwForce, ForceMode.Impulse);
+        }
+        else
+        {
+            rb.AddForce(moveInput * throwForce, ForceMode.Impulse);
+        }
     }
 
     public void Grab()
@@ -96,7 +115,7 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
         
         var player = Find<Player>();
         var moveInput = player.GetComponentInChildren<InputManager>().MoveInput;
-        var offset = new Vector3(moveInput.x * 2f, 3f);
+        var offset = new Vector3(moveInput.x * 2f, 3.5f);
         
         transform.position = player.transform.position + offset;
     }

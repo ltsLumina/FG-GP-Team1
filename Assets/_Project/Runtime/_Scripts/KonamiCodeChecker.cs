@@ -28,8 +28,7 @@ public class KonamiCodeChecker : MonoBehaviour
     {
         if (Input.anyKeyDown)
         {
-            KeyCode[] possibleKeys =
-            { KeyCode.UpArrow, KeyCode.DownArrow, KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.B, KeyCode.A };
+            KeyCode[] possibleKeys = { KeyCode.UpArrow, KeyCode.DownArrow, KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.B, KeyCode.A };
 
             foreach (KeyCode key in possibleKeys)
             {
@@ -71,9 +70,7 @@ public class KonamiCodeChecker : MonoBehaviour
         Rect rect = new (Screen.width / 2f - 50, Screen.height / 2f - 25, 500, 500);
 
         GUI.Label
-        (rect, "Konami Code Entered!", new ()
-         { fontSize = 20, fontStyle = FontStyle.Bold, normal =
-           { textColor = Color.white } });
+        (rect, "Konami Code Entered!", new () { fontSize = 20, fontStyle = FontStyle.Bold, normal = { textColor = Color.white } });
 
         yield return new WaitForSeconds(2.5f);
 

@@ -90,7 +90,7 @@ public class Train : MonoBehaviour
 
     [Header("Battery")]
     [Range(1, 50)]
-    [SerializeField] float powerRechargeAmount = 25;
+    [SerializeField] float batteryChargeRate = 25;
 
     [Header("Lighting")]
     [Tooltip("The intensity of the light.")]
@@ -121,9 +121,6 @@ public class Train : MonoBehaviour
     // [Range(1, 5)]
     // [SerializeField] float jellyfishStunDuration = 1;
 
-    [Tab("Rocks")]
-    [SerializeField] string inDevelopment = "Yes.";
-
     [Tab("Events")]
     [Foldout("Fuel")]
     [SerializeField] UnityEvent onFuelDepleted;
@@ -153,6 +150,7 @@ public class Train : MonoBehaviour
     [EndIf]
 
     [SerializeField] List<float> fuelDepletionDefaults = new () { 1, 1.5f, 2, 2.5f, 3 };
+    [SerializeField] List<DirtinessStage> dirtinessStagesDefaults = new () { new (20), new (40), new (60), new (80), new (100) };
     
     // <- Cached references. ->
     
@@ -168,7 +166,7 @@ public class Train : MonoBehaviour
     public float Fuel
     {
         get => fuel;
-        set
+        private set
         {
             fuel = Mathf.Clamp(value, 0, 100);
             if (fuel <= 0) onFuelDepleted.Invoke();
@@ -222,8 +220,6 @@ public class Train : MonoBehaviour
             GUILayout.Label($"Hull Integrity: {HullIntegrity}", style);
             GUILayout.Label($"Dirtiness: {dirtiness.Round()} (Stage {dirtinessStage})", style);
             GUILayout.Label($"Power: {Power.Round()}", style);
-            //GUILayout.Label($"Jellyfish Spawn Rate: {jellyfishSpawnRate}", style);
-            //GUILayout.Label($"Jellyfish Spawn Interval: {jellyfishSpawnInterval}", style);
         }
     }
 #endif
@@ -243,7 +239,7 @@ public class Train : MonoBehaviour
             (() =>
             {
                 GameManager.Instance.GameStateChanger(GameManager.GameState.GameOver);
-                Debug.Log("DOED");
+                Debug.Log("Died");
             });
 
             DOTween.SetTweensCapacity(1000, 5);
@@ -292,45 +288,29 @@ public class Train : MonoBehaviour
         }
         
         Dive();
+        FuelDirtinessCalculation();
+        ToggleLightsAtThreshold();
 
-        #region Dirtiness
-        dirtiness      = Mathf.Clamp(dirtiness + dirtinessRate * Time.deltaTime, 0, 100);
+    }
+
+    void Dive()
+    {
+        Vector3 dir = Vector3.down;
+        float speed = Mathf.Clamp(this.speed, 0, maxSpeed);
+        transform.position += dir * (speed * Time.deltaTime);
+    }
+    
+    void FuelDirtinessCalculation()
+    {
+        dirtiness = Mathf.Clamp(dirtiness + dirtinessRate * Time.deltaTime, 0, 100);
         dirtinessStage = Mathf.Clamp(dirtinessStages.FindIndex(d => dirtiness < d.threshold) + 1, 1, fuelDepletionRateMultipliers.Count);
 
-        switch (dirtinessStage)
-        {
-            case 1: // No dirtiness. (0-19)
-                Fuel -= fuelDepletionRate * fuelDepletionRateMultipliers[0].multiplier * Time.deltaTime;
-                DebugDirtiness(false);
-                onDirtinessStageChanged.Invoke(1);
-                break;
+        Fuel -= fuelDepletionRate * fuelDepletionRateMultipliers[dirtinessStage].multiplier * Time.deltaTime;
+        onDirtinessStageChanged.Invoke(dirtinessStage);
+    }
 
-            case 2: // Low dirtiness. (20-39)
-                Fuel -= fuelDepletionRate * fuelDepletionRateMultipliers[1].multiplier * Time.deltaTime;
-                DebugDirtiness(false);
-                onDirtinessStageChanged.Invoke(2);
-                break;
-
-            case 3: // Medium dirtiness. (40-59)
-                Fuel -= fuelDepletionRate * fuelDepletionRateMultipliers[2].multiplier * Time.deltaTime;
-                DebugDirtiness(false);
-                onDirtinessStageChanged.Invoke(3);
-                break;
-
-            case 4: // High dirtiness. (60-79)
-                Fuel -= fuelDepletionRate * fuelDepletionRateMultipliers[3].multiplier * Time.deltaTime;
-                DebugDirtiness(false);
-                onDirtinessStageChanged.Invoke(4);
-                break;
-
-            case 5: // Very high dirtiness. (80-100)
-                Fuel -= fuelDepletionRate * fuelDepletionRateMultipliers[4].multiplier * Time.deltaTime;
-                DebugDirtiness(false);
-                onDirtinessStageChanged.Invoke(5);
-                break;
-        }
-        #endregion
-
+    void ToggleLightsAtThreshold()
+    {
         foreach (var light in lights)
         {
             Power -= powerDepletionRate * Time.deltaTime;
@@ -350,21 +330,6 @@ public class Train : MonoBehaviour
         }
     }
 
-    #region Utility
-    void DebugDirtiness(bool enable)
-    {
-        if (!enable) return;
-        Debug.Log($"Dirtiness: {dirtiness} (Stage {dirtinessStage})");
-    }
-    #endregion
-    
-    void Dive()
-    {
-        Vector3 dir   = Vector3.down;
-        float   speed = Mathf.Clamp(this.speed, 0, maxSpeed);
-        transform.position += dir * (speed * Time.deltaTime);
-    }
-
     #region Tasks
     public void SetTaskStatus(Tasks tasks)
     {
@@ -376,8 +341,6 @@ public class Train : MonoBehaviour
 
             case Tasks.Refuel:
                 Fuel += kelpRestoreAmount;
-
-                if (Player.HoldingResource(out Resource heldItem)) Destroy(heldItem.gameObject);
                 break;
 
             case Tasks.Repair:
@@ -387,18 +350,18 @@ public class Train : MonoBehaviour
                 break;
 
             case Tasks.Recharge:
-                Power += powerRechargeAmount;
+                // Handled by Battery.cs
                 break;
         }
     }
 
     public bool CanPerformTask(Tasks tasks) => tasks switch
     { Tasks.Clean    => Dirtiness > 0,
-      Tasks.Refuel   => Fuel          < 100 && Player.HoldingResource(out Resource kelp) && kelp.Item == IGrabbable.Items.Kelp,
-      Tasks.Repair   => HullIntegrity < 3   && hullBreaches > 0,
-      Tasks.Recharge => Power         < 100 && Player.HoldingResource(out Resource battery) && battery.Item == IGrabbable.Items.Battery,
+      Tasks.Refuel   => Fuel < 100,
+      Tasks.Repair   => HullIntegrity < 3 && hullBreaches > 0 && !Player.HoldingResource(out Resource _),
+      Tasks.Recharge => Power < 100 && Player.HoldingResource(out Resource battery) && battery.Item == IGrabbable.Items.Battery,
       _              => false };
-    
+
     public bool IsTaskComplete(Tasks tasks) => tasks switch
     { Tasks.Clean    => Dirtiness     <= 20,
       Tasks.Refuel   => Fuel          >= 100,
@@ -407,26 +370,7 @@ public class Train : MonoBehaviour
       _                   => false };
     #endregion
 
-    #region Collision/Trigger
-    void OnCollision(GameObject collision)
-    {
-        switch (collision.tag)
-        {
-            case "Jellyfish":
-                hullBreaches++;
-                onHullBreach.Invoke(hullBreaches);
-                break;
-            
-            case "Rock":
-                hullBreaches++;
-                HullIntegrity = Mathf.Max(0, 3 - hullBreaches);
-                onHullBreach.Invoke(hullBreaches);
-                onHullIntegrityChanged.Invoke(HullIntegrity);
-                onRockCollision.Invoke(collision.GetComponent<Rock>());
-                break;
-        }
-    }
-
+    #region Collision
     void OnCollisionEnter(Collision other)
     {
         switch (other.gameObject.tag)
@@ -434,6 +378,18 @@ public class Train : MonoBehaviour
             case "Rock":
                 OnCollision(other.gameObject);
                 break;
+        }
+    }
+
+    void OnCollision(GameObject collision)
+    {
+        if (collision.CompareTag("Rock"))
+        {
+            hullBreaches++;
+            HullIntegrity = Mathf.Max(0, 3 - hullBreaches);
+            onHullBreach.Invoke(hullBreaches);
+            onHullIntegrityChanged.Invoke(HullIntegrity);
+            onRockCollision.Invoke(collision.GetComponent<Rock>());
         }
     }
     #endregion
@@ -491,9 +447,6 @@ public class Train : MonoBehaviour
     #region Validation/Editor
     void OnValidate()
     {
-        if (inDevelopment.Contains("No", StringComparison.InvariantCultureIgnoreCase)) inDevelopment = "You think you're so funny don't you.";
-        else if (!string.Equals(inDevelopment, "Yes.", StringComparison.Ordinal)) inDevelopment      = "Yes.";
-
         ValidateDirtiness();
         ValidateFuelDepletionRateMultipliers();
         
@@ -515,9 +468,8 @@ public class Train : MonoBehaviour
         if (dirtinessStages.Count != 5)
         {
             dirtinessStages.Clear();
-             
-            List<DirtinessStage> defaults = new () { new (20), new (40), new (60), new (80), new (100) };
-            dirtinessStages = defaults;
+            
+            dirtinessStages = dirtinessStagesDefaults.ConvertAll(t => new DirtinessStage(t.threshold));
         }
 
         // Set the name of each dirtiness stage

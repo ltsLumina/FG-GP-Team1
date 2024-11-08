@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 611735291495316075}
   - component: {fileID: 9137493641949627537}
   - component: {fileID: 6997154779627173858}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: Kelp
   m_TagString: Kelp
   m_Icon: {fileID: 0}
@@ -53,6 +53,7 @@ MonoBehaviour:
   standardMesh: {fileID: 4672667418851468691}
   grabbedMesh: {fileID: 6624494685130471572}
   reach: 10
+  throwForce: 10
   lifetime: 60
 --- !u!65 &9137493641949627537
 BoxCollider:
@@ -113,6 +114,10 @@ PrefabInstance:
     - target: {fileID: 7177136390599541626, guid: fd62dd37019d91448834017c658c0ef3, type: 3}
       propertyPath: m_Name
       value: FuelPlant_B_prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 7177136390599541626, guid: fd62dd37019d91448834017c658c0ef3, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7177136390599541626, guid: fd62dd37019d91448834017c658c0ef3, type: 3}
       propertyPath: m_IsActive
@@ -200,6 +205,10 @@ PrefabInstance:
     - target: {fileID: 8236300479915620002, guid: 83147d9e012ffdf439320d41d56518fb, type: 3}
       propertyPath: m_Name
       value: FuelPlant_A_prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 8236300479915620002, guid: 83147d9e012ffdf439320d41d56518fb, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8720911760901516312, guid: 83147d9e012ffdf439320d41d56518fb, type: 3}
       propertyPath: m_LocalScale.x

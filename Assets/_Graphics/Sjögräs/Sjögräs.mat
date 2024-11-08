@@ -89,7 +89,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: d28545a0589c536498c4158ff236fa5c, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5e1acf362611957488060eee4178b3f3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskMap:
@@ -167,6 +167,7 @@ Material:
     - _CullMode: 2
     - _CullModeForward: 2
     - _Cutoff: 0.5
+    - _Density: 2
     - _DepthOffsetEnable: 0
     - _Desity: 0.2
     - _DetailAlbedoScale: 1
@@ -246,6 +247,7 @@ Material:
     - _StencilWriteMaskGBuffer: 15
     - _StencilWriteMaskMV: 41
     - _Strenght: 2
+    - _Strength: 0.3
     - _SubsurfaceMask: 1
     - _SupportDecals: 1
     - _SurfaceType: 0
@@ -283,7 +285,7 @@ Material:
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _LightingColor: {r: 0, g: 1, b: 0.33355212, a: 0}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Speed: {r: 2, g: 0.15, b: 0, a: 0}
+    - _Speed: {r: 0.5, g: 0.5, b: 0, a: 0}
     - _ThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _TransmittanceColor: {r: 1, g: 1, b: 1, a: 1}
     - _UVDetailsMappingMask: {r: 1, g: 0, b: 0, a: 0}

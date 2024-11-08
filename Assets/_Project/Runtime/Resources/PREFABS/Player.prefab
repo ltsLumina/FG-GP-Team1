@@ -112,7 +112,7 @@ Transform:
   m_LocalScale: {x: 0.09538089, y: 0.08082441, z: 0.08082441}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4917923898647514832}
+  m_Father: {fileID: 5425014332352787703}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &8180479011006707217
 MeshFilter:
@@ -390,10 +390,10 @@ GameObject:
   m_Component:
   - component: {fileID: 371218063552686938}
   - component: {fileID: 3460641147627518562}
+  - component: {fileID: 8160497689056147793}
   - component: {fileID: 7800650524447749218}
   - component: {fileID: 7927158544815500917}
   - component: {fileID: 1519423553194101693}
-  - component: {fileID: 8160497689056147793}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -415,9 +415,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6955198144518571652}
+  - {fileID: 6407687503610076053}
   - {fileID: 5425014332352787703}
   - {fileID: 1163592691996433890}
-  - {fileID: 303640144284454436}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3460641147627518562
@@ -439,6 +439,23 @@ MonoBehaviour:
   dashDampingStart: 0
   dashDampingEnd: 4
   dashCooldown: 1
+  stunDuration: 1
+--- !u!114 &8160497689056147793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8848661024979553184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab8e27206f16bae4996289a9ce77eb8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitVFXPrefab: {fileID: 3639908008047340491, guid: a4d32c7ccaf940647ac4ba89d1d20cdb, type: 3}
+  squishAmount: 0.7
+  squishDuration: 0.2
+  cooldownDuration: 0.5
 --- !u!65 &7800650524447749218
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -501,22 +518,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   label: Add this component to the parent object you want the selection to highlight
     when selected.
---- !u!114 &8160497689056147793
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8848661024979553184}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab8e27206f16bae4996289a9ce77eb8f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitVFXPrefab: {fileID: 3639908008047340491, guid: a4d32c7ccaf940647ac4ba89d1d20cdb, type: 3}
-  squishAmount: 0.7
-  squishDuration: 0.2
-  cooldownDuration: 0.5
 --- !u!1001 &1929789565325795760
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -535,15 +536,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5876767227943163207, guid: 727894c7ee2894887aa8678f5c1e7b12, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -13.683037
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5876767227943163207, guid: 727894c7ee2894887aa8678f5c1e7b12, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.455002
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5876767227943163207, guid: 727894c7ee2894887aa8678f5c1e7b12, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -20.970207
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5876767227943163207, guid: 727894c7ee2894887aa8678f5c1e7b12, type: 3}
       propertyPath: m_LocalRotation.w
@@ -616,22 +617,17 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 6843224961146285920, guid: 727894c7ee2894887aa8678f5c1e7b12, type: 3}
-      insertIndex: 0
+    - targetCorrespondingSourceObject: {fileID: 5876767227943163207, guid: 727894c7ee2894887aa8678f5c1e7b12, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 5784129179504871632}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 727894c7ee2894887aa8678f5c1e7b12, type: 3}
---- !u!4 &4917923898647514832 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6843224961146285920, guid: 727894c7ee2894887aa8678f5c1e7b12, type: 3}
-  m_PrefabInstance: {fileID: 1929789565325795760}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5425014332352787703 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5876767227943163207, guid: 727894c7ee2894887aa8678f5c1e7b12, type: 3}
   m_PrefabInstance: {fileID: 1929789565325795760}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &4156527471714894446
+--- !u!1001 &7310716006769678303
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -645,11 +641,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4438381737095433290, guid: 9035092dc9dcdce49a297297e15e1215, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.299
+      value: 0.64
       objectReference: {fileID: 0}
     - target: {fileID: 4438381737095433290, guid: 9035092dc9dcdce49a297297e15e1215, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.906
+      value: -1.98
       objectReference: {fileID: 0}
     - target: {fileID: 4438381737095433290, guid: 9035092dc9dcdce49a297297e15e1215, type: 3}
       propertyPath: m_LocalRotation.w
@@ -688,8 +684,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9035092dc9dcdce49a297297e15e1215, type: 3}
---- !u!4 &303640144284454436 stripped
+--- !u!4 &6407687503610076053 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4438381737095433290, guid: 9035092dc9dcdce49a297297e15e1215, type: 3}
-  m_PrefabInstance: {fileID: 4156527471714894446}
+  m_PrefabInstance: {fileID: 7310716006769678303}
   m_PrefabAsset: {fileID: 0}
