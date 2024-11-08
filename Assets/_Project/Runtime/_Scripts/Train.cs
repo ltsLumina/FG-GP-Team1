@@ -90,7 +90,7 @@ public class Train : MonoBehaviour
 
     [Header("Battery")]
     [Range(1, 50)]
-    [SerializeField] float powerRechargeAmount = 25;
+    [SerializeField] float batteryChargeRate = 25;
 
     [Header("Lighting")]
     [Tooltip("The intensity of the light.")]
@@ -243,7 +243,7 @@ public class Train : MonoBehaviour
             (() =>
             {
                 GameManager.Instance.GameStateChanger(GameManager.GameState.GameOver);
-                Debug.Log("DOED");
+                Debug.Log("Died");
             });
 
             DOTween.SetTweensCapacity(1000, 5);
@@ -376,8 +376,6 @@ public class Train : MonoBehaviour
 
             case Tasks.Refuel:
                 Fuel += kelpRestoreAmount;
-
-                if (Player.HoldingResource(out Resource heldItem)) Destroy(heldItem.gameObject);
                 break;
 
             case Tasks.Repair:
@@ -387,18 +385,18 @@ public class Train : MonoBehaviour
                 break;
 
             case Tasks.Recharge:
-                Power += powerRechargeAmount;
+                // Handled by Battery.cs
                 break;
         }
     }
 
     public bool CanPerformTask(Tasks tasks) => tasks switch
     { Tasks.Clean    => Dirtiness > 0,
-      Tasks.Refuel   => Fuel          < 100 && Player.HoldingResource(out Resource kelp) && kelp.Item == IGrabbable.Items.Kelp,
-      Tasks.Repair   => HullIntegrity < 3   && hullBreaches > 0,
-      Tasks.Recharge => Power         < 100 && Player.HoldingResource(out Resource battery) && battery.Item == IGrabbable.Items.Battery,
+      Tasks.Refuel   => Fuel < 100,
+      Tasks.Repair   => HullIntegrity < 3 && hullBreaches > 0 && !Player.HoldingResource(out _),
+      Tasks.Recharge => Power < 100 && Player.HoldingResource(out Resource battery) && battery.Item == IGrabbable.Items.Battery,
       _              => false };
-    
+
     public bool IsTaskComplete(Tasks tasks) => tasks switch
     { Tasks.Clean    => Dirtiness     <= 20,
       Tasks.Refuel   => Fuel          >= 100,
