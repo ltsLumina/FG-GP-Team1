@@ -7,7 +7,14 @@ Shader "Custom/CRTShaderWithArray" {
         _AberrationAmount ("Aberration Amount", Range(0, 0.1)) = 0.03
     }
     SubShader {
+        Tags { "Queue"="Transparent-10" "RenderType"="Transparent" }  // Fine-tuned queue order
+        LOD 100
+
         Pass {
+            ZWrite On                 // Enable depth writing
+            ZTest LEqual              // Respect depth to avoid rendering too prominently
+            Fog { Mode Off }          // Disable fog interactions
+
             CGPROGRAM
             #pragma target 3.5
             #pragma vertex vert
@@ -26,7 +33,7 @@ Shader "Custom/CRTShaderWithArray" {
             };
 
             // Declare texture array
-            UNITY_DECLARE_TEX2DARRAY(_MainTexArray); // Updated to Unity's syntax
+            UNITY_DECLARE_TEX2DARRAY(_MainTexArray);
             float _ArrayIndex;
             float _ScanlineIntensity;
             float _DistortionAmount;
