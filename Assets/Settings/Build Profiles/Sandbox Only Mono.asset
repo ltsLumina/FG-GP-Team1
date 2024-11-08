@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 15003, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: Sandbox Only IL2CPP
+  m_Name: Sandbox Only Mono
   m_EditorClassIdentifier: 
   m_AssetVersion: 1
-  m_BuildTarget: 19
+  m_BuildTarget: 2
   m_Subtarget: 2
-  m_PlatformId: 4e3c793746204150860bf175a9a41a05
+  m_PlatformId: 0d2129357eac403d8b359c2dcbf82502
   m_PlatformBuildProfile:
-    rid: 7770152048932683776
+    rid: 1347812330220027905
   m_OverrideGlobalSceneList: 1
   m_Scenes:
   - m_enabled: 1
@@ -165,7 +165,7 @@ MonoBehaviour:
     - line: '|   loadStoreDebugModeEnabled: 0'
     - line: '|   visionOSBundleVersion: 1.0'
     - line: '|   tvOSBundleVersion: 1.0'
-    - line: '|   bundleVersion: Alpha 1.5.0'
+    - line: '|   bundleVersion: Alpha 0.5.1'
     - line: '|   preloadedAssets:'
     - line: '|   - {fileID: -944628639613478452, guid: 35845fe01580c41289b024647b1d1c53,
         type: 3}'
@@ -550,10 +550,10 @@ MonoBehaviour:
     - line: '|   m_BuildTargetGraphicsAPIs:'
     - line: '|   - m_BuildTarget: LinuxStandaloneSupport'
     - line: '|     m_APIs: 15000000'
-    - line: '|     m_Automatic: 1'
+    - line: '|     m_Automatic: 0'
     - line: '|   - m_BuildTarget: MacStandaloneSupport'
     - line: '|     m_APIs: 10000000'
-    - line: '|     m_Automatic: 1'
+    - line: '|     m_Automatic: 0'
     - line: '|   - m_BuildTarget: WindowsStandaloneSupport'
     - line: '|     m_APIs: 120000001500000002000000'
     - line: '|     m_Automatic: 0'
@@ -869,7 +869,7 @@ MonoBehaviour:
     - line: '|   platformArchitecture: {}'
     - line: '|   scriptingBackend:'
     - line: '|     Android: 1'
-    - line: '|     Standalone: 1'
+    - line: '|     Standalone: 0'
     - line: '|   il2cppCompilerConfiguration: {}'
     - line: '|   il2cppCodeGeneration:'
     - line: '|     Standalone: 0'
@@ -983,10 +983,7 @@ MonoBehaviour:
     - line: '|   windowsGamepadBackendHint: 0'
     - line: '|   cloudProjectId: '
     - line: '|   framebufferDepthMemorylessMode: 0'
-    - line: '|   qualitySettingsNames:'
-    - line: '|   - High Fidelity'
-    - line: '|   - Balanced'
-    - line: '|   - Performant'
+    - line: '|   qualitySettingsNames: []'
     - line: '|   projectName: '
     - line: '|   organizationId: '
     - line: '|   cloudEnabled: 0'
@@ -1001,8 +998,8 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 7770152048932683776
-      type: {class: WindowsPlatformSettings, ns: UnityEditor.WindowsStandalone, asm: UnityEditor.WindowsStandalone.Extensions}
+    - rid: 1347812330220027905
+      type: {class: OSXStandaloneBuildProfile, ns: UnityEditor.OSXStandalone, asm: UnityEditor.OSXStandalone.Extensions}
       data:
         m_Development: 0
         m_ConnectProfiler: 0
@@ -1015,9 +1012,6 @@ MonoBehaviour:
         m_ExplicitArrayBoundsChecks: 0
         m_CompressionType: 3
         m_InstallInBuildFolder: 0
-        m_WindowsBuildAndRunDeployTarget: 0
-        m_Architecture: 0
-        m_CreateSolution: 0
-        m_CopyPDBFiles: 0
-        m_WindowsDevicePortalAddress: 
-        m_WindowsDevicePortalUsername: 
+        m_MacOSXcodeBuildConfig: 1
+        m_Architecture: 2
+        m_CreateXcodeProject: 0

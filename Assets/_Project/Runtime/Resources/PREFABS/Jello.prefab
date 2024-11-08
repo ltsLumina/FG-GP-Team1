@@ -9,10 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8989851090566023958}
+  - component: {fileID: -6227526509156376808}
+  - component: {fileID: 3679529542735978214}
   - component: {fileID: 7332491634606278429}
   - component: {fileID: 3564621304440600882}
   - component: {fileID: 5025156445901423980}
-  - component: {fileID: 3679529542735978214}
   - component: {fileID: 7296617121546707005}
   - component: {fileID: 6230168168455329462}
   - component: {fileID: 2828710952692578021}
@@ -38,6 +39,42 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-6227526509156376808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5570282934742007449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 283023e4b68b427fb24512c2e1252630, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chargeLevel: 3
+  charged: 0
+  conversionRate: 10
+  offset: {x: 0, y: 0, z: 0}
+  radius: 0
+--- !u!114 &3679529542735978214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5570282934742007449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94e8e3258608a9245ab40d25574f84ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveCoolDown: 4
+  moveSpeed: 5
+  moveScale: 10
+  wallContext: 5
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!33 &7332491634606278429
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -114,25 +151,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3679529542735978214
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5570282934742007449}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94e8e3258608a9245ab40d25574f84ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveCoolDown: 4
-  moveSpeed: 5
-  moveScale: 10
-  wallContext: 5
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!114 &7296617121546707005
 MonoBehaviour:
   m_ObjectHideFlags: 0
