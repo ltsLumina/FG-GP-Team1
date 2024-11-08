@@ -208,11 +208,6 @@ public class Task : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        Debug.Log("IS IS TRIGGER: " + isInTrigger);
-    }
-
     void OnTriggerExit(Collider other)
     {
         isInTrigger = false;
