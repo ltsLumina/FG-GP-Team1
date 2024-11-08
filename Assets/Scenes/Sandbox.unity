@@ -934,7 +934,7 @@ MonoBehaviour:
         subfoldouts: []
 --- !u!43 &1092445047
 Mesh:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 32
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -2030,6 +2030,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -61.174, y: -49.48, z: 4.342}
+--- !u!1001 &1945188428
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1648786606433975147, guid: 44d1fc8ef4a59b54e8305e8907dcb74b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 59.86422
+      objectReference: {fileID: 0}
+    - target: {fileID: 1648786606433975147, guid: 44d1fc8ef4a59b54e8305e8907dcb74b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -83.559
+      objectReference: {fileID: 0}
+    - target: {fileID: 1648786606433975147, guid: 44d1fc8ef4a59b54e8305e8907dcb74b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6.4716654
+      objectReference: {fileID: 0}
+    - target: {fileID: 1648786606433975147, guid: 44d1fc8ef4a59b54e8305e8907dcb74b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1648786606433975147, guid: 44d1fc8ef4a59b54e8305e8907dcb74b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1648786606433975147, guid: 44d1fc8ef4a59b54e8305e8907dcb74b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1648786606433975147, guid: 44d1fc8ef4a59b54e8305e8907dcb74b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1648786606433975147, guid: 44d1fc8ef4a59b54e8305e8907dcb74b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1648786606433975147, guid: 44d1fc8ef4a59b54e8305e8907dcb74b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1648786606433975147, guid: 44d1fc8ef4a59b54e8305e8907dcb74b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2137655123363193297, guid: 44d1fc8ef4a59b54e8305e8907dcb74b, type: 3}
+      propertyPath: m_Name
+      value: Geo_Robot_01_v2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 44d1fc8ef4a59b54e8305e8907dcb74b, type: 3}
 --- !u!1 &2007165834
 GameObject:
   m_ObjectHideFlags: 0
@@ -2524,3 +2581,4 @@ SceneRoots:
   - {fileID: 1526439423}
   - {fileID: 1762362178}
   - {fileID: 1496620751}
+  - {fileID: 1945188428}
