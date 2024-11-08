@@ -15967,12 +15967,11 @@ MonoBehaviour:
     space: 0
   rootTab:
     name: 
-    selectedSubtabIndex: 2
+    selectedSubtabIndex: 0
     subtabs:
     - rid: 5260567303344357731
     - rid: 5260567303344357732
     - rid: 5260567303344357733
-    - rid: 5260567303344357734
     - rid: 5260567303344357735
     - rid: 5260567303344357736
     subtabsDrawn: 1
@@ -16005,13 +16004,6 @@ MonoBehaviour:
       type: {class: VInspectorData/Tab, ns: VInspector, asm: VInspector}
       data:
         name: Power
-        selectedSubtabIndex: 0
-        subtabs: []
-        subtabsDrawn: 0
-    - rid: 5260567303344357734
-      type: {class: VInspectorData/Tab, ns: VInspector, asm: VInspector}
-      data:
-        name: Rocks
         selectedSubtabIndex: 0
         subtabs: []
         subtabsDrawn: 0

@@ -3,7 +3,6 @@ using System.Collections;
 using System.Linq;
 using Lumina.Essentials.Modules;
 using UnityEngine;
-using UnityEngine.Custom.Attributes;
 #endregion
 
 /// <summary>
@@ -22,7 +21,7 @@ internal interface IDestructible
     bool Bypass => false;
 }
 
-public class GameManagerOLD : MonoBehaviour
+public class GlobalCleanupManager : MonoBehaviour
 {
     IEnumerator Start()
     {
@@ -56,17 +55,5 @@ public class GameManagerOLD : MonoBehaviour
                 }
             }
         }
-    }
-
-    //[Obsolete("Don't use this. It is only meant for the Alpha build.")]
-    public void LoadGame()
-    {
-        SceneManagerExtended.LoadScene(0);
-    }
-    
-    //[Obsolete("Don't use this. It is only meant for the Alpha build.")]
-    public void LoadMainMenu()
-    {
-        SceneManagerExtended.LoadScene(1);
     }
 }
