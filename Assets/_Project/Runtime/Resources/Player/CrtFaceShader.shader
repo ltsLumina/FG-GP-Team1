@@ -1,13 +1,15 @@
-Shader "Custom/CRTShader" {
+Shader "Custom/CRTShaderWithArray" {
     Properties {
-        _MainTex ("Texture", 2D) = "white" {}
+        _MainTexArray ("Texture Array", 2DArray) = "" {}
+        _ArrayIndex ("Array Index", Float) = 0
         _ScanlineIntensity ("Scanline Intensity", Range(0, 1)) = 0.5
         _DistortionAmount ("Distortion Amount", Range(0, 1)) = 0.1
-        _AberrationAmount ("Aberration Amount", Range(0, 1)) = 0.03
+        _AberrationAmount ("Aberration Amount", Range(0, 0.1)) = 0.03
     }
     SubShader {
         Pass {
             CGPROGRAM
+            #pragma target 3.5
             #pragma vertex vert
             #pragma fragment frag
 
@@ -23,7 +25,9 @@ Shader "Custom/CRTShader" {
                 float4 vertex : SV_POSITION;
             };
 
-            sampler2D _MainTex;
+            // Declare texture array
+            UNITY_DECLARE_TEX2DARRAY(_MainTexArray); // Updated to Unity's syntax
+            float _ArrayIndex;
             float _ScanlineIntensity;
             float _DistortionAmount;
             float _AberrationAmount;
@@ -38,9 +42,9 @@ Shader "Custom/CRTShader" {
             float3 ApplyAberration(float2 uv, float amount) {
                 // Apply chromatic aberration by shifting color channels
                 float3 color;
-                color.r = tex2D(_MainTex, uv + amount).r;
-                color.g = tex2D(_MainTex, uv).g;
-                color.b = tex2D(_MainTex, uv - amount).b;
+                color.r = UNITY_SAMPLE_TEX2DARRAY(_MainTexArray, float3(uv + amount, _ArrayIndex)).r;
+                color.g = UNITY_SAMPLE_TEX2DARRAY(_MainTexArray, float3(uv, _ArrayIndex)).g;
+                color.b = UNITY_SAMPLE_TEX2DARRAY(_MainTexArray, float3(uv - amount, _ArrayIndex)).b;
                 return color;
             }
 
