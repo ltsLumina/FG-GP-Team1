@@ -5478,7 +5478,7 @@ MonoBehaviour:
       isKeyRepeated: 0
     dividerPos: 0.33
   power: 100
-  powerDepletionRate: 1
+  powerDepletionRate: 0.25
   batteryChargeRate: 25
   lightIntensity: 20000
   lightRadius: 50
