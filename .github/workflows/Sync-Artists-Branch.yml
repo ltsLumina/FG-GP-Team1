@@ -16,4 +16,4 @@ jobs:
         with:
           branch: Artists
           token: ${{ secrets.SYNC_ARTISTS_BRANCH_TOKEN }}
-          force: false
+          force: true
