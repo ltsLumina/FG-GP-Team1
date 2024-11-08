@@ -13,16 +13,16 @@ MonoBehaviour:
   m_Name: GreenFishStandard
   m_EditorClassIdentifier: 
   moveSpeed: 7
-  turnSpeed: 7
+  turnSpeed: 5.5
   wallContext: 5
-  seperationContext: 3
-  seperationStrength: 5
+  seperationContext: 0.9
+  seperationStrength: 3
   alignmentContext: 7
   alignmentStrength: 2.8
-  cohesionContext: 10
+  cohesionContext: 13.4
   cohesionStrength: 2
   fleeingMoveSpeedMult: 3
   fleeContext: 5
   fleeTimeSeconds: 0.2
-  prefab: {fileID: 919132149155446097, guid: 252ed390f482ad742b9aff5ebb22ff82, type: 3}
-  material: {fileID: 2100000, guid: 7a87e8a073137c94b8df1516c461fb83, type: 2}
+  prefab: {fileID: 4879454075420634684, guid: affcf4c96e901a649b77edafbd789b74, type: 3}
+  material: {fileID: 2100000, guid: 66738c0d32b4b0c41ab16ad9fd4ad5e1, type: 2}
