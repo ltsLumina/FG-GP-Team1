@@ -10265,6 +10265,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EventSpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 5168876769981928410, guid: a0f4d7dab3d397d4ba3422788b6e3a40, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -40094,6 +40098,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Train
       objectReference: {fileID: 0}
+    - target: {fileID: 1505193886760754658, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
       propertyPath: repairAmount
       value: 3
@@ -40118,6 +40126,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4413985483703244372, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: moveLength
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 5707010853027933423, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
       propertyPath: vInspectorData
       value: 
@@ -40130,6 +40142,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8367960061602960449, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 66738c0d32b4b0c41ab16ad9fd4ad5e1, type: 2}
     - target: {fileID: 8589098272386292673, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
