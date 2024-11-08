@@ -19413,6 +19413,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1128967893}
   m_CullTransparentMesh: 1
+--- !u!1 &1132222917 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7584022963353752610, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+  m_PrefabInstance: {fileID: 8759106494943338648}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1132222922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1132222917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f0554478ecd1524ea43ab4960a62b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  label: Add this component to the parent object you want the selection to highlight
+    when selected.
 --- !u!1 &1134261430
 GameObject:
   m_ObjectHideFlags: 0
@@ -24108,6 +24127,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2613605133687634388, guid: bdafdd214f650c540bc6c5f7d52cf7c2, type: 3}
   m_PrefabInstance: {fileID: 1403519922}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1405892758 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4597449756645802583, guid: 750fd1bd8324fc84c98778924c9ebaf3, type: 3}
+  m_PrefabInstance: {fileID: 3083783681915289839}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1405892764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1405892758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 283023e4b68b427fb24512c2e1252630, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chargeLevel: 3
+  charged: 0
+  conversionRate: 10
+  offset: {x: 0, y: 0, z: 0}
+  radius: 2
 --- !u!1 &1406450824
 GameObject:
   m_ObjectHideFlags: 0
@@ -39692,7 +39733,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4597449756645802583, guid: 750fd1bd8324fc84c98778924c9ebaf3, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 1405892764}
   m_SourcePrefab: {fileID: 100100000, guid: 750fd1bd8324fc84c98778924c9ebaf3, type: 3}
 --- !u!1001 &3238097188645576308
 PrefabInstance:
@@ -39807,6 +39851,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3460641147627518562, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
+      propertyPath: stunDuration
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8848661024979553184, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
       propertyPath: m_Name
       value: Player
@@ -39833,6 +39881,10 @@ PrefabInstance:
       value: Train
       objectReference: {fileID: 0}
     - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: power
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
       propertyPath: vInspectorData
       value: 
       objectReference: {fileID: 921712202}
@@ -39852,6 +39904,10 @@ PrefabInstance:
       propertyPath: vInspectorData
       value: 
       objectReference: {fileID: 375217023}
+    - target: {fileID: 7584022963353752610, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 8589098272386292673, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -39895,7 +39951,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7584022963353752610, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1132222922}
   m_SourcePrefab: {fileID: 100100000, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
 --- !u!4 &8759106494943338649 stripped
 Transform:

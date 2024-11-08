@@ -166,7 +166,7 @@ public class Train : MonoBehaviour
     public float Fuel
     {
         get => fuel;
-        set
+        private set
         {
             fuel = Mathf.Clamp(value, 0, 100);
             if (fuel <= 0) onFuelDepleted.Invoke();
@@ -220,8 +220,6 @@ public class Train : MonoBehaviour
             GUILayout.Label($"Hull Integrity: {HullIntegrity}", style);
             GUILayout.Label($"Dirtiness: {dirtiness.Round()} (Stage {dirtinessStage})", style);
             GUILayout.Label($"Power: {Power.Round()}", style);
-            //GUILayout.Label($"Jellyfish Spawn Rate: {jellyfishSpawnRate}", style);
-            //GUILayout.Label($"Jellyfish Spawn Interval: {jellyfishSpawnInterval}", style);
         }
     }
 #endif
@@ -360,7 +358,7 @@ public class Train : MonoBehaviour
     public bool CanPerformTask(Tasks tasks) => tasks switch
     { Tasks.Clean    => Dirtiness > 0,
       Tasks.Refuel   => Fuel < 100,
-      Tasks.Repair   => HullIntegrity < 3 && hullBreaches > 0 && !Player.HoldingResource(out _),
+      Tasks.Repair   => HullIntegrity < 3 && hullBreaches > 0 && !Player.HoldingResource(out Resource _),
       Tasks.Recharge => Power < 100 && Player.HoldingResource(out Resource battery) && battery.Item == IGrabbable.Items.Battery,
       _              => false };
 
@@ -385,20 +383,13 @@ public class Train : MonoBehaviour
 
     void OnCollision(GameObject collision)
     {
-        switch (collision.tag)
+        if (collision.CompareTag("Rock"))
         {
-            case "Jellyfish":
-                hullBreaches++;
-                onHullBreach.Invoke(hullBreaches);
-                break;
-
-            case "Rock":
-                hullBreaches++;
-                HullIntegrity = Mathf.Max(0, 3 - hullBreaches);
-                onHullBreach.Invoke(hullBreaches);
-                onHullIntegrityChanged.Invoke(HullIntegrity);
-                onRockCollision.Invoke(collision.GetComponent<Rock>());
-                break;
+            hullBreaches++;
+            HullIntegrity = Mathf.Max(0, 3 - hullBreaches);
+            onHullBreach.Invoke(hullBreaches);
+            onHullIntegrityChanged.Invoke(HullIntegrity);
+            onRockCollision.Invoke(collision.GetComponent<Rock>());
         }
     }
     #endregion
