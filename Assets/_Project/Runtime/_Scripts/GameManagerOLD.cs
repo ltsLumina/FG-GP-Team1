@@ -22,7 +22,7 @@ internal interface IDestructible
     bool Bypass => false;
 }
 
-public class GameManager : SingletonPersistent<GameManager>
+public class GameManagerOLD : MonoBehaviour
 {
     IEnumerator Start()
     {
