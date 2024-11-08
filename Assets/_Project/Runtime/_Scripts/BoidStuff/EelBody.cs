@@ -41,4 +41,13 @@ public class EelBody : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        for (int i = 1; i < bodyParts.Count; i++)
+        { 
+            Destroy(bodyParts[i].gameObject);
+        }
+        bodyParts.Clear();
+    }
+
 }
