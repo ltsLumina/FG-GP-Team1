@@ -42,7 +42,8 @@ public class MainMenu : MonoBehaviour
     public void Retry()
     {
         GameManager.Instance.GameStateChanger(GameManager.GameState.Play);
-        SceneManager.LoadScene(2);
+        var doesSceneTwoExist = SceneManager.GetSceneByBuildIndex(2).IsValid(); // for debug builds
+        SceneManager.LoadScene(doesSceneTwoExist ? 2 : 0);
         highScoreManager = Helpers.Find<HighScoreManager>();
         highScoreManager.SaveHighScores();
         scoreManager = Helpers.Find<ScoreManager>();
