@@ -15,5 +15,5 @@ jobs:
       - uses: connor-baer/action-sync-branch@main
         with:
           branch: Artists
-          token: ${{ secrets.SYNC_BRANCH_TOKEN }}
+          token: ${{ secrets.SYNC_ARTISTS_BRANCH_TOKEN }}
           force: false
