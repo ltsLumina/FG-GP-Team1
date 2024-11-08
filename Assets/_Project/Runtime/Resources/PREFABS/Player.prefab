@@ -439,7 +439,6 @@ MonoBehaviour:
   dashDampingStart: 0
   dashDampingEnd: 4
   dashCooldown: 1
-  playerAnimation: {fileID: 7732228886085589350}
 --- !u!65 &7800650524447749218
 BoxCollider:
   m_ObjectHideFlags: 0

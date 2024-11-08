@@ -34,7 +34,6 @@ public class PlayerAnimation : MonoBehaviour
 
     private void SetMotorSpeed(float speed)
     {
-        Debug.Log("Setting motor speed to " + speed);
         anim.SetFloat("MotorSpeed", speed);
     }
 

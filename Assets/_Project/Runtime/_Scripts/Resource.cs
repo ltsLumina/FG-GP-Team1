@@ -13,8 +13,8 @@ public interface IGrabbable
 {
     public enum Items
     {
-        [UsedImplicitly] Kelp,
-        [UsedImplicitly] Battery,
+        Kelp,
+        Battery,
     }
 }
 

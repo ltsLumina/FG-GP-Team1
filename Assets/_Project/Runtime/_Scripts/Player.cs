@@ -14,31 +14,18 @@ using static Lumina.Essentials.Modules.Helpers;
 public class Player : MonoBehaviour
 {
     [Header("Multiplayer")]
-    [SerializeField, ReadOnly]
-    int playerID;
+    [SerializeField] [ReadOnly] int playerID;
 
     [Header("Movement")]
-    [SerializeField]
-    float moveSpeed;
+    [SerializeField] float moveSpeed;
 
     [Header("Dash")]
-    [SerializeField]
-    float dashForce = 25f;
-
-    [SerializeField]
-    float dashDuration = 0.05f;
-
-    [SerializeField]
-    float dashDampingStart;
-
-    [SerializeField]
-    float dashDampingEnd = 2.5f;
-
-    [SerializeField]
-    float dashCooldown = 1f;
-
-    [SerializeField]
-    PlayerAnimation playerAnimation;
+    [SerializeField] float dashForce = 25f;
+    [SerializeField] float dashDuration = 0.05f;
+    [SerializeField] float dashDampingStart;
+    [SerializeField] float dashDampingEnd = 2.5f;
+    [SerializeField] float dashCooldown = 1f;
+    
 
     float dashTimer;
 
@@ -47,6 +34,7 @@ public class Player : MonoBehaviour
     InputManager input;
     PlayerInput playerInput;
     Rigidbody rb;
+    PlayerAnimation playerAnimation;
 
     /// <summary>
     /// The player index.
@@ -60,20 +48,41 @@ public class Player : MonoBehaviour
 
     public PlayerInput PlayerInput => playerInput;
 
+    Action<bool> onDash;
+    Action<bool> onDashEnd;
+    
     void Awake()
     {
         playerInput = GetComponentInChildren<PlayerInput>();
         input = GetComponentInChildren<InputManager>();
         rb = GetComponent<Rigidbody>();
+        playerAnimation = GetComponentInChildren<PlayerAnimation>();
     }
+
+    #region Dash Animation Helper
+    void OnEnable()
+    {
+        onDash += DashAnims;
+        onDashEnd += DashAnims;
+    }
+
+    void OnDisable()
+    {
+        onDash -= DashAnims;
+        onDashEnd -= DashAnims;
+    }
+
+    void DashAnims(bool dashing)
+    {
+        if (dashing) playerAnimation.Dash();
+        else playerAnimation.StopDash();
+    }
+    #endregion
 
     // Player moves in parallel with the train if it's a child of the train. Simplest solution.
     void Start() => transform.SetParent(Find<Train>().transform);
 
-    void Update()
-    {
-        Move();
-    }
+    void Update() => Move();
 
     void Move()
     {
@@ -86,9 +95,9 @@ public class Player : MonoBehaviour
 
     public void Dash()
     {
-        if (dashTimer > 0)
-            return;
+        if (dashTimer > 0) return;
         StartCoroutine(DashRoutine(rb));
+        onDash?.Invoke(true);
         playerAnimation.Dash();
     }
 
@@ -106,7 +115,8 @@ public class Player : MonoBehaviour
             dashTimer -= Time.deltaTime;
             yield return null;
         }
-        playerAnimation.StopDash();
+
+        onDashEnd?.Invoke(false);
     }
 
     static Resource heldResource;
