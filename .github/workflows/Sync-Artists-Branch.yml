@@ -7,7 +7,7 @@ on:
 
 jobs:
   sync-branch:
-    name: Update Design branch
+    name: Update Artists branch
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
