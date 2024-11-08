@@ -94,6 +94,8 @@ public class Task : MonoBehaviour
 
     void Awake() => train = GetComponentInParent<Train>();
 
+    void OnDisable() => repairAction.performed -= HandleInteract;
+
     void Start()
     {
         taskCoroutine = null;
