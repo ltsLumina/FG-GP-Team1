@@ -9604,7 +9604,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4093640703
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -26207,6 +26207,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 745964790}
     m_Modifications:
+    - target: {fileID: 2980864767474477408, guid: f2bca4ec160f8bd4c82b1abe16045ad5, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: bf0f5da9196cd4494a729fd9d025537c, type: 2}
     - target: {fileID: 3629572297689696437, guid: f2bca4ec160f8bd4c82b1abe16045ad5, type: 3}
       propertyPath: m_Name
       value: PloraUVTest2 (1)
