@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,6 +20,19 @@ public class DialogueManager : MonoBehaviour
     [Tooltip("The audio source for playing voice-over clips")]
     public AudioSource dialogueAudioSource;
 
+    [Tooltip("The image used to display static noise over the profile image")]
+    public Image staticOverlayImage;
+
+    [Tooltip("Static effect intensity")]
+    [Range(0, 1)]
+    public float staticIntensity = 0.5f;
+
+    [Tooltip("Static effect duration in seconds")]
+    public float staticEffectDuration = 0.2f;
+
+    [Tooltip("The duration each glitch frame lasts")]
+    public float glitchFrameDuration = 0.05f;
+
     private Queue<Dialogue> dialogueQueue = new Queue<Dialogue>();
     private Dialogue currentDialogue;
     private int currentLineIndex;
@@ -30,6 +44,15 @@ public class DialogueManager : MonoBehaviour
 
     private void Start()
     {
+        // Ensure the static overlay image is initially hidden
+        if (staticOverlayImage != null)
+        {
+            Color initialOverlayColor = staticOverlayImage.color;
+            initialOverlayColor.a = 0f;
+            staticOverlayImage.color = initialOverlayColor;
+            staticOverlayImage.gameObject.SetActive(true);
+        }
+
         if (testDialogue != null)
         {
             StartDialogue(testDialogue);
@@ -94,7 +117,8 @@ public class DialogueManager : MonoBehaviour
             dialogueAudioSource.Play();
         }
 
-        StartCoroutine(DisplayLineForDuration(line.timing));
+        // Start the static effect coroutine
+        StartCoroutine(ApplyStaticEffect(line.timing));
         currentLineIndex++;
     }
 
@@ -102,6 +126,37 @@ public class DialogueManager : MonoBehaviour
     private IEnumerator DisplayLineForDuration(float duration)
     {
         yield return new WaitForSeconds(duration);
+        DisplayNextLine();
+    }
+
+    // Coroutine to apply static effect to profile image
+    private IEnumerator ApplyStaticEffect(float lineDuration)
+    {
+        if (staticOverlayImage == null)
+        {
+            yield break;
+        }
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < staticEffectDuration)
+        {
+            // Set a random intensity to simulate glitching
+            Color overlayColor = staticOverlayImage.color;
+            overlayColor.a = Random.Range(0.2f, staticIntensity);
+            staticOverlayImage.color = overlayColor;
+
+            elapsedTime += glitchFrameDuration;
+            yield return new WaitForSeconds(glitchFrameDuration);
+        }
+
+        // Fade out the static overlay after the effect
+        Color finalOverlayColor = staticOverlayImage.color;
+        finalOverlayColor.a = 0f;
+        staticOverlayImage.color = finalOverlayColor;
+
+        // Wait for the remaining duration of the dialogue line
+        yield return new WaitForSeconds(lineDuration);
         DisplayNextLine();
     }
 
@@ -136,3 +191,36 @@ public class DialogueManager : MonoBehaviour
         }
     }
 }
+
+#if UNITY_EDITOR
+public class NoiseTextureCreator
+{
+    [MenuItem("Assets/Create/Noise Texture")]
+    public static void CreateNoiseTexture()
+    {
+        int width = 256;
+        int height = 256;
+        Texture2D noiseTexture = new Texture2D(width, height);
+
+        for (int y = 0; y < height; y++)
+        {
+            for (int x = 0; x < width; x++)
+            {
+                float grayValue = Random.Range(0f, 1f);
+                Color color = new Color(grayValue, grayValue, grayValue);
+                noiseTexture.SetPixel(x, y, color);
+            }
+        }
+
+        noiseTexture.Apply();
+
+        // Save texture to the Assets folder
+        byte[] bytes = noiseTexture.EncodeToPNG();
+        string path = "Assets/NoiseTexture.png";
+        System.IO.File.WriteAllBytes(path, bytes);
+        AssetDatabase.Refresh();
+
+        Debug.Log("Noise texture created at: " + path);
+    }
+}
+#endif
