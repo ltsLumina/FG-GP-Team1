@@ -10,7 +10,6 @@ public class InputManager : MonoBehaviour
     public Vector2 MoveInput { get; private set; }
 
     Player player;
-
     void Start() => player = this.GetParentComponent<Player>();
 
     public void OnMove(InputAction.CallbackContext context)

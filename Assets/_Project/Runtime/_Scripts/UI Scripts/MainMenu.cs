@@ -33,8 +33,11 @@ public class MainMenu : MonoBehaviour
 
     public void Exit()
     {
-        Application.Quit();
+    #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
+    #else
+        Application.Quit();
+    #endif
     }
 
     public void SkipTutorial()
@@ -45,15 +48,16 @@ public class MainMenu : MonoBehaviour
     public void Retry()
     {
         GameManager.Instance.GameStateChanger(GameManager.GameState.Play);
-        SceneManager.LoadScene(2);
         highScoreManager = Helpers.Find<HighScoreManager>();
         highScoreManager.SaveHighScores();
         scoreManager = Helpers.Find<ScoreManager>();
         scoreManager.ResetGame();
+        SceneManager.LoadScene(2);
     }
 
     public void BackToMain()
     {
+        GameManager.Instance.GameStateChanger(GameManager.GameState.Play);
         SceneManager.LoadScene(0);
     }
 
