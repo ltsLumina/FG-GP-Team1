@@ -61,7 +61,7 @@ public class PlayerAnimation : MonoBehaviour
         // anim.SetTrigger("Spawn");
     }
 
-    public void Stun()
+    public void Stun(float stunDuration)
     {
         Debug.Log("Stun animation not implemented");
         // anim.SetTrigger("Stun");

@@ -390,10 +390,10 @@ GameObject:
   m_Component:
   - component: {fileID: 371218063552686938}
   - component: {fileID: 3460641147627518562}
+  - component: {fileID: 8160497689056147793}
   - component: {fileID: 7800650524447749218}
   - component: {fileID: 7927158544815500917}
   - component: {fileID: 1519423553194101693}
-  - component: {fileID: 8160497689056147793}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -439,6 +439,23 @@ MonoBehaviour:
   dashDampingStart: 0
   dashDampingEnd: 4
   dashCooldown: 1
+  stunDuration: 1
+--- !u!114 &8160497689056147793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8848661024979553184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab8e27206f16bae4996289a9ce77eb8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitVFXPrefab: {fileID: 3639908008047340491, guid: a4d32c7ccaf940647ac4ba89d1d20cdb, type: 3}
+  squishAmount: 0.7
+  squishDuration: 0.2
+  cooldownDuration: 0.5
 --- !u!65 &7800650524447749218
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -501,22 +518,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   label: Add this component to the parent object you want the selection to highlight
     when selected.
---- !u!114 &8160497689056147793
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8848661024979553184}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab8e27206f16bae4996289a9ce77eb8f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitVFXPrefab: {fileID: 3639908008047340491, guid: a4d32c7ccaf940647ac4ba89d1d20cdb, type: 3}
-  squishAmount: 0.7
-  squishDuration: 0.2
-  cooldownDuration: 0.5
 --- !u!1001 &1929789565325795760
 PrefabInstance:
   m_ObjectHideFlags: 0

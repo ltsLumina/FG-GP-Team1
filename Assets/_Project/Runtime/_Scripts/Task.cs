@@ -1,12 +1,17 @@
+#region
 using System;
 using System.Collections;
 using DG.Tweening;
 using JetBrains.Annotations;
+using Lumina.Essentials.Modules;
+using Unity.Collections;
 using UnityEngine;
 using UnityEngine.Custom.Attributes;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using VInspector;
+#endregion
 
 public enum Tasks
 {
@@ -50,13 +55,11 @@ public class Task : MonoBehaviour
     #region Task
     [Tab("Task")]
     [Header("Timers")]
-    [Tooltip("This is just a spacer variable because of how VInspector works")]
-    //[SerializeField, ReadOnly, TextArea] string spacer;
     [ShowIf(nameof(task), Tasks.Clean)]
     [RangeResettable(1, 10)]
     [SerializeField] float cleanTime = 5f;
     [ShowIf(nameof(task), Tasks.Refuel)]
-    [RangeResettable(1, 10)]
+    [RangeResettable(0, 10)]
     [SerializeField] float refuelTime = 5f;
     [ShowIf(nameof(task), Tasks.Repair)]
     [RangeResettable(1, 10)]
@@ -80,99 +83,85 @@ public class Task : MonoBehaviour
     [SerializeField] Image chargeCircle;
     [ColorUsage(false, true)]
     [SerializeField] Color completedColor = Color.green;
-    [ColorUsage(false, true)]
-    [SerializeField] Color baseColor = Color.grey;
     #endregion
 
     // <- Cached Components ->
     
     Train train;
-    Sequence onTaskCompleteSequence;
-    
-    // <- Properties ->
-    
-    public float TimeToCompleteTask => task switch
-    { Tasks.Clean    => cleanTime,
-      Tasks.Refuel   => refuelTime,
-      Tasks.Repair   => repairTime,
-      Tasks.Recharge => rechargeTime,
-      _                   => 0 
-    };
-    
-    #pragma warning restore 0414
-
-    void OnValidate()
-    {
-        name = task.ToString();
-        string[] validNames = Enum.GetNames(typeof(Tasks));
-        if (name != validNames[(int) task])
-        {
-            Logger.LogError($"Name must be the same as the task: {string.Join(", ", validNames)}");
-            name = task.ToString();
-        }
-        
-        // move component to top
-#if UNITY_EDITOR
-        if (Application.isPlaying) return;
-        UnityEditorInternal.ComponentUtility.MoveComponentUp(this);
-#endif
-        
-        var col = GetComponent<BoxCollider>();
-        col.size = new (width, height, depth);
-        col.center = new (offsetX, offsetY);
-    }
-    
     Coroutine taskCoroutine;
+    bool isInTrigger;
+    InputAction repairAction;
 
     void Awake() => train = GetComponentInParent<Train>();
-    
+
+    void OnDisable() => repairAction.performed -= HandleInteract;
+
     void Start()
     {
-        Debug.Assert(chargeCircle != null, "Charge circle is null");
-        chargeCircle.color = baseColor;
+        taskCoroutine = null;
         chargeCircle.fillAmount = 0;
 
         onTaskPerformed.AddListener
         (() =>
         {
-            onTaskCompleteSequence = DOTween.Sequence();
-            onTaskCompleteSequence.OnStart(() => chargeCircle.color = completedColor);
-            onTaskCompleteSequence.AppendInterval(waitOnTaskCompletion).OnComplete
+            chargeCircle.color = completedColor;
+
+            DOTween.Sequence().AppendInterval(waitOnTaskCompletion).OnComplete
             (() =>
             {
                 chargeCircle.DOFillAmount(0, 1f);
-                chargeCircle.DOColor(baseColor, 0.5f);
             });
         });
+
+        repairAction = Helpers.Find<Player>().PlayerInput.actions["Interact"];
     }
     
-    void OnTriggerEnter(Collider other)
-    {
-        if (!train.CanPerformTask(task)) return;
-        if (train.IsTaskComplete(task)) return;
+    bool performingTask => taskCoroutine != null;
 
+    void HandleInteract(InputAction.CallbackContext context)
+    {
+        if (!isInTrigger) return;
+
+        if (performingTask) CancelTask();
+        else if (train.CanPerformTask(task) && !train.IsTaskComplete(task)) StartTask();
+    }
+
+    void StartTask()
+    {
+        chargeCircle.color = completedColor;
+        var player = Helpers.Find<Player>();
+        player.Freeze(true);
         taskCoroutine = StartCoroutine(PerformTask());
     }
 
-    void PerformPerformTask() => taskCoroutine = StartCoroutine(PerformTask());
+    void CancelTask()
+    {
+        if (taskCoroutine != null)
+        {
+            StopCoroutine(taskCoroutine);
+            taskCoroutine = null;
+        }
+
+        chargeCircle.DOKill();
+        chargeCircle.fillAmount = 0;
+
+        Helpers.Find<Player>().Freeze(false);
+    }
 
     IEnumerator PerformTask()
     {
-        chargeCircle.color = completedColor;
         float elapsedTime = 0f;
 
-        while (elapsedTime < TimeToCompleteTask)
+        while (elapsedTime < repairTime)
         {
             if (!train.CanPerformTask(task))
             {
-                chargeCircle.DOKill();
-                chargeCircle.color      = baseColor;
-                chargeCircle.fillAmount = 0;
-                yield break; // Exit the coroutine
+                CancelTask();
+                yield break;
             }
 
             elapsedTime += Time.deltaTime;
-            chargeCircle.fillAmount =  elapsedTime / TimeToCompleteTask;
+            chargeCircle.fillAmount = elapsedTime / repairTime;
             yield return null;
         }
 
@@ -181,53 +170,56 @@ public class Task : MonoBehaviour
 
     void CompleteTask()
     {
-        LogFormatted();
+        taskCoroutine = null;
         train.SetTaskStatus(task);
         onTaskPerformed?.Invoke();
 
-        // If the task is still not complete, wait for onTaskCompleteSequence (animation) to finish and then start the task again
-        if (!train.IsTaskComplete(task))
+        Helpers.Find<Player>().Freeze(false);
+        
+        if (train.IsTaskComplete(task)) onTaskComplete?.Invoke(task);
+        else StartTask();
+    }
+
+    void OnTriggerEnter(Collider other) 
+    {
+        switch (task)
         {
-            onTaskCompleteSequence.OnComplete(PerformPerformTask);
-        }
-        else
-        {
-            onTaskComplete?.Invoke(task);
+            case Tasks.Refuel:
+                if (Player.HoldingResource(out Resource heldResource) && heldResource.Item == IGrabbable.Items.Kelp && task == Tasks.Refuel)
+                {
+                    train.SetTaskStatus(Tasks.Refuel);
+                    Destroy(heldResource.gameObject);
+                }
+
+                // Prevents non-grabbed resources such as base kelp, for instance, from being destroyed.
+                if (other.TryGetComponent(out Resource resource) && resource.Item == IGrabbable.Items.Kelp && resource.GrabbedMeshActive)
+                {
+                    train.SetTaskStatus(Tasks.Refuel);
+                    Destroy(resource.gameObject);
+                }
+                break;
+            
+            case Tasks.Repair:
+                isInTrigger = true;
+                repairAction.performed += HandleInteract;
+                break;
+            
+            case Tasks.Recharge:
+                // Recharge
+            break;
         }
     }
 
     void OnTriggerExit(Collider other)
     {
-        if (taskCoroutine != null) StopCoroutine(taskCoroutine);
-        
-        chargeCircle.DOKill();
-        chargeCircle.color      = baseColor;
-        chargeCircle.fillAmount = 0;
+        isInTrigger = false;
+        repairAction.performed -= HandleInteract;
     }
 
-    #region Utility
-    void LogFormatted()
+    void OnValidate()
     {
-        var taskName = task.ToString();
-        switch (taskName.EndsWith("e") ? taskName : taskName + "e")
-        {
-            case "Clean":
-                Logger.Log("Cleaning!");
-                break;
-            
-            case "Refuel":
-                Logger.Log("Refueling!");
-                break;
-            
-            case "Repair":
-                Logger.Log("Repairing!");
-                break;
-            
-            case "Recharge":
-                Logger.Log("Recharging!");
-                break;
-        }
-      
+        var collider = GetComponent<BoxCollider>();
+        collider.size = new (width, height, depth);
+        collider.center = new (offsetX, offsetY);
     }
-    #endregion
 }

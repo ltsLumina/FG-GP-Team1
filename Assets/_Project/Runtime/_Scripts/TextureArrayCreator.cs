@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class TextureArrayCreator : MonoBehaviour
 {
+#if UNITY_EDITOR
     [MenuItem("Assets/Create/Texture Array")]
     static void CreateTextureArray()
     {
@@ -47,4 +48,5 @@ public class TextureArrayCreator : MonoBehaviour
         AssetDatabase.CreateAsset(textureArray, path);
         Debug.Log("Texture Array created at " + path);
     }
+#endif
 }
