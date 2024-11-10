@@ -93,7 +93,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 4f883519d21b9d843974d2df542e64b5, type: 2}
+  m_LightingDataAsset: {fileID: 112000000, guid: 350c3df0c711e764b8632a367e8335fb, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: c36c04815661a0842b18c17c99723f7b, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -4074,7 +4074,34 @@ MonoBehaviour:
   spawnWaves:
   - {fileID: 11400000, guid: feb5a09cb67d7b446be069f2fed94100, type: 2}
   - {fileID: 11400000, guid: 2f9cdfb5861796f49840d8f6efa3aedf, type: 2}
+  - {fileID: 11400000, guid: 7262063f8ddcb9f41909fda54c7b5f08, type: 2}
+  - {fileID: 11400000, guid: 3645a9039bcb1114da10d590c7aa5925, type: 2}
   - {fileID: 11400000, guid: c35e2770c1c210544bbcf7d1973a74b4, type: 2}
+  - {fileID: 11400000, guid: a3360ad11ac2e9842ad632d9feab448e, type: 2}
+  - {fileID: 11400000, guid: 502f546d2e01572469c9f7589d48209e, type: 2}
+  - {fileID: 11400000, guid: 64ee062c7c7677b40846279b24d342f2, type: 2}
+  - {fileID: 11400000, guid: effbba80ea50c124ab3cfa7bbf0e8043, type: 2}
+  - {fileID: 11400000, guid: 02f46b772767d6646afca7baa441db5b, type: 2}
+  - {fileID: 11400000, guid: ca414053065fe27429e32b21e1d0d67e, type: 2}
+  - {fileID: 11400000, guid: a2da671b49b66634496f4e84da45e468, type: 2}
+  - {fileID: 11400000, guid: 6f0dc24ef3687e54f8a96b112c1d7934, type: 2}
+  - {fileID: 11400000, guid: bb41bd7f51de48f45a389f7de226d0ae, type: 2}
+  - {fileID: 11400000, guid: 97bcf1f0908253543ab8c0c7517ffe73, type: 2}
+  - {fileID: 11400000, guid: db34269efc77823499c34e7b711456a8, type: 2}
+  - {fileID: 11400000, guid: 65cc8ec28e8c9344a8abfd6f02b648e1, type: 2}
+  - {fileID: 11400000, guid: 16309de2899af814a89eacc442df4dd3, type: 2}
+  - {fileID: 11400000, guid: f0c28085efa04cb4e9dc3ad73d5edbfe, type: 2}
+  - {fileID: 11400000, guid: 8e8d478dd7f3fa44aadca96486b9683b, type: 2}
+  - {fileID: 11400000, guid: c14326cf6102ae4438ca35765dc934c6, type: 2}
+  - {fileID: 11400000, guid: 9a6b4558c191d7e46a9c7c0b9e417a7b, type: 2}
+  - {fileID: 11400000, guid: a2a117fa1551e3846b2f83f5149d1404, type: 2}
+  - {fileID: 11400000, guid: 6a16e39344dfad342a38556e558a334d, type: 2}
+  - {fileID: 11400000, guid: 9aff8230166ba7849a5edbafb5968c10, type: 2}
+  - {fileID: 11400000, guid: d5e4736ce5574ed4bbbaad9a338b5ba4, type: 2}
+  - {fileID: 11400000, guid: a9cef01356525dd4ba2fa26eb9f5685b, type: 2}
+  - {fileID: 11400000, guid: 6db4e40463592bf4295bcecb33450bd2, type: 2}
+  - {fileID: 11400000, guid: 70afe896e7d76bb49bba6851f25ffbe6, type: 2}
+  - {fileID: 11400000, guid: df2838dcb3c0ce440a69a0946d5bea56, type: 2}
   baseSpawnRate: 2
   randomAdjustment: 1
   moveLength: 40
