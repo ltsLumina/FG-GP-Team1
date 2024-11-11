@@ -94,6 +94,8 @@ public class Task : MonoBehaviour
 
     void Awake() => train = GetComponentInParent<Train>();
 
+    void OnDisable() => repairAction.performed -= HandleInteract;
+
     void Start()
     {
         taskCoroutine = null;
@@ -208,11 +210,6 @@ public class Task : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        Debug.Log("IS IS TRIGGER: " + isInTrigger);
-    }
-
     void OnTriggerExit(Collider other)
     {
         isInTrigger = false;
@@ -222,7 +219,7 @@ public class Task : MonoBehaviour
     void OnValidate()
     {
         var collider = GetComponent<BoxCollider>();
-        collider.size = new Vector3(width, height, depth);
-        collider.center = new Vector3(offsetX, offsetY);
+        collider.size = new (width, height, depth);
+        collider.center = new (offsetX, offsetY);
     }
 }

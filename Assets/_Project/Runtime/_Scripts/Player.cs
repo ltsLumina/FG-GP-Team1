@@ -27,6 +27,9 @@ public class Player : MonoBehaviour
     [SerializeField] float dashDampingEnd = 2.5f;
     [SerializeField] float dashCooldown = 1f;
 
+    [Header("Stun")]
+    [SerializeField] float stunDuration = 2f;
+
     float dashTimer;
     bool canMove = true;
 
@@ -128,18 +131,30 @@ public class Player : MonoBehaviour
     /// <summary>
     /// Check if the player is holding an item.
     /// </summary>
-    /// <param name="heldResource"> The held resource. </param>
+    /// <param name="resource"> The held resource. </param>
     /// <returns></returns>
-    public static bool HoldingResource(out Resource heldResource)
+    public static bool HoldingResource(out Resource resource)
     {
-        if (Player.heldResource == null)
+        if (heldResource == null)
         {
-            heldResource = null;
+            resource = null;
             return false;
         }
 
-        heldResource = Player.heldResource;
-        return heldResource is { Grabbed: true };
+        resource = heldResource;
+        return resource is { Grabbed: true };
+    }
+
+    public static bool HoldingResource(out Battery battery)
+    {
+        if (heldResource == null)
+        {
+            battery = null;
+            return false;
+        }
+        
+        battery = heldResource.GetComponent<Battery>();
+        return battery != null;
     }
 
     /// <summary>
@@ -164,8 +179,7 @@ public class Player : MonoBehaviour
 
     public void Grab()
     {
-        if (heldResource != null)
-            return;
+        if (heldResource != null) return;
 
         var resources = ClosestResources();
         var closest = resources[0];
@@ -193,5 +207,15 @@ public class Player : MonoBehaviour
             heldResource.Release();
             heldResource = null;
         }
+    }
+
+    public void Stun() => StartCoroutine(StunRoutine());
+
+    IEnumerator StunRoutine()
+    {
+        Freeze(true);
+        playerAnimation.Stun(stunDuration);
+        yield return new WaitForSeconds(stunDuration);
+        Freeze(false);
     }
 }
