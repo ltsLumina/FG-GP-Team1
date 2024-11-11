@@ -27,8 +27,8 @@ public class Battery : MonoBehaviour
     void Start()
     {
         Debug.Assert(startPos, "Start position is not assigned!", this);
-        
-        train = Find<Train>();
+
+        train              = Train.Instance;
         transform.position = startPos.position;
 
         charge = 0;
