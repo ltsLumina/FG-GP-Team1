@@ -1,0 +1,108 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &845319212596072679
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1459094109484034514}
+  - component: {fileID: 8874906369883056888}
+  - component: {fileID: 2170654816141372069}
+  - component: {fileID: 6168609485609320709}
+  - component: {fileID: 1773616348999035608}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1459094109484034514
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 845319212596072679}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 625.0052, y: 292.19794, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8874906369883056888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 845319212596072679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f6d54e7c12100145b9cf3a8b86e068b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGameOver: 0
+  state: 0
+--- !u!114 &2170654816141372069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 845319212596072679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c115964982d48f409a3efff2dee1d4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentDepthScore: {fileID: 0}
+  currentAlgaeCollected: {fileID: 0}
+  currentHolesRepaired: {fileID: 0}
+  currentJellyfishCollected: {fileID: 0}
+  currentLifeformsScanned: {fileID: 0}
+  depthScore: 0
+  algaeCollected: 0
+  holesRepaired: 0
+  jellyfishCollected: 0
+  lifeformsScanned: 0
+--- !u!114 &6168609485609320709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 845319212596072679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c161de272d277644915510644f70096, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highScoreDepthText: {fileID: 0}
+  highScoreAlgaeText: {fileID: 0}
+  highScoreRepairText: {fileID: 0}
+  highScoreJellyFishText: {fileID: 0}
+  highScoreLifeFormText: {fileID: 0}
+  highScoreDepth: 0
+  highScoreAlgae: 0
+  highScoreRepair: 0
+  highScoreJellyFish: 0
+  highScoreLifeForm: 0
+--- !u!114 &1773616348999035608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 845319212596072679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f8185c7fea0ac546b3c96b9cbe2114e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputKeys: 
