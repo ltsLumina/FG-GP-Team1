@@ -13,6 +13,12 @@ public class InteractableSpawner : MonoBehaviour
     [SerializeField]
     private float spawnRangeX = 5.0f; // The range in which to spawn objects on the x-axis
 
+    [SerializeField]
+    private float spawnYOffset = -35.0f; // The Y offset to spawn slightly off the bottom of the screen
+
+    [SerializeField]
+    private bool raycastToWall = true; // Toggle to decide if we should raycast to wall or use predefined x range
+
     private float startYOffset; // Starting Y offset of the spawner
     private ResourceWaves currentWave;
     private float intervalTimer;
@@ -61,11 +67,9 @@ public class InteractableSpawner : MonoBehaviour
 
                     if (intervalTimer >= targetInterval)
                     {
-                        Instantiate(
-                            spawnObject.objectToSpawn,
-                            GetSpawnPosition(spawnObject),
-                            Quaternion.identity
-                        );
+                        Vector3 spawnPosition = GetSpawnPosition(spawnObject);
+                        Quaternion rotation = GetSpawnRotation(spawnObject, spawnPosition);
+                        Instantiate(spawnObject.objectToSpawn, spawnPosition, rotation);
                         spawnCounts[spawnObject]++;
                         intervalTimer = 0f; // Reset timer for the next spawn
                     }
@@ -126,21 +130,66 @@ public class InteractableSpawner : MonoBehaviour
 
     private Vector3 GetSpawnPosition(RandomizeObjectsSpawn spawnObject)
     {
+        float yPosition =
+            Camera.main.ViewportToWorldPoint(new Vector3(0, 0, Camera.main.nearClipPlane)).y
+            + spawnYOffset;
         if (spawnObject.spawnOnWall)
         {
-            // If spawnOnWall is true, spawn at either end of the x range
-            float xPosition = Random.value < 0.5f ? -spawnRangeX : spawnRangeX;
-            return new Vector3(xPosition, trackTransform.position.y + startYOffset, 0f);
+            float xPosition;
+            if (raycastToWall)
+            {
+                // If raycastToWall is true, perform a raycast in 3D to find the wall position
+                Vector3 direction = Random.value < 0.5f ? Vector3.left : Vector3.right;
+                Vector3 origin = new Vector3(
+                    direction == Vector3.left ? -spawnRangeX : spawnRangeX,
+                    yPosition,
+                    transform.position.z
+                );
+                RaycastHit hit;
+                if (Physics.Raycast(origin, direction, out hit))
+                {
+                    xPosition = hit.point.x;
+                }
+                else
+                {
+                    // If no wall is hit, fallback to the edge of the spawn range
+                    xPosition = direction == Vector3.left ? -spawnRangeX : spawnRangeX;
+                }
+            }
+            else
+            {
+                // If raycastToWall is false, simply spawn at one end of the x range or the other
+                xPosition = Random.value < 0.5f ? -spawnRangeX : spawnRangeX;
+            }
+
+            return new Vector3(xPosition, yPosition, 0f);
         }
         else
         {
             // Otherwise, spawn within the range
-            return new Vector3(
-                Random.Range(-spawnRangeX, spawnRangeX),
-                trackTransform.position.y + startYOffset,
-                0f
-            );
+            return new Vector3(Random.Range(-spawnRangeX, spawnRangeX), yPosition, 0f);
         }
+    }
+
+    private Quaternion GetSpawnRotation(RandomizeObjectsSpawn spawnObject, Vector3 spawnPosition)
+    {
+        if (spawnObject.spawnOnWall)
+        {
+            // Rotate slightly inward between 0 and 35 degrees
+            float angle = Random.Range(0f, 35f);
+            if (spawnPosition.x < 0)
+            {
+                // If spawned on the left, rotate to the left
+                return Quaternion.Euler(0f, 0f, -angle);
+            }
+            else
+            {
+                // If spawned on the right, rotate to the right
+                return Quaternion.Euler(0f, 0f, angle);
+            }
+        }
+        // Default rotation if not on wall
+        return Quaternion.identity;
     }
 
     // Draw the spawn range in the editor

@@ -39823,6 +39823,10 @@ PrefabInstance:
       value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3567948801623996449, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: spawnYOffset
+      value: -35
+      objectReference: {fileID: 0}
+    - target: {fileID: 3567948801623996449, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
       propertyPath: spawnWaves.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -39860,7 +39864,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8166449474038044147, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -24.7
+      value: -33.2
       objectReference: {fileID: 0}
     - target: {fileID: 8589098272386292673, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
       propertyPath: m_LocalPosition.x
