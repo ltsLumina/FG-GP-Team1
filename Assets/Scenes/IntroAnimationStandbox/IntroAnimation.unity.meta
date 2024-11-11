@@ -1,5 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scenes/BoidSandBox.meta
+guid: c38781582b0de5a478cf88950542b2cd
+folderAsset: yes
+========
 guid: 2b3d4444af0fd4c7591d738876b15b60
+>>>>>>>> origin/Final:Assets/Scenes/IntroAnimationStandbox/IntroAnimation.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

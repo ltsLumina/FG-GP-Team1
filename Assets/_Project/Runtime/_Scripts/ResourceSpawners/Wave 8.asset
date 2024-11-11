@@ -10,13 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 35a8c9e13e169f54aae58c1e16119a65, type: 3}
-  m_Name: Wave1
+  m_Name: Wave 8
   m_EditorClassIdentifier: 
-  depth: -50
+  depth: -800
   spawnObjects:
-  - objectToSpawn: {fileID: 5581981930496451382, guid: feb31393fc9cd08459262f0f3deda43b, type: 3}
-    spawnRate: 6.74
   - objectToSpawn: {fileID: 4781570308072900306, guid: 38d6cdba11a866b4ca0c74aca4355d0f, type: 3}
-    spawnRate: 1.77
-  - objectToSpawn: {fileID: 5570282934742007449, guid: eeb3b30c0ef12144cb7e4a64986054f8, type: 3}
-    spawnRate: 1.39
+    spawnRate: 0.6
+  - objectToSpawn: {fileID: 5581981930496451382, guid: feb31393fc9cd08459262f0f3deda43b, type: 3}
+    spawnRate: 0.6
