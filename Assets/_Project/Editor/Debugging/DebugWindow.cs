@@ -457,7 +457,7 @@ public class DebugWindow : EditorWindow
                     break;
 
                 case var command when command.Contains("c_refuel"):
-                    train = Helpers.Find<Train>();
+                    train = Train.Instance;
                     if (train != null)
                     {
                         MethodInfo method = typeof(Train).GetMethod("c_Refuel", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -468,7 +468,7 @@ public class DebugWindow : EditorWindow
                     break;
                 
                 case var command when command.Contains("c_repair"):
-                    train = Helpers.Find<Train>();
+                    train = Train.Instance;
                     if (train != null)
                     {
                         MethodInfo method = typeof(Train).GetMethod("c_Repair", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -479,7 +479,7 @@ public class DebugWindow : EditorWindow
                     break;
                 
                 case var command when command.Contains("c_recharge"):
-                    train = Helpers.Find<Train>();
+                    train = Train.Instance;
                     if (train != null)
                     {
                         MethodInfo method = typeof(Train).GetMethod("c_Recharge", BindingFlags.NonPublic | BindingFlags.Instance);

@@ -91,10 +91,10 @@ public class Task : MonoBehaviour
     Coroutine taskCoroutine;
     bool isInTrigger;
     InputAction repairAction;
-
+    
     void Awake() => train = GetComponentInParent<Train>();
-
-    void OnDisable() => repairAction.performed -= HandleInteract;
+    
+    void OnDisable() => repairAction.started -= HandleInteract;
 
     void Start()
     {
@@ -112,8 +112,9 @@ public class Task : MonoBehaviour
                 chargeCircle.DOFillAmount(0, 1f);
             });
         });
-
-        repairAction = Helpers.Find<Player>().PlayerInput.actions["Interact"];
+        
+        repairAction ??= this.FindPlayer(1).PlayerInput.actions["Repair"];
+        
     }
     
     bool performingTask => taskCoroutine != null;
@@ -121,16 +122,33 @@ public class Task : MonoBehaviour
     void HandleInteract(InputAction.CallbackContext context)
     {
         if (!isInTrigger) return;
+        
+        switch (context.phase)
+        {
+            case InputActionPhase.Started: {
+                if (!performingTask && train.CanPerformTask(task) && !train.IsTaskComplete(task)) 
+                    StartTask();
+                break;
+            }
 
-        if (performingTask) CancelTask();
-        else if (train.CanPerformTask(task) && !train.IsTaskComplete(task)) StartTask();
+            case InputActionPhase.Canceled: {
+                if (performingTask)
+                    CancelTask();
+                break;
+            }
+
+            default:
+                Debug.Log("Invalid InputActionPhase");
+                break;
+        }
     }
 
     void StartTask()
     {
+        this.FindPlayer(1).PlayerAnimation.StartRepair();
+        
         chargeCircle.color = completedColor;
-        var player = Helpers.Find<Player>();
-        player.Freeze(true);
+        this.FindPlayer(1).Freeze(true);
         taskCoroutine = StartCoroutine(PerformTask());
     }
 
@@ -145,23 +163,22 @@ public class Task : MonoBehaviour
         chargeCircle.DOKill();
         chargeCircle.fillAmount = 0;
 
-        Helpers.Find<Player>().Freeze(false);
+        this.FindPlayer(1).Freeze(false);
     }
 
     IEnumerator PerformTask()
     {
         float elapsedTime = 0f;
-
         while (elapsedTime < repairTime)
         {
-            if (!train.CanPerformTask(task))
+            if (!train.CanPerformTask(task) || !repairAction.IsPressed())
             {
                 CancelTask();
                 yield break;
             }
 
-            elapsedTime += Time.deltaTime;
-            chargeCircle.fillAmount = elapsedTime / repairTime;
+            elapsedTime             += Time.deltaTime;
+            chargeCircle.fillAmount =  elapsedTime / repairTime;
             yield return null;
         }
 
@@ -174,13 +191,13 @@ public class Task : MonoBehaviour
         train.SetTaskStatus(task);
         onTaskPerformed?.Invoke();
 
-        Helpers.Find<Player>().Freeze(false);
+        this.FindPlayer(1).Freeze(false);
         
         if (train.IsTaskComplete(task)) onTaskComplete?.Invoke(task);
         else StartTask();
     }
 
-    void OnTriggerEnter(Collider other) 
+    void OnTriggerEnter(Collider other)
     {
         switch (task)
         {
@@ -200,8 +217,9 @@ public class Task : MonoBehaviour
                 break;
             
             case Tasks.Repair:
-                isInTrigger = true;
-                repairAction.performed += HandleInteract;
+                repairAction         =  this.FindPlayer(1).PlayerInput.actions["Repair"];
+                isInTrigger          =  true;
+                repairAction.started += HandleInteract;
                 break;
             
             case Tasks.Recharge:
@@ -213,7 +231,7 @@ public class Task : MonoBehaviour
     void OnTriggerExit(Collider other)
     {
         isInTrigger = false;
-        repairAction.performed -= HandleInteract;
+        repairAction.started -= HandleInteract;
     }
 
     void OnValidate()

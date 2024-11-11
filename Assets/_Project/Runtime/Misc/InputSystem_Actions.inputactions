@@ -15,12 +15,21 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Interact",
+                    "name": "GrabAndRelease",
                     "type": "Button",
                     "id": "852140f2-7766-474d-8707-702459ba45f3",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "Tap,Hold",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Repair",
+                    "type": "Button",
+                    "id": "ddc70794-95a5-4f6b-be17-db17f7ae03ac",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Hold,Tap",
                     "initialStateCheck": false
                 },
                 {
@@ -224,7 +233,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Interact",
+                    "action": "GrabAndRelease",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -235,7 +244,29 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Interact",
+                    "action": "GrabAndRelease",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4f4da948-7776-46ab-a211-0e3445a59d75",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Repair",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "33301001-1259-4339-a407-cda58d9047e2",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Repair",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -243,17 +274,6 @@
                     "name": "",
                     "id": "14672a25-fa61-4078-8ffd-ec0e47314c48",
                     "path": "<Keyboard>/shift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "Dash",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b25ea93c-af3d-4fbf-b646-40a625bcd4b3",
-                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
