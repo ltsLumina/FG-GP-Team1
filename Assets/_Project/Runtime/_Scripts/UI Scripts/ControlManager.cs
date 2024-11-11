@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class ControlManager : MonoBehaviour
 {
-
     public TMP_Text downKeyText, upKeyText, rightKeyText, leftKeyText, dashKeyText, grabKeyText;
     public Button downKeyButton, upKeyButton, rightKeyButton, leftKeyButton, dashKeyButton, grabKeyButton;
 

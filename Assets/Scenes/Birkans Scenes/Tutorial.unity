@@ -3356,6 +3356,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGameOver: 0
+  isIntroPlayed: 0
+  hasSeenKelp: 0
+  hasSeenRock: 0
+  hasSeenJellyfish: 0
+  hasLowFuelWarning: 0
+  hasTakenHullDamage: 0
+  hasLowBatteryWarning: 0
   state: 0
 --- !u!114 &530164786
 MonoBehaviour:
@@ -6264,7 +6271,7 @@ MonoBehaviour:
     space: 0
   rootTab:
     name: 
-    selectedSubtabIndex: 1
+    selectedSubtabIndex: 2
     subtabs:
     - rid: 5260567303344357731
     - rid: 5260567303344357732
@@ -26910,6 +26917,10 @@ PrefabInstance:
     - target: {fileID: 1505193886760754658, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
       propertyPath: m_Name
       value: Train
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: hullIntegrity
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
       propertyPath: vInspectorData
