@@ -42,7 +42,8 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
     public bool Bypass { get; private set; }
 
     // Duct-tape fix
-    public bool GrabbedMeshActive => grabbedMesh.gameObject.activeSelf;
+    bool GrabbedMeshActive => grabbedMesh.gameObject.activeSelf;
+    public bool HasBeenGrabbed => GrabbedMeshActive;
 
     Player currentPlayer;
     
@@ -57,6 +58,7 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
         {
             SetMesh(true);
             Throw(currentPlayer);
+            currentPlayer = null;
         };
     }
 
@@ -100,7 +102,6 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
     public void Release()
     {
         grabbed = false;
-        currentPlayer = null;
         onReleased?.Invoke();
     }
 

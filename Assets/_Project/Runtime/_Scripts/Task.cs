@@ -209,7 +209,7 @@ public class Task : MonoBehaviour
                 }
 
                 // Prevents non-grabbed resources such as base kelp, for instance, from being destroyed.
-                if (other.TryGetComponent(out Resource resource) && resource.Item == IGrabbable.Items.Kelp && resource.GrabbedMeshActive)
+                if (other.TryGetComponent(out Resource resource) && resource.Item == IGrabbable.Items.Kelp && resource.HasBeenGrabbed)
                 {
                     train.SetTaskStatus(Tasks.Refuel);
                     Destroy(resource.gameObject);

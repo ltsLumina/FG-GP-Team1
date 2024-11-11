@@ -12,11 +12,21 @@ public class InputManager : MonoBehaviour
     
     public Vector2 MoveInput { get; private set; }
 
-    void Start() => player = this.GetParentComponent<Player>();
-    
-    public static Action OnTapInteraction;
-    public static Action OnHoldInteraction;
+    void Start()
+    {
+        player = this.GetParentComponent<Player>();
+        
+        // Sometimes these actions will not be assigned when instantiating the player prefab upon joining the game.
+        Debug.Assert(player.PlayerInput.actions.FindAction("Move") != null, "Move action is not assigned!", this);
+        Debug.Assert(player.PlayerInput.actions.FindAction("Dash") != null, "Dash action is not assigned!", this);
+        Debug.Assert(player.PlayerInput.actions.FindAction("GrabAndRelease") != null, "Grab and Release action is not assigned!", this);
+        Debug.Assert(player.PlayerInput.actions.FindAction("Repair") != null, "Repair action is not assigned!", this);
+    }
 
+    public static Action OnTapInteraction;
+    
+    public static Action OnHoldInteraction;
+    
     public void OnMove(InputAction.CallbackContext context)
     {
         MoveInput = context.ReadValue<Vector2>(); 

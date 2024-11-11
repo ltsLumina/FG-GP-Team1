@@ -164,6 +164,40 @@ public class Player : MonoBehaviour
         return battery != null;
     }
 
+    public static bool PlayerHoldingResource(out Player player, out Resource resource)
+    {
+        var players = FindMultiple<Player>();
+        foreach (var p in players)
+        {
+            if (HoldingResource(out resource))
+            {
+                player = p;
+                return true;
+            }
+        }
+
+        player = null;
+        resource = null;
+        return false;
+    }
+    
+    public static bool PlayerHoldingResource(out Player player, out Battery battery)
+    {
+        var players = FindMultiple<Player>();
+        foreach (var p in players)
+        {
+            if (HoldingResource(out battery))
+            {
+                player = p;
+                return true;
+            }
+        }
+
+        player = null;
+        battery = null;
+        return false;
+    }
+    
     /// <summary>
     ///     Find the closest resource to the player.
     /// </summary>
