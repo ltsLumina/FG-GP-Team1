@@ -10,11 +10,16 @@ public class GameManager : SingletonPersistent<GameManager>
     {
         Play,
         Pause,
-        GameOver
+        GameOver,
     }
-    
-    [SerializeField, ReadOnly] bool isGameOver;
-    [SerializeField, ReadOnly] GameState state;
+
+    [SerializeField, ReadOnly]
+    bool isGameOver;
+
+    [SerializeField, ReadOnly]
+    GameState state;
+
+    public ShipScanner ShipScanner { get; private set; }
 
     MainMenu mainMenu;
 
