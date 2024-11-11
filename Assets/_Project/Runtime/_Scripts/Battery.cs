@@ -12,8 +12,14 @@ public class Battery : MonoBehaviour
     [SerializeField] float batteryReturnDistance = 5f;
 
     [Header("Charge")]
+    [RangeResettable(0,100)]
     [SerializeField] float charge = 100f;
-    [SerializeField] float chargeRate = 25f;
+
+    public float Charge
+    {
+        get => charge;
+        set => charge = value;
+    }
 
     [Space]
     
@@ -40,14 +46,6 @@ public class Battery : MonoBehaviour
         train.Power += charge;
         charge = 0;
         return true;
-    }
-
-    void OnTriggerStay(Collider other)
-    {
-        if (other.gameObject.CompareTag("Jellyfish"))
-        {
-            charge += chargeRate * Time.deltaTime;
-        }
     }
 
     void OnDrawGizmosSelected()

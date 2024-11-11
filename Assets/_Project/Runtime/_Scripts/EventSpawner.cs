@@ -8,12 +8,12 @@ public class EventSpawner : MonoBehaviour
 
     [SerializeField] private List<EventRandomizer> spawnObjects = new List<EventRandomizer>();
 
-    public float baseSpawnRate = 1.0f; // The base rate for spawning objects
-    public float randomAdjustment = 1.0f; // Maximum adjustment to the base rate
+    public float baseSpawnRate = 1.0f;
+    public float randomAdjustment = 1.0f;
     public float moveLength = 5.0f;
-    public float moveSpeed = 2.0f; // Speed of the left-right movement
+    public float moveSpeed = 2.0f;
 
-    private float startLocalX; // Starting local X position of the spawner
+    private float startLocalX;
 
     private void Start()
     {
@@ -22,7 +22,6 @@ public class EventSpawner : MonoBehaviour
         {
             startLocalX = transform.localPosition.x;
             StartCoroutine(SpawnObject());
-            StartCoroutine(MoveBackAndForth());
         }
     }
 
@@ -47,30 +46,6 @@ public class EventSpawner : MonoBehaviour
     }
 
 
-    // Coroutine to move the spawner back and forth on the local X-axis
-    private IEnumerator MoveBackAndForth()
-    {
-        while (true)
-        {
-            // Move to the right
-            while (transform.localPosition.x < startLocalX + moveLength)
-            {
-                transform.localPosition += Vector3.right * moveSpeed * Time.deltaTime;
-                yield return null;
-            }
-
-            // Move to the left
-            while (transform.localPosition.x > startLocalX - moveLength)
-            {
-                transform.localPosition -= Vector3.right * moveSpeed * Time.deltaTime;
-                yield return null;
-            }
-        }
-    }
-
-
-
-    // Spawning coroutine with randomized spawn rate
     private IEnumerator SpawnObject()
     {
         while (true)
@@ -82,27 +57,14 @@ public class EventSpawner : MonoBehaviour
             {
                 Instantiate(spawnObject, transform.position, Quaternion.identity);
             }
-            // Spawn the object at the current position of the spawner
-            // Calculate a random spawn rate based on the base rate and adjustment
-            float spawnTimer = baseSpawnRate + Random.Range(-randomAdjustment, randomAdjustment);
-            spawnTimer = Mathf.Max(0.1f, spawnTimer); // Ensure the timer is not less than 0.1 seconds
 
-            // Wait for the calculated random duration
+            float spawnTimer = baseSpawnRate + Random.Range(-randomAdjustment, randomAdjustment);
+            spawnTimer = Mathf.Max(0.1f, spawnTimer); 
+
             yield return new WaitForSeconds(spawnTimer);
         }
     }
 
-
-
-
-    // Draw the movement range in the editor
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Vector3 start = transform.position + Vector3.right * moveLength;
-        Vector3 end = transform.position - Vector3.right * moveLength;
-        Gizmos.DrawLine(start, end);
-    }
 
     private GameObject RandomizeSpawn()
     {

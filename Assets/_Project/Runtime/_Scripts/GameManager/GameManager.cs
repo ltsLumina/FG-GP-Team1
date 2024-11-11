@@ -1,22 +1,27 @@
 #region
+using Lumina.Essentials.Attributes;
 using UnityEngine;
 #endregion
 
 [DisallowMultipleComponent]
 public class GameManager : SingletonPersistent<GameManager>
 {
-    MainMenu mainMenu;
-    public bool isGameOver = false;
-
-    public GameState state;
-
     public enum GameState
     {
         Play,
         Pause,
-        GameOver
-        // Add more game states if needed
+        GameOver,
     }
+
+    [SerializeField, ReadOnly]
+    bool isGameOver;
+
+    [SerializeField, ReadOnly]
+    GameState state;
+
+    public ShipScanner ShipScanner { get; private set; }
+
+    MainMenu mainMenu;
 
     void Update()
     {

@@ -61,7 +61,7 @@ public class PlayerAnimation : MonoBehaviour
         // anim.SetTrigger("Spawn");
     }
 
-    public void Stun()
+    public void Stun(float stunDuration)
     {
         Debug.Log("Stun animation not implemented");
         // anim.SetTrigger("Stun");
@@ -73,6 +73,11 @@ public class PlayerAnimation : MonoBehaviour
         // Do a smooth transition between animations
 
         SetMovementBlendTree(input.MoveInput);
+    }
+
+    private void ObjectReleased()
+    {
+        Debug.Log("Object released");
     }
 
     // Set blend tree parameters for player movement based on input of new input system Player action Move
