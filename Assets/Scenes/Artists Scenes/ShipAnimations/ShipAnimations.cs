@@ -16,25 +16,25 @@ public class ShipAnimations : MonoBehaviour
     [Range(0.0f, 1.0f)]
     public float sideLightIntensity = 0.0f;
 
-    void Update()
-    {
-        //For debug
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Debug.Log("Damage Ship");
-            DamageShip();
-        }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            Debug.Log("Repair Ship");
-            RepairShip();
-        }
+    // void Update()
+    // {
+    //     //For debug
+    //     if (Input.GetKeyDown(KeyCode.Space))
+    //     {
+    //         Debug.Log("Damage Ship");
+    //         DamageShip();
+    //     }
+    //     if (Input.GetKeyDown(KeyCode.R))
+    //     {
+    //         Debug.Log("Repair Ship");
+    //         RepairShip();
+    //     }
 
-        //Set the front light intensity
-        anim.SetFloat("FrontLightStrength", frontLightIntensity);
-        //Set the side light intensity
-        anim.SetFloat("SideLightStrength", sideLightIntensity);
-    }
+    //     //Set the front light intensity
+    //     anim.SetFloat("FrontLightStrength", frontLightIntensity);
+    //     //Set the side light intensity
+    //     anim.SetFloat("SideLightStrength", sideLightIntensity);
+    // }
 
     void DamageShip()
     {
