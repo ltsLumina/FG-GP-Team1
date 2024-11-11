@@ -1,0 +1,19 @@
+name: Sync Beta branch
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sync-branch:
+    name: Update Beta branch
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@master
+      - uses: connor-baer/action-sync-branch@main
+        with:
+          branch: Final
+          token: ${{ secrets.SYNC_BETA_BRANCH_TOKEN }}
+          force: true
