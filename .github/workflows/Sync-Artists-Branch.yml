@@ -1,0 +1,19 @@
+name: Sync Artists branch
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sync-branch:
+    name: Update Artists branch
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@master
+      - uses: connor-baer/action-sync-branch@main
+        with:
+          branch: Artists
+          token: ${{ secrets.SYNC_ARTISTS_BRANCH_TOKEN }}
+          force: false

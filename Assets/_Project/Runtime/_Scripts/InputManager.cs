@@ -1,3 +1,4 @@
+using Lumina.Essentials.Modules;
 using UnityEngine;
 using UnityEngine.Custom.Attributes;
 using UnityEngine.InputSystem;
@@ -6,7 +7,11 @@ using UnityEngine.InputSystem.Interactions;
 [Author("Alex")]
 public class InputManager : MonoBehaviour
 {
+    Player player;
+    
     public Vector2 MoveInput { get; private set; }
+
+    void Start() => player = this.GetParentComponent<Player>();
 
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -15,27 +20,22 @@ public class InputManager : MonoBehaviour
 
     public void OnDash(InputAction.CallbackContext context)
     {
-        var player = GetComponentInParent<Player>();
         player.Dash();
     }
-
-    bool pressed;
-    bool held;
-
+    
     public void OnInteract(InputAction.CallbackContext context)
     {
-        var player = GetComponentInParent<Player>();
+        switch (context.interaction)
+        {
+            case TapInteraction:
+                Debug.Log("Tap Interaction" + "\nGrabbing Item");
+                player.Grab();
+                break;
 
-        if (context.interaction is TapInteraction)
-        {
-            Debug.Log("Tap Interaction" + "\nGrabbing Item");
-            player.Grab();
-        }
-        
-        if (context.interaction is HoldInteraction)
-        {
-            Debug.Log("Hold Interaction" + "\nReleasing Item");
-            player.Release();
+            case HoldInteraction:
+                Debug.Log("Hold Interaction" + "\nReleasing Item");
+                player.Release();
+                break;
         }
     }
 }

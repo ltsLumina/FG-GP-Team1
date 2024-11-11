@@ -1,12 +1,15 @@
 #region
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using JetBrains.Annotations;
 using Lumina.Essentials.Modules;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Custom.Attributes;
 using UnityEngine.Events;
+using UnityEngine.Rendering.HighDefinition;
 #if UNITY_EDITOR
 using VHierarchy.Libs;
 #endif
@@ -17,20 +20,10 @@ using VInspector;
 public class Train : MonoBehaviour
 {
 #pragma warning disable 0414
-
-    public enum Task 
-    {
-        Clean,
-        Refuel,
-        Repair,
-        Recharge,
-    }
-
-#if UNITY_EDITOR
+    
     [UsedImplicitly] // This is used by the VInspector. Don't remove it and don't remove 'public'. 
     public VInspectorData vInspectorData;
-#endif
-
+    
     [Header("Train Settings")]
     [SerializeField] float speed = 5;
     [SerializeField] float maxSpeed = 10;
@@ -82,53 +75,51 @@ public class Train : MonoBehaviour
     [SerializeField] int hullBreaches;
 
     [Tab("Power")]
+    [Tooltip("Whether the headlights are active, and which ones are active.")]
+    [SerializeField] SerializedDictionary<GameObject, bool> lights;
+
+    [Tooltip("The thresholds for the power level when the lights start to dim.")]
+    [SerializeField] SerializedDictionary<GameObject, float> lightSwitchThresholds;
+        
     [Tooltip("The amount of power/electricity the train has. A low power level will dim the lights.")]
     [RangeResettable(0, 100)]
-    [SerializeField] float power = 100; // Also known as "Light".
+    [SerializeField] float power = 100;
     [Tooltip("The rate at which power depletes. One unit per second.")]
     [Range(0f, 5f)]
     [SerializeField] float powerDepletionRate = 1;
-    [Tooltip("The rate at which power regenerates upon gathering a jellyfish. One unit per second.")]
-    [Range(0f, 5f)]
-    [SerializeField] float powerRechargeAmount = 1;
+
+    [Header("Battery")]
+    [Range(1, 50)]
+    [SerializeField] float batteryChargeRate = 25;
 
     [Header("Lighting")]
     [Tooltip("The intensity of the light.")]
-    [Range(0.1f, 5f)]
-    [SerializeField] float lightIntensity = 1;
+    [Range(0, 100000)]
+    [SerializeField] float lightIntensity = 20000;
     [Tooltip("The radius of the light.")]
-    [Range(0.1f, 10f)]
-    [SerializeField] float lightRadius = 5;
-    [Tooltip("The threshold for the power level when the light starts to dim.")]
     [Range(0, 100)]
-    [SerializeField] int powerDimThreshold = 25;
-    [Tooltip("A multiplier for the intensity and radius of the light when the power is low.")]
-    [Range(0.1f, 1f)]
-    [SerializeField] float lightDimMultiplier = 0.5f;
+    [SerializeField] float lightRadius = 50;
 
-    [Header("Jellyfish")]
-    [Tooltip("Whether to have a spawn rate or an interval.")]
-    [SerializeField] bool spawnInterval;
-
-    [Tooltip("The rate at which jellyfish spawn. One spawn per minute.")]
-    [Range(1f, 60f), HideIf(nameof(spawnInterval))]
-    [SerializeField] float jellyfishSpawnRate = 1; // TODO: Might move this to a separate script. 
-    [Tooltip("Alternatively, the interval between jellyfish spawns.")]
-    [Range(1f, 60f), ShowIf(nameof(spawnInterval))]
-    [SerializeField] float jellyfishSpawnInterval = 10;
-    [EndIf]
-    [Tooltip("The speed of the jellyfish.")]
-    [Range(1, 10)]
-    [SerializeField] float jellyfishSpeed = 5;
-    [Tooltip("The amount of power restored by a single jellyfish.")]
-    [Range(1, 50)]
-    [SerializeField] int jellyfishRestoreAmount = 25;
-    [Tooltip("The duration of the stun when the player bumps into a jellyfish.")]
-    [Range(1, 5)]
-    [SerializeField] float jellyfishStunDuration = 1;
-
-    [Tab("Rocks")]
-    [SerializeField] string inDevelopment = "Yes.";
+    // [Header("Jellyfish")]
+    // [Tooltip("Whether to have a spawn rate or an interval.")]
+    // [SerializeField] bool spawnInterval;
+    //
+    // [Tooltip("The rate at which jellyfish spawn. One spawn per minute.")]
+    // [Range(1f, 60f), HideIf(nameof(spawnInterval))]
+    // [SerializeField] float jellyfishSpawnRate = 1; // TODO: Might move this to a separate script. 
+    // [Tooltip("Alternatively, the interval between jellyfish spawns.")]
+    // [Range(1f, 60f), ShowIf(nameof(spawnInterval))]
+    // [SerializeField] float jellyfishSpawnInterval = 10;
+    // [EndIf]
+    // [Tooltip("The speed of the jellyfish.")]
+    // [Range(1, 10)]
+    // [SerializeField] float jellyfishSpeed = 5;
+    // [Tooltip("The amount of power restored by a single jellyfish.")]
+    // [Range(1, 50)]
+    // [SerializeField] int jellyfishRestoreAmount = 25;
+    // [Tooltip("The duration of the stun when the player bumps into a jellyfish.")]
+    // [Range(1, 5)]
+    // [SerializeField] float jellyfishStunDuration = 1;
 
     [Tab("Events")]
     [Foldout("Fuel")]
@@ -142,7 +133,7 @@ public class Train : MonoBehaviour
     [Foldout("Power")]
     [SerializeField] UnityEvent onPowerDepleted;
     [SerializeField] UnityEvent onPowerRestored;
-    [SerializeField] UnityEvent OnLightDim;
+    [SerializeField] UnityEvent<Light> OnLightDim;
     [Foldout("Rocks")]
     [SerializeField] UnityEvent<Rock> onRockCollision;
 
@@ -155,21 +146,27 @@ public class Train : MonoBehaviour
     [Tooltip("The train wont take damage. Might break the game.")]
     [SerializeField] bool invincible;
     [SerializeField] bool showDebugInfo;
+    [SerializeField] bool partyMode;
     [EndIf]
 
     [SerializeField] List<float> fuelDepletionDefaults = new () { 1, 1.5f, 2, 2.5f, 3 };
-    [SerializeField] List<float> hullIntegrityDepletionDefaults = new () { 1, 5f, 7.5f, 10f, 15f };
+    [SerializeField] List<DirtinessStage> dirtinessStagesDefaults = new () { new (20), new (40), new (60), new (80), new (100) };
     
     // <- Cached references. ->
-    ManagementCollider[] managementColliders;
     
     // <- Properties ->
+
+    #region Depth
+    public float Depth => transform.position.y;
+    public string DepthString => $"{Depth.Round()}m";
+    public string DepthStringFormatted => Depth.Round() < 0 ? $"{Mathf.Abs(Depth.Round())}m below sea level" : $"{Depth.Round()}m above sea level";
+    #endregion
 
     [MaxValue(100)]
     public float Fuel
     {
         get => fuel;
-        set
+        private set
         {
             fuel = Mathf.Clamp(value, 0, 100);
             if (fuel <= 0) onFuelDepleted.Invoke();
@@ -203,7 +200,11 @@ public class Train : MonoBehaviour
     public float Power
     {
         get => power;
-        set => power = value;
+        set
+        {
+            power = Mathf.Clamp(value, 0, 100);
+            if (power <= 0) onPowerDepleted.Invoke();
+        }
     }
 
 #if UNITY_EDITOR
@@ -219,141 +220,157 @@ public class Train : MonoBehaviour
             GUILayout.Label($"Hull Integrity: {HullIntegrity}", style);
             GUILayout.Label($"Dirtiness: {dirtiness.Round()} (Stage {dirtinessStage})", style);
             GUILayout.Label($"Power: {Power.Round()}", style);
-            GUILayout.Label($"Jellyfish Spawn Rate: {jellyfishSpawnRate}", style);
-            GUILayout.Label($"Jellyfish Spawn Interval: {jellyfishSpawnInterval}", style);
         }
     }
 #endif
 
     void Start()
     {
+        // TODO: for alpha
+        GameManager.Instance.GameStateChanger(GameManager.GameState.Play);
+
         Init();
 
         return;
         void Init()
         {
-            onDeath.AddListener(() => Debug.Log("The train has died."));
+            onFuelDepleted.AddListener(() => onDeath.Invoke());
+            onDeath.AddListener
+            (() =>
+            {
+                GameManager.Instance.GameStateChanger(GameManager.GameState.GameOver);
+                Debug.Log("Died");
+            });
+
+            DOTween.SetTweensCapacity(1000, 5);
+            
+            OnLightDim.AddListener
+            (light =>
+            {
+                var hdLightData = light.GetComponent<HDAdditionalLightData>();
+                DOVirtual.Float(hdLightData.volumetricDimmer, 0, 1, x => hdLightData.volumetricDimmer = x).OnComplete(() => { lights[light.gameObject] = false; });
+            });
+
+            onPowerRestored.AddListener
+            (() =>
+            {
+                foreach (var light in lights)
+                {
+                    var hdLightData = light.Key.GetComponent<HDAdditionalLightData>();
+                    DOVirtual.Float(hdLightData.volumetricDimmer, 1, 1, x => hdLightData.volumetricDimmer = x).OnComplete(() => { lights[light.Key] = true; });
+                }
+            });
+            
+            if (partyMode)
+            {
+                StartCoroutine(RGBLights());
+            }
+        }
+    }
+    
+    IEnumerator RGBLights()
+    {
+        while (true)
+        {
+            foreach (var light in lights)
+            {
+                light.Key.GetComponent<Light>().color = new Color(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value);
+            }
+            yield return new WaitForSeconds(0.25f);
         }
     }
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            StartCoroutine(RGBLights());
+        }
+        
         Dive();
+        FuelDirtinessCalculation();
+        ToggleLightsAtThreshold();
 
-        dirtiness      = Mathf.Clamp(dirtiness + dirtinessRate * Time.deltaTime, 0, 100);
+    }
+
+    void Dive()
+    {
+        Vector3 dir = Vector3.down;
+        float speed = Mathf.Clamp(this.speed, 0, maxSpeed);
+        transform.position += dir * (speed * Time.deltaTime);
+    }
+    
+    void FuelDirtinessCalculation()
+    {
+        dirtiness = Mathf.Clamp(dirtiness + dirtinessRate * Time.deltaTime, 0, 100);
         dirtinessStage = Mathf.Clamp(dirtinessStages.FindIndex(d => dirtiness < d.threshold) + 1, 1, fuelDepletionRateMultipliers.Count);
 
-        switch (dirtinessStage)
+        Fuel -= fuelDepletionRate * fuelDepletionRateMultipliers[dirtinessStage].multiplier * Time.deltaTime;
+        onDirtinessStageChanged.Invoke(dirtinessStage);
+    }
+
+    void ToggleLightsAtThreshold()
+    {
+        foreach (var light in lights)
         {
-            case 1: // No dirtiness. (0-19)
-                Fuel -= fuelDepletionRate * fuelDepletionRateMultipliers[0].multiplier * Time.deltaTime;
-                DebugDirtiness(false);
-                onDirtinessStageChanged.Invoke(1);
-                break;
+            Power -= powerDepletionRate * Time.deltaTime;
+            if (Power <= lightSwitchThresholds[light.Key])
+            {
+                OnLightDim.Invoke(light.Key.GetComponent<Light>());
+            }
+            else // Power has been restored above the threshold
+            {
+                onPowerRestored.Invoke();
+            }
+        }
 
-            case 2: // Low dirtiness. (20-39)
-                Fuel -= fuelDepletionRate * fuelDepletionRateMultipliers[1].multiplier * Time.deltaTime;
-                DebugDirtiness(false);
-                onDirtinessStageChanged.Invoke(2);
-                break;
-
-            case 3: // Medium dirtiness. (40-59)
-                Fuel -= fuelDepletionRate * fuelDepletionRateMultipliers[2].multiplier * Time.deltaTime;
-                DebugDirtiness(false);
-                onDirtinessStageChanged.Invoke(3);
-                break;
-
-            case 4: // High dirtiness. (60-79)
-                Fuel -= fuelDepletionRate * fuelDepletionRateMultipliers[3].multiplier * Time.deltaTime;
-                DebugDirtiness(false);
-                onDirtinessStageChanged.Invoke(4);
-                break;
-
-            case 5: // Very high dirtiness. (80-100)
-                Fuel -= fuelDepletionRate * fuelDepletionRateMultipliers[4].multiplier * Time.deltaTime;
-                DebugDirtiness(false);
-                onDirtinessStageChanged.Invoke(5);
-                break;
+        foreach (var light in lights)
+        {
+            light.Key.SetActive(light.Value);
         }
     }
 
-    #region Utility
-    void DebugDirtiness(bool enable)
-    {
-        if (!enable) return;
-        Debug.Log($"Dirtiness: {dirtiness} (Stage {dirtinessStage})");
-    }
-    #endregion
-    
-    void Dive()
-    {
-        Vector3 dir   = Vector3.down;
-        float   speed = Mathf.Clamp(this.speed, 0, maxSpeed);
-        transform.position += dir * (speed * Time.deltaTime);
-    }
-
     #region Tasks
-    public void SetTaskStatus(Task task)
+    public void SetTaskStatus(Tasks tasks)
     {
-        switch (task)
+        switch (tasks)
         {
-            case Task.Clean:
-                Dirtiness -= 25f; // TODO: Change this to a variable.
+            case Tasks.Clean:
+                Dirtiness -= algaeRestoreAmount;
                 break;
 
-            case Task.Refuel:
-                Fuel += algaeRestoreAmount;
-                Player.HoldingResource(out Resource heldItem);
-                Destroy(heldItem.gameObject);
+            case Tasks.Refuel:
+                Fuel += kelpRestoreAmount;
                 break;
 
-            case Task.Repair:
+            case Tasks.Repair:
                 hullBreaches--;
                 HullIntegrity += repairAmount;
                 onHullIntegrityChanged.Invoke(HullIntegrity);
                 break;
 
-            case Task.Recharge:
-                Power += powerRechargeAmount;
+            case Tasks.Recharge:
+                // Handled by Battery.cs
                 break;
         }
     }
 
-    public bool CanPerformTask(Task task) => task switch
-    { Task.Clean    => Dirtiness > 0,
-      Task.Refuel   => Fuel          < 100 && Player.HoldingResource(out Resource _),
-      Task.Repair   => HullIntegrity < 3   && hullBreaches > 0,
-      Task.Recharge => Power < 100,
-      _             => false };
-    
-    public bool IsTaskComplete(Task task) => task switch
-    { Task.Clean    => Dirtiness     <= 20,
-      Task.Refuel   => Fuel          >= 100,
-      Task.Repair   => HullIntegrity >= 3,
-      Task.Recharge => Power         >= 100,
-      _             => false };
+    public bool CanPerformTask(Tasks tasks) => tasks switch
+    { Tasks.Clean    => Dirtiness > 0,
+      Tasks.Refuel   => Fuel < 100,
+      Tasks.Repair   => HullIntegrity < 3 && hullBreaches > 0 && !Player.HoldingResource(out Resource _),
+      Tasks.Recharge => Power < 100 && Player.HoldingResource(out Resource battery) && battery.Item == IGrabbable.Items.Battery,
+      _              => false };
+
+    public bool IsTaskComplete(Tasks tasks) => tasks switch
+    { Tasks.Clean    => Dirtiness     <= 20,
+      Tasks.Refuel   => Fuel          >= 100,
+      Tasks.Repair   => HullIntegrity >= 3,
+      Tasks.Recharge => Power         >= 100,
+      _                   => false };
     #endregion
 
-    #region Collision/Trigger
-    void OnCollision(GameObject collision)
-    {
-        switch (collision.tag)
-        {
-            case "Jellyfish":
-                hullBreaches++;
-                onHullBreach.Invoke(hullBreaches);
-                break;
-            
-            case "Rock":
-                hullBreaches++;
-                HullIntegrity = Mathf.Max(0, 3 - hullBreaches);
-                onHullBreach.Invoke(hullBreaches);
-                onHullIntegrityChanged.Invoke(HullIntegrity);
-                onRockCollision.Invoke(collision.GetComponent<Rock>());
-                break;
-        }
-    }
-
+    #region Collision
     void OnCollisionEnter(Collision other)
     {
         switch (other.gameObject.tag)
@@ -361,6 +378,18 @@ public class Train : MonoBehaviour
             case "Rock":
                 OnCollision(other.gameObject);
                 break;
+        }
+    }
+
+    void OnCollision(GameObject collision)
+    {
+        if (collision.CompareTag("Rock"))
+        {
+            hullBreaches++;
+            HullIntegrity = Mathf.Max(0, 3 - hullBreaches);
+            onHullBreach.Invoke(hullBreaches);
+            onHullIntegrityChanged.Invoke(HullIntegrity);
+            onRockCollision.Invoke(collision.GetComponent<Rock>());
         }
     }
     #endregion
@@ -384,7 +413,7 @@ public class Train : MonoBehaviour
 
 #if UNITY_EDITOR
     [Button, UsedImplicitly, ShowIf(nameof(debugMode))]
-    void c_ShowManagementColliders() => TrainEditorWindow.Open();
+    void c_ShowTasks() => TrainEditorWindow.Open();
 #endif
 
     [Serializable]
@@ -418,9 +447,6 @@ public class Train : MonoBehaviour
     #region Validation/Editor
     void OnValidate()
     {
-        if (inDevelopment.Contains("No", StringComparison.InvariantCultureIgnoreCase)) inDevelopment = "You think you're so funny don't you.";
-        else if (!string.Equals(inDevelopment, "Yes.", StringComparison.Ordinal)) inDevelopment      = "Yes.";
-
         ValidateDirtiness();
         ValidateFuelDepletionRateMultipliers();
         
@@ -442,9 +468,8 @@ public class Train : MonoBehaviour
         if (dirtinessStages.Count != 5)
         {
             dirtinessStages.Clear();
-             
-            List<DirtinessStage> defaults = new () { new (20), new (40), new (60), new (80), new (100) };
-            dirtinessStages = defaults;
+            
+            dirtinessStages = dirtinessStagesDefaults.ConvertAll(t => new DirtinessStage(t.threshold));
         }
 
         // Set the name of each dirtiness stage
@@ -506,7 +531,7 @@ public class TrainEditorWindow : EditorWindow
     {
         scrollPos = GUILayout.BeginScrollView(scrollPos);
 
-        foreach (var managementCollider in Helpers.FindMultiple<ManagementCollider>())
+        foreach (var managementCollider in Helpers.FindMultiple<Task>())
         {
             GUILayout.Space(25);
             GUILayout.Label("", GUI.skin.horizontalSlider);
@@ -521,3 +546,8 @@ public class TrainEditorWindow : EditorWindow
     }
 }
 #endif
+
+internal static class TrainExtensions
+{
+    public static float Round(this float value) => Mathf.Round(value);
+}
