@@ -1226,6 +1226,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: 0
   grabbed: 0
+  standardMesh: {fileID: 0}
+  grabbedMesh: {fileID: 0}
   reach: 10
   lifetime: 10
 --- !u!4 &395589355
@@ -1584,6 +1586,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f6d54e7c12100145b9cf3a8b86e068b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isGameOver: 0
+  state: 0
 --- !u!114 &530164786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4112,6 +4116,10 @@ PrefabInstance:
       value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 1593504416138141191, guid: 2175803516d224265a441737d6f8525b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 13.683037
+      objectReference: {fileID: 0}
+    - target: {fileID: 1593504416138141191, guid: 2175803516d224265a441737d6f8525b, type: 3}
       propertyPath: m_LocalPosition.y
       value: -18.544998
       objectReference: {fileID: 0}
@@ -4162,6 +4170,10 @@ PrefabInstance:
     - target: {fileID: 6140353902049099123, guid: 2175803516d224265a441737d6f8525b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6581895759829843494, guid: 2175803516d224265a441737d6f8525b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 13.683037
       objectReference: {fileID: 0}
     - target: {fileID: 6581895759829843494, guid: 2175803516d224265a441737d6f8525b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6706,6 +6718,14 @@ PrefabInstance:
       propertyPath: vInspectorData
       value: 
       objectReference: {fileID: 1754602628}
+    - target: {fileID: 3647054809633606627, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3647054809633606627, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5707010853027933423, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
       propertyPath: offsetY
       value: -6
@@ -6729,6 +6749,14 @@ PrefabInstance:
     - target: {fileID: 6635521576301228563, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
       propertyPath: allowFidelityFX2SuperResolution
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6647658359549999598, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6647658359549999598, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6750989291407133015, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
       propertyPath: m_AllowDynamicResolution

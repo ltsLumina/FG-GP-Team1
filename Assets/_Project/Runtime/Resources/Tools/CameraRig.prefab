@@ -57,8 +57,8 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 50
-    OrthographicSize: 10
+    FieldOfView: 60
+    OrthographicSize: 25
     NearClipPlane: 0.1
     FarClipPlane: 5000
     Dutch: 0
@@ -163,9 +163,9 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 50
+  field of view: 60
   orthographic: 0
-  orthographic size: 10
+  orthographic size: 25
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
