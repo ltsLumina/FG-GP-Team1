@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Lumina.Essentials.Modules;
+using UnityEditor;
 using UnityEngine;
 
 public class WallGen : MonoBehaviour
@@ -54,10 +55,23 @@ public class WallGen : MonoBehaviour
 
     private int _levelCount = 0;
 
+    //temp
+    private Vector3[] _triNormals;
+    private Vector3[] _triCentres;
+    private List<int> _corals;
+
+
+    [SerializeField] public List<GameObject> CoralPrefabs = new List<GameObject>();
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        foreach (GameObject coralPrefab in CoralPrefabs)
+        {
+            ObjectPoolStaticBatch.Instance.CreateNewPool(coralPrefab.name, coralPrefab);
+        }
+
         grid1 = new GridDS(transform.position, Width, Height, CellSize, HeightMultiplier, ScaleX, ScaleY, Offset, GlobalOffset, GlobalScale, GlobalAmplitude, Octaves, Persistance, Lacunarity, 0);
         grid2 = new GridDS(transform.position, Width, Height, CellSize, HeightMultiplier, ScaleX, ScaleY, Offset, GlobalOffset, GlobalScale, GlobalAmplitude, Octaves, Persistance, Lacunarity, 0);
         grid3 = new GridDS(transform.position, Width, Height, CellSize, HeightMultiplier, ScaleX, ScaleY, Offset, GlobalOffset, GlobalScale, GlobalAmplitude, Octaves, Persistance, Lacunarity, 0);
@@ -79,7 +93,7 @@ public class WallGen : MonoBehaviour
         _levelCount++;
 
         Vector3 newPosition = new Vector3(transform.position.x, transform.position.y - ((Height - 2) * CellSize * _levelCount), transform.position.z);
-        StartCoroutine(newWall(1, newPosition));
+        StartCoroutine(newWall(1, newPosition, transform.rotation));
         _levelCount++;
     }
     
@@ -110,15 +124,57 @@ public class WallGen : MonoBehaviour
         if (_updateWalls)
         {
             Vector3 newPosition = new Vector3(transform.position.x, transform.position.y - ((Height - 2) * CellSize * _levelCount), transform.position.z);
-            StartCoroutine(newWall((_currentWallIndex + 1) % 3, newPosition));
+            StartCoroutine(newWall((_currentWallIndex + 1) % 3, newPosition, transform.rotation));
             _levelCount++;
+
+            for (int i = 0; i < _corals.Count; i++)
+            {
+                Vector3 centre = _triCentres[_corals[i]];
+                Vector3 normal = _triNormals[_corals[i]];
+
+                int coralPrefabIndex = Random.Range(0, CoralPrefabs.Count);
+                GameObject coral = CoralPrefabs[coralPrefabIndex];
+                GameObject temp = Instantiate(coral, centre, Quaternion.Euler(normal));
+                temp.transform.localScale = new Vector3(3, 3, 3);
+            }
+
         }
+
+        if (_currentWall != null)
+        {
+            _triCentres = _currentWall.GetTriCentres();
+            _triNormals = _currentWall.GetTriNormals();
+            _corals = _currentWall.GetCoralIndices();
+        }
+
+        
 
         // TODO: Optimize/Refactor this. For whatever reason a for loop doesn't work.
         var meshColliders = GetComponentsInChildren<MeshCollider>();
         meshColliders[0].sharedMesh = mesh1;
         meshColliders[1].sharedMesh = mesh2;
         meshColliders[2].sharedMesh = mesh3;
+    }
+
+    public void OnDrawGizmos()
+    {
+
+        for (int i = 0; i < _corals.Count; i++)
+        {
+            Vector3 centre = _triCentres[_corals[i]];
+            Vector3 normal = _triNormals[_corals[i]];
+            Gizmos.color = Color.yellow;
+            //Gizmos.DrawCube(centre, new Vector3(1,1,1));
+            //Gizmos.DrawRay(centre, normal);
+        }
+    }
+
+    static Vector3 RotateAround(Vector3 position, Vector3 pivotPoint, Quaternion rot)
+    {
+        Vector3 finalVec = new Vector3();
+        finalVec = position;
+        finalVec = rot * position + pivotPoint;
+        return finalVec;
     }
 
     private void CheckMeshInlineWithPlayer()
@@ -162,7 +218,7 @@ public class WallGen : MonoBehaviour
         _updateWalls = false;
     }
 
-    IEnumerator newWall(int index, Vector3 position)
+    IEnumerator newWall(int index, Vector3 position, Quaternion rotation)
     {
         int numberOfFrameToCalculateOver = 60;
         GridDS newGrid = _grids[index];
@@ -170,6 +226,7 @@ public class WallGen : MonoBehaviour
         newGrid.Clear();
         newGrid.SetOffset(Offset, GlobalOffset);
         newGrid.SetPosition(position);
+        newGrid.SetRotation(rotation);
 
         int numRowsPerFrame = (int)Mathf.Ceil(Height / (float)numberOfFrameToCalculateOver);
         int totalRowsCalculated = 0;

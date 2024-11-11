@@ -2,15 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPoolManager : MonoBehaviour
+public class ObjectPoolStaticBatch : MonoBehaviour
 {
-    public static ObjectPoolManager Instance;
+    public static ObjectPoolStaticBatch Instance;
 
     private Dictionary<string, List<GameObject>> _pools;
     private Dictionary<string, GameObject> _prefabs;
 
     void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+        
         Instance = this;
         _pools = new Dictionary<string, List<GameObject>>();
         _prefabs = new Dictionary<string, GameObject>();
@@ -18,6 +27,12 @@ public class ObjectPoolManager : MonoBehaviour
 
     public void CreateNewPool(string objectName, GameObject prefab)
     {
+        if (!_pools.ContainsKey(objectName))
+        {
+            Debug.Log("Object pool already exists");
+            return;
+        }
+
         List<GameObject> list = new List<GameObject>();
         _pools.Add(objectName, list);
         _prefabs.Add(objectName, prefab);

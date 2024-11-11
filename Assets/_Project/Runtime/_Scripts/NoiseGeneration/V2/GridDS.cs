@@ -8,6 +8,8 @@ public class GridDS
     private Vector3[] _triNormals;
     private Vector3[] _triCentres;
 
+    private List<int> _coralIndex = new List<int>();
+
     private int _totalRows;
 
     //Noise Related Variables
@@ -28,6 +30,7 @@ public class GridDS
     private float _gridCellLength;
 
     private Vector3 _position;
+    private Quaternion _rotation;
     private float _heightMultiplier;
 
 
@@ -153,6 +156,11 @@ public class GridDS
         _position = position;
     }
 
+    public void SetRotation(Quaternion rotation)
+    {
+        _rotation = rotation;
+    }
+
     public Mesh GenerateMesh(Mesh mesh)
     {
         if (mesh == null)
@@ -229,9 +237,9 @@ public class GridDS
 
         for (int i = 0; i < triangles.Length; i += 3)
         {
-            Vector3 vert1pos = vertices[triangles[i]];
-            Vector3 vert2pos = vertices[triangles[i + 1]];
-            Vector3 vert3pos = vertices[triangles[i + 2]];
+            Vector3 vert1pos = RotateAround(vertices[triangles[i]], _position, _rotation);
+            Vector3 vert2pos = RotateAround(vertices[triangles[i + 1]], _position, _rotation);
+            Vector3 vert3pos = RotateAround(vertices[triangles[i + 2]], _position, _rotation);
 
             Vector3 triPos = (vert1pos + vert2pos + vert3pos) / 3;
 
@@ -242,6 +250,16 @@ public class GridDS
 
             _triNormals[i / 3] = triNorm;
             _triCentres[i / 3] = triPos;
+
+            if (triNorm.y >= 0)
+            {
+                if (Random.Range(0f, 1f) < 0.5f)
+                {
+                    _coralIndex.Add(i / 3);
+                }
+            }
+
+
         }
 
         Debug.Log("Number of triNormals: " + _triNormals.Length);
@@ -255,6 +273,30 @@ public class GridDS
         mesh.RecalculateBounds();
         return mesh;
     }
+
+    public Vector3[] GetTriNormals()
+    {
+        return _triNormals;
+    }
+
+    public Vector3[] GetTriCentres()
+    {
+        return _triCentres;
+    }
+
+    public List<int> GetCoralIndices()
+    {
+        return _coralIndex;
+    }
+
+    static Vector3 RotateAround(Vector3 position, Vector3 pivotPoint, Quaternion rot)
+    {
+        Vector3 finalVec = new Vector3();
+        finalVec = position;
+        finalVec = rot * position + pivotPoint;
+        return finalVec;
+    }
+
 
 }
 
@@ -285,11 +327,4 @@ public class RowData
         Triangles[triangleIndex + 2] = c;
         triangleIndex += 3;
     }
-
-    public void CalculateNormals()
-    {
-
-    }
-
-
 }

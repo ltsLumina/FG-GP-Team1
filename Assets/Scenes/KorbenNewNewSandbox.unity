@@ -1067,6 +1067,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &61755659 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3101279273638698247, guid: 87bcb6a45619c404b80dfeef54d9ede9, type: 3}
+  m_PrefabInstance: {fileID: 1233903228}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &61755661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61755659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff615e82f84c403489094c2e2c98c111, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &67282340
 GameObject:
   m_ObjectHideFlags: 0
@@ -7193,6 +7210,7 @@ MonoBehaviour:
   standardMesh: {fileID: 0}
   grabbedMesh: {fileID: 0}
   reach: 10
+  throwForce: 0
   lifetime: 10
 --- !u!4 &395589355
 Transform:
@@ -16023,12 +16041,11 @@ MonoBehaviour:
     space: 0
   rootTab:
     name: 
-    selectedSubtabIndex: 1
+    selectedSubtabIndex: 0
     subtabs:
     - rid: 5260567303344357731
     - rid: 5260567303344357732
     - rid: 5260567303344357733
-    - rid: 5260567303344357734
     - rid: 5260567303344357735
     - rid: 5260567303344357736
     subtabsDrawn: 1
@@ -16061,13 +16078,6 @@ MonoBehaviour:
       type: {class: VInspectorData/Tab, ns: VInspector, asm: VInspector}
       data:
         name: Power
-        selectedSubtabIndex: 0
-        subtabs: []
-        subtabsDrawn: 0
-    - rid: 5260567303344357734
-      type: {class: VInspectorData/Tab, ns: VInspector, asm: VInspector}
-      data:
-        name: Rocks
         selectedSubtabIndex: 0
         subtabs: []
         subtabsDrawn: 0
@@ -21193,6 +21203,22 @@ PrefabInstance:
       propertyPath: HeightMultiplier
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 2480047899353137033, guid: 87bcb6a45619c404b80dfeef54d9ede9, type: 3}
+      propertyPath: CoralPrefabs.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2480047899353137033, guid: 87bcb6a45619c404b80dfeef54d9ede9, type: 3}
+      propertyPath: 'CoralPrefabs.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2338160585447282765, guid: ec7b5a9d42fdac243a40c92735d6f0e8, type: 3}
+    - target: {fileID: 2480047899353137033, guid: 87bcb6a45619c404b80dfeef54d9ede9, type: 3}
+      propertyPath: 'CoralPrefabs.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2947715999815865860, guid: e3b65d0070b2b544c839a118591df8d2, type: 3}
+    - target: {fileID: 2480047899353137033, guid: 87bcb6a45619c404b80dfeef54d9ede9, type: 3}
+      propertyPath: 'CoralPrefabs.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8550585485901510290, guid: ad790141f3718db4b814d6e78f412504, type: 3}
     - target: {fileID: 3101279273638698247, guid: 87bcb6a45619c404b80dfeef54d9ede9, type: 3}
       propertyPath: m_Name
       value: Walls
@@ -21212,6 +21238,26 @@ PrefabInstance:
     - target: {fileID: 3634297033005084161, guid: 87bcb6a45619c404b80dfeef54d9ede9, type: 3}
       propertyPath: HeightMultiplier
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3634297033005084161, guid: 87bcb6a45619c404b80dfeef54d9ede9, type: 3}
+      propertyPath: CoralPrefabs.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3634297033005084161, guid: 87bcb6a45619c404b80dfeef54d9ede9, type: 3}
+      propertyPath: 'CoralPrefabs.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2338160585447282765, guid: ec7b5a9d42fdac243a40c92735d6f0e8, type: 3}
+    - target: {fileID: 3634297033005084161, guid: 87bcb6a45619c404b80dfeef54d9ede9, type: 3}
+      propertyPath: 'CoralPrefabs.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2947715999815865860, guid: e3b65d0070b2b544c839a118591df8d2, type: 3}
+    - target: {fileID: 3634297033005084161, guid: 87bcb6a45619c404b80dfeef54d9ede9, type: 3}
+      propertyPath: 'CoralPrefabs.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8550585485901510290, guid: ad790141f3718db4b814d6e78f412504, type: 3}
+    - target: {fileID: 4174179796124559628, guid: 87bcb6a45619c404b80dfeef54d9ede9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4206456124539374396, guid: 87bcb6a45619c404b80dfeef54d9ede9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -21253,10 +21299,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7565169211787227416, guid: 87bcb6a45619c404b80dfeef54d9ede9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3101279273638698247, guid: 87bcb6a45619c404b80dfeef54d9ede9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 61755661}
   m_SourcePrefab: {fileID: 100100000, guid: 87bcb6a45619c404b80dfeef54d9ede9, type: 3}
 --- !u!1 &1246195200
 GameObject:
@@ -24910,6 +24963,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1500165713465378416, guid: 2175803516d224265a441737d6f8525b, type: 3}
+      propertyPath: m_AllowDynamicResolution
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1523588543152864231, guid: 2175803516d224265a441737d6f8525b, type: 3}
+      propertyPath: allowDynamicResolution
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6140353902049099123, guid: 2175803516d224265a441737d6f8525b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -40098,6 +40159,10 @@ PrefabInstance:
       propertyPath: vInspectorData
       value: 
       objectReference: {fileID: 921712202}
+    - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: fuelDepletionRate
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 3550748028598978181, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
       propertyPath: vInspectorData
       value: 
