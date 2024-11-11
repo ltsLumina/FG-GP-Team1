@@ -43,6 +43,8 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
 
     // Duct-tape fix
     public bool GrabbedMeshActive => grabbedMesh.gameObject.activeSelf;
+
+    Player currentPlayer;
     
     void OnEnable()
     {
@@ -54,7 +56,7 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
         onReleased += () =>
         {
             SetMesh(true);
-            Throw();
+            Throw(currentPlayer);
         };
     }
 
@@ -71,11 +73,11 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
         rb.angularVelocity = Vector3.zero;
     }
 
-    void Throw()
+    void Throw(Player player)
     {
         TryGetComponent(out Rigidbody rb);
-        if (rb == null) return;
-        var moveInput = Find<Player>().GetComponentInChildren<InputManager>().MoveInput;
+        if (rb == null || !player) return;
+        var moveInput = player.InputManager.MoveInput;
         if (moveInput == Vector2.down)
         {
             const float y = 8f; // don't change
@@ -88,15 +90,17 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
         }
     }
 
-    public void Grab()
+    public void Grab(Player player)
     {
         grabbed = true;
+        currentPlayer = player;
         onGrabbed?.Invoke();
     }
     
     public void Release()
     {
         grabbed = false;
+        currentPlayer = null;
         onReleased?.Invoke();
     }
 
@@ -111,13 +115,12 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
 
     void Update()
     {
-        if (!Grabbed) return;
-        
-        var player = Find<Player>();
-        var moveInput = player.GetComponentInChildren<InputManager>().MoveInput;
-        var offset = new Vector3(moveInput.x * 2f, 3.5f);
-        
-        transform.position = player.transform.position + offset;
+        if (!Grabbed || currentPlayer == null) return;
+
+        var moveInput = currentPlayer.InputManager.MoveInput;
+        var offset    = new Vector3(moveInput.x * 2f, 3.5f);
+
+        transform.position = currentPlayer.transform.position + offset;
     }
     
     void SetMesh(bool useGrabbedMesh)
