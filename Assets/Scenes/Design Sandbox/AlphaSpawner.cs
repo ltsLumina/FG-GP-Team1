@@ -1,38 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
-using Lumina.Essentials.Modules;
 using UnityEngine;
 
-public class AlphaSpawner : MonoBehaviour
+public class InteractableSpawner : MonoBehaviour
 {
-    #pragma warning disable 0414
-    
     [SerializeField]
-    // Transform to track
-    private Transform trackTransform;
+    private Transform trackTransform; // The transform to track (submarine/train)
 
     [SerializeField]
     private List<ResourceWaves> spawnWaves = new List<ResourceWaves>();
 
     [SerializeField]
-    float baseSpawnRate = 1.0f; // The base rate for spawning objects
-
-    [SerializeField]
-    float randomAdjustment = 1.0f; // Maximum adjustment to the base rate
-
-    [SerializeField]
-    float moveLength = 5.0f;
-
-    [SerializeField]
-    float moveSpeed = 2.0f; // Speed of the left-right movement
+    private float spawnRangeX = 5.0f; // The range in which to spawn objects on the x-axis
 
     private float startYOffset; // Starting Y offset of the spawner
-
-    private float startLocalX; // Starting local X position of the spawner
-
-    private float timer;
-
     private ResourceWaves currentWave;
+    private float intervalTimer;
+    private Dictionary<RandomizeObjectsSpawn, int> spawnCounts =
+        new Dictionary<RandomizeObjectsSpawn, int>();
 
     private void Start()
     {
@@ -50,67 +35,120 @@ public class AlphaSpawner : MonoBehaviour
             return;
         }
 
-        // Get the distance from the spawner to the tracked object
         startYOffset = transform.position.y - trackTransform.position.y;
-        currentWave = spawnWaves[0];
-        spawnWaves.Remove(currentWave);
-        startLocalX = transform.localPosition.x;
+        StartWave(spawnWaves[0]);
     }
 
     private void Update()
     {
-        if (currentWave == null)
-            return;
-
-        // track the transform's y position with the spawners y-offset
+        // Update the spawner's position to track the transform's y-offset
         transform.position = new Vector3(
             transform.position.x,
             trackTransform.position.y + startYOffset,
             transform.position.z
         );
 
-        timer += Time.deltaTime;
-
-        for (int i = 0; i < currentWave.spawnObjects.Count; i++)
+        // Check if we should start spawning based on the depth
+        if (currentWave != null && trackTransform.position.y <= -currentWave.depth)
         {
-            if (
-                Mathf.Repeat(timer, 2 / currentWave.spawnObjects[i].spawnRate)
-                >= 2 / currentWave.spawnObjects[i].spawnRate - Time.deltaTime
-            )
+            intervalTimer += Time.deltaTime;
+
+            foreach (var spawnObject in currentWave.spawnObjects)
             {
-                Instantiate(
-                    currentWave.spawnObjects[i].objectToSpawn,
-                    spawnPos(),
-                    Quaternion.identity
-                );
+                if (spawnCounts[spawnObject] < spawnObject.amountToSpawn)
+                {
+                    float targetInterval = spawnObject.spawnInterval / spawnObject.amountToSpawn;
+
+                    if (intervalTimer >= targetInterval)
+                    {
+                        Instantiate(
+                            spawnObject.objectToSpawn,
+                            GetSpawnPosition(spawnObject),
+                            Quaternion.identity
+                        );
+                        spawnCounts[spawnObject]++;
+                        intervalTimer = 0f; // Reset timer for the next spawn
+                    }
+                }
             }
-        }
 
-        for (int i = 0; i < spawnWaves.Count; i++)
-        {
-            if (Train.Instance.Depth < spawnWaves[i].depth)
+            // Reset the spawn counts once all objects have been spawned, to allow continuous spawning
+            if (AllObjectsSpawned())
             {
-                currentWave = spawnWaves[i];
-                spawnWaves.Remove(currentWave);
+                ResetSpawnCounts();
             }
         }
     }
 
-    private Vector3 spawnPos()
+    private void StartWave(ResourceWaves wave)
     {
-        return new Vector3(
-            Random.Range(-moveLength, moveLength),
-            transform.position.y,
-            transform.position.z
-        );
+        currentWave = wave;
+        intervalTimer = 0;
+        spawnCounts.Clear();
+        foreach (var spawnObject in currentWave.spawnObjects)
+        {
+            spawnCounts[spawnObject] = 0;
+        }
     }
 
-    // Draw the movement range in the editor
+    private void StartNextWave()
+    {
+        spawnWaves.RemoveAt(0);
+        if (spawnWaves.Count > 0)
+        {
+            StartWave(spawnWaves[0]);
+        }
+        else
+        {
+            StartWave(currentWave); // Restart the current wave if no more waves are left
+        }
+    }
+
+    private bool AllObjectsSpawned()
+    {
+        foreach (var spawnObject in currentWave.spawnObjects)
+        {
+            if (spawnCounts[spawnObject] < spawnObject.amountToSpawn)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void ResetSpawnCounts()
+    {
+        foreach (var spawnObject in currentWave.spawnObjects)
+        {
+            spawnCounts[spawnObject] = 0;
+        }
+    }
+
+    private Vector3 GetSpawnPosition(RandomizeObjectsSpawn spawnObject)
+    {
+        if (spawnObject.spawnOnWall)
+        {
+            // If spawnOnWall is true, spawn at either end of the x range
+            float xPosition = Random.value < 0.5f ? -spawnRangeX : spawnRangeX;
+            return new Vector3(xPosition, trackTransform.position.y + startYOffset, 0f);
+        }
+        else
+        {
+            // Otherwise, spawn within the range
+            return new Vector3(
+                Random.Range(-spawnRangeX, spawnRangeX),
+                trackTransform.position.y + startYOffset,
+                0f
+            );
+        }
+    }
+
+    // Draw the spawn range in the editor
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Vector3 start = transform.position + Vector3.right * moveLength;
-        Vector3 end = transform.position - Vector3.right * moveLength;
+        Vector3 start = transform.position + Vector3.right * spawnRangeX;
+        Vector3 end = transform.position - Vector3.right * spawnRangeX;
         Gizmos.DrawLine(start, end);
     }
 }
