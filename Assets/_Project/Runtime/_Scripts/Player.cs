@@ -4,6 +4,7 @@ using System.Collections;
 using DG.Tweening;
 using Lumina.Essentials.Attributes;
 using Lumina.Essentials.Modules;
+using NUnit.Framework.Constraints;
 using UnityEngine;
 using UnityEngine.Custom.Attributes;
 using UnityEngine.InputSystem;
@@ -14,36 +15,29 @@ using static Lumina.Essentials.Modules.Helpers;
 public class Player : MonoBehaviour
 {
     [Header("Multiplayer")]
-    [SerializeField, ReadOnly]
-    int playerID;
+    [SerializeField] [ReadOnly] int playerID;
 
     [Header("Movement")]
-    [SerializeField]
-    float moveSpeed;
+    [SerializeField] float moveSpeed;
 
     [Header("Dash")]
-    [SerializeField]
-    float dashForce = 25f;
+    [SerializeField] float dashForce = 25f;
+    [SerializeField] float dashDuration = 0.05f;
+    [SerializeField] float dashDampingStart;
+    [SerializeField] float dashDampingEnd = 2.5f;
+    [SerializeField] float dashCooldown = 1f;
 
-    [SerializeField]
-    float dashDuration = 0.05f;
-
-    [SerializeField]
-    float dashDampingStart;
-
-    [SerializeField]
-    float dashDampingEnd = 2.5f;
-
-    [SerializeField]
-    float dashCooldown = 1f;
+    [Header("Stun")]
+    [SerializeField] float stunDuration = 2f;
 
     float dashTimer;
+    bool canMove = true;
 
     // <- Cached Components ->
 
     InputManager input;
-    PlayerInput playerInput;
     Rigidbody rb;
+    PlayerAnimation playerAnimation;
 
     /// <summary>
     /// The player index.
@@ -55,28 +49,51 @@ public class Player : MonoBehaviour
         set => playerID = value + 1;
     }
 
-    public PlayerInput PlayerInput => playerInput;
+    public PlayerInput PlayerInput { get; private set; }
 
+    Action<bool> onDash;
+    Action<bool> onDashEnd;
+    
     void Awake()
     {
-        playerInput = GetComponentInChildren<PlayerInput>();
+        PlayerInput = GetComponentInChildren<PlayerInput>();
         input = GetComponentInChildren<InputManager>();
         rb = GetComponent<Rigidbody>();
+        playerAnimation = GetComponentInChildren<PlayerAnimation>();
     }
+
+    #region Dash Animation Helper
+    void OnEnable()
+    {
+        onDash += DashAnims;
+        onDashEnd += DashAnims;
+    }
+
+    void OnDisable()
+    {
+        onDash -= DashAnims;
+        onDashEnd -= DashAnims;
+    }
+
+    void DashAnims(bool dashing)
+    {
+        if (dashing) playerAnimation.Dash();
+        else playerAnimation.StopDash();
+    }
+    #endregion
 
     // Player moves in parallel with the train if it's a child of the train. Simplest solution.
     void Start() => transform.SetParent(Find<Train>().transform);
 
-    void Update()
-    {
-        Move();
-        //StayInBounds();
-        Rotate();
-    }
+    void Update() => Move();
 
+    public void Freeze(bool freeze) => canMove = !freeze;
+
+    
     void Move()
     {
-        var dir = input.MoveInput.normalized;
+        if (!canMove) return;
+        Vector2 dir = input.MoveInput.normalized;
         rb.AddForce(
             new Vector3(dir.x, dir.y) * (moveSpeed * Time.deltaTime),
             ForceMode.Acceleration
@@ -85,9 +102,10 @@ public class Player : MonoBehaviour
 
     public void Dash()
     {
-        if (dashTimer > 0)
-            return;
+        if (dashTimer > 0) return;
         StartCoroutine(DashRoutine(rb));
+        onDash?.Invoke(true);
+        playerAnimation.Dash();
     }
 
     IEnumerator DashRoutine(Rigidbody rb)
@@ -99,12 +117,13 @@ public class Player : MonoBehaviour
         rb.AddForce(dir * dashForce, ForceMode.Impulse);
         yield return new WaitForSeconds(dashDuration);
         DOVirtual.Float(dashDampingStart, dashDampingEnd, dashDuration, x => rb.linearDamping = x);
-
         while (dashTimer > 0)
         {
             dashTimer -= Time.deltaTime;
             yield return null;
         }
+
+        onDashEnd?.Invoke(false);
     }
 
     static Resource heldResource;
@@ -112,18 +131,30 @@ public class Player : MonoBehaviour
     /// <summary>
     /// Check if the player is holding an item.
     /// </summary>
-    /// <param name="heldResource"> The held resource. </param>
+    /// <param name="resource"> The held resource. </param>
     /// <returns></returns>
-    public static bool HoldingResource(out Resource heldResource)
+    public static bool HoldingResource(out Resource resource)
     {
-        if (Player.heldResource == null)
+        if (heldResource == null)
         {
-            heldResource = null;
+            resource = null;
             return false;
         }
 
-        heldResource = Player.heldResource;
-        return heldResource is { Grabbed: true };
+        resource = heldResource;
+        return resource is { Grabbed: true };
+    }
+
+    public static bool HoldingResource(out Battery battery)
+    {
+        if (heldResource == null)
+        {
+            battery = null;
+            return false;
+        }
+        
+        battery = heldResource.GetComponent<Battery>();
+        return battery != null;
     }
 
     /// <summary>
@@ -142,16 +173,17 @@ public class Player : MonoBehaviour
                     .Distance(a.transform.position, transform.position)
                     .CompareTo(Vector3.Distance(b.transform.position, transform.position))
         );
+
         return resources;
     }
 
     public void Grab()
     {
-        if (heldResource != null)
-            return;
+        if (heldResource != null) return;
 
         var resources = ClosestResources();
         var closest = resources[0];
+
         if (closest.Reach > Vector3.Distance(transform.position, closest.transform.position))
         {
             closest.Grab();
@@ -161,29 +193,29 @@ public class Player : MonoBehaviour
 
     public void Release()
     {
-        if (heldResource == null)
-            return;
+        if (heldResource == null) return;
 
-        heldResource.Release();
-        heldResource = null;
-    }
-
-    void StayInBounds()
-    {
-        switch (transform.position.x)
+        if (heldResource.Item == IGrabbable.Items.Battery)
         {
-            case < -25:
-                transform.position = new(-25, transform.position.y);
-                break;
+           if (!heldResource.GetComponent<Battery>().Deposit()) return;
 
-            case > 25:
-                transform.position = new(25, transform.position.y);
-                break;
+           heldResource.Release();
+           heldResource = null;
+        }
+        else
+        {
+            heldResource.Release();
+            heldResource = null;
         }
     }
 
-    void Rotate()
+    public void Stun() => StartCoroutine(StunRoutine());
+
+    IEnumerator StunRoutine()
     {
-        // TODO: @korben - please implement
+        Freeze(true);
+        playerAnimation.Stun(stunDuration);
+        yield return new WaitForSeconds(stunDuration);
+        Freeze(false);
     }
 }

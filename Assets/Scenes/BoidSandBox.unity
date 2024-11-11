@@ -93,7 +93,11 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
+<<<<<<<< HEAD:Assets/Scenes/SpawnSandbox.unity
+  m_LightingDataAsset: {fileID: 112000000, guid: 7fe7673023b3d9048ab871beddcbeb78, type: 2}
+========
   m_LightingDataAsset: {fileID: 112000000, guid: 349f9519e4a115546a71139f0fc81a39, type: 2}
+>>>>>>>> origin/Final:Assets/Scenes/BoidSandBox.unity
   m_LightingSettings: {fileID: 4890085278179872738, guid: c36c04815661a0842b18c17c99723f7b, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -602,7 +606,11 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 8000
   m_UseColorTemperature: 1
+<<<<<<<< HEAD:Assets/Scenes/SpawnSandbox.unity
+  m_BoundingSphereOverride: {x: 4.9175693e-33, y: 1.3750774e+38, z: 5.202e-42, w: 0}
+========
   m_BoundingSphereOverride: {x: 8.947e-42, y: 2.524355e-29, z: 0, w: 0.0000001661406}
+>>>>>>>> origin/Final:Assets/Scenes/BoidSandBox.unity
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ForceVisible: 0
@@ -1226,6 +1234,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: 0
   grabbed: 0
+  standardMesh: {fileID: 0}
+  grabbedMesh: {fileID: 0}
   reach: 10
   lifetime: 10
 --- !u!4 &395589355
@@ -1534,59 +1544,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2613605133687634388, guid: bdafdd214f650c540bc6c5f7d52cf7c2, type: 3}
   m_PrefabInstance: {fileID: 485280430}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &496786515
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 496786516}
-  - component: {fileID: 496786517}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &496786516
+<<<<<<<< HEAD:Assets/Scenes/SpawnSandbox.unity
+========
+--- !u!4 &496786516 stripped
 Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 1557401991717822191, guid: a0f4d7dab3d397d4ba3422788b6e3a40, type: 3}
+  m_PrefabInstance: {fileID: 2782162022618929007}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 496786515}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -67, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8759106494943338649}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &496786517
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 496786515}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 728fab7a9a036b841bbcdd075c01620f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnObjects:
-  - eventToTrigger: {fileID: 0}
-    eventChance: 5.4
-  - eventToTrigger: {fileID: 0}
-    eventChance: 21.1
-  baseSpawnRate: 10
-  randomAdjustment: 5
-  moveLength: 39.69
-  moveSpeed: 2
+>>>>>>>> origin/Final:Assets/Scenes/BoidSandBox.unity
 --- !u!1 &530164783
 GameObject:
   m_ObjectHideFlags: 0
@@ -1632,6 +1597,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f6d54e7c12100145b9cf3a8b86e068b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isGameOver: 0
+  state: 0
 --- !u!114 &530164786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2569,7 +2536,7 @@ MonoBehaviour:
     space: 0
   rootTab:
     name: 
-    selectedSubtabIndex: 0
+    selectedSubtabIndex: 2
     subtabs:
     - rid: 5260567303344357731
     - rid: 5260567303344357732
@@ -4160,9 +4127,23 @@ PrefabInstance:
       value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 1593504416138141191, guid: 2175803516d224265a441737d6f8525b, type: 3}
+<<<<<<<< HEAD:Assets/Scenes/SpawnSandbox.unity
       propertyPath: m_LocalPosition.y
       value: -18.544998
       objectReference: {fileID: 0}
+========
+      propertyPath: m_LocalPosition.x
+      value: 13.683037
+      objectReference: {fileID: 0}
+    - target: {fileID: 1593504416138141191, guid: 2175803516d224265a441737d6f8525b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -18.544998
+      objectReference: {fileID: 0}
+    - target: {fileID: 1593504416138141191, guid: 2175803516d224265a441737d6f8525b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 19
+      objectReference: {fileID: 0}
+>>>>>>>> origin/Final:Assets/Scenes/BoidSandBox.unity
     - target: {fileID: 5056807808768939299, guid: 2175803516d224265a441737d6f8525b, type: 3}
       propertyPath: m_TagString
       value: MainCamera
@@ -4177,7 +4158,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6140353902049099123, guid: 2175803516d224265a441737d6f8525b, type: 3}
       propertyPath: m_LocalPosition.z
+<<<<<<<< HEAD:Assets/Scenes/SpawnSandbox.unity
       value: -20.970207
+========
+      value: -59
+>>>>>>>> origin/Final:Assets/Scenes/BoidSandBox.unity
       objectReference: {fileID: 0}
     - target: {fileID: 6140353902049099123, guid: 2175803516d224265a441737d6f8525b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4208,9 +4193,23 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6581895759829843494, guid: 2175803516d224265a441737d6f8525b, type: 3}
+<<<<<<<< HEAD:Assets/Scenes/SpawnSandbox.unity
       propertyPath: m_LocalPosition.y
       value: -18.544998
       objectReference: {fileID: 0}
+========
+      propertyPath: m_LocalPosition.x
+      value: 13.683037
+      objectReference: {fileID: 0}
+    - target: {fileID: 6581895759829843494, guid: 2175803516d224265a441737d6f8525b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -18.544998
+      objectReference: {fileID: 0}
+    - target: {fileID: 6581895759829843494, guid: 2175803516d224265a441737d6f8525b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 19
+      objectReference: {fileID: 0}
+>>>>>>>> origin/Final:Assets/Scenes/BoidSandBox.unity
     - target: {fileID: 6845697726623191482, guid: 2175803516d224265a441737d6f8525b, type: 3}
       propertyPath: m_Name
       value: CameraRig
@@ -6257,6 +6256,120 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38d6cdba11a866b4ca0c74aca4355d0f, type: 3}
+--- !u!1001 &2782162022618929007
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8759106494943338649}
+    m_Modifications:
+    - target: {fileID: 1557401991717822191, guid: a0f4d7dab3d397d4ba3422788b6e3a40, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1557401991717822191, guid: a0f4d7dab3d397d4ba3422788b6e3a40, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -67
+      objectReference: {fileID: 0}
+    - target: {fileID: 1557401991717822191, guid: a0f4d7dab3d397d4ba3422788b6e3a40, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1557401991717822191, guid: a0f4d7dab3d397d4ba3422788b6e3a40, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1557401991717822191, guid: a0f4d7dab3d397d4ba3422788b6e3a40, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1557401991717822191, guid: a0f4d7dab3d397d4ba3422788b6e3a40, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1557401991717822191, guid: a0f4d7dab3d397d4ba3422788b6e3a40, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1557401991717822191, guid: a0f4d7dab3d397d4ba3422788b6e3a40, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1557401991717822191, guid: a0f4d7dab3d397d4ba3422788b6e3a40, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1557401991717822191, guid: a0f4d7dab3d397d4ba3422788b6e3a40, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5168876769981928410, guid: a0f4d7dab3d397d4ba3422788b6e3a40, type: 3}
+      propertyPath: m_Name
+      value: EventSpawner
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a0f4d7dab3d397d4ba3422788b6e3a40, type: 3}
+--- !u!1001 &2812665446481516212
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4879454075420634684, guid: affcf4c96e901a649b77edafbd789b74, type: 3}
+      propertyPath: m_Name
+      value: bittyFish
+      objectReference: {fileID: 0}
+    - target: {fileID: 5259251146538038406, guid: affcf4c96e901a649b77edafbd789b74, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5259251146538038406, guid: affcf4c96e901a649b77edafbd789b74, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5259251146538038406, guid: affcf4c96e901a649b77edafbd789b74, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5259251146538038406, guid: affcf4c96e901a649b77edafbd789b74, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071067
+      objectReference: {fileID: 0}
+    - target: {fileID: 5259251146538038406, guid: affcf4c96e901a649b77edafbd789b74, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 5259251146538038406, guid: affcf4c96e901a649b77edafbd789b74, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5259251146538038406, guid: affcf4c96e901a649b77edafbd789b74, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5259251146538038406, guid: affcf4c96e901a649b77edafbd789b74, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5259251146538038406, guid: affcf4c96e901a649b77edafbd789b74, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5259251146538038406, guid: affcf4c96e901a649b77edafbd789b74, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: affcf4c96e901a649b77edafbd789b74, type: 3}
 --- !u!1001 &3238097188645576308
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6545,6 +6658,17 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+<<<<<<<< HEAD:Assets/Scenes/SpawnSandbox.unity
+      propertyPath: algaeRestoreAmount
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: powerDepletionRate
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+========
+>>>>>>>> origin/Final:Assets/Scenes/BoidSandBox.unity
       propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.size
       value: 0
       objectReference: {fileID: 0}
@@ -6632,6 +6756,14 @@ PrefabInstance:
       propertyPath: vInspectorData
       value: 
       objectReference: {fileID: 1754602628}
+    - target: {fileID: 3647054809633606627, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3647054809633606627, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5707010853027933423, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
       propertyPath: offsetY
       value: -6
@@ -6656,6 +6788,17 @@ PrefabInstance:
       propertyPath: allowFidelityFX2SuperResolution
       value: 1
       objectReference: {fileID: 0}
+<<<<<<<< HEAD:Assets/Scenes/SpawnSandbox.unity
+========
+    - target: {fileID: 6647658359549999598, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6647658359549999598, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+>>>>>>>> origin/Final:Assets/Scenes/BoidSandBox.unity
     - target: {fileID: 6750989291407133015, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
       propertyPath: m_AllowDynamicResolution
       value: 1
@@ -6707,9 +6850,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8589098272386292673, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1417265912}
+<<<<<<<< HEAD:Assets/Scenes/SpawnSandbox.unity
+========
     - targetCorrespondingSourceObject: {fileID: 8589098272386292673, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
       insertIndex: -1
       addedObject: {fileID: 496786516}
+>>>>>>>> origin/Final:Assets/Scenes/BoidSandBox.unity
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
 --- !u!4 &8759106494943338649 stripped
@@ -6744,3 +6890,7 @@ SceneRoots:
   - {fileID: 13306814}
   - {fileID: 1608106812}
   - {fileID: 1478707431}
+<<<<<<<< HEAD:Assets/Scenes/SpawnSandbox.unity
+========
+  - {fileID: 2812665446481516212}
+>>>>>>>> origin/Final:Assets/Scenes/BoidSandBox.unity

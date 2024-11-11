@@ -1,19 +1,14 @@
 using System;
-using System.Collections;
-using JetBrains.Annotations;
 using Lumina.Essentials.Attributes;
-using Unity.VisualScripting;
 using UnityEngine;
-using VInspector;
 using static Lumina.Essentials.Modules.Helpers;
-using Object = UnityEngine.Object;
 
 public interface IGrabbable
 {
     public enum Items
     {
-        [UsedImplicitly] Kelp,
-        [UsedImplicitly] Battery,
+        Kelp,
+        Battery,
     }
 }
 
@@ -21,9 +16,15 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
 {
     [SerializeField] IGrabbable.Items item;
     [SerializeField, ReadOnly] bool grabbed;
+
+    [Header("Mesh")]
+    [SerializeField] MeshRenderer standardMesh;
+    [SerializeField] MeshRenderer grabbedMesh;
     
     [Header("Settings")]
     [SerializeField] float reach;
+    [SerializeField] float throwForce;
+    
     [Range(1,60)]
     [SerializeField] float lifetime = 10f;
 
@@ -38,13 +39,11 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
 
     public float Lifetime => lifetime;
 
-    bool bypass;
-    public bool Bypass
-    {
-        get => bypass;
-        set => bypass = value;
-    }
+    public bool Bypass { get; private set; }
 
+    // Duct-tape fix
+    public bool GrabbedMeshActive => grabbedMesh.gameObject.activeSelf;
+    
     void OnEnable()
     {
         onGrabbed += () =>
@@ -55,20 +54,39 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
         onReleased += () =>
         {
             SetMesh(true);
-            ResetVelocity();
+            Throw();
         };
     }
 
-    void OnDisable() => onGrabbed -= ResetVelocity;
+    void OnDisable()
+    {
+        onGrabbed -= ResetVelocity;
+    }
 
     void ResetVelocity()
     {
         TryGetComponent(out Rigidbody rb);
+        if (rb == null) return;
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
     }
 
-    void Destroy() => Destroy(gameObject);
+    void Throw()
+    {
+        TryGetComponent(out Rigidbody rb);
+        if (rb == null) return;
+        var moveInput = Find<Player>().GetComponentInChildren<InputManager>().MoveInput;
+        if (moveInput == Vector2.down)
+        {
+            const float y = 8f; // don't change
+            transform.position += Vector3.down * y;
+            rb.AddForce(Vector3.down * throwForce, ForceMode.Impulse);
+        }
+        else
+        {
+            rb.AddForce(moveInput * throwForce, ForceMode.Impulse);
+        }
+    }
 
     public void Grab()
     {
@@ -84,6 +102,9 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
 
     void Start()
     {
+        Debug.Assert(standardMesh != null, "Standard mesh is not set. Please set it in the inspector.", this);
+        Debug.Assert(grabbedMesh != null, "Grabbed mesh is not set. Please set it in the inspector.", this);
+        
         if (Lifetime <= 5) Debug.LogWarning("Lifetime is set too low. Object will likely be destroyed before it has left the screen bounds.");
         Bypass = item == IGrabbable.Items.Battery; // Don't destroy the battery. (obviously, lol)
     }
@@ -94,22 +115,18 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
         
         var player = Find<Player>();
         var moveInput = player.GetComponentInChildren<InputManager>().MoveInput;
-        var offset = new Vector3(moveInput.x * 3f, moveInput.y * 3f);
-        if (moveInput == Vector2.zero) offset = new (2, 2);
-
+        var offset = new Vector3(moveInput.x * 2f, 3.5f);
+        
         transform.position = player.transform.position + offset;
     }
     
     void SetMesh(bool useGrabbedMesh)
     {
-        var regularMesh = transform.GetChild(0);
-        var grabbedMesh = transform.GetChild(1);
-        
-        regularMesh.gameObject.SetActive(!useGrabbedMesh);
+        standardMesh.gameObject.SetActive(!useGrabbedMesh);
         grabbedMesh.gameObject.SetActive(useGrabbedMesh);
     }
 
-    void OnDrawGizmos()
+    void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, reach);

@@ -32,20 +32,18 @@ public class Boid : MonoBehaviour
     private BoidSpawner spawner;
 
     LayerMask groundLayer = 1 << 3;
-
     private Vector3 targetDir;
-
     [SerializeField] private List<Boid> boids = new List<Boid>();
-
     private float timer;
-
     private float updateTimer = 0.5f;
-    
+
+    private Camera cam;
 
     private void Start()
     {
+        cam = Camera.main;
 
-        transform.forward = new Vector3(Random.Range(-1f,1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
+        transform.up = -new Vector3(Random.Range(-1f,1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
 
         updateTimer = Random.Range(0, updateTimer);
 
@@ -77,10 +75,9 @@ public class Boid : MonoBehaviour
     private void FixedUpdate()
     {
 
-        CheckWalls(transform.forward);
+        CheckWalls(-transform.up);
 
-
-
+        CheckVisible();
 
         if (timer < 0)
         {
@@ -90,6 +87,14 @@ public class Boid : MonoBehaviour
 
         Move();
 
+    }
+
+    private void CheckVisible()
+    {
+        if (Mathf.Abs(cam.transform.position.x - transform.position.x) > 100 || Mathf.Abs(cam.transform.position.y - transform.position.y) > 100 || cam.transform.position.z - transform.position.z > 30)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void CheckWalls(Vector3 dir)
@@ -116,8 +121,8 @@ public class Boid : MonoBehaviour
 
     private void Move()
     {
-        transform.forward = Vector3.MoveTowards(transform.forward, targetDir, currentTurnSpeed * Time.deltaTime);
-        transform.position += transform.forward * currentMoveSpeed * Time.deltaTime;
+        transform.up = -Vector3.MoveTowards(-transform.up, targetDir, currentTurnSpeed * Time.deltaTime);
+        transform.position += -transform.up * currentMoveSpeed * Time.deltaTime;
     }
 
     private void UpdateBehaviour()
@@ -146,7 +151,7 @@ public class Boid : MonoBehaviour
 
         for (int i = 0; i < boids.Count; i++)
         {
-            if(Vector3.Distance(transform.position, boids[i].transform.position) < seperationContext)
+            if(boids[i] != null && Vector3.Distance(transform.position, boids[i].transform.position) < seperationContext)
             {
                 Vector3 tempVector = Vector3.zero;
                 tempVector += transform.position - boids[i].transform.position;
@@ -165,7 +170,7 @@ public class Boid : MonoBehaviour
 
         for(int i = 0; i < boids.Count; i++)
         {
-            if (Vector3.Distance(transform.position, boids[i].transform.position) < alignmentContext)
+            if (boids[i] != null && Vector3.Distance(transform.position, boids[i].transform.position) < alignmentContext)
             {
                 alignmentVector += boids[i].TargetDir;
             } 
@@ -181,7 +186,7 @@ public class Boid : MonoBehaviour
 
         for (int i = 0; i < boids.Count; i++)
         {
-            if (Vector3.Distance(transform.position, boids[i].transform.position) < cohesionContext)
+            if (boids[i] != null && Vector3.Distance(transform.position, boids[i].transform.position) < cohesionContext)
             {
                 cohesionVector += boids[i].transform.position - transform.position;
             }
