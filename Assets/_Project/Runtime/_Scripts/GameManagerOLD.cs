@@ -33,8 +33,8 @@ public class GameManagerOLD : MonoBehaviour
             if (destructible is MonoBehaviour monoBehaviour)
             {
                 if (destructible.Bypass) continue;
-                
-                Debug.Log($"Destroying {monoBehaviour.gameObject.name} in {destructible.Lifetime} seconds.", monoBehaviour.gameObject);
+
+                Logger.LogWarning($"Destroying {monoBehaviour.gameObject.name} in {destructible.Lifetime} seconds.", monoBehaviour.gameObject);
                 Destroy(monoBehaviour.gameObject, destructible.Lifetime);
             }
         }
@@ -52,7 +52,7 @@ public class GameManagerOLD : MonoBehaviour
                     if (destructible.Bypass) continue;
                     
                     Destroy(monoBehaviour.gameObject, destructible.Lifetime);
-                    Debug.Log($"Destroying {monoBehaviour.gameObject.name} in {destructible.Lifetime} seconds. as part of global cleanup of lifetime objects.", monoBehaviour.gameObject);
+                    Logger.LogWarning($"Destroying {monoBehaviour.gameObject.name} in {destructible.Lifetime} seconds. as part of global cleanup of lifetime objects.", monoBehaviour.gameObject);
                 }
             }
         }

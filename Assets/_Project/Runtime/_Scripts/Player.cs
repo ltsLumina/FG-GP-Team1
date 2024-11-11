@@ -4,6 +4,7 @@ using System.Collections;
 using DG.Tweening;
 using Lumina.Essentials.Attributes;
 using Lumina.Essentials.Modules;
+using NUnit.Framework.Constraints;
 using UnityEngine;
 using UnityEngine.Custom.Attributes;
 using UnityEngine.InputSystem;
@@ -25,14 +26,13 @@ public class Player : MonoBehaviour
     [SerializeField] float dashDampingStart;
     [SerializeField] float dashDampingEnd = 2.5f;
     [SerializeField] float dashCooldown = 1f;
-    
 
     float dashTimer;
+    bool canMove = true;
 
     // <- Cached Components ->
 
     InputManager input;
-    PlayerInput playerInput;
     Rigidbody rb;
     PlayerAnimation playerAnimation;
 
@@ -46,14 +46,14 @@ public class Player : MonoBehaviour
         set => playerID = value + 1;
     }
 
-    public PlayerInput PlayerInput => playerInput;
+    public PlayerInput PlayerInput { get; private set; }
 
     Action<bool> onDash;
     Action<bool> onDashEnd;
     
     void Awake()
     {
-        playerInput = GetComponentInChildren<PlayerInput>();
+        PlayerInput = GetComponentInChildren<PlayerInput>();
         input = GetComponentInChildren<InputManager>();
         rb = GetComponent<Rigidbody>();
         playerAnimation = GetComponentInChildren<PlayerAnimation>();
@@ -84,8 +84,12 @@ public class Player : MonoBehaviour
 
     void Update() => Move();
 
+    public void Freeze(bool freeze) => canMove = !freeze;
+
+    
     void Move()
     {
+        if (!canMove) return;
         Vector2 dir = input.MoveInput.normalized;
         rb.AddForce(
             new Vector3(dir.x, dir.y) * (moveSpeed * Time.deltaTime),
@@ -175,10 +179,19 @@ public class Player : MonoBehaviour
 
     public void Release()
     {
-        if (heldResource == null)
-            return;
+        if (heldResource == null) return;
 
-        heldResource.Release();
-        heldResource = null;
+        if (heldResource.Item == IGrabbable.Items.Battery)
+        {
+           if (!heldResource.GetComponent<Battery>().Deposit()) return;
+
+           heldResource.Release();
+           heldResource = null;
+        }
+        else
+        {
+            heldResource.Release();
+            heldResource = null;
+        }
     }
 }

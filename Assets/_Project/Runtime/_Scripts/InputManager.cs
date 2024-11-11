@@ -7,9 +7,9 @@ using UnityEngine.InputSystem.Interactions;
 [Author("Alex")]
 public class InputManager : MonoBehaviour
 {
-    public Vector2 MoveInput { get; private set; }
-
     Player player;
+    
+    public Vector2 MoveInput { get; private set; }
 
     void Start() => player = this.GetParentComponent<Player>();
 
