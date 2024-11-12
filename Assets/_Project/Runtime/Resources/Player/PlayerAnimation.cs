@@ -75,6 +75,11 @@ public class PlayerAnimation : MonoBehaviour
         SetMovementBlendTree(input.MoveInput);
     }
 
+    private void ObjectReleased()
+    {
+        Debug.Log("Object released");
+    }
+
     // Set blend tree parameters for player movement based on input of new input system Player action Move
     public void SetMovementBlendTree(Vector2 movement)
     {
@@ -92,4 +97,7 @@ public class PlayerAnimation : MonoBehaviour
         anim.SetFloat("Horizontal", horizontalUpdate);
         anim.SetFloat("Vertical", verticalUpdate);
     }
+
+    public void StartRepair() { /* not implemented */ }
+    public void EndRepair() { /* not implemented */ }
 }

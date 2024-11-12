@@ -88,7 +88,7 @@ public class AlphaSpawner : MonoBehaviour
 
         for (int i = 0; i < spawnWaves.Count; i++)
         {
-            if (Helpers.Find<Train>().Depth < spawnWaves[i].depth)
+            if (Train.Instance.Depth < spawnWaves[i].depth)
             {
                 currentWave = spawnWaves[i];
                 spawnWaves.Remove(currentWave);

@@ -79,7 +79,6 @@ public class JellyMovement : MonoBehaviour
             if (Physics.Raycast(transform.position, randDirs[i], out hit, 3, groundLayer))
             {
                 Debug.DrawRay(transform.position, randDirs[i], Color.red, 2);
-                Debug.Log("hello");
                 randDirs[i] = new Vector3(-randDirs[i].x, randDirs[i].y, randDirs[i].z);
                 return;
             }
