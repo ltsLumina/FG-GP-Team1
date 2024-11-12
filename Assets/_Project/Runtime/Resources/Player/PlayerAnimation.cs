@@ -11,13 +11,13 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField]
     float dashMotorSpeed = 5.0f;
 
-    public Animator Animator { get; private set; }
     InputManager input;
+    public Animator Animator { get; private set; }
 
     private void Start()
     {
-        Animator = GetComponent<Animator>();
         input = transform.parent.GetComponentInChildren<InputManager>();
+        Animator = GetComponent<Animator>();
         SetMotorSpeed(motorSpeed);
     }
 
@@ -77,7 +77,7 @@ public class PlayerAnimation : MonoBehaviour
 
     private void ObjectReleased()
     {
-        Debug.Log("Object released");
+        
     }
 
     // Set blend tree parameters for player movement based on input of new input system Player action Move

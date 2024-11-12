@@ -9,8 +9,6 @@ public class Battery : MonoBehaviour
     [SerializeField] Transform startPos;
     [Range(0, 10)]
     [SerializeField] float batteryReturnDistance = 5f;
-
-    [Header("Charge")]
     [RangeResettable(0,100)]
     [SerializeField] float charge = 100f;
 
@@ -42,7 +40,7 @@ public class Battery : MonoBehaviour
     {
         // If the battery is not within range of the train, return false.
         if (Vector3.Distance(transform.position, startPos.position) > batteryReturnDistance) return false;
-
+        
         transform.position = startPos.position;
         train.Power += charge;
         charge = 0;
@@ -57,7 +55,7 @@ public class Battery : MonoBehaviour
             Gizmos.DrawWireSphere(startPos.position, batteryReturnDistance);
         }
 
-        if (PlayerInputsManager.Player2)
+        if (PlayerInputsManager.Player2 != null)
         {
             Gizmos.color = Vector3.Distance(PlayerInputsManager.Player2.transform.position, startPos.position) > batteryReturnDistance ? Color.red : Color.green;
             Gizmos.DrawWireSphere(startPos.position, batteryReturnDistance);
