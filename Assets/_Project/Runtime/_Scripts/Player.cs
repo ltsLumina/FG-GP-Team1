@@ -224,6 +224,7 @@ public class Player : MonoBehaviour
         {
             heldResource.Release();
             heldResource = null;
+            Debug.Log("Released");
         }
     }
 

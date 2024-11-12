@@ -81,7 +81,6 @@ public class EventSpawner : MonoBehaviour
             totalChance += spawnObjects[i].eventChance;
             if (randomizer > startChance && randomizer < totalChance)
             {
-                Debug.Log(spawnObjects[i].eventToTrigger);
                 return spawnObjects[i].eventToTrigger;
             }
         }
