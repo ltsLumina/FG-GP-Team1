@@ -13390,11 +13390,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1557401991717822191, guid: a0f4d7dab3d397d4ba3422788b6e3a40, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -50
+      value: -75
       objectReference: {fileID: 0}
     - target: {fileID: 1557401991717822191, guid: a0f4d7dab3d397d4ba3422788b6e3a40, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 1557401991717822191, guid: a0f4d7dab3d397d4ba3422788b6e3a40, type: 3}
       propertyPath: m_LocalRotation.w
@@ -13423,6 +13423,14 @@ PrefabInstance:
     - target: {fileID: 1557401991717822191, guid: a0f4d7dab3d397d4ba3422788b6e3a40, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3684984900369376195, guid: a0f4d7dab3d397d4ba3422788b6e3a40, type: 3}
+      propertyPath: spawnObjects.Array.data[0].eventChance
+      value: 93
+      objectReference: {fileID: 0}
+    - target: {fileID: 3684984900369376195, guid: a0f4d7dab3d397d4ba3422788b6e3a40, type: 3}
+      propertyPath: spawnObjects.Array.data[1].eventChance
+      value: 5.300003
       objectReference: {fileID: 0}
     - target: {fileID: 5168876769981928410, guid: a0f4d7dab3d397d4ba3422788b6e3a40, type: 3}
       propertyPath: m_Name
