@@ -30,6 +30,8 @@ public class Train : MonoBehaviour
 
     [Header("Audio")]
     [SerializeField] FMODUnity.EventReference shipBonkSound;
+    [SerializeField] FMODUnity.EventReference lightsOnSound;
+    [SerializeField] FMODUnity.EventReference lightsOffSound;
 
     [Tab("Fuel")]
     [Tooltip("The amount of fuel the train has.")]
@@ -262,6 +264,11 @@ public class Train : MonoBehaviour
             OnLightDim.AddListener
             (light =>
             {
+                //HeadPhoneWarning MOVE THIS
+               // var lightOff = FMODUnity.RuntimeManager.CreateInstance(lightsOffSound);
+               // FMODUnity.RuntimeManager.AttachInstanceToGameObject(lightOff, transform);
+               // lightOff.start();
+
                 var hdLightData = light.GetComponent<HDAdditionalLightData>();
                 DOVirtual.Float(hdLightData.volumetricDimmer, 0, 1, x => hdLightData.volumetricDimmer = x).OnComplete(() => { lights[light.gameObject] = false; });
             });
@@ -269,6 +276,11 @@ public class Train : MonoBehaviour
             onPowerRestored.AddListener
             (() =>
             {
+                //HeadPhoneWarning MOVE THIS
+              // var lightOn = FMODUnity.RuntimeManager.CreateInstance(lightsOnSound);
+              // FMODUnity.RuntimeManager.AttachInstanceToGameObject(lightOn, transform);
+              // lightOn.start();
+
                 foreach (var light in lights)
                 {
                     var hdLightData = light.Key.GetComponent<HDAdditionalLightData>();
@@ -331,7 +343,6 @@ public class Train : MonoBehaviour
             {
                 OnLightDim.Invoke(light.Key.GetComponent<Light>());
                 this.DoForEachPlayer(p => p.Animator.SetTrigger("LightsOut"));
-
             }
             else // Power has been restored above the threshold
             {

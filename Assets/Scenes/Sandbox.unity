@@ -15829,7 +15829,7 @@ MonoBehaviour:
     space: 0
   rootTab:
     name: 
-    selectedSubtabIndex: 0
+    selectedSubtabIndex: 2
     subtabs:
     - rid: 5260567303344357731
     - rid: 5260567303344357732
@@ -39835,6 +39835,10 @@ PrefabInstance:
       value: Ship
       objectReference: {fileID: 0}
     - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: power
+      value: 2.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
       propertyPath: debugMode
       value: 1
       objectReference: {fileID: 0}
@@ -39847,8 +39851,32 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 921712202}
     - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: lightsOnSound.Path
+      value: event:/LightsOn
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
       propertyPath: shipBonkSound.Path
       value: event:/ShipBonk
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: lightsOffSound.Path
+      value: event:/LightsOff
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: lightsOnSound.Guid.Data1
+      value: 1751048478
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: lightsOnSound.Guid.Data2
+      value: 1292499626
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: lightsOnSound.Guid.Data3
+      value: 1244723900
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: lightsOnSound.Guid.Data4
+      value: 894868041
       objectReference: {fileID: 0}
     - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
       propertyPath: shipBonkSound.Guid.Data1
@@ -39865,6 +39893,22 @@ PrefabInstance:
     - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
       propertyPath: shipBonkSound.Guid.Data4
       value: 1958399429
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: lightsOffSound.Guid.Data1
+      value: -671731495
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: lightsOffSound.Guid.Data2
+      value: 1195529186
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: lightsOffSound.Guid.Data3
+      value: 2038465210
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: lightsOffSound.Guid.Data4
+      value: 1622729245
       objectReference: {fileID: 0}
     - target: {fileID: 3550748028598978181, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
       propertyPath: vInspectorData
