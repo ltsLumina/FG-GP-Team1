@@ -39701,37 +39701,9 @@ PrefabInstance:
       value: Train
       objectReference: {fileID: 0}
     - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
-      propertyPath: debugMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
-      propertyPath: invincible
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
-      propertyPath: hullIntegrity
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
       propertyPath: vInspectorData
       value: 
       objectReference: {fileID: 921712202}
-    - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
-      propertyPath: fuelDepletionRate
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3139968387828256574, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
-      propertyPath: spawnWaves.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3139968387828256574, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
-      propertyPath: 'spawnWaves.Array.data[0]'
-      value: 
-      objectReference: {fileID: 11400000, guid: feb5a09cb67d7b446be069f2fed94100, type: 2}
-    - target: {fileID: 3139968387828256574, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
-      propertyPath: 'spawnWaves.Array.data[1]'
-      value: 
-      objectReference: {fileID: 11400000, guid: c35e2770c1c210544bbcf7d1973a74b4, type: 2}
     - target: {fileID: 3550748028598978181, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
       propertyPath: vInspectorData
       value: 

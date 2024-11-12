@@ -5622,7 +5622,7 @@ MonoBehaviour:
   speed: 5
   maxSpeed: 10
   fuel: 100
-  fuelDepletionRate: 3
+  fuelDepletionRate: 1
   fuelDepletionRateMultipliers:
   - name: Stage 1
     multiplier: 1
@@ -5720,7 +5720,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   debugMode: 0
-  invincible: 1
+  invincible: 0
   showDebugInfo: 0
   partyMode: 0
   fuelDepletionDefaults:
@@ -12105,7 +12105,6 @@ GameObject:
   - component: {fileID: 2320368068176530552}
   - component: {fileID: 7223694263872748342}
   - component: {fileID: 4944935668799653503}
-  - component: {fileID: 3146501963480999516}
   - component: {fileID: 9134469541386498661}
   m_Layer: 0
   m_Name: Battery
@@ -12165,27 +12164,6 @@ MonoBehaviour:
   reach: 4
   throwForce: 0
   lifetime: 60
---- !u!135 &3146501963480999516
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7584022963353752610}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &9134469541386498661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12284,7 +12262,6 @@ GameObject:
   - component: {fileID: 3315115754414391099}
   - component: {fileID: 2941929052750377106}
   - component: {fileID: 5545397127223024012}
-  - component: {fileID: 4925574570411674880}
   m_Layer: 0
   m_Name: Grabbed
   m_TagString: Untagged
@@ -12360,27 +12337,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4925574570411674880
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8004168638512261961}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8297738135000550943
 GameObject:
   m_ObjectHideFlags: 0
@@ -13506,6 +13462,10 @@ PrefabInstance:
       propertyPath: trackTransform
       value: 
       objectReference: {fileID: 8589098272386292673}
+    - target: {fileID: 7301713046473840335, guid: 15a582d9f0ee1489a9434d00f3afbfdf, type: 3}
+      propertyPath: spawnWaves.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -52,16 +52,13 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
     {
         onGrabbed += () =>
         {
-            TryGetComponent(out Rigidbody rb);
-            rb.isKinematic = false;
             SetMesh(true);
             ResetVelocity();
         };
         onReleased += () =>
         {
-            SetMesh(true);
             Throw(currentPlayer);
-            currentPlayer = null;
+            currentPlayer = null; // Set to null after throwing.
         };
     }
 
@@ -74,12 +71,15 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
     {
         TryGetComponent(out Rigidbody rb);
         if (rb == null) return;
+        rb.isKinematic = false;
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
     }
 
     void Throw(Player player)
     {
+        Debug.Log("Throwing resource...");
+        
         TryGetComponent(out Rigidbody rb);
         if (rb == null || !player) return;
         var moveInput = player.InputManager.MoveInput;
@@ -124,7 +124,7 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
         var moveInput = currentPlayer.InputManager.MoveInput;
         var offset    = new Vector3(moveInput.x * 2f, 3.5f);
 
-        transform.DOMove(currentPlayer.transform.position + offset, 0.35f);
+        transform.position = currentPlayer.transform.position + offset;
     }
     
     void SetMesh(bool useGrabbedMesh)
