@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 617d59800373807479a540fe01a75e2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: {x: 1, y: 1, z: 1}
+  direction: {x: 1, y: 1, z: 3}
   force: 1.25
   torque: 0.2
   magnetizationStrength: 15
