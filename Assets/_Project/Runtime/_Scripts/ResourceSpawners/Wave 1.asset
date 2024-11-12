@@ -17,12 +17,12 @@ MonoBehaviour:
   - objectToSpawn: {fileID: 5581981930496451382, guid: feb31393fc9cd08459262f0f3deda43b, type: 3}
     amountToSpawn: 2
     spawnInterval: 7
-    spawnOnWall: 1
+    spawnOnWall: 0
   - objectToSpawn: {fileID: 5570282934742007449, guid: eeb3b30c0ef12144cb7e4a64986054f8, type: 3}
     amountToSpawn: 1
     spawnInterval: 25
-    spawnOnWall: 1
+    spawnOnWall: 0
   - objectToSpawn: {fileID: 4781570308072900306, guid: 38d6cdba11a866b4ca0c74aca4355d0f, type: 3}
     amountToSpawn: 1
     spawnInterval: 15
-    spawnOnWall: 1
+    spawnOnWall: 0
