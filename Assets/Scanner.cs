@@ -13,7 +13,7 @@ public class Scanner : MonoBehaviour
     GameObject scannerLight;
 
     //Inital Rotation
-    private Quaternion initialRotation;
+    Quaternion initialRotation;
 
     bool isScanning = false;
 

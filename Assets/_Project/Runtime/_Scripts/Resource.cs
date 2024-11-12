@@ -79,6 +79,8 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
     {
         TryGetComponent(out Rigidbody rb);
         if (rb == null || !player) return;
+
+        rb.isKinematic = false;
         var moveInput = player.InputManager.MoveInput;
         if (moveInput == Vector2.down)
         {
