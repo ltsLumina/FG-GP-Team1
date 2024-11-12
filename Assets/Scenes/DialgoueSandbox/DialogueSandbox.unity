@@ -5714,55 +5714,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 372991915}
   m_CullTransparentMesh: 1
---- !u!114 &375217023
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89b7ac12dedcd467992b1d9eb3139ab5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buttons: []
-  rootTab:
-    name: 
-    selectedSubtabIndex: 0
-    subtabs:
-    - rid: 5260567303344357601
-    - rid: 5260567303344357602
-    - rid: 5260567303344357603
-    subtabsDrawn: 1
-  rootFoldout:
-    name: 
-    expanded: 1
-    subfoldouts: []
-  references:
-    version: 2
-    RefIds:
-    - rid: 5260567303344357601
-      type: {class: VInspectorData/Tab, ns: VInspector, asm: VInspector}
-      data:
-        name: Collider
-        selectedSubtabIndex: 0
-        subtabs: []
-        subtabsDrawn: 0
-    - rid: 5260567303344357602
-      type: {class: VInspectorData/Tab, ns: VInspector, asm: VInspector}
-      data:
-        name: Task
-        selectedSubtabIndex: 0
-        subtabs: []
-        subtabsDrawn: 0
-    - rid: 5260567303344357603
-      type: {class: VInspectorData/Tab, ns: VInspector, asm: VInspector}
-      data:
-        name: UI
-        selectedSubtabIndex: 0
-        subtabs: []
-        subtabsDrawn: 0
 --- !u!1 &381568772
 GameObject:
   m_ObjectHideFlags: 0
@@ -9792,6 +9743,119 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &725924540
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1505193886760754658, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: m_Name
+      value: TrainFinal
+      objectReference: {fileID: 0}
+    - target: {fileID: 2320368068176530552, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2320368068176530552, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2320368068176530552, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2320368068176530552, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2320368068176530552, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -6.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2320368068176530552, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.81
+      objectReference: {fileID: 0}
+    - target: {fileID: 2320368068176530552, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 2320368068176530552, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2320368068176530552, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2320368068176530552, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 2320368068176530552, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2320368068176530552, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3647054809633606627, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3647054809633606627, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8589098272386292673, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.0701766
+      objectReference: {fileID: 0}
+    - target: {fileID: 8589098272386292673, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -31.13049
+      objectReference: {fileID: 0}
+    - target: {fileID: 8589098272386292673, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.4353094
+      objectReference: {fileID: 0}
+    - target: {fileID: 8589098272386292673, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8589098272386292673, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8589098272386292673, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8589098272386292673, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8589098272386292673, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8589098272386292673, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8589098272386292673, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
 --- !u!1 &731816192
 GameObject:
   m_ObjectHideFlags: 0
@@ -12670,6 +12734,123 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 881353028}
   m_CullTransparentMesh: 1
+--- !u!114 &882930627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89b7ac12dedcd467992b1d9eb3139ab5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttons:
+  - name: C _ Refuel
+    tab: 
+    size: 30
+    space: 0
+  - name: C _ Clean
+    tab: 
+    size: 30
+    space: 0
+  - name: C _ Repair
+    tab: 
+    size: 30
+    space: 0
+  - name: C _ Damage
+    tab: 
+    size: 30
+    space: 0
+  - name: C _ Recharge
+    tab: 
+    size: 30
+    space: 0
+  - name: C _ Show Tasks
+    tab: 
+    size: 30
+    space: 0
+  rootTab:
+    name: 
+    selectedSubtabIndex: 0
+    subtabs:
+    - rid: 3861983204425334871
+    - rid: 3861983204425334872
+    - rid: 3861983204425334873
+    - rid: 3861983204425334874
+    - rid: 3861983204425334875
+    subtabsDrawn: 1
+  rootFoldout:
+    name: 
+    expanded: 1
+    subfoldouts:
+    - rid: 3861983204425334876
+    - rid: 3861983204425334877
+    - rid: 3861983204425334878
+    - rid: 3861983204425334879
+  references:
+    version: 2
+    RefIds:
+    - rid: 3861983204425334871
+      type: {class: VInspectorData/Tab, ns: VInspector, asm: VInspector}
+      data:
+        name: Fuel
+        selectedSubtabIndex: 0
+        subtabs: []
+        subtabsDrawn: 0
+    - rid: 3861983204425334872
+      type: {class: VInspectorData/Tab, ns: VInspector, asm: VInspector}
+      data:
+        name: Hull
+        selectedSubtabIndex: 0
+        subtabs: []
+        subtabsDrawn: 0
+    - rid: 3861983204425334873
+      type: {class: VInspectorData/Tab, ns: VInspector, asm: VInspector}
+      data:
+        name: Power
+        selectedSubtabIndex: 0
+        subtabs: []
+        subtabsDrawn: 0
+    - rid: 3861983204425334874
+      type: {class: VInspectorData/Tab, ns: VInspector, asm: VInspector}
+      data:
+        name: Events
+        selectedSubtabIndex: 0
+        subtabs: []
+        subtabsDrawn: 0
+    - rid: 3861983204425334875
+      type: {class: VInspectorData/Tab, ns: VInspector, asm: VInspector}
+      data:
+        name: Settings
+        selectedSubtabIndex: 0
+        subtabs: []
+        subtabsDrawn: 0
+    - rid: 3861983204425334876
+      type: {class: VInspectorData/Foldout, ns: VInspector, asm: VInspector}
+      data:
+        name: Fuel
+        expanded: 0
+        subfoldouts: []
+    - rid: 3861983204425334877
+      type: {class: VInspectorData/Foldout, ns: VInspector, asm: VInspector}
+      data:
+        name: Hull
+        expanded: 0
+        subfoldouts: []
+    - rid: 3861983204425334878
+      type: {class: VInspectorData/Foldout, ns: VInspector, asm: VInspector}
+      data:
+        name: Power
+        expanded: 0
+        subfoldouts: []
+    - rid: 3861983204425334879
+      type: {class: VInspectorData/Foldout, ns: VInspector, asm: VInspector}
+      data:
+        name: Rocks
+        expanded: 0
+        subfoldouts: []
 --- !u!1 &898450015
 GameObject:
   m_ObjectHideFlags: 0
@@ -13051,123 +13232,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 918575399}
   m_CullTransparentMesh: 1
---- !u!114 &921712202
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89b7ac12dedcd467992b1d9eb3139ab5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buttons:
-  - name: C _ Refuel
-    tab: 
-    size: 30
-    space: 0
-  - name: C _ Clean
-    tab: 
-    size: 30
-    space: 0
-  - name: C _ Repair
-    tab: 
-    size: 30
-    space: 0
-  - name: C _ Damage
-    tab: 
-    size: 30
-    space: 0
-  - name: C _ Recharge
-    tab: 
-    size: 30
-    space: 0
-  - name: C _ Show Tasks
-    tab: 
-    size: 30
-    space: 0
-  rootTab:
-    name: 
-    selectedSubtabIndex: 2
-    subtabs:
-    - rid: 5260567303344357731
-    - rid: 5260567303344357732
-    - rid: 5260567303344357733
-    - rid: 5260567303344357735
-    - rid: 5260567303344357736
-    subtabsDrawn: 1
-  rootFoldout:
-    name: 
-    expanded: 1
-    subfoldouts:
-    - rid: 5260567303344357737
-    - rid: 5260567303344357738
-    - rid: 5260567303344357739
-    - rid: 5260567303344357740
-  references:
-    version: 2
-    RefIds:
-    - rid: 5260567303344357731
-      type: {class: VInspectorData/Tab, ns: VInspector, asm: VInspector}
-      data:
-        name: Fuel
-        selectedSubtabIndex: 0
-        subtabs: []
-        subtabsDrawn: 0
-    - rid: 5260567303344357732
-      type: {class: VInspectorData/Tab, ns: VInspector, asm: VInspector}
-      data:
-        name: Hull
-        selectedSubtabIndex: 0
-        subtabs: []
-        subtabsDrawn: 0
-    - rid: 5260567303344357733
-      type: {class: VInspectorData/Tab, ns: VInspector, asm: VInspector}
-      data:
-        name: Power
-        selectedSubtabIndex: 0
-        subtabs: []
-        subtabsDrawn: 0
-    - rid: 5260567303344357735
-      type: {class: VInspectorData/Tab, ns: VInspector, asm: VInspector}
-      data:
-        name: Events
-        selectedSubtabIndex: 0
-        subtabs: []
-        subtabsDrawn: 0
-    - rid: 5260567303344357736
-      type: {class: VInspectorData/Tab, ns: VInspector, asm: VInspector}
-      data:
-        name: Settings
-        selectedSubtabIndex: 0
-        subtabs: []
-        subtabsDrawn: 0
-    - rid: 5260567303344357737
-      type: {class: VInspectorData/Foldout, ns: VInspector, asm: VInspector}
-      data:
-        name: Fuel
-        expanded: 1
-        subfoldouts: []
-    - rid: 5260567303344357738
-      type: {class: VInspectorData/Foldout, ns: VInspector, asm: VInspector}
-      data:
-        name: Hull
-        expanded: 1
-        subfoldouts: []
-    - rid: 5260567303344357739
-      type: {class: VInspectorData/Foldout, ns: VInspector, asm: VInspector}
-      data:
-        name: Power
-        expanded: 0
-        subfoldouts: []
-    - rid: 5260567303344357740
-      type: {class: VInspectorData/Foldout, ns: VInspector, asm: VInspector}
-      data:
-        name: Rocks
-        expanded: 0
-        subfoldouts: []
 --- !u!1 &925271737
 GameObject:
   m_ObjectHideFlags: 0
@@ -18503,55 +18567,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1339202019}
   m_CullTransparentMesh: 1
---- !u!114 &1348020994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89b7ac12dedcd467992b1d9eb3139ab5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buttons: []
-  rootTab:
-    name: 
-    selectedSubtabIndex: 1
-    subtabs:
-    - rid: 5260567303344357604
-    - rid: 5260567303344357605
-    - rid: 5260567303344357606
-    subtabsDrawn: 1
-  rootFoldout:
-    name: 
-    expanded: 1
-    subfoldouts: []
-  references:
-    version: 2
-    RefIds:
-    - rid: 5260567303344357604
-      type: {class: VInspectorData/Tab, ns: VInspector, asm: VInspector}
-      data:
-        name: Collider
-        selectedSubtabIndex: 0
-        subtabs: []
-        subtabsDrawn: 0
-    - rid: 5260567303344357605
-      type: {class: VInspectorData/Tab, ns: VInspector, asm: VInspector}
-      data:
-        name: Task
-        selectedSubtabIndex: 0
-        subtabs: []
-        subtabsDrawn: 0
-    - rid: 5260567303344357606
-      type: {class: VInspectorData/Tab, ns: VInspector, asm: VInspector}
-      data:
-        name: UI
-        selectedSubtabIndex: 0
-        subtabs: []
-        subtabsDrawn: 0
 --- !u!1 &1359848000
 GameObject:
   m_ObjectHideFlags: 0
@@ -20115,7 +20130,7 @@ PrefabInstance:
     - target: {fileID: 8165206028233633459, guid: 2175803516d224265a441737d6f8525b, type: 3}
       propertyPath: Target.TrackingTarget
       value: 
-      objectReference: {fileID: 8759106494943338649}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -25837,55 +25852,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1754563364}
   m_CullTransparentMesh: 1
---- !u!114 &1754602628
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89b7ac12dedcd467992b1d9eb3139ab5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buttons: []
-  rootTab:
-    name: 
-    selectedSubtabIndex: 1
-    subtabs:
-    - rid: 5260567303344357598
-    - rid: 5260567303344357599
-    - rid: 5260567303344357600
-    subtabsDrawn: 1
-  rootFoldout:
-    name: 
-    expanded: 1
-    subfoldouts: []
-  references:
-    version: 2
-    RefIds:
-    - rid: 5260567303344357598
-      type: {class: VInspectorData/Tab, ns: VInspector, asm: VInspector}
-      data:
-        name: Collider
-        selectedSubtabIndex: 0
-        subtabs: []
-        subtabsDrawn: 0
-    - rid: 5260567303344357599
-      type: {class: VInspectorData/Tab, ns: VInspector, asm: VInspector}
-      data:
-        name: Task
-        selectedSubtabIndex: 0
-        subtabs: []
-        subtabsDrawn: 0
-    - rid: 5260567303344357600
-      type: {class: VInspectorData/Tab, ns: VInspector, asm: VInspector}
-      data:
-        name: UI
-        selectedSubtabIndex: 0
-        subtabs: []
-        subtabsDrawn: 0
 --- !u!1 &1781808411
 GameObject:
   m_ObjectHideFlags: 0
@@ -32887,100 +32853,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 557b4b46778d9ca4e8613fbc6853049d, type: 3}
---- !u!1001 &8759106494943338648
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 169949475450650984, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
-      propertyPath: vInspectorData
-      value: 
-      objectReference: {fileID: 1348020994}
-    - target: {fileID: 1505193886760754658, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
-      propertyPath: m_Name
-      value: Train
-      objectReference: {fileID: 0}
-    - target: {fileID: 1505193886760754658, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
-      propertyPath: vInspectorData
-      value: 
-      objectReference: {fileID: 921712202}
-    - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
-      propertyPath: powerDepletionRate
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3550748028598978181, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
-      propertyPath: vInspectorData
-      value: 
-      objectReference: {fileID: 1754602628}
-    - target: {fileID: 3647054809633606627, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3647054809633606627, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5707010853027933423, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
-      propertyPath: vInspectorData
-      value: 
-      objectReference: {fileID: 375217023}
-    - target: {fileID: 8589098272386292673, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8589098272386292673, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -20
-      objectReference: {fileID: 0}
-    - target: {fileID: 8589098272386292673, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8589098272386292673, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8589098272386292673, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8589098272386292673, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8589098272386292673, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8589098272386292673, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8589098272386292673, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8589098272386292673, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
---- !u!4 &8759106494943338649 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8589098272386292673, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
-  m_PrefabInstance: {fileID: 8759106494943338648}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9143293059505199276
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33087,7 +32959,6 @@ SceneRoots:
   - {fileID: 432432461}
   - {fileID: 1246450655}
   - {fileID: 4565025280417043590}
-  - {fileID: 8759106494943338648}
   - {fileID: 1424883301}
   - {fileID: 2013410475}
   - {fileID: 2007165835}
@@ -33097,3 +32968,4 @@ SceneRoots:
   - {fileID: 530164784}
   - {fileID: 653606286}
   - {fileID: 965158417}
+  - {fileID: 725924540}
