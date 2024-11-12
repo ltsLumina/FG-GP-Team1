@@ -13531,14 +13531,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7301713046473840335, guid: 15a582d9f0ee1489a9434d00f3afbfdf, type: 3}
-      propertyPath: spawnRangeX
-      value: 35
-      objectReference: {fileID: 0}
-    - target: {fileID: 7301713046473840335, guid: 15a582d9f0ee1489a9434d00f3afbfdf, type: 3}
-      propertyPath: raycastToWall
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7301713046473840335, guid: 15a582d9f0ee1489a9434d00f3afbfdf, type: 3}
       propertyPath: trackTransform
       value: 
       objectReference: {fileID: 8589098272386292673}
