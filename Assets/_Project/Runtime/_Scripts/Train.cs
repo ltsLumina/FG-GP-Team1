@@ -325,7 +325,6 @@ public class Train : MonoBehaviour
             {
                 OnLightDim.Invoke(light.Key.GetComponent<Light>());
                 this.DoForEachPlayer(p => p.Animator.SetTrigger("LightsOut"));
-
             }
             else // Power has been restored above the threshold
             {
