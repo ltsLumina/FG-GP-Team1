@@ -253,7 +253,7 @@ public class GridDS
 
             if (triNorm.y >= 0)
             {
-                if (Random.Range(0f, 1f) < 0.5f)
+                if (Random.Range(0f, 1f) < 0.2f)
                 {
                     _coralIndex.Add(i / 3);
                 }
@@ -261,10 +261,6 @@ public class GridDS
 
 
         }
-
-        Debug.Log("Number of triNormals: " + _triNormals.Length);
-        Debug.Log("Number of triCentres: " + _triCentres.Length);
-
 
         mesh.vertices = vertices;
         mesh.triangles = triangles;

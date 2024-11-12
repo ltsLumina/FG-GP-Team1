@@ -27,7 +27,7 @@ public class ObjectPoolStaticBatch : MonoBehaviour
 
     public void CreateNewPool(string objectName, GameObject prefab)
     {
-        if (!_pools.ContainsKey(objectName))
+        if (_pools.ContainsKey(objectName))
         {
             Debug.Log("Object pool already exists");
             return;
@@ -57,6 +57,7 @@ public class ObjectPoolStaticBatch : MonoBehaviour
         newObject = _pools[objectName][0];
         _pools[objectName].RemoveAt(0);
 
+        newObject.SetActive(true);
         return newObject;
     }
 
