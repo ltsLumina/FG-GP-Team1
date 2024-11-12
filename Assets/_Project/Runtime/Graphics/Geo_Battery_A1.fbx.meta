@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: 35028c7a8ea99164eb6575d98705bb22
+guid: c4d2eb48cde56104fba0809bc9b55450
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: battery
+    second: {fileID: 2100000, guid: 59a8aaf23a3f0a547b35cd73c05e9d3a, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -76,7 +81,7 @@ ModelImporter:
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
   referencedClips: []
-  importAnimation: 0
+  importAnimation: 1
   humanDescription:
     serializedVersion: 3
     human: []

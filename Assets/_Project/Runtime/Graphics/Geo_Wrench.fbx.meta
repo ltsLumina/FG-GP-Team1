@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: 35028c7a8ea99164eb6575d98705bb22
+guid: 38bfc79c91da90046987f749ef09931b
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wrench1
+    second: {fileID: 2100000, guid: cd727cdcb11f2d34c8aabe04cc5858ee, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -76,7 +81,7 @@ ModelImporter:
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
   referencedClips: []
-  importAnimation: 0
+  importAnimation: 1
   humanDescription:
     serializedVersion: 3
     human: []
