@@ -7151,6 +7151,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGameOver: 0
+  isIntroPlayed: 0
+  hasSeenKelp: 0
+  hasSeenRock: 0
+  hasSeenJellyfish: 0
+  hasLowFuelWarning: 0
+  hasTakenHullDamage: 0
+  hasChargedBattery: 0
+  hasRepairedHull: 0
+  hasRefilledFuel: 0
+  hasBeenStunned: 0
+  hasEnteredTheDeep: 0
+  hasLightOut: 0
+  hasHadCriticalHull: 0
+  hasHadCriticalFuel: 0
+  hasHadCriticalBattery: 0
+  hasHadPressureEvent: 0
+  hasPlayedIntro: 0
+  hasPlayedFirstPlay: 0
+  ShipScanner: {fileID: 0}
+  highScore: 0
+  currentDepth: 0
   state: 0
 --- !u!114 &530164786
 MonoBehaviour:
@@ -19911,6 +19932,7 @@ MonoBehaviour:
   mainMenuPanel: {fileID: 1144234547}
   pausePanel: {fileID: 36601360}
   gameOverPanel: {fileID: 1198225461}
+  skipTutorialButton: {fileID: 0}
 --- !u!114 &1423688756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32967,38 +32989,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1278512552}
     m_Modifications:
-    - target: {fileID: 1296806615754764978, guid: e7f50d4fc1849473da8b08ad92b9ad9a, type: 3}
-      propertyPath: m_fontSize
-      value: 24
-      objectReference: {fileID: 0}
-    - target: {fileID: 1296806615754764978, guid: e7f50d4fc1849473da8b08ad92b9ad9a, type: 3}
-      propertyPath: m_margin.x
-      value: 5.6912003
-      objectReference: {fileID: 0}
-    - target: {fileID: 1296806615754764978, guid: e7f50d4fc1849473da8b08ad92b9ad9a, type: 3}
-      propertyPath: m_margin.y
-      value: 4.969084
-      objectReference: {fileID: 0}
-    - target: {fileID: 1296806615754764978, guid: e7f50d4fc1849473da8b08ad92b9ad9a, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 0f31ab0c20891424ab70c9d1231acc70, type: 2}
-    - target: {fileID: 1296806615754764978, guid: e7f50d4fc1849473da8b08ad92b9ad9a, type: 3}
-      propertyPath: m_fontSizeBase
-      value: 24
-      objectReference: {fileID: 0}
-    - target: {fileID: 1296806615754764978, guid: e7f50d4fc1849473da8b08ad92b9ad9a, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 1663124027218561463, guid: 0f31ab0c20891424ab70c9d1231acc70, type: 2}
-    - target: {fileID: 1296806615754764978, guid: e7f50d4fc1849473da8b08ad92b9ad9a, type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5406450099889314408, guid: e7f50d4fc1849473da8b08ad92b9ad9a, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 407.2
-      objectReference: {fileID: 0}
     - target: {fileID: 6555228801450534230, guid: e7f50d4fc1849473da8b08ad92b9ad9a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

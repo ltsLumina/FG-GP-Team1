@@ -189,7 +189,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 62.18, y: -3.35}
-  m_SizeDelta: {x: 400, y: 100}
+  m_SizeDelta: {x: 407.2, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1521437895121107334
 CanvasRenderer:
@@ -221,8 +221,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Dialogue Text Goes here.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 37a49ff468e6ff94baae6510501ad93f, type: 2}
-  m_sharedMaterial: {fileID: -7526973247068231971, guid: 37a49ff468e6ff94baae6510501ad93f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0f31ab0c20891424ab70c9d1231acc70, type: 2}
+  m_sharedMaterial: {fileID: 1663124027218561463, guid: 0f31ab0c20891424ab70c9d1231acc70, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -284,7 +284,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 29.55664, w: 8.646458}
+  m_margin: {x: 5.6912003, y: 4.969084, z: 29.55664, w: 8.646458}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -509,6 +509,7 @@ GameObject:
   - component: {fileID: 6555228801450534230}
   - component: {fileID: 6872776999774393755}
   - component: {fileID: 1165592239024975985}
+  - component: {fileID: 7176855985535340775}
   m_Layer: 5
   m_Name: DialogueManager
   m_TagString: Untagged
@@ -565,3 +566,35 @@ MonoBehaviour:
   staticEffectDuration: 0.2
   glitchFrameDuration: 0.05
   testDialogue: {fileID: 11400000, guid: 81b486ecabdff4e4fadaf8e70ddc8c6b, type: 2}
+--- !u!114 &7176855985535340775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8575249831327262986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e029ea1fb36b411cab671ff9120a073, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueManager: {fileID: 1165592239024975985}
+  introDialogue: {fileID: 0}
+  gameStartedDialogue: {fileID: 0}
+  firstPlayDialogue: {fileID: 0}
+  firstKelpDialogue: {fileID: 0}
+  firstRockDialogue: {fileID: 0}
+  rockHitsShipDialogue: {fileID: 0}
+  hullBreachPressureDialogue: {fileID: 0}
+  criticalHullDamageDialogue: {fileID: 0}
+  criticalFuelLevelDialogue: {fileID: 0}
+  criticalBatteryChargeLevelDialogue: {fileID: 0}
+  deathFromRunningOutOfFuelDialogue: {fileID: 0}
+  deathFromHullDestroyedDialogue: {fileID: 0}
+  lightsOutDialogue: {fileID: 0}
+  enterTheDeepDialogue: {fileID: 0}
+  hullRepairDialogue: {fileID: 0}
+  fuelRefillDialogue: {fileID: 0}
+  batteryChargeDialogue: {fileID: 0}
+  playerStunDialogue: {fileID: 0}
+  electricFishOnScreenDialogue: {fileID: 0}
