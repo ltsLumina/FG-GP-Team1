@@ -8,6 +8,7 @@ TagManager:
   - Jellyfish
   - Kelp
   - Rock
+  - Ship
   layers:
   - Default
   - TransparentFX

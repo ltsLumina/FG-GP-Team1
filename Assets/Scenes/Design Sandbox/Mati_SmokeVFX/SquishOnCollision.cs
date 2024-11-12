@@ -11,6 +11,8 @@ public class SquishOnCollision : MonoBehaviour
     [SerializeField] float squishDuration = 0.2f;
     [SerializeField] float cooldownDuration = 1f;
 
+    [SerializeField] FMODUnity.EventReference playerBonkSound;
+
     Vector3 originalScale;
     bool isOnCooldown;
 
@@ -22,6 +24,11 @@ public class SquishOnCollision : MonoBehaviour
         if (hitVFXPrefab != null) Instantiate(hitVFXPrefab, collision.contacts[0].point, Quaternion.identity);
         
         this.DoForEachPlayer(p => p.Animator.SetTrigger("Collide"));
+
+        var playerBonk = FMODUnity.RuntimeManager.CreateInstance(playerBonkSound);
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(playerBonk, transform);
+        playerBonk.start();
+
         SquishEffect();
         StartCoroutine(CooldownCoroutine());
     }

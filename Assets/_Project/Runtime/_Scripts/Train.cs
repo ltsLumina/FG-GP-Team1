@@ -20,13 +20,16 @@ using VInspector;
 public class Train : MonoBehaviour
 {
 #pragma warning disable 0414
-    
+
     [UsedImplicitly] // This is used by the VInspector. Don't remove it and don't remove 'public'. 
     public VInspectorData vInspectorData;
-    
+
     [Header("Train Settings")]
     [SerializeField] float speed = 5;
     [SerializeField] float maxSpeed = 10;
+
+    [Header("Audio")]
+    [SerializeField] FMODUnity.EventReference shipBonkSound;
 
     [Tab("Fuel")]
     [Tooltip("The amount of fuel the train has.")]
@@ -41,14 +44,14 @@ public class Train : MonoBehaviour
     [Header("Kelp")]
     [Range(1, 50)]
     [SerializeField] int kelpRestoreAmount = 25;
-    
+
     [Header("Algae")]
     [Tooltip("The amount of dirtiness restored by the algae.")]
     [Range(1, 50)]
     [SerializeField] int algaeRestoreAmount = 10;
-    
+
     [Header("Dirtiness")]
-    [SerializeField] List<DirtinessStage> dirtinessStages = new (5);
+    [SerializeField] List<DirtinessStage> dirtinessStages = new(5);
     [Tooltip("The current dirtiness stage of the train.")]
     [Range(1, 5)]
     [SerializeField] int dirtinessStage = 1;
@@ -58,20 +61,20 @@ public class Train : MonoBehaviour
     [Tooltip("The rate at which dirtiness increases. One unit per second.")]
     [Range(0f, 5f)]
     [SerializeField] float dirtinessRate = 1;
-    
+
     [Header("Cleaning")]
     [RangeResettable(0, 100)]
     [SerializeField] float dirtinessCleanAmount = 25;
 
     [Tab("Hull")]
     [Tooltip("The hull integrity of the train.")]
-    [RangeResettable(0, 3)] 
+    [RangeResettable(0, 3)]
     [SerializeField] int hullIntegrity = 3; // Takes 3 hits before it breaks and you lose.
     [Tooltip("The rate at which the train is repaired. One unit per second.")]
     [Range(1f, 3f)]
     [SerializeField] int repairAmount = 1;
     [Tooltip("The amount of hull breaches the train has.")]
-    [Range(0,3)]
+    [Range(0, 3)]
     [SerializeField] int hullBreaches;
 
     [Tab("Power")]
@@ -80,7 +83,7 @@ public class Train : MonoBehaviour
 
     [Tooltip("The thresholds for the power level when the lights start to dim.")]
     [SerializeField] SerializedDictionary<GameObject, float> lightSwitchThresholds;
-        
+
     [Tooltip("The amount of power/electricity the train has. A low power level will dim the lights.")]
     [RangeResettable(0, 100)]
     [SerializeField] float power = 100;
@@ -190,6 +193,9 @@ public class Train : MonoBehaviour
         }
         set
         {
+            var shipBonk = FMODUnity.RuntimeManager.CreateInstance(shipBonkSound);
+            FMODUnity.RuntimeManager.AttachInstanceToGameObject(shipBonk, transform);
+            shipBonk.start();
             if (invincible) return;
             hullIntegrity = Mathf.Clamp(value, 0, 3);
             if (hullIntegrity <= 0) onDeath.Invoke();

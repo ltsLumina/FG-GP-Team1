@@ -30,7 +30,9 @@ public class Player : MonoBehaviour
     [Header("Stun")]
     [SerializeField] float stunDuration = 2f;
 
-    public FMODUnity.EventReference dash;
+    [Header("Audio")]
+    [SerializeField] FMODUnity.EventReference dashSound;
+    [SerializeField] FMODUnity.EventReference pickKelpSound;
 
 
     float dashTimer;
@@ -94,7 +96,6 @@ public class Player : MonoBehaviour
         transform.SetParent(Train.Instance.transform);
         transform.position = transform.parent.position + new Vector3(-5, -5, 0);
         transform.rotation = new Quaternion(0, 180, 0, 0); // i dont know why but this must be done
-
     }
 
     void Update()
@@ -102,6 +103,8 @@ public class Player : MonoBehaviour
         Move();
         
         Animator.SetBool("Grabbing", heldResource != null);
+
+        
     }
 
     public void Freeze(bool freeze) => canMove = !freeze;
@@ -119,7 +122,6 @@ public class Player : MonoBehaviour
 
     public void Dash()
     {
-
         if (dashTimer > 0) return;
         StartCoroutine(DashRoutine(rb));
         onDash?.Invoke(true);
@@ -128,7 +130,10 @@ public class Player : MonoBehaviour
 
     IEnumerator DashRoutine(Rigidbody rb)
     {
-        FMODUnity.RuntimeManager.CreateInstance(dash).start();
+        var dash = FMODUnity.RuntimeManager.CreateInstance(dashSound);
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(dash, transform);
+        dash.start();
+
         dashTimer = dashCooldown;
         rb.linearDamping = dashDampingStart;
         var dir = InputManager.MoveInput.normalized;
@@ -204,6 +209,10 @@ public class Player : MonoBehaviour
 
         if (closest.Reach > Vector3.Distance(transform.position, closest.transform.position))
         {
+            var kelp = FMODUnity.RuntimeManager.CreateInstance(pickKelpSound);
+            FMODUnity.RuntimeManager.AttachInstanceToGameObject(kelp, transform);
+            kelp.start();
+
             closest.Grab(this);
             heldResource = closest;
         }

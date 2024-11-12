@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="Event" id="{8bad6c65-0f3d-471d-bcd2-cee6fc46dc25}">
+		<property name="name">
+			<value>PlayerBonk</value>
+		</property>
+		<property name="outputFormat">
+			<value>1</value>
+		</property>
+		<relationship name="folder">
+			<destination>{a0408f8e-36d3-42c0-a6cf-680d4e04d249}</destination>
+		</relationship>
+		<relationship name="mixer">
+			<destination>{256d7429-e1e8-4cdf-910d-4406f8c106f0}</destination>
+		</relationship>
+		<relationship name="masterTrack">
+			<destination>{8847634f-1a19-4d15-aeab-c08b12a57ffe}</destination>
+		</relationship>
+		<relationship name="mixerInput">
+			<destination>{adc2b8e9-d79b-4920-8faf-1382972a46b5}</destination>
+		</relationship>
+		<relationship name="automatableProperties">
+			<destination>{b9a9f08d-4c0f-45f5-94b8-b65747bb6481}</destination>
+		</relationship>
+		<relationship name="markerTracks">
+			<destination>{99ce150f-a7bc-4a78-9584-4756ddc44a27}</destination>
+		</relationship>
+		<relationship name="groupTracks">
+			<destination>{b41d809d-f62e-405f-8d4a-3f3aa0fa2fc2}</destination>
+		</relationship>
+		<relationship name="timeline">
+			<destination>{7e946a61-3fc6-49dc-83cb-28a435f2c8d3}</destination>
+		</relationship>
+		<relationship name="banks">
+			<destination>{6ccc636e-c850-410c-97ba-75548e8d6f35}</destination>
+		</relationship>
+	</object>
+	<object class="EventMixer" id="{256d7429-e1e8-4cdf-910d-4406f8c106f0}">
+		<relationship name="masterBus">
+			<destination>{e2eee7b1-a2e8-478c-afce-24532b0a7739}</destination>
+		</relationship>
+	</object>
+	<object class="MasterTrack" id="{8847634f-1a19-4d15-aeab-c08b12a57ffe}">
+		<relationship name="mixerGroup">
+			<destination>{e2eee7b1-a2e8-478c-afce-24532b0a7739}</destination>
+		</relationship>
+	</object>
+	<object class="MixerInput" id="{adc2b8e9-d79b-4920-8faf-1382972a46b5}">
+		<relationship name="effectChain">
+			<destination>{6baeb36b-185a-413e-97a2-12aafa17092d}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{20563fd9-0a07-49e7-bb4a-20ab41517a89}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{9fb1d617-63c7-48ff-8b68-f03b2fe5a859}</destination>
+		</relationship>
+	</object>
+	<object class="EventAutomatableProperties" id="{b9a9f08d-4c0f-45f5-94b8-b65747bb6481}">
+		<property name="minimumDistance">
+			<value>20</value>
+		</property>
+		<property name="maximumDistance">
+			<value>9600</value>
+		</property>
+	</object>
+	<object class="MarkerTrack" id="{99ce150f-a7bc-4a78-9584-4756ddc44a27}" />
+	<object class="GroupTrack" id="{b41d809d-f62e-405f-8d4a-3f3aa0fa2fc2}">
+		<relationship name="modules">
+			<destination>{3173e496-434e-465f-97c7-4613d2990640}</destination>
+		</relationship>
+		<relationship name="mixerGroup">
+			<destination>{9bdbaab3-d181-44b0-9e05-6e67fa34ef15}</destination>
+		</relationship>
+	</object>
+	<object class="Timeline" id="{7e946a61-3fc6-49dc-83cb-28a435f2c8d3}">
+		<relationship name="modules">
+			<destination>{3173e496-434e-465f-97c7-4613d2990640}</destination>
+		</relationship>
+	</object>
+	<object class="EventMixerMaster" id="{e2eee7b1-a2e8-478c-afce-24532b0a7739}">
+		<relationship name="effectChain">
+			<destination>{c25b6faa-684f-4167-837b-71b77ee0f15d}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{b026de0d-ac2f-4021-8211-c455ac34fd7d}</destination>
+		</relationship>
+		<relationship name="mixer">
+			<destination>{256d7429-e1e8-4cdf-910d-4406f8c106f0}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusEffectChain" id="{6baeb36b-185a-413e-97a2-12aafa17092d}">
+		<relationship name="effects">
+			<destination>{d6bb7a64-7a76-43dc-a497-811772e9e4db}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{20563fd9-0a07-49e7-bb4a-20ab41517a89}" />
+	<object class="SingleSound" id="{3173e496-434e-465f-97c7-4613d2990640}">
+		<property name="length">
+			<value>1.2212925170068027</value>
+		</property>
+		<relationship name="modulators">
+			<destination>{f673bd7f-0375-479f-848f-70f66dc43c75}</destination>
+		</relationship>
+		<relationship name="audioFile">
+			<destination>{5882ca7f-a966-471c-9ad2-d610e61bad08}</destination>
+		</relationship>
+	</object>
+	<object class="EventMixerGroup" id="{9bdbaab3-d181-44b0-9e05-6e67fa34ef15}">
+		<property name="name">
+			<value>Audio 1</value>
+		</property>
+		<relationship name="effectChain">
+			<destination>{d42342ce-53f2-4a21-ab65-47a524038458}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{99d34862-ca89-4de6-8912-947dfb0acdf0}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{e2eee7b1-a2e8-478c-afce-24532b0a7739}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusEffectChain" id="{c25b6faa-684f-4167-837b-71b77ee0f15d}">
+		<relationship name="effects">
+			<destination>{33c07164-1b34-4dac-b406-5a6bd3c6128f}</destination>
+			<destination>{2b5f3ec9-4f24-4139-be07-02b27f08b32c}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{b026de0d-ac2f-4021-8211-c455ac34fd7d}" />
+	<object class="MixerBusFader" id="{d6bb7a64-7a76-43dc-a497-811772e9e4db}" />
+	<object class="RandomizerModulator" id="{f673bd7f-0375-479f-848f-70f66dc43c75}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>pitch</value>
+		</property>
+		<property name="amount">
+			<value>2</value>
+		</property>
+	</object>
+	<object class="MixerBusEffectChain" id="{d42342ce-53f2-4a21-ab65-47a524038458}">
+		<relationship name="effects">
+			<destination>{519ad53e-46ab-44de-a644-58738011d5c2}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{99d34862-ca89-4de6-8912-947dfb0acdf0}" />
+	<object class="MixerBusFader" id="{33c07164-1b34-4dac-b406-5a6bd3c6128f}" />
+	<object class="ObjectSpatialiserEffect" id="{2b5f3ec9-4f24-4139-be07-02b27f08b32c}" />
+	<object class="MixerBusFader" id="{519ad53e-46ab-44de-a644-58738011d5c2}" />
+</objects>

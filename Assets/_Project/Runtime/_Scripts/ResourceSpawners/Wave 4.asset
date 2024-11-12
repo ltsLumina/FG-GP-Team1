@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35a8c9e13e169f54aae58c1e16119a65, type: 3}
   m_Name: Wave 4
   m_EditorClassIdentifier: 
-  depth: 15
+  depth: 9999
   spawnObjects:
   - objectToSpawn: {fileID: 5581981930496451382, guid: feb31393fc9cd08459262f0f3deda43b, type: 3}
     amountToSpawn: 1

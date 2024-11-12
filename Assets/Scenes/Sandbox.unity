@@ -4058,6 +4058,11 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &169929712 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5056807808768939299, guid: 2175803516d224265a441737d6f8525b, type: 3}
+  m_PrefabInstance: {fileID: 1424883301}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &179690732
 GameObject:
   m_ObjectHideFlags: 0
@@ -24537,6 +24542,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3861982111307437376, guid: 2175803516d224265a441737d6f8525b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3861982111307437376, guid: 2175803516d224265a441737d6f8525b, type: 3}
+      propertyPath: attenuationObject
+      value: 
+      objectReference: {fileID: 169929712}
+    - target: {fileID: -3861982111307437376, guid: 2175803516d224265a441737d6f8525b, type: 3}
+      propertyPath: nonRigidbodyVelocity
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6140353902049099123, guid: 2175803516d224265a441737d6f8525b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -39700,6 +39717,66 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3460641147627518562, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
+      propertyPath: dash.Path
+      value: event:/Dash
+      objectReference: {fileID: 0}
+    - target: {fileID: 3460641147627518562, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
+      propertyPath: dashSound.Path
+      value: event:/Dash
+      objectReference: {fileID: 0}
+    - target: {fileID: 3460641147627518562, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
+      propertyPath: dash.Guid.Data1
+      value: 463538073
+      objectReference: {fileID: 0}
+    - target: {fileID: 3460641147627518562, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
+      propertyPath: dash.Guid.Data2
+      value: 1299560521
+      objectReference: {fileID: 0}
+    - target: {fileID: 3460641147627518562, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
+      propertyPath: dash.Guid.Data3
+      value: 404336823
+      objectReference: {fileID: 0}
+    - target: {fileID: 3460641147627518562, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
+      propertyPath: dash.Guid.Data4
+      value: 1624466022
+      objectReference: {fileID: 0}
+    - target: {fileID: 3460641147627518562, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
+      propertyPath: dashSound.Guid.Data1
+      value: 463538073
+      objectReference: {fileID: 0}
+    - target: {fileID: 3460641147627518562, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
+      propertyPath: dashSound.Guid.Data2
+      value: 1299560521
+      objectReference: {fileID: 0}
+    - target: {fileID: 3460641147627518562, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
+      propertyPath: dashSound.Guid.Data3
+      value: 404336823
+      objectReference: {fileID: 0}
+    - target: {fileID: 3460641147627518562, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
+      propertyPath: dashSound.Guid.Data4
+      value: 1624466022
+      objectReference: {fileID: 0}
+    - target: {fileID: 8160497689056147793, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
+      propertyPath: playerBonkSound.Path
+      value: event:/PlayerBonk
+      objectReference: {fileID: 0}
+    - target: {fileID: 8160497689056147793, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
+      propertyPath: playerBonkSound.Guid.Data1
+      value: -1951568795
+      objectReference: {fileID: 0}
+    - target: {fileID: 8160497689056147793, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
+      propertyPath: playerBonkSound.Guid.Data2
+      value: 1193086781
+      objectReference: {fileID: 0}
+    - target: {fileID: 8160497689056147793, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
+      propertyPath: playerBonkSound.Guid.Data3
+      value: -422653252
+      objectReference: {fileID: 0}
+    - target: {fileID: 8160497689056147793, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
+      propertyPath: playerBonkSound.Guid.Data4
+      value: 635193084
+      objectReference: {fileID: 0}
     - target: {fileID: 8848661024979553184, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
       propertyPath: m_Name
       value: Player
@@ -39725,10 +39802,42 @@ PrefabInstance:
       propertyPath: m_Name
       value: Train
       objectReference: {fileID: 0}
+    - target: {fileID: 1505193886760754658, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: m_TagString
+      value: Ship
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: debugMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: invincible
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
       propertyPath: vInspectorData
       value: 
       objectReference: {fileID: 921712202}
+    - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: shipBonkSound.Path
+      value: event:/ShipBonk
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: shipBonkSound.Guid.Data1
+      value: -108169742
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: shipBonkSound.Guid.Data2
+      value: 1230995779
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: shipBonkSound.Guid.Data3
+      value: -1830331736
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: shipBonkSound.Guid.Data4
+      value: 1958399429
+      objectReference: {fileID: 0}
     - target: {fileID: 3550748028598978181, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
       propertyPath: vInspectorData
       value: 

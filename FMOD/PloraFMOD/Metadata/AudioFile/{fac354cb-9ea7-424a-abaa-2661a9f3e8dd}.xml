@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{fac354cb-9ea7-424a-abaa-2661a9f3e8dd}">
+		<property name="assetPath">
+			<value>ShipBonk.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>2.3493197278911566</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{7efb7576-45ea-4a77-85bc-3fc9a5cd2e61}</destination>
+		</relationship>
+	</object>
+</objects>
