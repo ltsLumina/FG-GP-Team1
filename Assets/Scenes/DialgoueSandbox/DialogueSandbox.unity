@@ -32909,6 +32909,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: DialogueManager
       objectReference: {fileID: 0}
+    - target: {fileID: 8978661430233241730, guid: e7f50d4fc1849473da8b08ad92b9ad9a, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 8978661430233241730, guid: e7f50d4fc1849473da8b08ad92b9ad9a, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 8978661430233241730, guid: e7f50d4fc1849473da8b08ad92b9ad9a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 8978661430233241730, guid: e7f50d4fc1849473da8b08ad92b9ad9a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 8978661430233241730, guid: e7f50d4fc1849473da8b08ad92b9ad9a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 8978661430233241730, guid: e7f50d4fc1849473da8b08ad92b9ad9a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -191
+      objectReference: {fileID: 0}
+    - target: {fileID: 8978661430233241730, guid: e7f50d4fc1849473da8b08ad92b9ad9a, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -15,7 +15,7 @@ public class DialogueManager : MonoBehaviour
     public TMP_Text dialogueText;
 
     [Tooltip("The image component for the speaker's profile picture")]
-    public Image profileImage;
+    public RawImage profileImage;
 
     [Tooltip("The audio source for playing voice-over clips")]
     public AudioSource dialogueAudioSource;
@@ -109,7 +109,7 @@ public class DialogueManager : MonoBehaviour
 
         DialogueLine line = currentDialogue.dialogueLines[currentLineIndex];
         dialogueText.text = line.dialogueText;
-        profileImage.sprite = line.speakerProfilePicture;
+        profileImage.texture = line.speakerProfilePicture;
 
         if (line.voiceOverClip != null)
         {
