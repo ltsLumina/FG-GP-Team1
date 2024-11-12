@@ -29,6 +29,9 @@ public class GameManager : SingletonPersistent<GameManager>
 
     public ShipScanner ShipScanner;
 
+    public float highScore;
+    public float currentDepth;
+
     // Add more variables as needed
 
     public GameState state;
