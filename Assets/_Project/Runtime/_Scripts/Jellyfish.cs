@@ -1,8 +1,10 @@
-﻿using System;
+﻿#region
 using Lumina.Essentials.Attributes;
 using UnityEngine;
+using UnityEngine.Events;
 using VInspector;
 using Random = UnityEngine.Random;
+#endregion
 
 public class Jellyfish : MonoBehaviour
 {
@@ -17,28 +19,32 @@ public class Jellyfish : MonoBehaviour
     [Tab("Collider")]
     [SerializeField] Vector3 offset;
     [SerializeField] int radius;
+
+    [Tab("Events")]
+    [SerializeField] UnityEvent<int> onChargeChanged;
+    [SerializeField] UnityEvent onChargeDepleted;
     
     public int ChargeLevel => chargeLevel;
     public bool Charged => charged;
 
     int reductionAmount = 1;
-    SphereCollider collider;
+    SphereCollider col;
     
     void Start()
     {
         chargeLevel = Random.Range(0, 5 + 1);
         charged = chargeLevel > 0;
 
-        collider = GetComponent<SphereCollider>();
+        col = GetComponent<SphereCollider>();
     }
 
     void Update()
     {
         charged = chargeLevel > 0;
         
-        collider.isTrigger = true;
-        collider.radius = radius;
-        collider.center = offset;
+        col.isTrigger = true;
+        col.radius = radius;
+        col.center = offset;
     }
 
     void OnTriggerEnter(Collider other)

@@ -24,5 +24,5 @@ MonoBehaviour:
   fleeingMoveSpeedMult: 1
   fleeContext: 2
   fleeTimeSeconds: 0.2
-  prefab: {fileID: 8611983429417115528, guid: 4871ee3ad9336104c82f941a0e8abcb2, type: 3}
+  prefab: {fileID: 942484583108916622, guid: bc075673a23662e47a2493f3978eaf66, type: 3}
   material: {fileID: 2100000, guid: 7a87e8a073137c94b8df1516c461fb83, type: 2}

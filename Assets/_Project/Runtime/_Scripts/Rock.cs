@@ -14,7 +14,7 @@ public class Rock : MonoBehaviour, IDestructible
     void FixedUpdate()
     {
         // Move towards the train very slightly if within the magnetization distance
-        var train    = Helpers.Find<Train>();
+        var train    = Train.Instance;
         var distance = Vector3.Distance(train.transform.position, transform.position);
 
         if (distance <= magnetizationDistance)
