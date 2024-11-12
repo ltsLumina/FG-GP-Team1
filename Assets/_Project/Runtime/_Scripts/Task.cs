@@ -154,7 +154,7 @@ public class Task : MonoBehaviour
 
     void CancelTask()
     {
-        this.FindPlayer(1).PlayerAnimation.Animator.SetTrigger("StartRepairing");
+        this.FindPlayer(1).PlayerAnimation.Animator.SetTrigger("StopRepairing");
         
         if (taskCoroutine != null)
         {
@@ -189,7 +189,7 @@ public class Task : MonoBehaviour
 
     void CompleteTask()
     {
-        this.FindPlayer(1).PlayerAnimation.Animator.SetTrigger("StartRepairing");
+        this.FindPlayer(1).PlayerAnimation.Animator.SetTrigger("StopRepairing");
         
         taskCoroutine = null;
         train.SetTaskStatus(task);

@@ -9,6 +9,7 @@ using UnityEngine;
 using UnityEngine.Custom.Attributes;
 using UnityEngine.InputSystem;
 using static Lumina.Essentials.Modules.Helpers;
+using Object = UnityEngine.Object;
 #endregion
 
 [Author("Alex", "alexander.andrejeff@edu.futuregames.se"), DisallowMultipleComponent]
@@ -254,10 +255,16 @@ public static class PlayerExtensions
 {
     public static void DoForEachPlayer(this MonoBehaviour _, Action<Player> action)
     {
-        var players = FindMultiple<Player>();
-        foreach (var player in players)
+        int playerCount = PlayerInputManager.instance.playerCount;
+        if (playerCount == 1)
         {
+            var player = Object.FindAnyObjectByType<Player>();
             action(player);
+        }
+        else
+        {
+            Player[] players = FindMultiple<Player>();
+            foreach (Player player in players) { action(player); }
         }
     }
     

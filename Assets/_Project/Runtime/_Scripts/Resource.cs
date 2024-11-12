@@ -52,16 +52,13 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
     {
         onGrabbed += () =>
         {
-            TryGetComponent(out Rigidbody rb);
-            rb.isKinematic = false;
             SetMesh(true);
             ResetVelocity();
         };
         onReleased += () =>
         {
-            SetMesh(true);
             Throw(currentPlayer);
-            currentPlayer = null;
+            currentPlayer = null; // Set to null after throwing.
         };
     }
 
@@ -74,6 +71,7 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
     {
         TryGetComponent(out Rigidbody rb);
         if (rb == null) return;
+        rb.isKinematic = false;
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
     }
@@ -110,8 +108,11 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
 
     void Start()
     {
-        Debug.Assert(standardMesh != null, "Standard mesh is not set. Please set it in the inspector.", this);
-        Debug.Assert(grabbedMesh != null, "Grabbed mesh is not set. Please set it in the inspector.", this);
+        if (Item != IGrabbable.Items.Battery)
+        {
+            Debug.Assert(standardMesh != null, "Standard mesh is not set. Please set it in the inspector.", this);
+            Debug.Assert(grabbedMesh != null, "Grabbed mesh is not set. Please set it in the inspector.", this);
+        }
         
         if (Lifetime <= 5) Debug.LogWarning("Lifetime is set too low. Object will likely be destroyed before it has left the screen bounds.");
         Bypass = item == IGrabbable.Items.Battery; // Don't destroy the battery. (obviously, lol)
@@ -124,11 +125,13 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
         var moveInput = currentPlayer.InputManager.MoveInput;
         var offset    = new Vector3(moveInput.x * 2f, 3.5f);
 
-        transform.DOMove(currentPlayer.transform.position + offset, 0.35f);
+        transform.position = currentPlayer.transform.position + offset;
     }
     
     void SetMesh(bool useGrabbedMesh)
     {
+        if (Item == IGrabbable.Items.Battery) return;
+        
         standardMesh.gameObject.SetActive(!useGrabbedMesh);
         grabbedMesh.gameObject.SetActive(useGrabbedMesh);
     }

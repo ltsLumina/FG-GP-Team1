@@ -303,7 +303,7 @@ public class Train : MonoBehaviour
         }
         
         Dive();
-        FuelDirtinessCalculation();
+        FuelCalculation();
         ToggleLightsAtThreshold();
 
     }
@@ -315,15 +315,9 @@ public class Train : MonoBehaviour
         transform.position += dir * (speed * Time.deltaTime);
     }
     
-    void FuelDirtinessCalculation()
+    void FuelCalculation()
     {
-        dirtiness = Mathf.Clamp(dirtiness + dirtinessRate * Time.deltaTime, 0, 100);
-        dirtinessStage = Mathf.Clamp(dirtinessStages.FindIndex(d => dirtiness < d.threshold) + 1, 1, fuelDepletionRateMultipliers.Count);
-        this.DoForEachPlayer(p => p.Animator.SetInteger("FilthLevel", dirtinessStage));
-
-        Fuel -= fuelDepletionRate * fuelDepletionRateMultipliers[dirtinessStage].multiplier * Time.deltaTime;
-        onDirtinessStageChanged.Invoke(dirtinessStage);
-
+        Fuel -= fuelDepletionRate * Time.deltaTime;
         this.DoForEachPlayer(p => p.Animator.SetBool("FuelCritical", Fuel < 20));
     }
 
@@ -356,10 +350,6 @@ public class Train : MonoBehaviour
     {
         switch (tasks)
         {
-            case Tasks.Clean:
-                Dirtiness -= algaeRestoreAmount;
-                break;
-
             case Tasks.Refuel:
                 Fuel += kelpRestoreAmount;
                 break;
@@ -377,18 +367,16 @@ public class Train : MonoBehaviour
     }
 
     public bool CanPerformTask(Tasks tasks) => tasks switch
-    { Tasks.Clean    => Dirtiness > 0,
-      Tasks.Refuel   => Fuel < 100,
+    { Tasks.Refuel   => Fuel < 100,
       Tasks.Repair   => HullIntegrity < 3 && hullBreaches > 0 && !Player.HoldingResource(out Resource _),
       Tasks.Recharge => Power < 100 && Player.HoldingResource(out Resource battery) && battery.Item == IGrabbable.Items.Battery,
       _              => false };
 
     public bool IsTaskComplete(Tasks tasks) => tasks switch
-    { Tasks.Clean    => Dirtiness     <= 20,
-      Tasks.Refuel   => Fuel          >= 100,
+    { Tasks.Refuel   => Fuel >= 100,
       Tasks.Repair   => HullIntegrity >= 3,
-      Tasks.Recharge => Power         >= 100,
-      _                   => false };
+      Tasks.Recharge => Power >= 100,
+      _              => false };
     #endregion
 
     #region Collision
@@ -472,8 +460,6 @@ public class Train : MonoBehaviour
     {
         ValidateDirtiness();
         ValidateFuelDepletionRateMultipliers();
-        
-        HullIntegrity = Mathf.Max(0, 3 - hullBreaches);
     }
 
     void Reset()

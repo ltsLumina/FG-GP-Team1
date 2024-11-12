@@ -21,9 +21,12 @@ public class InteractableSpawner : MonoBehaviour
 
     private float startYOffset; // Starting Y offset of the spawner
     private ResourceWaves currentWave;
-    private float intervalTimer;
-    private Dictionary<RandomizeObjectsSpawn, int> spawnCounts =
+    private Dictionary<RandomizeObjectsSpawn, float> spawnTimers =
+        new Dictionary<RandomizeObjectsSpawn, float>();
+    private Dictionary<RandomizeObjectsSpawn, int> spawnedCount =
         new Dictionary<RandomizeObjectsSpawn, int>();
+    private Dictionary<RandomizeObjectsSpawn, float> cooldownTimers =
+        new Dictionary<RandomizeObjectsSpawn, float>(); // Cooldown timers for each spawn object
 
     private void Start()
     {
@@ -57,29 +60,46 @@ public class InteractableSpawner : MonoBehaviour
         // Check if we should start spawning based on the depth
         if (currentWave != null && trackTransform.position.y <= -currentWave.depth)
         {
-            intervalTimer += Time.deltaTime;
-
             foreach (var spawnObject in currentWave.spawnObjects)
             {
-                if (spawnCounts[spawnObject] < spawnObject.amountToSpawn)
+                if (!spawnTimers.ContainsKey(spawnObject))
+                {
+                    spawnTimers[spawnObject] = 0f;
+                    spawnedCount[spawnObject] = 0;
+                    cooldownTimers[spawnObject] = 0f;
+                }
+
+                spawnTimers[spawnObject] += Time.deltaTime;
+                cooldownTimers[spawnObject] -= Time.deltaTime;
+
+                if (spawnTimers[spawnObject] >= currentWave.spawnObjects[0].spawnInterval)
+                {
+                    // Reset the timer and spawned count every interval
+                    spawnTimers[spawnObject] = 0f;
+                    spawnedCount[spawnObject] = 0;
+                }
+
+                if (
+                    spawnedCount[spawnObject] < spawnObject.amountToSpawn
+                    && cooldownTimers[spawnObject] <= 0f
+                )
                 {
                     float targetInterval = spawnObject.spawnInterval / spawnObject.amountToSpawn;
-
-                    if (intervalTimer >= targetInterval)
+                    if (
+                        spawnTimers[spawnObject]
+                        >= Random.Range(
+                            spawnedCount[spawnObject] * targetInterval,
+                            (spawnedCount[spawnObject] + 1) * targetInterval
+                        )
+                    )
                     {
                         Vector3 spawnPosition = GetSpawnPosition(spawnObject);
                         Quaternion rotation = GetSpawnRotation(spawnObject, spawnPosition);
                         Instantiate(spawnObject.objectToSpawn, spawnPosition, rotation);
-                        spawnCounts[spawnObject]++;
-                        intervalTimer = 0f; // Reset timer for the next spawn
+                        spawnedCount[spawnObject]++;
+                        cooldownTimers[spawnObject] = targetInterval; // Set cooldown timer to prevent immediate re-spawning
                     }
                 }
-            }
-
-            // Reset the spawn counts once all objects have been spawned, to allow continuous spawning
-            if (AllObjectsSpawned())
-            {
-                ResetSpawnCounts();
             }
         }
     }
@@ -87,44 +107,14 @@ public class InteractableSpawner : MonoBehaviour
     private void StartWave(ResourceWaves wave)
     {
         currentWave = wave;
-        intervalTimer = 0;
-        spawnCounts.Clear();
+        spawnTimers.Clear();
+        spawnedCount.Clear();
+        cooldownTimers.Clear();
         foreach (var spawnObject in currentWave.spawnObjects)
         {
-            spawnCounts[spawnObject] = 0;
-        }
-    }
-
-    private void StartNextWave()
-    {
-        spawnWaves.RemoveAt(0);
-        if (spawnWaves.Count > 0)
-        {
-            StartWave(spawnWaves[0]);
-        }
-        else
-        {
-            StartWave(currentWave); // Restart the current wave if no more waves are left
-        }
-    }
-
-    private bool AllObjectsSpawned()
-    {
-        foreach (var spawnObject in currentWave.spawnObjects)
-        {
-            if (spawnCounts[spawnObject] < spawnObject.amountToSpawn)
-            {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private void ResetSpawnCounts()
-    {
-        foreach (var spawnObject in currentWave.spawnObjects)
-        {
-            spawnCounts[spawnObject] = 0;
+            spawnTimers[spawnObject] = 0f;
+            spawnedCount[spawnObject] = 0;
+            cooldownTimers[spawnObject] = 0f;
         }
     }
 
