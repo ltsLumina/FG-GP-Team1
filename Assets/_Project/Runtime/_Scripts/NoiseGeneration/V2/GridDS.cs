@@ -5,6 +5,11 @@ public class GridDS
 {
     //Grid Integrity
     LinkedList<RowData> _meshData = new LinkedList<RowData>();
+    private Vector3[] _triNormals;
+    private Vector3[] _triCentres;
+
+    private List<int> _coralIndex = new List<int>();
+
     private int _totalRows;
 
     //Noise Related Variables
@@ -25,6 +30,7 @@ public class GridDS
     private float _gridCellLength;
 
     private Vector3 _position;
+    private Quaternion _rotation;
     private float _heightMultiplier;
 
 
@@ -89,7 +95,6 @@ public class GridDS
     public void GenerateNextRow()
     {
         float[,] heightMap = BetterNoise.GetNoiseMap(_width, _totalRows, _totalRows+2, _scaleX, _scaleY, _offset, _globalOffset, _globalScale, _globalAmplitude, _octaves, _persistance, _lacunarity, _seed);
-        
         float topLeftX = _position.x - (_width * _gridCellLength / 2);
         float topLeftZ = _offset.y;
 
@@ -105,7 +110,7 @@ public class GridDS
             for (int x = 0; x < _width; x++)
             {
                 float heightMapVal = heightMap[x, y];
-                float vertexVal = heightMapVal;//Mathf.Pow(heightMapVal, 3);
+                float vertexVal = heightMapVal;
 
                 float VertexX = topLeftX + (x * _gridCellLength);
                 float VertexY = vertexVal * _heightMultiplier;
@@ -151,6 +156,11 @@ public class GridDS
         _position = position;
     }
 
+    public void SetRotation(Quaternion rotation)
+    {
+        _rotation = rotation;
+    }
+
     public Mesh GenerateMesh(Mesh mesh)
     {
         if (mesh == null)
@@ -161,6 +171,10 @@ public class GridDS
         Vector3[] vertices = new Vector3[_width * _height];
         Vector2[] UVs = new Vector2[_width * _height];
         int[] triangles = new int[(_width - 1) * (_height - 1) * 6];
+
+        _triNormals = new Vector3[(_width - 1) * (_height - 1) * 2];
+        _triCentres = new Vector3[(_width - 1) * (_height - 1) * 2];
+
 
         float zPos = -(_height * _gridCellLength / 2);
 
@@ -221,6 +235,33 @@ public class GridDS
             index++;
         }
 
+        for (int i = 0; i < triangles.Length; i += 3)
+        {
+            Vector3 vert1pos = RotateAround(vertices[triangles[i]], _position, _rotation);
+            Vector3 vert2pos = RotateAround(vertices[triangles[i + 1]], _position, _rotation);
+            Vector3 vert3pos = RotateAround(vertices[triangles[i + 2]], _position, _rotation);
+
+            Vector3 triPos = (vert1pos + vert2pos + vert3pos) / 3;
+
+            Vector3 A = vert2pos - vert1pos;
+            Vector3 B = vert3pos - vert1pos;
+
+            Vector3 triNorm = Vector3.Cross(A, B).normalized;
+
+            _triNormals[i / 3] = triNorm;
+            _triCentres[i / 3] = triPos;
+
+            if (triNorm.y >= 0)
+            {
+                if (Random.Range(0f, 1f) < 0.2f)
+                {
+                    _coralIndex.Add(i / 3);
+                }
+            }
+
+
+        }
+
         mesh.vertices = vertices;
         mesh.triangles = triangles;
         mesh.uv = UVs;
@@ -229,6 +270,30 @@ public class GridDS
         return mesh;
     }
 
+    public Vector3[] GetTriNormals()
+    {
+        return _triNormals;
+    }
+
+    public Vector3[] GetTriCentres()
+    {
+        return _triCentres;
+    }
+
+    public List<int> GetCoralIndices()
+    {
+        return _coralIndex;
+    }
+
+    static Vector3 RotateAround(Vector3 position, Vector3 pivotPoint, Quaternion rot)
+    {
+        Vector3 finalVec = new Vector3();
+        finalVec = position;
+        finalVec = rot * position + pivotPoint;
+        return finalVec;
+    }
+
+
 }
 
 public class RowData
@@ -236,6 +301,8 @@ public class RowData
     public Vector3[] Vertices;
     public int[] Triangles;
     public Vector2[] UVs;
+    public Vector3[] triNormals;
+    public Vector3[] triCentres;
 
     public int rowNumber;
     int triangleIndex = 0;
@@ -245,6 +312,8 @@ public class RowData
         Vertices = new Vector3[meshWidth * meshHeight];
         UVs = new Vector2[meshWidth * meshHeight];
         Triangles = new int[(meshWidth - 1) * (meshHeight - 1) * 6];
+        triNormals = new Vector3[(meshWidth - 1) * (meshHeight - 1) * 2];
+        triCentres = new Vector3[(meshWidth - 1) * (meshHeight - 1) * 2];
     }
 
     public void AddTriangle(int a, int b, int c)
