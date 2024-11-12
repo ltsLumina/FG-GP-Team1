@@ -57,7 +57,7 @@ public class Battery : MonoBehaviour
             Gizmos.DrawWireSphere(startPos.position, batteryReturnDistance);
         }
 
-        if (PlayerInputsManager.Player2)
+        if (PlayerInputsManager.Player2 != null)
         {
             Gizmos.color = Vector3.Distance(PlayerInputsManager.Player2.transform.position, startPos.position) > batteryReturnDistance ? Color.red : Color.green;
             Gizmos.DrawWireSphere(startPos.position, batteryReturnDistance);

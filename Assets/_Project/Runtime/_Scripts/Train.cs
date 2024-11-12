@@ -466,8 +466,6 @@ public class Train : MonoBehaviour
     {
         ValidateDirtiness();
         ValidateFuelDepletionRateMultipliers();
-        
-        HullIntegrity = Mathf.Max(0, 3 - hullBreaches);
     }
 
     void Reset()
