@@ -20,7 +20,8 @@ public class SquishOnCollision : MonoBehaviour
     {
         if (isOnCooldown) return;
         if (hitVFXPrefab != null) Instantiate(hitVFXPrefab, collision.contacts[0].point, Quaternion.identity);
-
+        
+        this.DoForEachPlayer(p => p.Animator.SetTrigger("Collide"));
         SquishEffect();
         StartCoroutine(CooldownCoroutine());
     }

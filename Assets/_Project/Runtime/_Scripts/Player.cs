@@ -50,6 +50,7 @@ public class Player : MonoBehaviour
     public PlayerInput PlayerInput { get; private set; }
     public InputManager InputManager { get; private set; }
     public PlayerAnimation PlayerAnimation { get; private set; }
+    public Animator Animator => PlayerAnimation.Animator;
 
     Action<bool> onDash;
     Action<bool> onDashEnd;
@@ -92,7 +93,12 @@ public class Player : MonoBehaviour
         transform.rotation = new Quaternion(0, 180, 0, 0); // i dont know why but this must be done
     }
 
-    void Update() => Move();
+    void Update()
+    {
+        Move();
+        
+        Animator.SetBool("Grabbing", heldResource != null);
+    }
 
     public void Freeze(bool freeze) => canMove = !freeze;
 
@@ -220,6 +226,8 @@ public class Player : MonoBehaviour
 
     IEnumerator StunRoutine()
     {
+        Animator.SetTrigger("Stunned");
+        
         Freeze(true);
         PlayerAnimation.Stun(stunDuration);
         yield return new WaitForSeconds(stunDuration);
@@ -229,7 +237,16 @@ public class Player : MonoBehaviour
 
 public static class PlayerExtensions
 {
-    public static Player FindPlayer(this MonoBehaviour monoBehaviour, int playerID)
+    public static void DoForEachPlayer(this MonoBehaviour _, Action<Player> action)
+    {
+        var players = FindMultiple<Player>();
+        foreach (var player in players)
+        {
+            action(player);
+        }
+    }
+    
+    public static Player FindPlayer(this MonoBehaviour _, int playerID)
     {
         var players = FindMultiple<Player>();
         foreach (var player in players)
