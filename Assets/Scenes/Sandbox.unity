@@ -15824,7 +15824,7 @@ MonoBehaviour:
     space: 0
   rootTab:
     name: 
-    selectedSubtabIndex: 4
+    selectedSubtabIndex: 0
     subtabs:
     - rid: 5260567303344357731
     - rid: 5260567303344357732
@@ -24537,10 +24537,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1500165713465378416, guid: 2175803516d224265a441737d6f8525b, type: 3}
-      propertyPath: field of view
-      value: 50
-      objectReference: {fileID: 0}
     - target: {fileID: 6140353902049099123, guid: 2175803516d224265a441737d6f8525b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -24586,17 +24582,16 @@ PrefabInstance:
       value: CameraRig
       objectReference: {fileID: 0}
     - target: {fileID: 8165206028233633459, guid: 2175803516d224265a441737d6f8525b, type: 3}
-      propertyPath: Lens.FieldOfView
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 8165206028233633459, guid: 2175803516d224265a441737d6f8525b, type: 3}
       propertyPath: Target.TrackingTarget
       value: 
       objectReference: {fileID: 8759106494943338649}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2262547350676529732, guid: 2175803516d224265a441737d6f8525b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1609272763}
   m_SourcePrefab: {fileID: 100100000, guid: 2175803516d224265a441737d6f8525b, type: 3}
 --- !u!1 &1427501592
 GameObject:
@@ -28300,6 +28295,34 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &1609272758 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2262547350676529732, guid: 2175803516d224265a441737d6f8525b, type: 3}
+  m_PrefabInstance: {fileID: 1424883301}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1609272763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1609272758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ApplyAfter: 2
+  ChannelMask: 1
+  Gain: 1
+  Use2DDistance: 0
+  UseCameraSpace: 1
+  ReactionSettings:
+    m_SecondaryNoise: {fileID: 0}
+    AmplitudeGain: 1
+    FrequencyGain: 1
+    Duration: 1
+    m_NoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &1610229299
 GameObject:
   m_ObjectHideFlags: 0
@@ -35811,10 +35834,10 @@ MonoBehaviour:
   cpuEvaluateRipples: 0
   customMaterial: {fileID: 0}
   startSmoothness: 1
-  endSmoothness: 0.789629
+  endSmoothness: 0.7896289
   smoothnessFadeStart: 100
   smoothnessFadeDistance: 500
-  tessellation: 1
+  tessellation: 0
   maxTessellationFactor: 3
   tessellationFactorFadeStart: 150
   tessellationFactorFadeRange: 1850
@@ -35853,7 +35876,7 @@ MonoBehaviour:
   underWaterScatteringColorMode: 0
   underWaterScatteringColor: {r: 0, g: 0.27, b: 0.23, a: 1}
   underWaterRefraction: 1
-  decalRegionSize: {x: 200, y: 200}
+  decalRegionSize: {x: 1, y: 1}
   decalRegionAnchor: {fileID: 0}
   supportLargeCurrent: 0
   largeCurrentRes: 512
@@ -35869,10 +35892,10 @@ MonoBehaviour:
   ripplesCurrentRegionExtent: {x: 100, y: 100}
   ripplesCurrentRegionOffset: {x: 0, y: 0}
   ripplesCurrentMapInfluence: 1
-  deformation: 1
+  deformation: 0
   deformationRes: 512
-  foam: 1
-  foamResolution: 512
+  foam: 0
+  foamResolution: 256
   foamPersistenceMultiplier: 0.5
   foamCurrentInfluence: 0.6
   foamColor: {r: 1, g: 1, b: 1, a: 1}
@@ -39453,10 +39476,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock
       objectReference: {fileID: 0}
-    - target: {fileID: 4781570308072900306, guid: 38d6cdba11a866b4ca0c74aca4355d0f, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8091987052845928827, guid: 38d6cdba11a866b4ca0c74aca4355d0f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9.78
@@ -39689,58 +39708,42 @@ PrefabInstance:
       propertyPath: m_Name
       value: Train
       objectReference: {fileID: 0}
-    - target: {fileID: 2007319347909775451, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
-      propertyPath: m_LocalPosition.z
+    - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: debugMode
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
       propertyPath: invincible
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
-      propertyPath: hullBreaches
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
-      propertyPath: repairAmount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
       propertyPath: hullIntegrity
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
       propertyPath: vInspectorData
       value: 
       objectReference: {fileID: 921712202}
     - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
-      propertyPath: powerDepletionRate
-      value: 0.5
+      propertyPath: fuelDepletionRate
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3139968387828256574, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: spawnWaves.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3139968387828256574, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: 'spawnWaves.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: feb5a09cb67d7b446be069f2fed94100, type: 2}
+    - target: {fileID: 3139968387828256574, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: 'spawnWaves.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: c35e2770c1c210544bbcf7d1973a74b4, type: 2}
     - target: {fileID: 3550748028598978181, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
       propertyPath: vInspectorData
       value: 
       objectReference: {fileID: 1754602628}
-    - target: {fileID: 3550748028598978181, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
-      propertyPath: repairAction.m_Name
-      value: Repair
-      objectReference: {fileID: 0}
-    - target: {fileID: 3550748028598978181, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
-      propertyPath: repairAction.m_SingletonActionBindings.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3550748028598978181, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
-      propertyPath: repairAction.m_SingletonActionBindings.Array.data[0].m_Id
-      value: 317d5536-df09-4556-b17d-85617c5e5076
-      objectReference: {fileID: 0}
-    - target: {fileID: 3550748028598978181, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
-      propertyPath: repairAction.m_SingletonActionBindings.Array.data[0].m_Path
-      value: <Keyboard>/space
-      objectReference: {fileID: 0}
-    - target: {fileID: 3550748028598978181, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
-      propertyPath: repairAction.m_SingletonActionBindings.Array.data[0].m_Action
-      value: Repair
-      objectReference: {fileID: 0}
     - target: {fileID: 3647054809633606627, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -39757,14 +39760,6 @@ PrefabInstance:
       propertyPath: vInspectorData
       value: 
       objectReference: {fileID: 375217023}
-    - target: {fileID: 6722248718235981374, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7584022963353752610, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8589098272386292673, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
