@@ -300,9 +300,9 @@ public class WallGen : MonoBehaviour
             int coralPrefabIndex = Random.Range(0, CoralPrefabs.Count);
 
             GameObject coral = ObjectPoolStaticBatch.Instance.GetObject(CoralPrefabs[coralPrefabIndex].name);
-            //GameObject temp = Instantiate(coral, centre, Quaternion.Euler(normal));
             coral.name = CoralPrefabs[coralPrefabIndex].name;
             coral.transform.position = centre;
+            coral.transform.rotation = Quaternion.Euler(normal);
             coral.transform.localScale = new Vector3(3, 3, 3);
             coralList.Add(coral);
         }
