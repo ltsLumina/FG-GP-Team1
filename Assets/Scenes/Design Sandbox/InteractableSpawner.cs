@@ -25,6 +25,8 @@ public class InteractableSpawner : MonoBehaviour
         new Dictionary<RandomizeObjectsSpawn, float>();
     private Dictionary<RandomizeObjectsSpawn, int> spawnedCount =
         new Dictionary<RandomizeObjectsSpawn, int>();
+    private Dictionary<RandomizeObjectsSpawn, float> cooldownTimers =
+        new Dictionary<RandomizeObjectsSpawn, float>(); // Cooldown timers for each spawn object
 
     private void Start()
     {
@@ -64,9 +66,11 @@ public class InteractableSpawner : MonoBehaviour
                 {
                     spawnTimers[spawnObject] = 0f;
                     spawnedCount[spawnObject] = 0;
+                    cooldownTimers[spawnObject] = 0f;
                 }
 
                 spawnTimers[spawnObject] += Time.deltaTime;
+                cooldownTimers[spawnObject] -= Time.deltaTime;
 
                 if (spawnTimers[spawnObject] >= currentWave.spawnObjects[0].spawnInterval)
                 {
@@ -75,7 +79,10 @@ public class InteractableSpawner : MonoBehaviour
                     spawnedCount[spawnObject] = 0;
                 }
 
-                if (spawnedCount[spawnObject] < spawnObject.amountToSpawn)
+                if (
+                    spawnedCount[spawnObject] < spawnObject.amountToSpawn
+                    && cooldownTimers[spawnObject] <= 0f
+                )
                 {
                     float targetInterval = spawnObject.spawnInterval / spawnObject.amountToSpawn;
                     if (
@@ -90,6 +97,7 @@ public class InteractableSpawner : MonoBehaviour
                         Quaternion rotation = GetSpawnRotation(spawnObject, spawnPosition);
                         Instantiate(spawnObject.objectToSpawn, spawnPosition, rotation);
                         spawnedCount[spawnObject]++;
+                        cooldownTimers[spawnObject] = targetInterval; // Set cooldown timer to prevent immediate re-spawning
                     }
                 }
             }
@@ -101,10 +109,12 @@ public class InteractableSpawner : MonoBehaviour
         currentWave = wave;
         spawnTimers.Clear();
         spawnedCount.Clear();
+        cooldownTimers.Clear();
         foreach (var spawnObject in currentWave.spawnObjects)
         {
             spawnTimers[spawnObject] = 0f;
             spawnedCount[spawnObject] = 0;
+            cooldownTimers[spawnObject] = 0f;
         }
     }
 
