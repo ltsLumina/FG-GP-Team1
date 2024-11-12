@@ -49,7 +49,7 @@ public class TurtorialManager : MonoBehaviour
 
                 if (pressedW && pressedA && pressedS && pressedD)
                 {
-                    TurtorialPickup(); // Move to the next step
+                    TurtorialPickup();
                 }
                 break;
 
@@ -58,7 +58,7 @@ public class TurtorialManager : MonoBehaviour
                 tutorialText.text = "Press E to pick up items.";
                 if (Input.GetKeyDown(KeyCode.E) /* && isObjectGrabbed*/)
                 {
-                    TurtorialFuel(); // Move to the next step
+                    TurtorialFuel();
                 }
                 break;
 
