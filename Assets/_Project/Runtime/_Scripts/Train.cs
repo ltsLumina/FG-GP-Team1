@@ -224,6 +224,14 @@ public class Train : MonoBehaviour
     }
 #endif
 
+    public static Train Instance { get; private set; } 
+    
+    void Awake()
+    {
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+    }
+
     void Start()
     {
         // TODO: for alpha
@@ -239,6 +247,7 @@ public class Train : MonoBehaviour
             (() =>
             {
                 GameManager.Instance.GameStateChanger(GameManager.GameState.GameOver);
+                this.DoForEachPlayer(p => p.Animator.SetTrigger("GameOver"));
                 Debug.Log("Died");
             });
 
@@ -304,9 +313,12 @@ public class Train : MonoBehaviour
     {
         dirtiness = Mathf.Clamp(dirtiness + dirtinessRate * Time.deltaTime, 0, 100);
         dirtinessStage = Mathf.Clamp(dirtinessStages.FindIndex(d => dirtiness < d.threshold) + 1, 1, fuelDepletionRateMultipliers.Count);
+        this.DoForEachPlayer(p => p.Animator.SetFloat("FilthLevel", dirtinessStage));
 
         Fuel -= fuelDepletionRate * fuelDepletionRateMultipliers[dirtinessStage].multiplier * Time.deltaTime;
         onDirtinessStageChanged.Invoke(dirtinessStage);
+
+        this.DoForEachPlayer(p => p.Animator.SetBool("FuelCritical", Fuel < 20));
     }
 
     void ToggleLightsAtThreshold()
@@ -314,9 +326,12 @@ public class Train : MonoBehaviour
         foreach (var light in lights)
         {
             Power -= powerDepletionRate * Time.deltaTime;
+            this.DoForEachPlayer(p => p.Animator.SetBool("LightsCritical", Power < 20));
             if (Power <= lightSwitchThresholds[light.Key])
             {
                 OnLightDim.Invoke(light.Key.GetComponent<Light>());
+                this.DoForEachPlayer(p => p.Animator.SetTrigger("LightsOut"));
+
             }
             else // Power has been restored above the threshold
             {
@@ -390,6 +405,8 @@ public class Train : MonoBehaviour
             onHullBreach.Invoke(hullBreaches);
             onHullIntegrityChanged.Invoke(HullIntegrity);
             onRockCollision.Invoke(collision.GetComponent<Rock>());
+            
+            this.DoForEachPlayer(p => p.Animator.SetBool("HullCritical", HullIntegrity == 1));
         }
     }
     #endregion

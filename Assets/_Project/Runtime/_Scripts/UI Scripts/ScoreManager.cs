@@ -29,7 +29,7 @@ public class ScoreManager : MonoBehaviour
 
     public void Update()
     {
-        currentDepthScore.text         = Helpers.Find<Train>().DepthString;
+        currentDepthScore.text         = Train.Instance.DepthString;
         currentAlgaeCollected.text     = algaeCollected.ToString();
         currentHolesRepaired.text      = holesRepaired.ToString();
         currentJellyfishCollected.text = jellyfishCollected.ToString();

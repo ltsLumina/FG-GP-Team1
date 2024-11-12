@@ -11,19 +11,19 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField]
     float dashMotorSpeed = 5.0f;
 
-    Animator anim;
+    public Animator Animator { get; private set; }
     InputManager input;
 
     private void Start()
     {
-        anim = GetComponent<Animator>();
+        Animator = GetComponent<Animator>();
         input = transform.parent.GetComponentInChildren<InputManager>();
         SetMotorSpeed(motorSpeed);
     }
 
     public void Dash()
     {
-        anim.SetTrigger("Dash");
+        Animator.SetTrigger("Dash");
         SetMotorSpeed(dashMotorSpeed);
     }
 
@@ -34,7 +34,7 @@ public class PlayerAnimation : MonoBehaviour
 
     private void SetMotorSpeed(float speed)
     {
-        anim.SetFloat("MotorSpeed", speed);
+        Animator.SetFloat("MotorSpeed", speed);
     }
 
     public void Grab(GameObject grabbedObject)
@@ -75,21 +75,26 @@ public class PlayerAnimation : MonoBehaviour
         SetMovementBlendTree(input.MoveInput);
     }
 
+    private void ObjectReleased()
+    {
+        Debug.Log("Object released");
+    }
+
     // Set blend tree parameters for player movement based on input of new input system Player action Move
     public void SetMovementBlendTree(Vector2 movement)
     {
         // Smooth out the transition between animations, so the player doesn't snap between animations
         float horizontalUpdate = Mathf.Lerp(
-            anim.GetFloat("Horizontal"),
+            Animator.GetFloat("Horizontal"),
             movement.x,
             Time.deltaTime / animationTiming
         );
         float verticalUpdate = Mathf.Lerp(
-            anim.GetFloat("Vertical"),
+            Animator.GetFloat("Vertical"),
             movement.y,
             Time.deltaTime / animationTiming
         );
-        anim.SetFloat("Horizontal", horizontalUpdate);
-        anim.SetFloat("Vertical", verticalUpdate);
+        Animator.SetFloat("Horizontal", horizontalUpdate);
+        Animator.SetFloat("Vertical", verticalUpdate);
     }
 }

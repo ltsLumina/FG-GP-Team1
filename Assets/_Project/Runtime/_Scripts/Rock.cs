@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using Lumina.Essentials.Modules;
 using UnityEngine;
 
@@ -11,10 +13,18 @@ public class Rock : MonoBehaviour, IDestructible
     [Tooltip("The maximum distance at which the magnetization effect kicks in.")]
     [SerializeField] float magnetizationDistance = 5f;
 
+    [SerializeField] List<GameObject> rockModels;
+
+    void Start()
+    {
+        var rockModel = rockModels[UnityEngine.Random.Range(0, rockModels.Count)];
+        Instantiate(rockModel, transform);
+    }
+
     void FixedUpdate()
     {
         // Move towards the train very slightly if within the magnetization distance
-        var train    = Helpers.Find<Train>();
+        var train    = Train.Instance;
         var distance = Vector3.Distance(train.transform.position, transform.position);
 
         if (distance <= magnetizationDistance)
