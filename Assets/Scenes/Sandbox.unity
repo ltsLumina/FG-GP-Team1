@@ -24427,10 +24427,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1523588543152864231, guid: 2175803516d224265a441737d6f8525b, type: 3}
       propertyPath: antialiasing
-      value: 2
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1523588543152864231, guid: 2175803516d224265a441737d6f8525b, type: 3}
+      propertyPath: taaSharpenMode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1523588543152864231, guid: 2175803516d224265a441737d6f8525b, type: 3}
       propertyPath: allowDynamicResolution
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1523588543152864231, guid: 2175803516d224265a441737d6f8525b, type: 3}
+      propertyPath: taaMotionVectorRejection
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1523588543152864231, guid: 2175803516d224265a441737d6f8525b, type: 3}
+      propertyPath: allowFidelityFX2SuperResolution
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1523588543152864231, guid: 2175803516d224265a441737d6f8525b, type: 3}
+      propertyPath: fidelityFX2SuperResolutionSharpening
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1523588543152864231, guid: 2175803516d224265a441737d6f8525b, type: 3}
+      propertyPath: fidelityFX2SuperResolutionEnableSharpening
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1523588543152864231, guid: 2175803516d224265a441737d6f8525b, type: 3}
+      propertyPath: deepLearningSuperSamplingUseCustomAttributes
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1523588543152864231, guid: 2175803516d224265a441737d6f8525b, type: 3}
+      propertyPath: fidelityFX2SuperResolutionUseCustomAttributes
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1593504416138141191, guid: 2175803516d224265a441737d6f8525b, type: 3}
