@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using Lumina.Essentials.Attributes;
 using UnityEngine;
 using static Lumina.Essentials.Modules.Helpers;
@@ -123,7 +124,7 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
         var moveInput = currentPlayer.InputManager.MoveInput;
         var offset    = new Vector3(moveInput.x * 2f, 3.5f);
 
-        transform.position = currentPlayer.transform.position + offset;
+        transform.DOMove(currentPlayer.transform.position + offset, 0.35f);
     }
     
     void SetMesh(bool useGrabbedMesh)

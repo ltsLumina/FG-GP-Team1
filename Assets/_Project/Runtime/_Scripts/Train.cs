@@ -313,7 +313,7 @@ public class Train : MonoBehaviour
     {
         dirtiness = Mathf.Clamp(dirtiness + dirtinessRate * Time.deltaTime, 0, 100);
         dirtinessStage = Mathf.Clamp(dirtinessStages.FindIndex(d => dirtiness < d.threshold) + 1, 1, fuelDepletionRateMultipliers.Count);
-        this.DoForEachPlayer(p => p.Animator.SetFloat("FilthLevel", dirtinessStage));
+        this.DoForEachPlayer(p => p.Animator.SetInteger("FilthLevel", dirtinessStage));
 
         Fuel -= fuelDepletionRate * fuelDepletionRateMultipliers[dirtinessStage].multiplier * Time.deltaTime;
         onDirtinessStageChanged.Invoke(dirtinessStage);
