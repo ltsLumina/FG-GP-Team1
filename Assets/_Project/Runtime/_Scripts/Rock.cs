@@ -5,15 +5,29 @@ using UnityEngine;
 
 public class Rock : MonoBehaviour, IDestructible
 {
-    [SerializeField] Vector3 direction = Vector3.one;
-    [SerializeField] float force = 10;
-    [SerializeField] float torque = 10;
-    [Tooltip("The weight of the magnetization towards the train. A higher value will make the rock move faster.")]
-    [SerializeField] float magnetizationStrength = 0.1f;
-    [Tooltip("The maximum distance at which the magnetization effect kicks in.")]
-    [SerializeField] float magnetizationDistance = 5f;
+    [SerializeField]
+    Vector3 direction = Vector3.one;
 
-    [SerializeField] List<GameObject> rockModels;
+    [SerializeField]
+    float force = 10;
+
+    [SerializeField]
+    float torque = 10;
+
+    [Tooltip(
+        "The weight of the magnetization towards the train. A higher value will make the rock move faster."
+    )]
+    [SerializeField]
+    float magnetizationStrength = 0.1f;
+
+    [Tooltip("The maximum distance at which the magnetization effect kicks in.")]
+    [SerializeField]
+    float magnetizationDistance = 5f;
+
+    private bool collided = false;
+
+    [SerializeField]
+    List<GameObject> rockModels;
 
     void Start()
     {
@@ -24,10 +38,10 @@ public class Rock : MonoBehaviour, IDestructible
     void FixedUpdate()
     {
         // Move towards the train very slightly if within the magnetization distance
-        var train    = Train.Instance;
+        var train = Train.Instance;
         var distance = Vector3.Distance(train.transform.position, transform.position);
 
-        if (distance <= magnetizationDistance)
+        if (!collided && distance <= magnetizationDistance)
         {
             var dir = (train.transform.position - transform.position).normalized;
             transform.position += dir * magnetizationStrength / 100;
@@ -37,8 +51,12 @@ public class Rock : MonoBehaviour, IDestructible
     void OnCollisionEnter(Collision other)
     {
         // add force and torque to the rock
-        var rb = GetComponent<Rigidbody>();
-        rb.AddForce(direction   * force, ForceMode.Impulse);
-        rb.AddTorque(Vector3.up * torque, ForceMode.Impulse);
+        if ((other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Ship")))
+        {
+            var rb = GetComponent<Rigidbody>();
+            collided = true;
+            rb.AddForce(direction * force, ForceMode.Impulse);
+            rb.AddTorque(Vector3.up * torque, ForceMode.Impulse);
+        }
     }
 }
