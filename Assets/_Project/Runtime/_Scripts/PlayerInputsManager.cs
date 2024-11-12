@@ -8,8 +8,8 @@ public class PlayerInputsManager : PlayerInputManager
 {
     public static List<Player> Players { get; private set; } = new ();
     
-    public static Player Player1 => Players[0];
-    public static Player Player2 => Players[1];
+    public static Player Player1 => Players.Count == 0 ? null : Players[0];
+    public static Player Player2 => Players.Count == 1 ? null : Players[1];
     
     void Awake()
     {
