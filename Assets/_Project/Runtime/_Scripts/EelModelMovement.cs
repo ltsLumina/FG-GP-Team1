@@ -25,9 +25,6 @@ public class EelModelMovement : MonoBehaviour
             bodyParts[i].transform.position = new Vector3(transform.position.x + bodyParts.Count * jointLength, transform.position.y, transform.position.z);
             bodyParts[i].SetParent(null);
         }
-
-
-        Debug.Log("here");
     }
 
     private void Update()
@@ -48,7 +45,7 @@ public class EelModelMovement : MonoBehaviour
     {
         for (int i = 1; i < bodyParts.Count; i++)
         {
-            Destroy(bodyParts[i].gameObject);
+            if (bodyParts[i] != null) Destroy(bodyParts[i].gameObject);
         }
         bodyParts.Clear();
     }

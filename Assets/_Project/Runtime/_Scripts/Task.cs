@@ -145,7 +145,7 @@ public class Task : MonoBehaviour
 
     void StartTask()
     {
-        this.FindPlayer(1).PlayerAnimation.StartRepair();
+        this.FindPlayer(1).PlayerAnimation.Animator.SetTrigger("StartRepairing");
         
         chargeCircle.color = completedColor;
         this.FindPlayer(1).Freeze(true);
@@ -154,6 +154,8 @@ public class Task : MonoBehaviour
 
     void CancelTask()
     {
+        this.FindPlayer(1).PlayerAnimation.Animator.SetTrigger("StopRepairing");
+        
         if (taskCoroutine != null)
         {
             StopCoroutine(taskCoroutine);
@@ -187,6 +189,8 @@ public class Task : MonoBehaviour
 
     void CompleteTask()
     {
+        this.FindPlayer(1).PlayerAnimation.Animator.SetTrigger("StopRepairing");
+        
         taskCoroutine = null;
         train.SetTaskStatus(task);
         onTaskPerformed?.Invoke();

@@ -15,5 +15,6 @@ MonoBehaviour:
   depth: 20
   spawnObjects:
   - objectToSpawn: {fileID: 5581981930496451382, guid: feb31393fc9cd08459262f0f3deda43b, type: 3}
-    amountToSpawn: 5
-    spawnInterval: 1
+    amountToSpawn: 1
+    spawnInterval: 60
+    spawnOnWall: 0

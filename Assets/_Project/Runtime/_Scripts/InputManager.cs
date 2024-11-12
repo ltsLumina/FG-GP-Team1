@@ -42,13 +42,11 @@ public class InputManager : MonoBehaviour
         switch (context.interaction)
         {
             case TapInteraction:
-                Debug.Log("Tap Interaction" + "\nGrabbing Item");
                 OnTapInteraction?.Invoke();
                 player.Grab();
                 break;
 
             case HoldInteraction:
-                Debug.Log("Hold Interaction" + "\nReleasing Item");
                 OnHoldInteraction?.Invoke();
                 player.Release();
                 break;
