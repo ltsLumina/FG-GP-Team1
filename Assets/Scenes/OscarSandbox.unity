@@ -3569,7 +3569,11 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 8000
   m_UseColorTemperature: 1
+<<<<<<< Updated upstream
   m_BoundingSphereOverride: {x: 2.1814e-41, y: 2.524355e-29, z: 0, w: 0}
+=======
+  m_BoundingSphereOverride: {x: 3.93e-42, y: 2.524355e-29, z: 0, w: 2.7295596e+17}
+>>>>>>> Stashed changes
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ForceVisible: 0
@@ -15864,6 +15868,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 907285229}
   m_CullTransparentMesh: 1
+--- !u!1 &910954363 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5056807808768939299, guid: 2175803516d224265a441737d6f8525b, type: 3}
+  m_PrefabInstance: {fileID: 1424883301}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &910954369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 910954363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nonRigidbodyVelocity: 0
+  attenuationObject: {fileID: 910954363}
 --- !u!1 &918575399
 GameObject:
   m_ObjectHideFlags: 0
@@ -24963,10 +24986,14 @@ PrefabInstance:
       propertyPath: Target.TrackingTarget
       value: 
       objectReference: {fileID: 8759106494943338649}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4637010859509072236, guid: 2175803516d224265a441737d6f8525b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5056807808768939299, guid: 2175803516d224265a441737d6f8525b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 910954369}
   m_SourcePrefab: {fileID: 100100000, guid: 2175803516d224265a441737d6f8525b, type: 3}
 --- !u!1 &1427501592
 GameObject:
@@ -40073,6 +40100,26 @@ PrefabInstance:
     - target: {fileID: 371218063552686938, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3460641147627518562, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
+      propertyPath: dash.Path
+      value: event:/Dash
+      objectReference: {fileID: 0}
+    - target: {fileID: 3460641147627518562, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
+      propertyPath: dash.Guid.Data1
+      value: 463538073
+      objectReference: {fileID: 0}
+    - target: {fileID: 3460641147627518562, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
+      propertyPath: dash.Guid.Data2
+      value: 1299560521
+      objectReference: {fileID: 0}
+    - target: {fileID: 3460641147627518562, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
+      propertyPath: dash.Guid.Data3
+      value: 404336823
+      objectReference: {fileID: 0}
+    - target: {fileID: 3460641147627518562, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
+      propertyPath: dash.Guid.Data4
+      value: 1624466022
       objectReference: {fileID: 0}
     - target: {fileID: 8848661024979553184, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
       propertyPath: m_Name

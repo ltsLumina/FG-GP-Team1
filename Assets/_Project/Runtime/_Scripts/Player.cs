@@ -30,6 +30,9 @@ public class Player : MonoBehaviour
     [Header("Stun")]
     [SerializeField] float stunDuration = 2f;
 
+    public FMODUnity.EventReference dash;
+
+
     float dashTimer;
     bool canMove = true;
 
@@ -91,6 +94,7 @@ public class Player : MonoBehaviour
         transform.SetParent(Train.Instance.transform);
         transform.position = transform.parent.position + new Vector3(-5, -5, 0);
         transform.rotation = new Quaternion(0, 180, 0, 0); // i dont know why but this must be done
+
     }
 
     void Update()
@@ -115,6 +119,7 @@ public class Player : MonoBehaviour
 
     public void Dash()
     {
+
         if (dashTimer > 0) return;
         StartCoroutine(DashRoutine(rb));
         onDash?.Invoke(true);
@@ -123,8 +128,8 @@ public class Player : MonoBehaviour
 
     IEnumerator DashRoutine(Rigidbody rb)
     {
+        FMODUnity.RuntimeManager.CreateInstance(dash).start();
         dashTimer = dashCooldown;
-
         rb.linearDamping = dashDampingStart;
         var dir = InputManager.MoveInput.normalized;
         rb.AddForce(dir * dashForce, ForceMode.Impulse);

@@ -53,3 +53,10 @@ MonoBehaviour:
   randomAdjustment: 5
   moveLength: 2
   moveSpeed: 2
+  dash:
+    Guid:
+      Data1: 463538073
+      Data2: 1299560521
+      Data3: 404336823
+      Data4: 1624466022
+    Path: event:/Dash

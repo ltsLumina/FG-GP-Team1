@@ -15,6 +15,7 @@ public class EventSpawner : MonoBehaviour
 
     private float startLocalX;
 
+    
     private void Start()
     {
 
@@ -27,6 +28,9 @@ public class EventSpawner : MonoBehaviour
 
     private void Update()
     {
+
+
+
         float totalSpawnChance = 0;
 
         for (int i = 0; i < spawnObjects.Count; i++)
