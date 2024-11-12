@@ -78,8 +78,6 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
 
     void Throw(Player player)
     {
-        Debug.Log("Throwing resource...");
-        
         TryGetComponent(out Rigidbody rb);
         if (rb == null || !player) return;
         var moveInput = player.InputManager.MoveInput;
@@ -110,8 +108,11 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
 
     void Start()
     {
-        Debug.Assert(standardMesh != null, "Standard mesh is not set. Please set it in the inspector.", this);
-        Debug.Assert(grabbedMesh != null, "Grabbed mesh is not set. Please set it in the inspector.", this);
+        if (Item != IGrabbable.Items.Battery)
+        {
+            Debug.Assert(standardMesh != null, "Standard mesh is not set. Please set it in the inspector.", this);
+            Debug.Assert(grabbedMesh != null, "Grabbed mesh is not set. Please set it in the inspector.", this);
+        }
         
         if (Lifetime <= 5) Debug.LogWarning("Lifetime is set too low. Object will likely be destroyed before it has left the screen bounds.");
         Bypass = item == IGrabbable.Items.Battery; // Don't destroy the battery. (obviously, lol)
@@ -129,6 +130,8 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
     
     void SetMesh(bool useGrabbedMesh)
     {
+        if (Item == IGrabbable.Items.Battery) return;
+        
         standardMesh.gameObject.SetActive(!useGrabbedMesh);
         grabbedMesh.gameObject.SetActive(useGrabbedMesh);
     }

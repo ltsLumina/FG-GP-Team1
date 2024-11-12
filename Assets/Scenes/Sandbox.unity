@@ -13174,37 +13174,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 778989670}
   m_CullTransparentMesh: 1
---- !u!1 &779542490
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 779542491}
-  m_Layer: 0
-  m_Name: Canvases
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &779542491
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 779542490}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5375111, y: 13.24786, z: -0.2348059}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &782382750
 GameObject:
   m_ObjectHideFlags: 0
@@ -24448,6 +24417,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1593504416138141191, guid: 2175803516d224265a441737d6f8525b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -26
+      objectReference: {fileID: 0}
     - target: {fileID: 6140353902049099123, guid: 2175803516d224265a441737d6f8525b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -24487,6 +24460,10 @@ PrefabInstance:
     - target: {fileID: 6140353902049099123, guid: 2175803516d224265a441737d6f8525b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6581895759829843494, guid: 2175803516d224265a441737d6f8525b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -26
       objectReference: {fileID: 0}
     - target: {fileID: 6845697726623191482, guid: 2175803516d224265a441737d6f8525b, type: 3}
       propertyPath: m_Name
@@ -35952,7 +35929,7 @@ MonoBehaviour:
   largeBand1FadeMode: 1
   largeBand1FadeStart: 300
   largeBand1FadeDistance: 800
-  ripples: 1
+  ripples: 0
   ripplesMotionMode: 0
   ripplesOrientationValue: 0
   ripplesWindSpeed: 8
@@ -39468,6 +39445,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock
       objectReference: {fileID: 0}
+    - target: {fileID: 4781570308072900306, guid: 38d6cdba11a866b4ca0c74aca4355d0f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8091987052845928827, guid: 38d6cdba11a866b4ca0c74aca4355d0f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9.78
@@ -39508,11 +39489,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 4.342
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1441501163675559202, guid: 38d6cdba11a866b4ca0c74aca4355d0f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4781570308072900306, guid: 38d6cdba11a866b4ca0c74aca4355d0f, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 2300738773248309787}
   m_SourcePrefab: {fileID: 100100000, guid: 38d6cdba11a866b4ca0c74aca4355d0f, type: 3}
+--- !u!1 &2300738773248309786 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4781570308072900306, guid: 38d6cdba11a866b4ca0c74aca4355d0f, type: 3}
+  m_PrefabInstance: {fileID: 2300738773248309785}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &2300738773248309787
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2300738773248309786}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 3
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &3083783681915289839
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39788,7 +39799,6 @@ SceneRoots:
   - {fileID: 2013410475}
   - {fileID: 2007165835}
   - {fileID: 1153145365}
-  - {fileID: 779542491}
   - {fileID: 1363951287}
   - {fileID: 1435956281}
   - {fileID: 530164784}

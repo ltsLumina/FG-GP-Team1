@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6230168168455329462}
   - component: {fileID: 4458449401021413045}
   m_Layer: 0
-  m_Name: Jello
+  m_Name: DEPRECATED (Jello)
   m_TagString: Jellyfish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

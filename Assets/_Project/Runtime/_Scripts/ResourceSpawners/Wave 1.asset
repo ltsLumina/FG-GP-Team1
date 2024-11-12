@@ -18,7 +18,7 @@ MonoBehaviour:
     amountToSpawn: 2
     spawnInterval: 7
     spawnOnWall: 0
-  - objectToSpawn: {fileID: 5570282934742007449, guid: eeb3b30c0ef12144cb7e4a64986054f8, type: 3}
+  - objectToSpawn: {fileID: 4597449756645802583, guid: 750fd1bd8324fc84c98778924c9ebaf3, type: 3}
     amountToSpawn: 1
     spawnInterval: 25
     spawnOnWall: 0

@@ -51,7 +51,7 @@ public class Rock : MonoBehaviour, IDestructible
     void OnCollisionEnter(Collision other)
     {
         // add force and torque to the rock
-        if ((other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Ship")))
+        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Ship"))
         {
             var rb = GetComponent<Rigidbody>();
             collided = true;
