@@ -177,7 +177,8 @@ MonoBehaviour:
   CoralPrefabs:
   - {fileID: 2338160585447282765, guid: ec7b5a9d42fdac243a40c92735d6f0e8, type: 3}
   - {fileID: 2947715999815865860, guid: e3b65d0070b2b544c839a118591df8d2, type: 3}
-  - {fileID: 8550585485901510290, guid: ad790141f3718db4b814d6e78f412504, type: 3}
+  - {fileID: 7647910961313182791, guid: c69ace905a864644babc6736ebbcebe1, type: 3}
+  - {fileID: 8768699437855887584, guid: a6df4fc3711bebf489a0d96bcc6d8a8e, type: 3}
 --- !u!114 &8349971662610666768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -743,7 +744,8 @@ MonoBehaviour:
   CoralPrefabs:
   - {fileID: 2338160585447282765, guid: ec7b5a9d42fdac243a40c92735d6f0e8, type: 3}
   - {fileID: 2947715999815865860, guid: e3b65d0070b2b544c839a118591df8d2, type: 3}
-  - {fileID: 8550585485901510290, guid: ad790141f3718db4b814d6e78f412504, type: 3}
+  - {fileID: 7647910961313182791, guid: c69ace905a864644babc6736ebbcebe1, type: 3}
+  - {fileID: 8768699437855887584, guid: a6df4fc3711bebf489a0d96bcc6d8a8e, type: 3}
 --- !u!114 &4852888117147254933
 MonoBehaviour:
   m_ObjectHideFlags: 0

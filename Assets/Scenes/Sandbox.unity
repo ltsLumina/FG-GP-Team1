@@ -24417,54 +24417,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1500165713465378416, guid: 2175803516d224265a441737d6f8525b, type: 3}
-      propertyPath: m_AllowDynamicResolution
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1523588543152864231, guid: 2175803516d224265a441737d6f8525b, type: 3}
-      propertyPath: TAAQuality
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1523588543152864231, guid: 2175803516d224265a441737d6f8525b, type: 3}
-      propertyPath: antialiasing
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1523588543152864231, guid: 2175803516d224265a441737d6f8525b, type: 3}
-      propertyPath: taaSharpenMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1523588543152864231, guid: 2175803516d224265a441737d6f8525b, type: 3}
-      propertyPath: allowDynamicResolution
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1523588543152864231, guid: 2175803516d224265a441737d6f8525b, type: 3}
-      propertyPath: taaMotionVectorRejection
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1523588543152864231, guid: 2175803516d224265a441737d6f8525b, type: 3}
-      propertyPath: allowFidelityFX2SuperResolution
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1523588543152864231, guid: 2175803516d224265a441737d6f8525b, type: 3}
-      propertyPath: fidelityFX2SuperResolutionSharpening
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1523588543152864231, guid: 2175803516d224265a441737d6f8525b, type: 3}
-      propertyPath: fidelityFX2SuperResolutionEnableSharpening
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1523588543152864231, guid: 2175803516d224265a441737d6f8525b, type: 3}
-      propertyPath: deepLearningSuperSamplingUseCustomAttributes
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1523588543152864231, guid: 2175803516d224265a441737d6f8525b, type: 3}
-      propertyPath: fidelityFX2SuperResolutionUseCustomAttributes
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1593504416138141191, guid: 2175803516d224265a441737d6f8525b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -26
-      objectReference: {fileID: 0}
     - target: {fileID: 6140353902049099123, guid: 2175803516d224265a441737d6f8525b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -24505,10 +24457,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6581895759829843494, guid: 2175803516d224265a441737d6f8525b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -26
-      objectReference: {fileID: 0}
     - target: {fileID: 6845697726623191482, guid: 2175803516d224265a441737d6f8525b, type: 3}
       propertyPath: m_Name
       value: CameraRig
@@ -24520,10 +24468,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2262547350676529732, guid: 2175803516d224265a441737d6f8525b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1609272763}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2175803516d224265a441737d6f8525b, type: 3}
 --- !u!1 &1427501592
 GameObject:
@@ -28227,34 +28172,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!1 &1609272758 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2262547350676529732, guid: 2175803516d224265a441737d6f8525b, type: 3}
-  m_PrefabInstance: {fileID: 1424883301}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1609272763
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1609272758}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ApplyAfter: 2
-  ChannelMask: 1
-  Gain: 1
-  Use2DDistance: 0
-  UseCameraSpace: 1
-  ReactionSettings:
-    m_SecondaryNoise: {fileID: 0}
-    AmplitudeGain: 1
-    FrequencyGain: 1
-    Duration: 1
-    m_NoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &1610229299
 GameObject:
   m_ObjectHideFlags: 0
@@ -30420,18 +30337,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Walls
       objectReference: {fileID: 0}
-    - target: {fileID: 3055213813340400393, guid: 9cbb89091b27ea943ac44b01d9f24df5, type: 3}
-      propertyPath: CoralPrefabs.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3055213813340400393, guid: 9cbb89091b27ea943ac44b01d9f24df5, type: 3}
-      propertyPath: 'CoralPrefabs.Array.data[2]'
-      value: 
-      objectReference: {fileID: 7647910961313182791, guid: c69ace905a864644babc6736ebbcebe1, type: 3}
-    - target: {fileID: 3055213813340400393, guid: 9cbb89091b27ea943ac44b01d9f24df5, type: 3}
-      propertyPath: 'CoralPrefabs.Array.data[3]'
-      value: 
-      objectReference: {fileID: 8768699437855887584, guid: a6df4fc3711bebf489a0d96bcc6d8a8e, type: 3}
     - target: {fileID: 3279909054012991696, guid: 9cbb89091b27ea943ac44b01d9f24df5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -30472,18 +30377,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6750015925898390748, guid: 9cbb89091b27ea943ac44b01d9f24df5, type: 3}
-      propertyPath: CoralPrefabs.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6750015925898390748, guid: 9cbb89091b27ea943ac44b01d9f24df5, type: 3}
-      propertyPath: 'CoralPrefabs.Array.data[2]'
-      value: 
-      objectReference: {fileID: 7647910961313182791, guid: c69ace905a864644babc6736ebbcebe1, type: 3}
-    - target: {fileID: 6750015925898390748, guid: 9cbb89091b27ea943ac44b01d9f24df5, type: 3}
-      propertyPath: 'CoralPrefabs.Array.data[3]'
-      value: 
-      objectReference: {fileID: 8768699437855887584, guid: a6df4fc3711bebf489a0d96bcc6d8a8e, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
