@@ -31,7 +31,11 @@ public class MainMenu : MonoBehaviour
 
     public void Exit()
     {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
         Application.Quit();
+#endif
     }
 
     public void SkipTutorial()
@@ -59,6 +63,7 @@ public class MainMenu : MonoBehaviour
 
     public void BackToMain()
     {
+        GameManager.Instance.GameStateChanger(GameManager.GameState.Play);
         SceneManager.LoadScene(0);
     }
 
@@ -86,4 +91,5 @@ public class MainMenu : MonoBehaviour
         pausePanel.SetActive(false);
         mainMenuPanel.SetActive(false);
     }
+
 }
