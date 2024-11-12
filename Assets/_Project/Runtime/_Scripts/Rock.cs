@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using Lumina.Essentials.Modules;
 using UnityEngine;
 
@@ -10,6 +12,14 @@ public class Rock : MonoBehaviour, IDestructible
     [SerializeField] float magnetizationStrength = 0.1f;
     [Tooltip("The maximum distance at which the magnetization effect kicks in.")]
     [SerializeField] float magnetizationDistance = 5f;
+
+    [SerializeField] List<GameObject> rockModels;
+
+    void Start()
+    {
+        var rockModel = rockModels[UnityEngine.Random.Range(0, rockModels.Count)];
+        Instantiate(rockModel, transform);
+    }
 
     void FixedUpdate()
     {

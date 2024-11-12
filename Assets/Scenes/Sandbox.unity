@@ -15889,7 +15889,7 @@ MonoBehaviour:
     space: 0
   rootTab:
     name: 
-    selectedSubtabIndex: 4
+    selectedSubtabIndex: 0
     subtabs:
     - rid: 5260567303344357731
     - rid: 5260567303344357732
@@ -39575,9 +39575,45 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock
       objectReference: {fileID: 0}
-    - target: {fileID: 4781570308072900306, guid: 38d6cdba11a866b4ca0c74aca4355d0f, type: 3}
-      propertyPath: m_IsActive
-      value: 0
+    - target: {fileID: 7877462829709938395, guid: 38d6cdba11a866b4ca0c74aca4355d0f, type: 3}
+      propertyPath: rockModels.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7877462829709938395, guid: 38d6cdba11a866b4ca0c74aca4355d0f, type: 3}
+      propertyPath: 'rockModels.Array.data[0]'
+      value: 
+      objectReference: {fileID: 5226338540731633465, guid: 2e4504acec2cfc042a608df80f4d376b, type: 3}
+    - target: {fileID: 7877462829709938395, guid: 38d6cdba11a866b4ca0c74aca4355d0f, type: 3}
+      propertyPath: 'rockModels.Array.data[1]'
+      value: 
+      objectReference: {fileID: 583531556197013093, guid: 34db13fcf15d092429003e307f22ae7d, type: 3}
+    - target: {fileID: 7877462829709938395, guid: 38d6cdba11a866b4ca0c74aca4355d0f, type: 3}
+      propertyPath: 'rockModels.Array.data[2]'
+      value: 
+      objectReference: {fileID: 6404073604289948843, guid: a11145b7be3dadd4995d807d9a7657e1, type: 3}
+    - target: {fileID: 7877462829709938395, guid: 38d6cdba11a866b4ca0c74aca4355d0f, type: 3}
+      propertyPath: 'rockModels.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8051226306110171970, guid: 19df126d6ab4f0f48a7de56780031a49, type: 3}
+    - target: {fileID: 7877462829709938395, guid: 38d6cdba11a866b4ca0c74aca4355d0f, type: 3}
+      propertyPath: 'rockModels.Array.data[4]'
+      value: 
+      objectReference: {fileID: 103608390705873723, guid: 3aa7a5ac959b4cf4fb4fbd20ebc421aa, type: 3}
+    - target: {fileID: 7877462829709938395, guid: 38d6cdba11a866b4ca0c74aca4355d0f, type: 3}
+      propertyPath: 'rockModels.Array.data[5]'
+      value: 
+      objectReference: {fileID: 4233482341294893110, guid: 2f951d369b609d742907262e2386c072, type: 3}
+    - target: {fileID: 8091987052845928827, guid: 38d6cdba11a866b4ca0c74aca4355d0f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8091987052845928827, guid: 38d6cdba11a866b4ca0c74aca4355d0f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8091987052845928827, guid: 38d6cdba11a866b4ca0c74aca4355d0f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8091987052845928827, guid: 38d6cdba11a866b4ca0c74aca4355d0f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -39844,19 +39880,19 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
+      propertyPath: debugMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
       propertyPath: invincible
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
       propertyPath: hullBreaches
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
       propertyPath: repairAmount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}
-      propertyPath: hullIntegrity
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2469166811154837062, guid: 3110042f2cfa93a4fb6a411d01cd0a15, type: 3}

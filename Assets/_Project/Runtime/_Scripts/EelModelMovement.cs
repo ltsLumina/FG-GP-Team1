@@ -48,7 +48,7 @@ public class EelModelMovement : MonoBehaviour
     {
         for (int i = 1; i < bodyParts.Count; i++)
         {
-            Destroy(bodyParts[i].gameObject);
+            if (bodyParts[i] != null) Destroy(bodyParts[i].gameObject);
         }
         bodyParts.Clear();
     }
