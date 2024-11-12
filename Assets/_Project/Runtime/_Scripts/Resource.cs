@@ -53,7 +53,7 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
         onGrabbed += () =>
         {
             TryGetComponent(out Rigidbody rb);
-            rb.isKinematic = false;
+            if (rb != null) rb.isKinematic = true;
             SetMesh(true);
             ResetVelocity();
         };
