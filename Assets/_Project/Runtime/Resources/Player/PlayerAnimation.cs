@@ -97,4 +97,7 @@ public class PlayerAnimation : MonoBehaviour
         anim.SetFloat("Horizontal", horizontalUpdate);
         anim.SetFloat("Vertical", verticalUpdate);
     }
+
+    public void StartRepair() { /* not implemented */ }
+    public void EndRepair() { /* not implemented */ }
 }

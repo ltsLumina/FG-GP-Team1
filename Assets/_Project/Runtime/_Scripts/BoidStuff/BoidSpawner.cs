@@ -34,7 +34,6 @@ public class BoidSpawner : MonoBehaviour
         {
             GameObject fish = Instantiate(boidDataSO.prefab, transform.position, Quaternion.identity);
             fish.transform.position = new Vector3(transform.position.x + (Random.Range(-spawnRangeX, spawnRangeX) / 2), transform.position.y + (Random.Range(-spawnRangeY, spawnRangeY) / 2), transform.position.z + (Random.Range(-spawnRangeZ, spawnRangeZ) / 2));
-            fish.GetComponent<MeshRenderer>().material = boidDataSO.material;
             fish.transform.parent = transform;
             var boid = fish.AddComponent<Boid>();
             fish.AddComponent<SphereCollider>().isTrigger = true;

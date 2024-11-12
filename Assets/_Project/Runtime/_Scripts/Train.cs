@@ -224,6 +224,14 @@ public class Train : MonoBehaviour
     }
 #endif
 
+    public static Train Instance { get; private set; } 
+    
+    void Awake()
+    {
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+    }
+
     void Start()
     {
         // TODO: for alpha

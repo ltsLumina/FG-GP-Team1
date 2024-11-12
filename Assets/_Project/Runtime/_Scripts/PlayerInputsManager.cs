@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Custom.Attributes;
 using UnityEngine.InputSystem;
@@ -5,6 +6,11 @@ using UnityEngine.InputSystem;
 [Author("Alex")]
 public class PlayerInputsManager : PlayerInputManager
 {
+    public static List<Player> Players { get; private set; } = new ();
+    
+    public static Player Player1 => Players.Count == 0 ? null : Players[0];
+    public static Player Player2 => Players.Count == 1 ? null : Players[1];
+    
     void Awake()
     {
         onPlayerJoined += OnPlayerJoined;
@@ -22,7 +28,12 @@ public class PlayerInputsManager : PlayerInputManager
     {
         var player = obj.GetComponentInParent<Player>();
         player.PlayerID = obj.playerIndex;
+        
+        Players.Add(player);
     }
 
-    void OnPlayerLeft(PlayerInput obj) { }
+    void OnPlayerLeft(PlayerInput obj)
+    {
+        Players.Remove(obj.GetComponentInParent<Player>());
+    }
 }
