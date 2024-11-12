@@ -33,11 +33,11 @@ public class MainMenu : MonoBehaviour
 
     public void Exit()
     {
-#if UNITY_EDITOR
+    #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
-#else
+    #else
         Application.Quit();
-#endif
+    #endif
     }
 
     public void SkipTutorial()
@@ -85,5 +85,4 @@ public class MainMenu : MonoBehaviour
         pausePanel.SetActive(false);
         mainMenuPanel.SetActive(false);
     }
-
 }
