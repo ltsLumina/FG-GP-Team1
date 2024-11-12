@@ -51,10 +51,16 @@ public class Battery : MonoBehaviour
 
     void OnDrawGizmosSelected()
     {
-        Gizmos.color = Vector3.Distance(PlayerInputsManager.Player1.transform.position, startPos.position) > batteryReturnDistance ? Color.red : Color.green;
-        Gizmos.DrawWireSphere(startPos.position, batteryReturnDistance);
+        if (PlayerInputsManager.Player1)
+        {
+            Gizmos.color = Vector3.Distance(PlayerInputsManager.Player1.transform.position, startPos.position) > batteryReturnDistance ? Color.red : Color.green;
+            Gizmos.DrawWireSphere(startPos.position, batteryReturnDistance);
+        }
 
-        Gizmos.color = Vector3.Distance(PlayerInputsManager.Player2.transform.position, startPos.position) > batteryReturnDistance ? Color.red : Color.green;
-        Gizmos.DrawWireSphere(startPos.position, batteryReturnDistance);
+        if (PlayerInputsManager.Player2)
+        {
+            Gizmos.color = Vector3.Distance(PlayerInputsManager.Player2.transform.position, startPos.position) > batteryReturnDistance ? Color.red : Color.green;
+            Gizmos.DrawWireSphere(startPos.position, batteryReturnDistance);
+        }
     }
 }
