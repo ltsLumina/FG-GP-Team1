@@ -1,22 +1,26 @@
+using Lumina.Essentials.Modules;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class TurtorialManager : MonoBehaviour
+public class TutorialManager : MonoBehaviour
 {
     public GameState state;
 
     public TextMeshProUGUI tutorialText;
-    public GameObject player;
-    public GameObject submarine;
 
     // Movement check
-    bool pressedW = false;
-    bool pressedA = false;
-    bool pressedS = false;
-    bool pressedD = false;
+    bool pressedW;
+    bool pressedA;
+    bool pressedS;
+    bool pressedD;
 
-    bool isObjectGrabbed = false;
+    bool isObjectGrabbed;
+    bool checkFuelInteraction;
+    bool checkRepairInteraction;
+    bool checkRechargeInteraction;
+
+    bool lowFuel;
 
     public enum GameState
     {
@@ -33,6 +37,11 @@ public class TurtorialManager : MonoBehaviour
     void Start()
     {
         GameStateChanger(GameState.Movement);
+        
+        Player.OnGrab += () => isObjectGrabbed = true;
+        Train.Instance.OnRefuel.AddListener(() => checkFuelInteraction = true);
+        Train.Instance.OnHullRepair.AddListener(_ => checkRepairInteraction = true);
+        Train.Instance.OnRecharge.AddListener(() => checkRechargeInteraction = true);
     }
 
     void Update()
@@ -56,7 +65,7 @@ public class TurtorialManager : MonoBehaviour
             case GameState.Pickup:
                 // Player try pickup
                 tutorialText.text = "Press E to pick up items.";
-                if (Input.GetKeyDown(KeyCode.E) /* && isObjectGrabbed*/)
+                if (Input.GetKeyDown(KeyCode.E)  && isObjectGrabbed)
                 {
                     TurtorialFuel();
                 }
@@ -65,7 +74,7 @@ public class TurtorialManager : MonoBehaviour
             case GameState.Fuel:
                 // Player try fuel
                 tutorialText.text = "Place fuel into the submarine to keep it running.";
-                if (CheckFuelInteraction())
+                if (checkFuelInteraction)
                 {
                     TurtorialRepair();
                 }
@@ -74,7 +83,7 @@ public class TurtorialManager : MonoBehaviour
             case GameState.Repair:
                 // Player try repair
                 tutorialText.text = "Repair the submarine hull by interacting with it.";
-                if (CheckRepairInteraction())
+                if (checkRepairInteraction)
                 {
                     TurtorialRecharge();
                 }
@@ -92,7 +101,7 @@ public class TurtorialManager : MonoBehaviour
             case GameState.TurtorialDone:
                 // Change scene
                 tutorialText.text = "Tutorial Complete! Good luck!";
-                Invoke("LoadMainGameScene", 3f);
+                Invoke(nameof(LoadMainGameScene), 3f);
                 break;
                 
                 // Add more cases if needed
@@ -126,22 +135,10 @@ public class TurtorialManager : MonoBehaviour
         GameStateChanger(GameState.Fuel);
     }
 
-    bool CheckFuelInteraction()
-    {
-        // Replace this with actual logic for checking if fuel is added
-        return true; // Placeholder
-    }
-
     //Repair
     public void TurtorialRepair()
     {
         GameStateChanger(GameState.Repair);
-    }
-
-    bool CheckRepairInteraction()
-    {
-        // Replace this with actual logic for checking if repair is done
-        return true; // Placeholder
     }
 
     //Recharge

@@ -158,6 +158,9 @@ public class Player : MonoBehaviour
         return resources;
     }
 
+    public static Action OnGrab;
+    public static Action OnRelease;
+    
     public void Grab()
     {
         if (heldResource != null)
@@ -169,6 +172,7 @@ public class Player : MonoBehaviour
         if (closest.Reach > Vector3.Distance(transform.position, closest.transform.position))
         {
             closest.Grab();
+            OnGrab?.Invoke();
             heldResource = closest;
         }
     }
@@ -179,6 +183,7 @@ public class Player : MonoBehaviour
             return;
 
         heldResource.Release();
+        OnRelease?.Invoke();
         heldResource = null;
     }
 }

@@ -127,18 +127,16 @@ public class Train : MonoBehaviour
     [Tab("Events")]
     [Foldout("Fuel")]
     [SerializeField] UnityEvent onFuelDepleted;
-    [SerializeField] UnityEvent onFuelRestored;
+    [SerializeField] UnityEvent onRefuel;
     [SerializeField] UnityEvent<int> onDirtinessStageChanged;
     [Foldout("Hull")]
     [SerializeField] UnityEvent<int> onHullBreach;
-    [SerializeField] UnityEvent<int> onHullIntegrityChanged;
+    [SerializeField] UnityEvent<int> onHullRepair;
     [SerializeField] UnityEvent onDeath;
     [Foldout("Power")]
     [SerializeField] UnityEvent onPowerDepleted;
-    [SerializeField] UnityEvent onPowerRestored;
+    [SerializeField] UnityEvent onRecharge;
     [SerializeField] UnityEvent<Light> OnLightDim;
-    [Foldout("Rocks")]
-    [SerializeField] UnityEvent<Rock> onRockCollision;
 
     [Tab("Settings")]
     [Header("Settings")]
@@ -157,7 +155,13 @@ public class Train : MonoBehaviour
     // <- Cached references. ->
     
     // <- Properties ->
+    
+    public UnityEvent OnRefuel => onRefuel;
+    public UnityEvent<int> OnHullRepair => onHullRepair;
+    public UnityEvent OnRecharge => onRecharge;
 
+    public static Train Instance { get; private set; }
+    
     #region Depth
     public float Depth => transform.position.y;
     public string DepthString => $"{Depth.Round()}m";
@@ -171,7 +175,16 @@ public class Train : MonoBehaviour
         set
         {
             fuel = Mathf.Clamp(value, 0, 100);
-            if (fuel <= 0) onFuelDepleted.Invoke();
+            switch (fuel)
+            {
+                case >= 100:
+                    
+                    break;
+
+                case <= 0:
+                    onFuelDepleted.Invoke();
+                    break;
+            }
         }
     }
     
@@ -228,6 +241,12 @@ public class Train : MonoBehaviour
     }
 #endif
 
+    void Awake()
+    {
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+    }
+
     void Start()
     {
         // TODO: for alpha
@@ -243,6 +262,7 @@ public class Train : MonoBehaviour
             (() =>
             {
                 GameManager.Instance.GameStateChanger(GameManager.GameState.GameOver);
+                GameManager.Instance.TriggerPlayerDeath("<reason not set>");
                 Debug.Log("DOED");
             });
 
@@ -255,7 +275,7 @@ public class Train : MonoBehaviour
                 DOVirtual.Float(hdLightData.volumetricDimmer, 0, 1, x => hdLightData.volumetricDimmer = x).OnComplete(() => { lights[light.gameObject] = false; });
             });
 
-            onPowerRestored.AddListener
+            onRecharge.AddListener
             (() =>
             {
                 foreach (var light in lights)
@@ -286,6 +306,11 @@ public class Train : MonoBehaviour
 
     void Update()
     {
+        if (HullIntegrity == 1) GameManager.Instance.TriggerCriticalHull(1);
+        if (Fuel <= 20) GameManager.Instance.TriggerLowFuel(20);
+        if (Power <= 20) GameManager.Instance.TriggerLowBattery(20);
+        if (lights.ContainsValue(false)) GameManager.Instance.TriggerLightOut();
+        
         if (Input.GetKeyDown(KeyCode.P))
         {
             StartCoroutine(RGBLights());
@@ -340,7 +365,7 @@ public class Train : MonoBehaviour
             }
             else // Power has been restored above the threshold
             {
-                onPowerRestored.Invoke();
+                onRecharge.Invoke();
             }
         }
 
@@ -376,18 +401,19 @@ public class Train : MonoBehaviour
 
             case Tasks.Refuel:
                 Fuel += kelpRestoreAmount;
-
                 if (Player.HoldingResource(out Resource heldItem)) Destroy(heldItem.gameObject);
+                onRefuel.Invoke();
                 break;
 
             case Tasks.Repair:
                 hullBreaches--;
                 HullIntegrity += repairAmount;
-                onHullIntegrityChanged.Invoke(HullIntegrity);
+                onHullRepair.Invoke(HullIntegrity);
                 break;
 
             case Tasks.Recharge:
                 Power += powerRechargeAmount;
+                onRecharge.Invoke();
                 break;
         }
     }
@@ -408,21 +434,18 @@ public class Train : MonoBehaviour
     #endregion
 
     #region Collision/Trigger
+    bool firstBreach = false;
+    
     void OnCollision(GameObject collision)
     {
         switch (collision.tag)
         {
-            case "Jellyfish":
-                hullBreaches++;
-                onHullBreach.Invoke(hullBreaches);
-                break;
-            
             case "Rock":
                 hullBreaches++;
                 HullIntegrity = Mathf.Max(0, 3 - hullBreaches);
                 onHullBreach.Invoke(hullBreaches);
-                onHullIntegrityChanged.Invoke(HullIntegrity);
-                onRockCollision.Invoke(collision.GetComponent<Rock>());
+
+                if (firstBreach) GameManager.Instance.TriggerFirstHullDamage();
                 break;
         }
     }

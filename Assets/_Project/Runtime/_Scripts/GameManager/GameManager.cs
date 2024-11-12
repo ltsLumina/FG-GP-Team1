@@ -8,14 +8,14 @@ public class GameManager : SingletonPersistent<GameManager>
 {
     MainMenu mainMenu;
 
-    public bool isGameOver = false;
-    public bool isIntroPlayed = false;
-    public bool hasSeenKelp = false;
-    public bool hasSeenRock = false;
-    public bool hasSeenJellyfish = false;
-    public bool hasLowFuelWarning = false;
-    public bool hasTakenHullDamage = false;
-    public bool hasLowBatteryWarning = false;
+    public bool isGameOver;
+    public bool isIntroPlayed;
+    public bool hasSeenKelp;
+    public bool hasSeenRock;
+    public bool hasSeenJellyfish;
+    public bool hasLowFuelWarning;
+    public bool hasTakenHullDamage;
+    public bool hasLowBatteryWarning;
     // Add more variables as needed
 
     public GameState state;
@@ -236,8 +236,7 @@ public class GameManager : SingletonPersistent<GameManager>
             Vector3 screenPoint = mainCamera.WorldToViewportPoint(obj.transform.position);
             bool onScreen = screenPoint.z > 0 && screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1;
 
-            if (onScreen)
-                return true;
+            if (onScreen) return true;
         }
 
         return false;
