@@ -39469,6 +39469,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4573179970985483644, guid: 750fd1bd8324fc84c98778924c9ebaf3, type: 3}
+      propertyPath: chargeLevel
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4597449756645802583, guid: 750fd1bd8324fc84c98778924c9ebaf3, type: 3}
       propertyPath: m_Name
       value: Electric Fish
