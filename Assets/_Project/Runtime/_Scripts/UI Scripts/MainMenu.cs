@@ -17,6 +17,8 @@ public class MainMenu : MonoBehaviour
     public GameObject PausePanel => pausePanel;
     [SerializeField] GameObject gameOverPanel;
     public GameObject GameOverPanel => gameOverPanel;
+    [SerializeField] GameObject skipTutorialButton;
+    public GameObject SkipTutorialButton => skipTutorialButton;
 
     void Start()
     {
@@ -46,19 +48,11 @@ public class MainMenu : MonoBehaviour
     public void Retry()
     {
         GameManager.Instance.GameStateChanger(GameManager.GameState.Play);
-        var doesSceneTwoExist = SceneManager.GetSceneByBuildIndex(2).IsValid(); // for debug builds
-        LoadScene(doesSceneTwoExist ? 2 : 0);
         highScoreManager = Helpers.Find<HighScoreManager>();
         highScoreManager.SaveHighScores();
         scoreManager = Helpers.Find<ScoreManager>();
         scoreManager.ResetGame();
-    }
-
-    void LoadScene(int sceneIndex, string sceneName = default)
-    {
-        var doesSceneExist = SceneManager.GetSceneByBuildIndex(sceneIndex).IsValid(); // for debug builds
-        if (doesSceneExist) SceneManager.LoadScene(sceneIndex);
-        else SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene(2);
     }
 
     public void BackToMain()
