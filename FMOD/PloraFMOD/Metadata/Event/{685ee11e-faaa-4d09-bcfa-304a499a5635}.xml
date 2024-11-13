@@ -5,7 +5,7 @@
 			<value>LightsOn</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{a0408f8e-36d3-42c0-a6cf-680d4e04d249}</destination>
@@ -46,6 +46,9 @@
 		</relationship>
 	</object>
 	<object class="MixerInput" id="{1c6b195c-45b9-430d-a3b2-3bb117c4f909}">
+		<relationship name="masters">
+			<destination>{7bb49671-aff2-43da-9a6c-3648c225894a}</destination>
+		</relationship>
 		<relationship name="effectChain">
 			<destination>{53649ee4-afa4-4d1c-8251-630d0d916bb8}</destination>
 		</relationship>
@@ -57,6 +60,12 @@
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{83f91aa6-e4da-435f-81f8-58d4693d205f}">
+		<property name="maxVoices">
+			<value>1</value>
+		</property>
+		<property name="voiceStealing">
+			<value>3</value>
+		</property>
 		<property name="minimumDistance">
 			<value>20</value>
 		</property>
@@ -123,7 +132,7 @@
 	<object class="MixerBusEffectChain" id="{6780ff25-03ee-437a-aaa2-d908c3c18895}">
 		<relationship name="effects">
 			<destination>{be34be75-680f-4ae7-8a69-3b0d108abbdc}</destination>
-			<destination>{aec28e20-2a01-4a21-b252-6c1b22043247}</destination>
+			<destination>{9f2496f5-e76c-4a66-8090-4324c7a6c9b2}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{68bf6ff1-c92d-43dd-9770-cf9df07189ca}" />
@@ -143,7 +152,7 @@
 	</object>
 	<object class="MixerBusPanner" id="{79b8de60-e195-45f9-9674-b1f7705f2f19}" />
 	<object class="MixerBusFader" id="{be34be75-680f-4ae7-8a69-3b0d108abbdc}" />
-	<object class="ObjectSpatialiserEffect" id="{aec28e20-2a01-4a21-b252-6c1b22043247}" />
+	<object class="SpatialiserEffect" id="{9f2496f5-e76c-4a66-8090-4324c7a6c9b2}" />
 	<object class="AutomationPoint" id="{436da1f9-2e55-4874-baf0-b5a38454603d}">
 		<property name="position">
 			<value>1</value>

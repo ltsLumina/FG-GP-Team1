@@ -5,7 +5,7 @@
 			<value>LightsOff</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{a0408f8e-36d3-42c0-a6cf-680d4e04d249}</destination>
@@ -46,6 +46,9 @@
 		</relationship>
 	</object>
 	<object class="MixerInput" id="{8162f9d7-a03b-4124-8b23-2c496fee25f0}">
+		<relationship name="masters">
+			<destination>{7bb49671-aff2-43da-9a6c-3648c225894a}</destination>
+		</relationship>
 		<relationship name="effectChain">
 			<destination>{9cd0cb0a-09de-431a-a07b-9edaa1fbba84}</destination>
 		</relationship>
@@ -57,6 +60,12 @@
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{5bb77178-27f3-4034-94c9-05a63780f81c}">
+		<property name="maxVoices">
+			<value>1</value>
+		</property>
+		<property name="voiceStealing">
+			<value>3</value>
+		</property>
 		<property name="minimumDistance">
 			<value>20</value>
 		</property>
@@ -120,7 +129,7 @@
 	<object class="MixerBusEffectChain" id="{36353fd3-b9a5-44d9-8057-ff6fc3861053}">
 		<relationship name="effects">
 			<destination>{385336ac-724b-438b-882f-f65b612a2099}</destination>
-			<destination>{4902a167-9e0d-425c-8851-8a55a32bd775}</destination>
+			<destination>{fbcd50b8-1286-41c8-a0fe-d071e7621c21}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{b074f35e-49d4-49aa-abba-6389c9241211}" />
@@ -132,6 +141,6 @@
 	</object>
 	<object class="MixerBusPanner" id="{6b3138c9-1c74-43d6-8b5c-d46f2405bf2d}" />
 	<object class="MixerBusFader" id="{385336ac-724b-438b-882f-f65b612a2099}" />
-	<object class="ObjectSpatialiserEffect" id="{4902a167-9e0d-425c-8851-8a55a32bd775}" />
+	<object class="SpatialiserEffect" id="{fbcd50b8-1286-41c8-a0fe-d071e7621c21}" />
 	<object class="MixerBusFader" id="{239d4a62-a986-4ce2-b878-6d5860759b93}" />
 </objects>

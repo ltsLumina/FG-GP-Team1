@@ -33,6 +33,9 @@ public class Train : MonoBehaviour
     [SerializeField] FMODUnity.EventReference lightsOnSound;
     [SerializeField] FMODUnity.EventReference lightsOffSound;
 
+    FMOD.Studio.EventInstance lightOff;
+    FMOD.Studio.EventInstance lightOn;
+
     [Tab("Fuel")]
     [Tooltip("The amount of fuel the train has.")]
     [RangeResettable(0, 100)]
@@ -265,9 +268,9 @@ public class Train : MonoBehaviour
             (light =>
             {
                 //HeadPhoneWarning MOVE THIS
-               // var lightOff = FMODUnity.RuntimeManager.CreateInstance(lightsOffSound);
+               // lightOff = FMODUnity.RuntimeManager.CreateInstance(lightsOffSound);
                // FMODUnity.RuntimeManager.AttachInstanceToGameObject(lightOff, transform);
-               // lightOff.start();
+               // lightOn.start();
 
                 var hdLightData = light.GetComponent<HDAdditionalLightData>();
                 DOVirtual.Float(hdLightData.volumetricDimmer, 0, 1, x => hdLightData.volumetricDimmer = x).OnComplete(() => { lights[light.gameObject] = false; });

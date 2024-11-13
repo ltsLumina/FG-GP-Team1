@@ -5,7 +5,7 @@
 			<value>PlayerStunned</value>
 		</property>
 		<property name="outputFormat">
-			<value>0</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{a0408f8e-36d3-42c0-a6cf-680d4e04d249}</destination>
@@ -43,6 +43,9 @@
 		</relationship>
 	</object>
 	<object class="MixerInput" id="{074b8d51-70e5-4626-9b95-9a6f81ab5ac5}">
+		<relationship name="masters">
+			<destination>{7bb49671-aff2-43da-9a6c-3648c225894a}</destination>
+		</relationship>
 		<relationship name="effectChain">
 			<destination>{1f072d12-0b2c-4f0e-a9c8-f1263965c2f2}</destination>
 		</relationship>
@@ -83,11 +86,11 @@
 	<object class="MixerBusEffectChain" id="{1a0ffbee-9659-4680-9ad5-77d5757ef4e4}">
 		<relationship name="effects">
 			<destination>{b494e348-4cbf-4db7-8afe-78db23a2c97c}</destination>
-			<destination>{9befd6e2-9342-43c9-a782-e6457049c70b}</destination>
+			<destination>{83961b79-4d25-47e9-a79b-fa56fbbe7f10}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{1f76bb7b-0dc6-4e60-b0f7-87510487ba94}" />
 	<object class="MixerBusFader" id="{23a6ae06-ff5e-4622-ac66-d06042266c6b}" />
 	<object class="MixerBusFader" id="{b494e348-4cbf-4db7-8afe-78db23a2c97c}" />
-	<object class="ObjectSpatialiserEffect" id="{9befd6e2-9342-43c9-a782-e6457049c70b}" />
+	<object class="SpatialiserEffect" id="{83961b79-4d25-47e9-a79b-fa56fbbe7f10}" />
 </objects>
