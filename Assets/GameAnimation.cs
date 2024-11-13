@@ -10,11 +10,14 @@ public class GameAnimation : MonoBehaviour
     [SerializeField]
     Train ship;
 
+    [SerializeField]
     Animator anim;
 
-    void Start()
+    void Awake()
     {
         anim = GetComponent<Animator>();
+        // Sets itself in the gameManager
+        GameManager.Instance.gameAnimation = this;
     }
 
     void Update()
