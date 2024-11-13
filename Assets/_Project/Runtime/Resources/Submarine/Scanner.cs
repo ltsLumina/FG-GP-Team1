@@ -17,11 +17,6 @@ public class Scanner : MonoBehaviour
 
     bool isScanning = false;
 
-    void Awake()
-    {
-        // TODO Subscribe to scanner events in GameManager
-    }
-
     void Start()
     {
         // Set initial rotation
@@ -36,7 +31,7 @@ public class Scanner : MonoBehaviour
         }
     }
 
-    void ResetScanner()
+    public void ResetScanner()
     {
         // Reset rotation
         isScanning = false;
@@ -44,8 +39,14 @@ public class Scanner : MonoBehaviour
         scannerLight.SetActive(false);
     }
 
-    void Scan()
+    public void Scan(GameObject newTarget = null)
     {
+        // If a new target is provided, update the target
+        if (newTarget != null)
+        {
+            target = newTarget.transform;
+        }
+
         if (target != null)
         {
             // Calculate direction from scanner to target

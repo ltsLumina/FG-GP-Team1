@@ -27,6 +27,11 @@ public class PlayerAnimation : MonoBehaviour
         SetMotorSpeed(dashMotorSpeed);
     }
 
+    public void Spawn()
+    {
+        Animator.SetTrigger("Spawn");
+    }
+
     public void StopDash()
     {
         SetMotorSpeed(motorSpeed);
@@ -55,12 +60,6 @@ public class PlayerAnimation : MonoBehaviour
         // anim.SetTrigger("Die");
     }
 
-    public void Spawn()
-    {
-        Debug.Log("Spawn animation not implemented");
-        // anim.SetTrigger("Spawn");
-    }
-
     public void Stun(float stunDuration)
     {
         Debug.Log("Stun animation not implemented");
@@ -75,10 +74,7 @@ public class PlayerAnimation : MonoBehaviour
         SetMovementBlendTree(input.MoveInput);
     }
 
-    private void ObjectReleased()
-    {
-        
-    }
+    private void ObjectReleased() { }
 
     // Set blend tree parameters for player movement based on input of new input system Player action Move
     public void SetMovementBlendTree(Vector2 movement)

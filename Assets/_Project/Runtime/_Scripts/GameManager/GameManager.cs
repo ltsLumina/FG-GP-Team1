@@ -27,7 +27,7 @@ public class GameManager : SingletonPersistent<GameManager>
     public bool hasPlayedIntro;
     public bool hasPlayedFirstPlay;
 
-    public ShipScanner ShipScanner;
+    public Scanner ShipScanner;
 
     public float highScore;
     public float currentDepth;
@@ -63,16 +63,31 @@ public class GameManager : SingletonPersistent<GameManager>
     public event Action OnFuelRefill;
     public event Action OnBatteryCharge;
 
+    [SerializeField]
+    GameAnimation gameAnimation;
+
     // Add more events as needed
 
     void Start()
     {
+        if (gameAnimation == null)
+        {
+            gameAnimation = FindFirstObjectByType<GameAnimation>();
+        }
+
+        if (ShipScanner == null)
+        {
+            ShipScanner = FindFirstObjectByType<Scanner>();
+        }
+
         if (!isIntroPlayed)
         {
             isIntroPlayed = true;
             OnIntro?.Invoke();
         }
     }
+
+    // Update is called once per frame
 
     void Update()
     {
@@ -308,11 +323,11 @@ public class GameManager : SingletonPersistent<GameManager>
 
     public void TriggerPlay()
     {
-        if (!hasPlayedFirstPlay)
-        {
-            OnPlay?.Invoke();
-            hasPlayedFirstPlay = true;
-        }
+        Debug.Log("playing the game.");
+        OnPlay?.Invoke();
+        hasPlayedFirstPlay = true;
+        GameStateChanger(GameState.Play);
+        gameAnimation.Play();
     }
 
     GameObject IsObjectInView(string tag)

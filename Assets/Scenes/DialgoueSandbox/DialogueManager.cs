@@ -37,7 +37,7 @@ public class DialogueManager : MonoBehaviour
     private Dialogue currentDialogue;
     private int currentLineIndex;
     private GameObject highlightedObject;
-    private ShipScanner scanner => GameManager.Instance.ShipScanner;
+    private Scanner scanner => GameManager.Instance.ShipScanner;
 
     [SerializeField]
     private Dialogue testDialogue;
@@ -85,7 +85,7 @@ public class DialogueManager : MonoBehaviour
         {
             if (scanner != null && highlightedObject != null && highlightedObject.activeInHierarchy)
             {
-                scanner.HighlightObject(highlightedObject);
+                scanner.Scan(highlightedObject);
             }
         }
         else
@@ -171,7 +171,7 @@ public class DialogueManager : MonoBehaviour
         {
             if (scanner != null && highlightedObject != null && highlightedObject.activeInHierarchy)
             {
-                scanner.HighlightObject(null);
+                scanner.ResetScanner();
             }
         }
         else
