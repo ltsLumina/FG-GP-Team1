@@ -18,6 +18,9 @@ public class MainMenu : MonoBehaviour
     [SerializeField] GameObject gameOverPanel;
     public GameObject GameOverPanel => gameOverPanel;
     [SerializeField] GameObject skipTutorialButton;
+    public GameObject Gradient => gradient;
+    [SerializeField] GameObject gradient;
+
     public GameObject SkipTutorialButton => skipTutorialButton;
 
     void Start()

@@ -8,9 +8,6 @@ public class OptionsMenu : MonoBehaviour
 {
     //Audio
     [Header("Audio")]
-    public AudioMixer audioMixer;
-    string vcaPath = "vca:/VCA Name";
-
     public TMP_Text masterLabel, musicLabel, sfxLabel;
     public Slider masterSlider, musicSlider, sfxSlider;
 
@@ -33,14 +30,11 @@ public class OptionsMenu : MonoBehaviour
         //Audio
         float volume = 0f;
         masterSlider.value = volume;
-
         masterLabel.text = Mathf.RoundToInt(volume + 80).ToString();
 
-        audioMixer.GetFloat("MusicVol", out volume);
         musicSlider.value = volume;
         musicLabel.text = Mathf.RoundToInt(volume + 80).ToString();
 
-        audioMixer.GetFloat("SFXVol", out volume);
         sfxSlider.value = volume;
         sfxLabel.text = Mathf.RoundToInt(volume + 80).ToString();
 
@@ -91,21 +85,18 @@ public class OptionsMenu : MonoBehaviour
     public void SetMasterVolume()
     {
         masterLabel.text = Mathf.RoundToInt(masterSlider.value + 80).ToString();
-        audioMixer.SetFloat("MasterVol", masterSlider.value);
         PlayerPrefs.SetFloat("MasterVol", masterSlider.value);
     }
 
     public void SetMusicVolume()
     {
         musicLabel.text = Mathf.RoundToInt(musicSlider.value + 80).ToString();
-        audioMixer.SetFloat("MusicVol", musicSlider.value);
         PlayerPrefs.SetFloat("MusicVol", musicSlider.value);
     }
 
     public void SetSFXVolume()
     {
         sfxLabel.text = Mathf.RoundToInt(sfxSlider.value + 80).ToString();
-        audioMixer.SetFloat("SFXVol", sfxSlider.value);
         PlayerPrefs.SetFloat("SFXVol", sfxSlider.value);
     }
 

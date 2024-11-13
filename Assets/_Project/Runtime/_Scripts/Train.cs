@@ -1,5 +1,7 @@
 #region
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using DG.Tweening;
 using JetBrains.Annotations;
 using Lumina.Essentials.Modules;
@@ -9,7 +11,7 @@ using UnityEngine.Custom.Attributes;
 using UnityEngine.Events;
 using UnityEngine.Rendering.HighDefinition;
 using VInspector;
-
+using Random = UnityEngine.Random;
 #endregion
 
 [Author("Alex"), DisallowMultipleComponent]
@@ -311,6 +313,11 @@ public class Train : MonoBehaviour
             {
                 StartCoroutine(RGBLights());
             }
+
+            foreach (var light in lights)
+            {
+                light.Key.SetActive(false);
+            }
         }
     }
 
@@ -320,10 +327,8 @@ public class Train : MonoBehaviour
         {
             foreach (var light in lights)
             {
-                light.Key.GetComponent<Light>().color = new Color(
-                    UnityEngine.Random.value,
-                    UnityEngine.Random.value,
-                    UnityEngine.Random.value
+                light.Key.GetComponent<Light>().color = new
+                (Random.value, Random.value, Random.value
                 );
             }
             yield return new WaitForSeconds(0.25f);
@@ -332,14 +337,24 @@ public class Train : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P)) StartCoroutine(RGBLights());
+
+        if (transform.position.y < -300)
         {
-            StartCoroutine(RGBLights());
+            GameManager.Instance.TriggerEnterTheDeep();
+            Debug.Log("deep");
+
+            Power -= powerDepletionRate * Time.deltaTime;
+
+            foreach (var light in lights)
+            {
+                light.Key.SetActive(true);
+            }
         }
 
         Dive();
         FuelCalculation();
-        ToggleLightsAtThreshold();
+        //ToggleLightsAtThreshold();
     }
 
     void Dive()
@@ -359,7 +374,6 @@ public class Train : MonoBehaviour
     {
         foreach (var light in lights)
         {
-            Power -= powerDepletionRate * Time.deltaTime;
             this.DoForEachPlayer(p => p.Animator.SetBool("LightsCritical", Power < 20));
             if (Power <= lightSwitchThresholds[light.Key])
             {
@@ -428,6 +442,7 @@ public class Train : MonoBehaviour
         switch (other.gameObject.tag)
         {
             case "Rock":
+                Debug.Log("hit", other.gameObject);
                 OnCollision(other.gameObject);
                 break;
         }

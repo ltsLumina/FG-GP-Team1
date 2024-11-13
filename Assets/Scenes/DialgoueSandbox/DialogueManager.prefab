@@ -523,7 +523,7 @@ RectTransform:
   m_GameObject: {fileID: 8575249831327262986}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6591177002051156265}
@@ -559,10 +559,11 @@ MonoBehaviour:
   profileImage: {fileID: 5211559674016822761}
   dialogueAudioSource: {fileID: 8169619664616533932}
   staticOverlayImage: {fileID: 7932947544484855172}
-  staticIntensity: 1
+  staticIntensity: 0.042
   staticEffectDuration: 0.2
   glitchFrameDuration: 0.05
-  testDialogue: {fileID: 11400000, guid: 81b486ecabdff4e4fadaf8e70ddc8c6b, type: 2}
+  typingDuration: 0.546
+  testDialogue: {fileID: 0}
 --- !u!114 &7176855985535340775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -570,13 +571,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8575249831327262986}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9e029ea1fb36b411cab671ff9120a073, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueManager: {fileID: 1165592239024975985}
-  introDialogue: {fileID: 0}
+  introDialogue: {fileID: 11400000, guid: 81b486ecabdff4e4fadaf8e70ddc8c6b, type: 2}
   gameStartedDialogue: {fileID: 0}
   firstPlayDialogue: {fileID: 0}
   firstKelpDialogue: {fileID: 0}
