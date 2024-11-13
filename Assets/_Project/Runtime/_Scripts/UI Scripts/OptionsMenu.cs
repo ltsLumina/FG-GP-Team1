@@ -29,6 +29,7 @@ public class OptionsMenu : MonoBehaviour
     {
         //Audio
         float volume = 0f;
+<<<<<<< HEAD
 
         if (PlayerPrefs.HasKey("MasterVol"))
         {
@@ -61,6 +62,18 @@ public class OptionsMenu : MonoBehaviour
             PlayerPrefs.SetFloat("SFXVol", volume);
         }
         sfxSlider.value = PlayerPrefs.GetFloat("SFXVol"); ;
+=======
+        audioMixer.GetFloat("MasterVol", out volume);
+        masterSlider.value = volume;
+        masterLabel.text = Mathf.RoundToInt(volume + 80).ToString();
+
+        audioMixer.GetFloat("MusicVol", out volume);
+        musicSlider.value = volume;
+        musicLabel.text = Mathf.RoundToInt(volume + 80).ToString();
+
+        audioMixer.GetFloat("SFXVol", out volume);
+        sfxSlider.value = volume;
+>>>>>>> parent of 879c870 (updates on the settings that didn't work apperently)
         sfxLabel.text = Mathf.RoundToInt(volume + 80).ToString();
 
         //Resolution
@@ -93,7 +106,7 @@ public class OptionsMenu : MonoBehaviour
         vsyncToggle.onValueChanged.AddListener(SetVSync);
 
         //Graphics
-        graphicsDropdown.value = PlayerPrefs.GetInt("GraphicsQuality", PlayerPrefs.GetInt("Graphics"));
+        graphicsDropdown.value = PlayerPrefs.GetInt("GraphicsQuality", QualitySettings.GetQualityLevel());
         graphicsDropdown.onValueChanged.AddListener(SetGraphics);
 
         brightnessSlider.value = PlayerPrefs.GetFloat("Brightness", 1f);
@@ -111,21 +124,18 @@ public class OptionsMenu : MonoBehaviour
     {
         masterLabel.text = Mathf.RoundToInt(masterSlider.value + 80).ToString();
         PlayerPrefs.SetFloat("MasterVol", masterSlider.value);
-        //PlayerPrefs.Save();
     }
 
     public void SetMusicVolume()
     {
         musicLabel.text = Mathf.RoundToInt(musicSlider.value + 80).ToString();
         PlayerPrefs.SetFloat("MusicVol", musicSlider.value);
-        //PlayerPrefs.Save();
     }
 
     public void SetSFXVolume()
     {
         sfxLabel.text = Mathf.RoundToInt(sfxSlider.value + 80).ToString();
         PlayerPrefs.SetFloat("SFXVol", sfxSlider.value);
-        //PlayerPrefs.Save();
     }
 
     //Resolution

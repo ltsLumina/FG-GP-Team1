@@ -5488,7 +5488,7 @@ MonoBehaviour:
   onFuelDepleted:
     m_PersistentCalls:
       m_Calls: []
-  onRefuel:
+  onFuelRestored:
     m_PersistentCalls:
       m_Calls: []
   onDirtinessStageChanged:
@@ -5497,7 +5497,7 @@ MonoBehaviour:
   onHullBreach:
     m_PersistentCalls:
       m_Calls: []
-  onHullRepair:
+  onHullIntegrityChanged:
     m_PersistentCalls:
       m_Calls: []
   onDeath:
@@ -5506,10 +5506,13 @@ MonoBehaviour:
   onPowerDepleted:
     m_PersistentCalls:
       m_Calls: []
-  onRecharge:
+  onPowerRestored:
     m_PersistentCalls:
       m_Calls: []
   OnLightDim:
+    m_PersistentCalls:
+      m_Calls: []
+  onRockCollision:
     m_PersistentCalls:
       m_Calls: []
   debugMode: 0
