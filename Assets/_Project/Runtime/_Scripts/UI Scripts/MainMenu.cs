@@ -1,6 +1,7 @@
 using System;
 using DG.Tweening;
 using Lumina.Essentials.Modules;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,6 +17,8 @@ public class MainMenu : MonoBehaviour
     [SerializeField] GameObject pausePanel;
     public GameObject PausePanel => pausePanel;
     [SerializeField] GameObject gameOverPanel;
+    public TextMeshProUGUI GameOverReasonText => gameOverReasonText;
+    [SerializeField] TextMeshProUGUI gameOverReasonText;
     public GameObject GameOverPanel => gameOverPanel;
     [SerializeField] GameObject skipTutorialButton;
     public GameObject Gradient => gradient;
@@ -28,10 +31,24 @@ public class MainMenu : MonoBehaviour
         DOTween.KillAll();
     }
 
+    public void SetGameOverReason(string reason)
+    {
+        if (gameOverReasonText != null)
+        {
+            gameOverReasonText.text = reason;
+        }
+        else
+        {
+            Debug.LogWarning("GameOverReasonText is not assigned in the MainMenu!");
+        }
+    }
+
     public void StartTurtorialGame()
     {
-        // Replace later with what scene is the game scene
-        SceneManager.LoadScene(1);
+        //Start Animation for tutorial
+        Debug.Log("Starting the tutorial game...");
+        GameManager.Instance.TriggerPlayIntro();
+        mainMenuPanel.SetActive(false);
     }
 
     public void Exit()
@@ -45,23 +62,39 @@ public class MainMenu : MonoBehaviour
 
     public void SkipTutorial()
     {
-        SceneManager.LoadScene(2);
+        //Skips the tutorial button
+        Debug.Log("Skipping the tutorial...");
+        GameManager.Instance.hasPlayedIntro = true;
+        StartGame();
     }
 
     public void Retry()
     {
-        GameManager.Instance.GameStateChanger(GameManager.GameState.Play);
-        highScoreManager = Helpers.Find<HighScoreManager>();
+        if (highScoreManager == null)
+            highScoreManager = Helpers.Find<HighScoreManager>();
         highScoreManager.SaveHighScores();
-        scoreManager = Helpers.Find<ScoreManager>();
+
+        if (scoreManager == null)
+            scoreManager = Helpers.Find<ScoreManager>();
         scoreManager.ResetGame();
-        SceneManager.LoadScene(2);
+
+        GameManager.Instance.hasPlayedIntro = true;
+        GameManager.Instance.GameStateChanger(GameManager.GameState.Play);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void BackToMain()
     {
-        GameManager.Instance.GameStateChanger(GameManager.GameState.Play);
-        SceneManager.LoadScene(0);
+        Debug.Log("Returning to the main menu...");
+        GameManager.Instance.GameStateChanger(GameManager.GameState.Menu);
+
+        mainMenuPanel.SetActive(true);
+        pausePanel.SetActive(false);
+        gameOverPanel.SetActive(false);
+
+        if (scoreManager == null)
+            scoreManager = Helpers.Find<ScoreManager>();
+        scoreManager.ResetGame();
     }
 
     public void StartGame()
@@ -82,9 +115,13 @@ public class MainMenu : MonoBehaviour
 
     public void GameOver()
     {
+        if (highScoreManager == null)
+            highScoreManager = Helpers.Find<HighScoreManager>();
         highScoreManager.SaveHighScores();
+
         GameManager.Instance.GameStateChanger(GameManager.GameState.GameOver);
-        gameOverPanel.SetActive(false);
+
+        gameOverPanel.SetActive(true);
         pausePanel.SetActive(false);
         mainMenuPanel.SetActive(false);
     }

@@ -94,6 +94,7 @@ public class GameManager : SingletonPersistent<GameManager>
         {
             //ship = FindObjectByTag("Player");
             ship = GameObject.FindGameObjectWithTag("Ship");
+
             // Debug
             if (ship == null)
             {
@@ -135,7 +136,6 @@ public class GameManager : SingletonPersistent<GameManager>
         switch (state)
         {
             case GameState.Play:
-                isGameOver = false;
                 if (Input.GetKeyDown(KeyCode.Escape))
                 {
                     GameStateChanger(GameState.Pause);
@@ -185,8 +185,7 @@ public class GameManager : SingletonPersistent<GameManager>
                 Time.timeScale = 0f;
                 break;
             case GameState.GameOver:
-                // mainMenu = FindAnyObjectByType<MainMenu>();
-                // mainMenu.GameOverPanel.SetActive(true);
+                Time.timeScale = 0f;
                 break;
         }
     }
@@ -317,8 +316,22 @@ public class GameManager : SingletonPersistent<GameManager>
     {
         if (!isGameOver)
         {
-            Debug.Log($"Player died due to: {reason}");
+            Debug.Log($"Game Over triggered: {reason}");
+            isGameOver = true;
+
             GameStateChanger(GameState.GameOver);
+
+            if (mainMenu == null)
+            {
+                mainMenu = FindAnyObjectByType<MainMenu>();
+            }
+
+            if (mainMenu != null)
+            {
+                mainMenu.SetGameOverReason($"Game Over: {reason}");
+                mainMenu.GameOverPanel.SetActive(true);
+            }
+
             OnGameOver?.Invoke(reason);
         }
     }
