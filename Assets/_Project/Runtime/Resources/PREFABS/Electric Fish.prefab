@@ -50,16 +50,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 283023e4b68b427fb24512c2e1252630, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chargeLevel: 3
-  charged: 0
   offset: {x: 0, y: 0, z: 0}
   radius: 2
-  onChargeChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  onChargeDepleted:
-    m_PersistentCalls:
-      m_Calls: []
+  shockSound:
+    Guid:
+      Data1: -11847226
+      Data2: 1192019140
+      Data3: 211635631
+      Data4: -812553168
+    Path: event:/SFX/ElectricityShock
 --- !u!114 &2170168624318907611
 MonoBehaviour:
   m_ObjectHideFlags: 0
