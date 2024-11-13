@@ -98,7 +98,7 @@ public class DialogueEvents : MonoBehaviour
     private void Start()
     {
         // Check for missing dialogues
-        if (introDialogue == null)
+        if (introDialogue == null) // shame on you turner
             Debug.LogWarning("Intro dialogue is missing.");
         if (gameStartedDialogue == null)
             Debug.LogWarning("Game started dialogue is missing.");
