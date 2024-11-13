@@ -4195,6 +4195,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 752f73e008521414a8b6cdcedf960df8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainMenuPanel: {fileID: 0}
+  pausePanel: {fileID: 0}
+  gameOverPanel: {fileID: 0}
 --- !u!1 &224090082
 GameObject:
   m_ObjectHideFlags: 0
@@ -11402,6 +11405,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 713685231}
   m_CullTransparentMesh: 1
+--- !u!1001 &715428831
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: eaedcb082b0b82749bf820af2b38175a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 955.5608
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eaedcb082b0b82749bf820af2b38175a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eaedcb082b0b82749bf820af2b38175a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1727.0864
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eaedcb082b0b82749bf820af2b38175a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071067
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eaedcb082b0b82749bf820af2b38175a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eaedcb082b0b82749bf820af2b38175a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eaedcb082b0b82749bf820af2b38175a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eaedcb082b0b82749bf820af2b38175a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eaedcb082b0b82749bf820af2b38175a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eaedcb082b0b82749bf820af2b38175a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: eaedcb082b0b82749bf820af2b38175a, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d42f856679b1b5f40b58d86c1d274b37, type: 2}
+    - target: {fileID: 919132149155446097, guid: eaedcb082b0b82749bf820af2b38175a, type: 3}
+      propertyPath: m_Name
+      value: DWcoral4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: eaedcb082b0b82749bf820af2b38175a, type: 3}
 --- !u!1 &720053121
 GameObject:
   m_ObjectHideFlags: 0
@@ -22546,20 +22610,17 @@ MonoBehaviour:
   hullIntegrity: 3
   repairAmount: 1
   hullBreaches: 0
+  lights:
+    serializedKvps: []
+    dividerPos: 0.33
+  lightSwitchThresholds:
+    serializedKvps: []
+    dividerPos: 0.33
   power: 100
   powerDepletionRate: 1
-  powerRechargeAmount: 1
+  batteryChargeRate: 25
   lightIntensity: 1
   lightRadius: 5
-  powerDimThreshold: 25
-  lightDimMultiplier: 0.5
-  spawnInterval: 1
-  jellyfishSpawnRate: 24.5
-  jellyfishSpawnInterval: 27.7
-  jellyfishSpeed: 5
-  jellyfishRestoreAmount: 10
-  jellyfishStunDuration: 1
-  inDevelopment: Yes.
   onFuelDepleted:
     m_PersistentCalls:
       m_Calls: []
@@ -22593,18 +22654,24 @@ MonoBehaviour:
   debugMode: 0
   invincible: 0
   showDebugInfo: 0
+  partyMode: 0
   fuelDepletionDefaults:
   - 1
   - 1.5
   - 2
   - 2.5
   - 3
-  hullIntegrityDepletionDefaults:
-  - 1
-  - 5
-  - 7.5
-  - 10
-  - 15
+  dirtinessStagesDefaults:
+  - name: Stage
+    threshold: 20
+  - name: Stage
+    threshold: 40
+  - name: Stage
+    threshold: 60
+  - name: Stage
+    threshold: 80
+  - name: Stage
+    threshold: 100
 --- !u!114 &1555046371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29540,9 +29607,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f6d54e7c12100145b9cf3a8b86e068b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainMenuPanel: {fileID: 7407327896625588074}
-  pausePanel: {fileID: 1085162099}
-  gameOverPanel: {fileID: 835118295}
   isGameOver: 0
   state: 0
 --- !u!114 &2031856055
@@ -36984,3 +37048,4 @@ SceneRoots:
   - {fileID: 140685472}
   - {fileID: 1507177281376618506}
   - {fileID: 2031856053}
+  - {fileID: 715428831}
