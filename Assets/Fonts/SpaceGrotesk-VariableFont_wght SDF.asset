@@ -2789,6 +2789,9 @@ MonoBehaviour:
           m_YAdvance: 0
       m_SecondAdjustmentRecord:
         m_GlyphIndex: 146
+<<<<<<< HEAD
+>>>>>>> parent of 0ee8ae3 (Merge branch 'Birkans-Branch' of https://github.com/ltsLumina/FG-GP-Team1 into Birkans-Branch)
+=======
 >>>>>>> parent of 0ee8ae3 (Merge branch 'Birkans-Branch' of https://github.com/ltsLumina/FG-GP-Team1 into Birkans-Branch)
         m_GlyphValueRecord:
           m_XPlacement: 0
