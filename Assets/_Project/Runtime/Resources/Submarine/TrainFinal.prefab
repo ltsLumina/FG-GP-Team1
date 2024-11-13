@@ -5167,7 +5167,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1014627520484451730
 Transform:
   m_ObjectHideFlags: 0
@@ -5577,13 +5577,15 @@ GameObject:
   - component: {fileID: 944340541773133129}
   - component: {fileID: 2062316385156636542}
   - component: {fileID: 2370222099135413591}
+  - component: {fileID: 6447990558812800315}
+  - component: {fileID: 7686934855000917441}
   m_Layer: 0
   m_Name: TrainFinal
   m_TagString: Ship
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8589098272386292673
 Transform:
   m_ObjectHideFlags: 0
@@ -5620,34 +5622,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vInspectorData: {fileID: 0}
-  speed: 0
   maxSpeed: 10
   fuel: 100
   fuelDepletionRate: 1
-  fuelDepletionRateMultipliers:
-  - name: Stage 1
-    multiplier: 1
-  - name: Stage 2
-    multiplier: 1.5
-  - name: Stage 3
-    multiplier: 2
-  - name: Stage 4
-    multiplier: 2.5
-  - name: Stage 5
-    multiplier: 3
-  kelpRestoreAmount: 20
+  kelpRestoreAmount: 10
   algaeRestoreAmount: 10
-  dirtinessStages:
-  - name: Stage 1
-    threshold: 20
-  - name: Stage 2
-    threshold: 40
-  - name: Stage 3
-    threshold: 60
-  - name: Stage 4
-    threshold: 80
-  - name: Stage 5
-    threshold: 100
   dirtinessStage: 1
   dirtiness: 0
   dirtinessRate: 1
@@ -5658,15 +5637,15 @@ MonoBehaviour:
   lights:
     serializedKvps:
     - Key: {fileID: 798089902134642151}
-      Value: 1
+      Value: 0
       index: 0
       isKeyRepeated: 0
     - Key: {fileID: 8815689672189453731}
-      Value: 1
+      Value: 0
       index: 1
       isKeyRepeated: 0
     - Key: {fileID: 5028551218659514896}
-      Value: 1
+      Value: 0
       index: 2
       isKeyRepeated: 0
     dividerPos: 0.33
@@ -5686,8 +5665,8 @@ MonoBehaviour:
       isKeyRepeated: 0
     dividerPos: 0.33
   power: 100
-  powerDepletionRate: 0.5
-  batteryChargeRate: 25
+  powerDepletionRate: 1
+  batteryChargeRate: 20
   lightIntensity: 20000
   lightRadius: 50
   onFuelDepleted:
@@ -5736,23 +5715,6 @@ MonoBehaviour:
   invincible: 0
   showDebugInfo: 0
   partyMode: 0
-  fuelDepletionDefaults:
-  - 1
-  - 1.5
-  - 2
-  - 2.5
-  - 3
-  dirtinessStagesDefaults:
-  - name: Stage
-    threshold: 20
-  - name: Stage
-    threshold: 40
-  - name: Stage
-    threshold: 60
-  - name: Stage
-    threshold: 80
-  - name: Stage
-    threshold: 100
 --- !u!114 &944340541773133129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5815,6 +5777,48 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 2
+--- !u!65 &6447990558812800315
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1505193886760754658}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 191
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 52.45, y: 1, z: 10}
+  m_Center: {x: 0, y: 15, z: 0}
+--- !u!65 &7686934855000917441
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1505193886760754658}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 191
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 57.89, y: 1, z: 10}
+  m_Center: {x: 0, y: -25, z: 0}
 --- !u!1 &2501092614291335951
 GameObject:
   m_ObjectHideFlags: 0
@@ -6090,7 +6094,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7011852503996240859
 Transform:
   m_ObjectHideFlags: 0
@@ -12696,7 +12700,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3947362507345352074
 Transform:
   m_ObjectHideFlags: 0
@@ -13205,6 +13209,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8589098272386292673}
     m_Modifications:
+    - target: {fileID: 302833535142362519, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 371218063552686938, guid: 170688ef4bfd85a439605bb542031a97, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -13425,11 +13433,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4977319602852276643, guid: 61da76c00b4c61f41be3ed24cdc40bf5, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4977319602852276643, guid: 61da76c00b4c61f41be3ed24cdc40bf5, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5169608157023660997, guid: 61da76c00b4c61f41be3ed24cdc40bf5, type: 3}
       propertyPath: m_Pivot.x
