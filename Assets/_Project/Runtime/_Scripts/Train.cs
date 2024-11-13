@@ -273,10 +273,10 @@ public class Train : MonoBehaviour
             onFuelDepleted.AddListener(() => onDeath.Invoke());
             onDeath.AddListener(() =>
             {
+                HandleHullIntegrityDepletion();
                 GameManager.Instance.GameStateChanger(GameManager.GameState.GameOver);
                 this.DoForEachPlayer(p => p.Animator.SetTrigger("GameOver"));
                 Debug.Log("Died");
-                HandleHullIntegrityDepletion();
             });
 
             DOTween.SetTweensCapacity(1000, 5);
@@ -376,7 +376,8 @@ public class Train : MonoBehaviour
     // Handle hull integrity depletion
     void HandleHullIntegrityDepletion()
     {
-        Debug.Log("Hull integrity reached zero!");
+        Debug.Log("Hull integrity reached zero!"); 
+        GameManager.Instance.TriggerGameOver("Hull destroyed");
     }
     //--------------------------Added----------------------------------
 
@@ -479,13 +480,6 @@ public class Train : MonoBehaviour
             HullIntegrity = Mathf.Max(0, 3 - hullBreaches);
             onHullBreach.Invoke(hullBreaches);
             onHullIntegrityChanged.Invoke(HullIntegrity);
-
-            //---------------------Added-----------------------------
-            if (HullIntegrity <= 0)
-            {
-                HandleHullIntegrityDepletion();
-            }
-            //--------------------------------------------------------
 
             onRockCollision.Invoke(collision.GetComponent<Rock>());
 

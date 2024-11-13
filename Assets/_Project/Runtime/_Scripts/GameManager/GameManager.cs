@@ -96,13 +96,9 @@ public class GameManager : MonoBehaviour
     {
         hasPlayedIntro = false;
         StartGame();
+
         // subscribe to SceneManager.sceneLoaded event to start game in case of reload
         UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    void Destroy()
-    {
-        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     void OnSceneLoaded(
@@ -112,12 +108,6 @@ public class GameManager : MonoBehaviour
     {
         StartGame();
     }
-
-    // IEnumerator WaitAndStartGame()
-    // {
-    //     yield return new WaitForSeconds(5.0f);
-    //     StartGame();
-    // }
 
     void StartGame()
     {
@@ -153,10 +143,10 @@ public class GameManager : MonoBehaviour
         // Play the right animation
         if (hasPlayedIntro)
         {
-            // if (isGoingToMainMenu)
-            // {
-            //     gameAnimation.MainMenu();
-            // }
+            //if (isGoingToMainMenu)
+            //{
+            //    gameAnimation.MainMenu();
+            //}
 
             gameAnimation.Replay();
         }
@@ -175,8 +165,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-
     void Update()
     {
         highscoreText.text = $"High Score: {1 * -Mathf.RoundToInt(currentDepth)}m";
@@ -194,6 +182,7 @@ public class GameManager : MonoBehaviour
                 {
                     GameStateChanger(GameState.Pause);
                     mainMenu = FindAnyObjectByType<MainMenu>();
+                    mainMenu.ScoreUI.SetActive(false);
                     mainMenu.Gradient.SetActive(true);
                     mainMenu.PausePanel.SetActive(true);
                     //mainMenu.SkipTutorialButton.SetActive(false);
@@ -204,6 +193,8 @@ public class GameManager : MonoBehaviour
                 {
                     GameStateChanger(GameState.Play);
                     mainMenu = FindAnyObjectByType<MainMenu>();
+                    mainMenu.ScoreUI.SetActive(true);
+                    mainMenu.SetPauseUIsActive(false);
                     mainMenu.Gradient.SetActive(false);
                     mainMenu.PausePanel.SetActive(false);
                     //mainMenu.SkipTutorialButton.SetActive(true);
@@ -213,10 +204,11 @@ public class GameManager : MonoBehaviour
                 if (!isGameOver)
                 {
                     isGameOver = true;
-                    GameStateChanger(GameState.Pause);
                     mainMenu = FindAnyObjectByType<MainMenu>();
+                    mainMenu.ScoreUI.SetActive(false);
                     mainMenu.Gradient.SetActive(true);
                     mainMenu.GameOverPanel.SetActive(true);
+                    GameStateChanger(GameState.Pause);
                     Debug.Log("Game Over");
                 }
                 break;
@@ -367,26 +359,30 @@ public class GameManager : MonoBehaviour
     // Game Over
     public void TriggerGameOver(string reason)
     {
-        if (!isGameOver)
+        if (isGameOver)
+            return;
+
+        Debug.Log($"Game Over triggered: {reason}");
+        isGameOver = true;
+
+        GameStateChanger(GameState.GameOver);
+
+        if (mainMenu == null)
         {
-            Debug.Log($"Game Over triggered: {reason}");
-            isGameOver = true;
-
-            GameStateChanger(GameState.GameOver);
-
+            mainMenu = FindAnyObjectByType<MainMenu>();
             if (mainMenu == null)
             {
-                mainMenu = FindAnyObjectByType<MainMenu>();
+                Debug.LogError("MainMenu not found. Cannot update GameOver UI.");
+                return;
             }
-
-            if (mainMenu != null)
-            {
-                mainMenu.SetGameOverReason($"Game Over: {reason}");
-                mainMenu.GameOverPanel.SetActive(true);
-            }
-
-            OnGameOver?.Invoke(reason);
         }
+
+        mainMenu.SetGameOverReason($"Game Over: {reason}");
+
+        mainMenu.GameOverPanel.SetActive(true);
+        mainMenu.ScoreUI.SetActive(false);
+
+        OnGameOver?.Invoke(reason);
     }
 
     // Enter the deep

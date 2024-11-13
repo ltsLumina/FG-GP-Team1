@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using DG.Tweening;
 using Lumina.Essentials.Modules;
 using TMPro;
@@ -29,10 +30,20 @@ public class MainMenu : MonoBehaviour
 
     [SerializeField]
     GameObject skipTutorialButton;
-    public GameObject Gradient => gradient;
 
     [SerializeField]
     GameObject gradient;
+    public GameObject Gradient => gradient;
+
+    [SerializeField]
+    GameObject scoreUI;
+    public GameObject ScoreUI => scoreUI;
+
+    [Header("Pause UIs")]
+    [SerializeField]
+    List<GameObject> pauseUIs;
+    public List<GameObject> PauseUIs => pauseUIs;
+
 
     public GameObject SkipTutorialButton => skipTutorialButton;
 
@@ -59,6 +70,17 @@ public class MainMenu : MonoBehaviour
         Debug.Log("Starting the tutorial game...");
         GameManager.Instance.TriggerPlayIntro();
         mainMenuPanel.SetActive(false);
+    }
+
+    public void SetPauseUIsActive(bool isActive)
+    {
+        foreach (GameObject ui in pauseUIs)
+        {
+            if (ui != null)
+            {
+                ui.SetActive(isActive);
+            }
+        }
     }
 
     public void Exit()
@@ -98,14 +120,10 @@ public class MainMenu : MonoBehaviour
         GameManager.Instance.GameStateChanger(GameManager.GameState.Menu);
         GameManager.Instance.hasPlayedIntro = true;
         GameManager.Instance.isGoingToMainMenu = true;
-
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         mainMenuPanel.SetActive(true);
-        pausePanel.SetActive(false);
+        SetPauseUIsActive(false);
         gameOverPanel.SetActive(false);
-
-        if (scoreManager == null)
-            scoreManager = Helpers.Find<ScoreManager>();
-        scoreManager.ResetGame();
     }
 
     public void StartGame()
