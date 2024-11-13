@@ -351,7 +351,8 @@ public class Train : MonoBehaviour
 
         Dive();
         FuelCalculation();
-        ToggleLightsAtThreshold();
+
+        if (Depth < -250) ToggleLightsAtThreshold();
     }
 
     void Dive()
