@@ -48,10 +48,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7792483606580729019, guid: c4d2eb48cde56104fba0809bc9b55450, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d5e7d34cdd84f9545af339e5dd3fd25b, type: 2}
+    - target: {fileID: -5533758295934680636, guid: c4d2eb48cde56104fba0809bc9b55450, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d5e7d34cdd84f9545af339e5dd3fd25b, type: 2}
     - target: {fileID: 919132149155446097, guid: c4d2eb48cde56104fba0809bc9b55450, type: 3}
       propertyPath: m_Name
       value: Geo_Battery_A1
       objectReference: {fileID: 0}
+    - target: {fileID: 1273993294125220986, guid: c4d2eb48cde56104fba0809bc9b55450, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: d5e7d34cdd84f9545af339e5dd3fd25b, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

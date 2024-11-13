@@ -1,12 +1,19 @@
+using Lumina.Essentials.Modules;
 using UnityEngine;
 
 public class ShipAnimations : MonoBehaviour
 {
     [SerializeField]
+    private Train ship;
+
+    [SerializeField]
     private Animator anim;
 
     [SerializeField]
     private int damage = 0;
+
+    [SerializeField]
+    private int maxHullIntegrity = 3;
 
     //Slider from 0 - 1
     [Range(0.0f, 1.0f)]
@@ -16,35 +23,18 @@ public class ShipAnimations : MonoBehaviour
     [Range(0.0f, 1.0f)]
     public float sideLightIntensity = 0.0f;
 
-    // void Update()
-    // {
-    //     //For debug
-    //     if (Input.GetKeyDown(KeyCode.Space))
-    //     {
-    //         Debug.Log("Damage Ship");
-    //         DamageShip();
-    //     }
-    //     if (Input.GetKeyDown(KeyCode.R))
-    //     {
-    //         Debug.Log("Repair Ship");
-    //         RepairShip();
-    //     }
-
-    //     //Set the front light intensity
-    //     anim.SetFloat("FrontLightStrength", frontLightIntensity);
-    //     //Set the side light intensity
-    //     anim.SetFloat("SideLightStrength", sideLightIntensity);
-    // }
-
-    void DamageShip()
+    void Start()
     {
-        damage++;
-        anim.SetInteger("Damage", damage);
+        if (ship == null) ship = FindObjectOfType<Train>(true);
+
+        //Subscribe to UnityEvent
+        ship.onHullIntegrityChanged.AddListener(onHullIntegrityChanged);
     }
 
-    void RepairShip()
+    void onHullIntegrityChanged(int hullIntegrity)
     {
-        damage--;
+        // Convert Hull integrety to damage
+        damage = maxHullIntegrity - hullIntegrity;
         anim.SetInteger("Damage", damage);
     }
 }

@@ -82,7 +82,7 @@ MonoBehaviour:
     supportProbeVolumeScenarios: 0
     supportProbeVolumeScenarioBlending: 1
     probeVolumeBlendingMemoryBudget: 128
-    supportRayTracing: 1
+    supportRayTracing: 0
     supportVFXRayTracing: 0
     supportedRayTracingMode: 1
     lightLoopSettings:
@@ -176,7 +176,7 @@ MonoBehaviour:
       FSR2EnableSharpness: 1
       FSR2Sharpness: 0.5
       FSR2UseOptimalSettings: 1
-      FSR2QualitySetting: 2
+      FSR2QualitySetting: 0
       FSR2InjectionPoint: 0
       fsrOverrideSharpness: 0
       fsrSharpness: 0.92

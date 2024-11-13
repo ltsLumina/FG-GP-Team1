@@ -11,13 +11,16 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField]
     float dashMotorSpeed = 5.0f;
 
-    public Animator Animator { get; private set; }
     InputManager input;
+    public Animator Animator { get; private set; }
+
+    [SerializeField]
+    bool isFakePlayer = false;
 
     private void Start()
     {
-        Animator = GetComponent<Animator>();
         input = transform.parent.GetComponentInChildren<InputManager>();
+        Animator = GetComponent<Animator>();
         SetMotorSpeed(motorSpeed);
     }
 
@@ -25,6 +28,11 @@ public class PlayerAnimation : MonoBehaviour
     {
         Animator.SetTrigger("Dash");
         SetMotorSpeed(dashMotorSpeed);
+    }
+
+    public void Spawn()
+    {
+        Animator.SetTrigger("Spawn");
     }
 
     public void StopDash()
@@ -55,12 +63,6 @@ public class PlayerAnimation : MonoBehaviour
         // anim.SetTrigger("Die");
     }
 
-    public void Spawn()
-    {
-        Debug.Log("Spawn animation not implemented");
-        // anim.SetTrigger("Spawn");
-    }
-
     public void Stun(float stunDuration)
     {
         Debug.Log("Stun animation not implemented");
@@ -71,14 +73,11 @@ public class PlayerAnimation : MonoBehaviour
     {
         // Set blend tree parameters for player movement based on input of new input system Player action Move
         // Do a smooth transition between animations
-
-        SetMovementBlendTree(input.MoveInput);
+        if (!isFakePlayer)
+            SetMovementBlendTree(input.MoveInput);
     }
 
-    private void ObjectReleased()
-    {
-        Debug.Log("Object released");
-    }
+    private void ObjectReleased() { }
 
     // Set blend tree parameters for player movement based on input of new input system Player action Move
     public void SetMovementBlendTree(Vector2 movement)

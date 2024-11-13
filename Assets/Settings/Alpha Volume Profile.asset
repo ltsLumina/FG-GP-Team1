@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e88178bb13f64a54f90d6cd6ef7aa9a1, type: 3}
   m_Name: CloudLayer
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   opacity:
     m_OverrideState: 1
     m_Value: 1
@@ -508,7 +508,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f034cba68ab55e046ae1445a42f18c0e, type: 3}
   m_Name: IndirectLightingController
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   indirectDiffuseLightingMultiplier:
     m_OverrideState: 1
     m_Value: 1
@@ -579,7 +579,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d877ec3e844f2ca46830012e8e79319b, type: 3}
   m_Name: PhysicallyBasedSky
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   rotation:
     m_OverrideState: 1
     m_Value: 0
@@ -722,7 +722,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b8bcdf71d7fafa419fca1ed162f5fc9, type: 3}
   m_Name: ColorAdjustments
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   postExposure:
     m_OverrideState: 1
     m_Value: 0
@@ -750,7 +750,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32b6af8f7ad32324cb6941c3290e5895, type: 3}
   m_Name: MicroShadowing
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   enable:
     m_OverrideState: 1
     m_Value: 0
@@ -876,7 +876,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c604242b4dd4c8caa4d1944b94189e0, type: 3}
   m_Name: HighQualityLineRenderingVolumeComponent
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   enable:
     m_OverrideState: 1
     m_Value: 0
@@ -1008,7 +1008,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e17fad69ea181b4483974138b566975, type: 3}
   m_Name: ScreenSpaceRefraction
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   screenFadeDistance:
     m_OverrideState: 1
     m_Value: 0.1
@@ -1024,7 +1024,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 464ccca2a3ef3ce429c63a5b5cd3be58, type: 3}
   m_Name: SubSurfaceScattering
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   rayTracing:
     m_OverrideState: 1
     m_Value: 1
@@ -1092,7 +1092,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a81bcacc415a1f743bfdf703afc52027, type: 3}
   m_Name: GradientSky
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   rotation:
     m_OverrideState: 1
     m_Value: 0
@@ -1147,7 +1147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 384c4d03a551c44448145f4093304119, type: 3}
   m_Name: ScreenSpaceReflection
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   quality:
     m_OverrideState: 1
     m_Value: 1
@@ -1732,7 +1732,7 @@ MonoBehaviour:
     m_Value: 1
   triangleSize:
     m_OverrideState: 1
-    m_Value: 15
+    m_Value: 100
   ambientProbeDimmer:
     m_OverrideState: 1
     m_Value: 0.5
@@ -1748,7 +1748,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f1984a7ac01bf84b86559f7595cdc68, type: 3}
   m_Name: LightCluster
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   cameraClusterRange:
     m_OverrideState: 1
     m_Value: 10
@@ -1804,6 +1804,21 @@ MonoBehaviour:
   maximumIntensity:
     m_OverrideState: 1
     m_Value: 10
+  denoising:
+    m_OverrideState: 0
+    m_Value: 0
+  useAOVs:
+    m_OverrideState: 0
+    m_Value: 1
+  temporal:
+    m_OverrideState: 0
+    m_Value: 0
+  separateVolumetrics:
+    m_OverrideState: 0
+    m_Value: 0
+  asyncDenoising:
+    m_OverrideState: 0
+    m_Value: 1
   skyImportanceSampling:
     m_OverrideState: 1
     m_Value: 0
@@ -2399,7 +2414,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0775cbb206825d541bf6c0297ee524ca, type: 3}
   m_Name: SplitToning
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   shadows:
     m_OverrideState: 1
     m_Value: {r: 0.5, g: 0.5, b: 0.5, a: 1}
@@ -2638,7 +2653,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b709909182ba0943abef2c49ed59205, type: 3}
   m_Name: PaniniProjection
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   distance:
     m_OverrideState: 1
     m_Value: 0
