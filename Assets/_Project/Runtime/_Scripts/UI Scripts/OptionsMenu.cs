@@ -84,21 +84,22 @@ public class OptionsMenu : MonoBehaviour
     //Audio
     public void SetMasterVolume()
     {
-        masterLabel.text = Mathf.RoundToInt(masterSlider.value + 80).ToString();
+        masterLabel.text = Mathf.RoundToInt(masterSlider.value * 100).ToString();
+        Debug.Log(masterSlider.value);
         SetMasterMixerVolume(masterSlider.value);
         PlayerPrefs.SetFloat("MasterVol", masterSlider.value);
     }
 
     public void SetMusicVolume()
     {
-        musicLabel.text = Mathf.RoundToInt(musicSlider.value + 80).ToString();
+        musicLabel.text = Mathf.RoundToInt(musicSlider.value * 100).ToString();
         SetMusicMixerVolume(musicSlider.value);
         PlayerPrefs.SetFloat("MusicVol", musicSlider.value);
     }
 
     public void SetSFXVolume()
     {
-        sfxLabel.text = Mathf.RoundToInt(sfxSlider.value + 80).ToString();
+        sfxLabel.text = Mathf.RoundToInt(sfxSlider.value * 100).ToString();
         SetSFXMixerVolume(sfxSlider.value);
         PlayerPrefs.SetFloat("SFXVol", sfxSlider.value);
     }

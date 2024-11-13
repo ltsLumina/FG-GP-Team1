@@ -74,6 +74,12 @@ public class GameManager : SingletonPersistent<GameManager>
     [SerializeField]
     GameAnimation gameAnimation;
 
+    [Header("Music")]
+    [SerializeField] FMODUnity.EventReference menuMusic;
+    [SerializeField] FMODUnity.EventReference gameMusic;
+    FMOD.Studio.EventInstance menuMusicInstance;
+    FMOD.Studio.EventInstance gameMusicInstance;
+
     // Add more events as needed
 
     void Start()
@@ -109,6 +115,9 @@ public class GameManager : SingletonPersistent<GameManager>
                 Debug.LogError("ShipScanner not found!");
             }
         }
+
+        menuMusicInstance = FMODUnity.RuntimeManager.CreateInstance(menuMusic);
+        gameMusicInstance = FMODUnity.RuntimeManager.CreateInstance(gameMusic);
     }
 
     public void TriggerPlayIntro()
@@ -116,6 +125,7 @@ public class GameManager : SingletonPersistent<GameManager>
         if (!isIntroPlayed)
         {
             isIntroPlayed = true;
+            menuMusicInstance.start();
             OnIntro?.Invoke();
         }
     }
