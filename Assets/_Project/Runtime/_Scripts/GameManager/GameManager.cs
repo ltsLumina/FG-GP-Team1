@@ -76,6 +76,12 @@ public class GameManager : MonoBehaviour
 
     public GameAnimation gameAnimation;
 
+    [Header("Music")]
+    [SerializeField] FMODUnity.EventReference menuMusic;
+    [SerializeField] FMODUnity.EventReference gameMusic;
+    FMOD.Studio.EventInstance menuMusicInstance;
+    FMOD.Studio.EventInstance gameMusicInstance;
+
     // Add more events as needed
 
     void Awake()
@@ -98,6 +104,9 @@ public class GameManager : MonoBehaviour
         StartGame();
         // subscribe to SceneManager.sceneLoaded event to start game in case of reload
         UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
+
+        menuMusicInstance = FMODUnity.RuntimeManager.CreateInstance(menuMusic);
+        gameMusicInstance = FMODUnity.RuntimeManager.CreateInstance(gameMusic);
     }
 
     void Destroy()
@@ -170,6 +179,7 @@ public class GameManager : MonoBehaviour
     {
         if (!isIntroPlayed)
         {
+            menuMusicInstance.start();
             isIntroPlayed = true;
             OnIntro?.Invoke();
         }
@@ -445,6 +455,9 @@ public class GameManager : MonoBehaviour
         hasPlayedFirstPlay = true;
         GameStateChanger(GameState.Play);
         gameAnimation.Play();
+        menuMusicInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        gameMusicInstance.start();
+
     }
 
     GameObject IsObjectInView(string tag)

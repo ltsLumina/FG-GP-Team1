@@ -208,6 +208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f6d54e7c12100145b9cf3a8b86e068b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  highscoreText: {fileID: 1208200993}
   isGameOver: 0
   isIntroPlayed: 0
   hasSeenKelp: 0
@@ -227,12 +228,11 @@ MonoBehaviour:
   hasHadPressureEvent: 0
   hasPlayedIntro: 0
   hasPlayedFirstPlay: 0
-  ShipScanner: {fileID: 2131405164}
-  highscoreText: {fileID: 1208200993}
   highScore: 0
   currentDepth: 0
   ship: {fileID: 1217269328}
   state: 3
+  isGoingToMainMenu: 0
   gameAnimation: {fileID: 745964792}
   menuMusic:
     Guid:
@@ -240,14 +240,14 @@ MonoBehaviour:
       Data2: 1146894767
       Data3: -238704221
       Data4: 294476956
-    Path: event:/MenuMusic
+    Path: event:/Music/MenuMusic
   gameMusic:
     Guid:
       Data1: 1582424870
       Data2: 1132824071
       Data3: 1244188298
       Data4: -1255417914
-    Path: event:/GameMusic
+    Path: event:/Music/GameMusic
 --- !u!4 &13125785
 Transform:
   m_ObjectHideFlags: 0
@@ -1260,6 +1260,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ploraTitle: {fileID: 793944065616846641}
   ship: {fileID: 895494835}
+  anim: {fileID: 0}
 --- !u!1 &766114262
 GameObject:
   m_ObjectHideFlags: 0
@@ -4347,17 +4348,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2076352758}
   m_Mesh: {fileID: -8406963476016318327, guid: 13564b4d6979fa848bc5f1948fe5589d, type: 3}
---- !u!114 &2131405164 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 432130288261178304, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
-  m_PrefabInstance: {fileID: 895494830}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d12ad6b01e524490baf5dd4145cfdfbf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2137362239
 PrefabInstance:
   m_ObjectHideFlags: 0
