@@ -1,3 +1,5 @@
+using System.Linq;
+using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEngine;
 
@@ -17,6 +19,9 @@ public class TextureArrayCreator : MonoBehaviour
             );
             return;
         }
+
+        // Sort the textures numerically by the number at the front of their name
+        textures = textures.OrderBy(texture => GetLeadingNumber(texture.name)).ToArray();
 
         int width = textures[0].width;
         int height = textures[0].height;
@@ -47,6 +52,14 @@ public class TextureArrayCreator : MonoBehaviour
         string path = "Assets/TextureArray.asset";
         AssetDatabase.CreateAsset(textureArray, path);
         Debug.Log("Texture Array created at " + path);
+    }
+
+    // Extract leading number from the texture name
+    static int GetLeadingNumber(string name)
+    {
+        // Regex to match a number at the beginning of the string
+        Match match = Regex.Match(name, @"^\d+");
+        return match.Success ? int.Parse(match.Value) : int.MaxValue; // If no leading number, push to the end
     }
 #endif
 }
