@@ -79,17 +79,31 @@ public class GameManager : SingletonPersistent<GameManager>
             gameAnimation = GameObject
                 .FindGameObjectsWithTag("GameAnimation")[0]
                 .GetComponent<GameAnimation>();
+
+            if (gameAnimation == null)
+            {
+                Debug.LogError("GameAnimation not found!");
+            }
         }
 
         if (ship == null)
         {
             //ship = FindObjectByTag("Player");
             ship = GameObject.FindGameObjectWithTag("Ship");
+            // Debug
+            if (ship == null)
+            {
+                Debug.LogError("Ship not found!");
+            }
         }
 
         if (ShipScanner == null)
         {
             ShipScanner = ship.GetComponentInChildren<Scanner>();
+            if (ShipScanner == null)
+            {
+                Debug.LogError("ShipScanner not found!");
+            }
         }
 
         // Add more initialization as needed
