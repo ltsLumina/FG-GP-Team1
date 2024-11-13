@@ -109,9 +109,11 @@ public class WallGen : MonoBehaviour
         GlobalOffset.y += (Height);
         _levelCount++;
 
+        /*
         Vector3 newPosition = new Vector3(transform.position.x, transform.position.y - ((Height - 2) * CellSize * _levelCount), transform.position.z);
         StartCoroutine(newWall(1, newPosition, transform.rotation));
         _levelCount++;
+        */
     }
 
     // Update is called once per frame
