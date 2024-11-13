@@ -14,11 +14,6 @@ public class GameAnimation : MonoBehaviour
 
     void Start()
     {
-        if (playerAnim == null)
-        {
-            playerAnim = FindFirstObjectByType<PlayerAnimation>();
-        }
-
         anim = GetComponent<Animator>();
     }
 
