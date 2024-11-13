@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8091987052845928827}
   - component: {fileID: 7877462829709938395}
-  - component: {fileID: 1441501163675559202}
+  - component: {fileID: -3853769303329081364}
   - component: {fileID: 2954834920272817354}
   - component: {fileID: 2608386257217809619}
   - component: {fileID: 1624652238392619795}
@@ -60,8 +60,8 @@ MonoBehaviour:
   - {fileID: 8051226306110171970, guid: 19df126d6ab4f0f48a7de56780031a49, type: 3}
   - {fileID: 103608390705873723, guid: 3aa7a5ac959b4cf4fb4fbd20ebc421aa, type: 3}
   - {fileID: 4233482341294893110, guid: 2f951d369b609d742907262e2386c072, type: 3}
---- !u!65 &1441501163675559202
-BoxCollider:
+--- !u!135 &-3853769303329081364
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -79,7 +79,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &2954834920272817354
 Rigidbody:
