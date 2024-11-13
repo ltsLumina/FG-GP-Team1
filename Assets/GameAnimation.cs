@@ -38,9 +38,9 @@ public class GameAnimation : MonoBehaviour
         anim.SetTrigger("Play");
     }
 
-    public void Intro()
+    public void IntroPlaying()
     {
-        anim.SetTrigger("Intro");
+        GameManager.Instance.TriggerPlayIntro();
     }
 
     public void Replay()
@@ -59,10 +59,7 @@ public class GameAnimation : MonoBehaviour
         StartCoroutine(SpeedUpShipOverTime());
     }
 
-    void SpawnPlayer()
-    {
-        
-    }
+    void SpawnPlayer() { }
 
     IEnumerator SpeedUpShipOverTime()
     {
