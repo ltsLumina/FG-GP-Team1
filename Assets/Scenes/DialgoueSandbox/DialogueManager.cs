@@ -63,6 +63,15 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        // Skip the current dialogue line when 'G' is pressed, but only in editor
+        if (Application.isEditor && Input.GetKeyDown(KeyCode.G))
+        {
+            SkipDialogueLine();
+        }
+    }
+
     // Function to start dialogue
     public void StartDialogue(Dialogue dialogue, GameObject highlightTarget = null)
     {
@@ -152,10 +161,19 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    // Coroutine to wait for the timing duration before displaying the next line
-    private IEnumerator DisplayLineForDuration(float duration)
+    // Function to skip the current dialogue line and display the next one
+    private void SkipDialogueLine()
     {
-        yield return new WaitForSeconds(duration);
+        // Stop any running coroutines to ensure the next line displays immediately
+        StopAllCoroutines();
+
+        // Stop the voice-over if playing
+        if (dialogueAudioSource.isPlaying)
+        {
+            dialogueAudioSource.Stop();
+        }
+
+        // Move to the next line
         DisplayNextLine();
     }
 
@@ -221,36 +239,3 @@ public class DialogueManager : MonoBehaviour
         }
     }
 }
-
-#if UNITY_EDITOR
-public class NoiseTextureCreator
-{
-    [MenuItem("Assets/Create/Noise Texture")]
-    public static void CreateNoiseTexture()
-    {
-        int width = 256;
-        int height = 256;
-        Texture2D noiseTexture = new Texture2D(width, height);
-
-        for (int y = 0; y < height; y++)
-        {
-            for (int x = 0; x < width; x++)
-            {
-                float grayValue = Random.Range(0f, 1f);
-                Color color = new Color(grayValue, grayValue, grayValue);
-                noiseTexture.SetPixel(x, y, color);
-            }
-        }
-
-        noiseTexture.Apply();
-
-        // Save texture to the Assets folder
-        byte[] bytes = noiseTexture.EncodeToPNG();
-        string path = "Assets/NoiseTexture.png";
-        System.IO.File.WriteAllBytes(path, bytes);
-        AssetDatabase.Refresh();
-
-        Debug.Log("Noise texture created at: " + path);
-    }
-}
-#endif
