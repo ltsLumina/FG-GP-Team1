@@ -17,19 +17,19 @@ MonoBehaviour:
     speakerProfilePicture: {fileID: 2800000, guid: 73cd7111ba5a44fdc822f73018d97be1, type: 3}
     dialogueText: Did you steal the cheese? There's no cheese in the fridge.
     voiceOverClip: {fileID: 8300000, guid: 1cf133be36a0345d2a267c7f5a384553, type: 3}
-    timing: 5
+    timing: 3
   - speakerName: Ship
     speakerProfilePicture: {fileID: 8400000, guid: f24050b707b104b15ba9395af7b34de5, type: 2}
     dialogueText: '*Looks innocent*'
     voiceOverClip: {fileID: 8300000, guid: d2403c6d97f194ecfb509f35c51eb019, type: 3}
-    timing: 2
+    timing: 0.75
   - speakerName: Turner
     speakerProfilePicture: {fileID: 2800000, guid: 73cd7111ba5a44fdc822f73018d97be1, type: 3}
     dialogueText: I'm pretty sure you did it.
     voiceOverClip: {fileID: 8300000, guid: 5606d2c00f75c4b3a8f41d6f94eed88f, type: 3}
-    timing: 4
+    timing: 1.5
   - speakerName: Marci
     speakerProfilePicture: {fileID: 8400000, guid: f24050b707b104b15ba9395af7b34de5, type: 2}
     dialogueText: GIVE ME CHEESE!
     voiceOverClip: {fileID: 8300000, guid: 4dc1e7746719c4404bdcb2f15f672c3a, type: 3}
-    timing: 2
+    timing: 1.5

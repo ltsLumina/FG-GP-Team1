@@ -31,6 +31,7 @@ public class GameManager : SingletonPersistent<GameManager>
 
     public float highScore;
     public float currentDepth;
+    private readonly float initialDepth = 22f;
 
     [SerializeField]
     GameObject ship;
@@ -75,18 +76,20 @@ public class GameManager : SingletonPersistent<GameManager>
     {
         if (gameAnimation == null)
         {
-            gameAnimation = FindFirstObjectByType<GameAnimation>();
-        }
-
-        if (ShipScanner == null)
-        {
-            ShipScanner = FindFirstObjectByType<Scanner>();
+            gameAnimation = GameObject
+                .FindGameObjectsWithTag("GameAnimation")[0]
+                .GetComponent<GameAnimation>();
         }
 
         if (ship == null)
         {
             //ship = FindObjectByTag("Player");
             ship = GameObject.FindGameObjectWithTag("Ship");
+        }
+
+        if (ShipScanner == null)
+        {
+            ShipScanner = ship.GetComponentInChildren<Scanner>();
         }
 
         // Add more initialization as needed
@@ -166,7 +169,7 @@ public class GameManager : SingletonPersistent<GameManager>
 
     void UpdateDepth()
     {
-        currentDepth = ship.transform.position.y * -1;
+        currentDepth = ship.transform.position.y * -1 - initialDepth;
 
         // Update max if needed
         if (currentDepth > highScore)
