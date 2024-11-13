@@ -38,26 +38,6 @@ public class ShipAnimations : MonoBehaviour
         ship.onHullIntegrityChanged.RemoveListener(onHullIntegrityChanged);
     }
 
-    void Update()
-    {
-        // //For debug
-        // if (Input.GetKeyDown(KeyCode.Space))
-        // {
-        //     Debug.Log("Damage Ship");
-        //     DamageShip();
-        // }
-        // if (Input.GetKeyDown(KeyCode.R))
-        // {
-        //     Debug.Log("Repair Ship");
-        //     RepairShip();
-        // }
-
-        // //Set the front light intensity
-        // anim.SetFloat("FrontLightStrength", frontLightIntensity);
-        // //Set the side light intensity
-        // anim.SetFloat("SideLightStrength", sideLightIntensity);
-    }
-
     void onHullIntegrityChanged(int hullIntegrity)
     {
         // Convert Hull integrety to damage
