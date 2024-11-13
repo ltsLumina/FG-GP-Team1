@@ -10,19 +10,29 @@ public class MainMenu : MonoBehaviour
     HighScoreManager highScoreManager;
     ScoreManager scoreManager;
 
-
     [Header("UI Elements")]
-    [SerializeField] GameObject mainMenuPanel;
+    [SerializeField]
+    GameObject mainMenuPanel;
     public GameObject MainMenuPanel => mainMenuPanel;
-    [SerializeField] GameObject pausePanel;
+
+    [SerializeField]
+    GameObject pausePanel;
     public GameObject PausePanel => pausePanel;
-    [SerializeField] GameObject gameOverPanel;
+
+    [SerializeField]
+    GameObject gameOverPanel;
     public TextMeshProUGUI GameOverReasonText => gameOverReasonText;
-    [SerializeField] TextMeshProUGUI gameOverReasonText;
+
+    [SerializeField]
+    TextMeshProUGUI gameOverReasonText;
     public GameObject GameOverPanel => gameOverPanel;
-    [SerializeField] GameObject skipTutorialButton;
+
+    [SerializeField]
+    GameObject skipTutorialButton;
     public GameObject Gradient => gradient;
-    [SerializeField] GameObject gradient;
+
+    [SerializeField]
+    GameObject gradient;
 
     public GameObject SkipTutorialButton => skipTutorialButton;
 
@@ -53,11 +63,11 @@ public class MainMenu : MonoBehaviour
 
     public void Exit()
     {
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
-    #else
+#else
         Application.Quit();
-    #endif
+#endif
     }
 
     public void SkipTutorial()
@@ -70,6 +80,7 @@ public class MainMenu : MonoBehaviour
 
     public void Retry()
     {
+        Debug.Log("Retrying the game...");
         GameManager.Instance.hasPlayedIntro = true;
         GameManager.Instance.GameStateChanger(GameManager.GameState.Play);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

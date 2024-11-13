@@ -187,6 +187,7 @@ MonoBehaviour:
   currentDepth: 0
   ship: {fileID: 1217269328}
   state: 3
+  isGoingToMainMenu: 0
   gameAnimation: {fileID: 745964792}
 --- !u!4 &13125785
 Transform:
@@ -5135,6 +5136,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2679941528252141523, guid: 7bf57695c5af74a168792544df2440ba, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2789857656311927356, guid: 7bf57695c5af74a168792544df2440ba, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -5597,7 +5602,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9070157341038882163, guid: 7bf57695c5af74a168792544df2440ba, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9099207719333497023, guid: 7bf57695c5af74a168792544df2440ba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
