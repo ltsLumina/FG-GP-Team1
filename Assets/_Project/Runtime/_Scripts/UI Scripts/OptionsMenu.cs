@@ -28,15 +28,19 @@ public class OptionsMenu : MonoBehaviour
     void Start()
     {
         //Audio
-        float volume = 0f;
-        masterSlider.value = volume;
-        masterLabel.text = Mathf.RoundToInt(volume + 80).ToString();
 
-        musicSlider.value = volume;
-        musicLabel.text = Mathf.RoundToInt(volume + 80).ToString();
+        masterSlider.value = PlayerPrefs.GetFloat("MasterVol");
+        masterLabel.text = Mathf.RoundToInt(masterSlider.value * 100).ToString();
 
-        sfxSlider.value = volume;
-        sfxLabel.text = Mathf.RoundToInt(volume + 80).ToString();
+        musicSlider.value = PlayerPrefs.GetFloat("MusicVol"); ;
+        musicLabel.text = Mathf.RoundToInt(musicSlider.value * 100).ToString();
+
+        sfxSlider.value = PlayerPrefs.GetFloat("SFXVol"); ;
+        sfxLabel.text = Mathf.RoundToInt(sfxSlider.value * 100).ToString();
+
+        SetMasterMixerVolume(masterSlider.value);
+        SetMusicMixerVolume(musicSlider.value);
+        SetSFXMixerVolume(sfxSlider.value);
 
         //Resolution
         resolutions = new List<Resolution>(Screen.resolutions);
@@ -80,7 +84,7 @@ public class OptionsMenu : MonoBehaviour
         ApplySavedSettings();
 
     }
-
+    
     //Audio
     public void SetMasterVolume()
     {

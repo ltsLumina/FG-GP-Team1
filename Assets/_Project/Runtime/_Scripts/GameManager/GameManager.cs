@@ -389,6 +389,9 @@ public class GameManager : SingletonPersistent<GameManager>
         hasPlayedFirstPlay = true;
         GameStateChanger(GameState.Play);
         gameAnimation.Play();
+        menuMusicInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        gameMusicInstance.start();
+
     }
 
     GameObject IsObjectInView(string tag)
