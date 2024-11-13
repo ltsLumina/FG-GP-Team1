@@ -2525,11 +2525,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8509019975299622848}
   - component: {fileID: 7824742962486998579}
-  - component: {fileID: 2878429264781942515}
   - component: {fileID: 4196128108717161170}
   - component: {fileID: 6790100678256416933}
-  - component: {fileID: 3133918386599062666}
-  - component: {fileID: 8844614631672973635}
   m_Layer: 0
   m_Name: Menu Manager
   m_TagString: Untagged
@@ -2569,19 +2566,6 @@ MonoBehaviour:
   gameOverPanel: {fileID: 6711473153887366384}
   skipTutorialButton: {fileID: 0}
   gradient: {fileID: 0}
---- !u!114 &2878429264781942515
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 768427821247145280}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f21af6f17ceb0f4b9b9c0fe93928461, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24100000, guid: 14858602dd5682843bdc6b6a425b359d, type: 2}
 --- !u!114 &4196128108717161170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2630,54 +2614,6 @@ MonoBehaviour:
   leftKeyButton: {fileID: 4983375768672001897}
   dashKeyButton: {fileID: 5701207199392353098}
   grabKeyButton: {fileID: 6446795999091711078}
---- !u!114 &3133918386599062666
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 768427821247145280}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fd4eb042a47b7a43bc76dbc506094df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  masterLabel: {fileID: 1393324668893415053}
-  musicLabel: {fileID: 9168318205754126672}
-  sfxLabel: {fileID: 3764883933178660329}
-  masterSlider: {fileID: 6521533100682947711}
-  musicSlider: {fileID: 4958302012695305476}
-  sfxSlider: {fileID: 4003104493407264710}
-  resolutionDropdown: {fileID: 3876404469694708365}
-  fullscreenToggle: {fileID: 3836886804155146410}
-  vsyncToggle: {fileID: 3374480310464003903}
-  graphicsDropdown: {fileID: 2649307968771045886}
-  brightnessSlider: {fileID: 1050710598508395970}
-  shadowsToggle: {fileID: 3086058371633687434}
---- !u!114 &8844614631672973635
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 768427821247145280}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77844f7220d5d8e4babb5cf3dcc6d4fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  downKeyText: {fileID: 2967459002510541619}
-  upKeyText: {fileID: 6450525922728883439}
-  rightKeyText: {fileID: 2096556740027002885}
-  leftKeyText: {fileID: 3989946706723649181}
-  dashKeyText: {fileID: 3784706336424202762}
-  grabKeyText: {fileID: 5161775422654518601}
-  downKeyButton: {fileID: 2383626538767549731}
-  upKeyButton: {fileID: 2949272276499304968}
-  rightKeyButton: {fileID: 6396272194080693944}
-  leftKeyButton: {fileID: 9099664920601077050}
-  dashKeyButton: {fileID: 4031778476010624595}
-  grabKeyButton: {fileID: 5047178844939135517}
 --- !u!1 &796435818815510984
 GameObject:
   m_ObjectHideFlags: 0
