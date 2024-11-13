@@ -158,12 +158,15 @@ public class Train : MonoBehaviour
 
     [SerializeField]
     bool partyMode;
-    
+
     [EndIf]
 
     // <- Cached references. ->
 
     // <- Properties ->
+
+
+    bool DeepChangeLights = true;
 
     #region Depth
     public float Depth => transform.position.y;
@@ -344,9 +347,14 @@ public class Train : MonoBehaviour
 
             Power -= powerDepletionRate * Time.deltaTime;
 
-            foreach (var light in lights)
+
+            if (DeepChangeLights)
             {
-                light.Key.SetActive(true);
+                foreach (var light in lights)
+                {
+                    light.Key.SetActive(true);
+                }
+                DeepChangeLights = false;
             }
         }
 

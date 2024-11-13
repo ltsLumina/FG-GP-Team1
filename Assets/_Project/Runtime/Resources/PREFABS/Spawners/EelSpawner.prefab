@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 335ff94347b21584e8711a6cbb0c2e62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amountOfBoids: 150
-  spawnRangeX: 65
+  amountOfBoids: 100
+  spawnRangeX: 50
   spawnRangeY: 35
   spawnRangeZ: 28
   boidDataSO: {fileID: 11400000, guid: 01b5edabbbc16d248868688aff2b7901, type: 2}
