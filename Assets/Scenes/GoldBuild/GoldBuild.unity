@@ -93,8 +93,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 20201, guid: 0000000000000000f000000000000000, type: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: e081dc9fa30b4714892d772721e7bc26, type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: c36c04815661a0842b18c17c99723f7b, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -129,6 +129,8 @@ GameObject:
   m_Component:
   - component: {fileID: 13125785}
   - component: {fileID: 13125784}
+  - component: {fileID: 13125783}
+  - component: {fileID: 13125782}
   - component: {fileID: 13125781}
   m_Layer: 0
   m_Name: GameManager
@@ -150,6 +152,50 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputKeys: 
+--- !u!114 &13125782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13125780}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c161de272d277644915510644f70096, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highScoreDepthText: {fileID: 0}
+  highScoreAlgaeText: {fileID: 0}
+  highScoreRepairText: {fileID: 0}
+  highScoreJellyFishText: {fileID: 0}
+  highScoreLifeFormText: {fileID: 0}
+  highScoreDepth: 0
+  highScoreAlgae: 0
+  highScoreRepair: 0
+  highScoreJellyFish: 0
+  highScoreLifeForm: 0
+--- !u!114 &13125783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13125780}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c115964982d48f409a3efff2dee1d4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentDepthScore: {fileID: 0}
+  currentAlgaeCollected: {fileID: 0}
+  currentHolesRepaired: {fileID: 0}
+  currentJellyfishCollected: {fileID: 0}
+  currentLifeformsScanned: {fileID: 0}
+  depthScore: 0
+  algaeCollected: 0
+  holesRepaired: 0
+  jellyfishCollected: 0
+  lifeformsScanned: 0
 --- !u!114 &13125784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,7 +243,7 @@ Transform:
   m_GameObject: {fileID: 13125780}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 625.0052, y: 292.19794, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1396,6 +1442,55 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1687047035}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &809764841
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 809764843}
+  - component: {fileID: 809764842}
+  m_Layer: 0
+  m_Name: StaticLightingSky
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &809764842
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 809764841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 441482e8936e35048a1dffac814e3ef8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Profile: {fileID: 0}
+  m_StaticLightingSkyUniqueID: 0
+  m_StaticLightingCloudsUniqueID: 0
+  m_StaticLightingVolumetricClouds: 0
+  bounces: 1
+--- !u!4 &809764843
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 809764841}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &834473442
 GameObject:
   m_ObjectHideFlags: 0
@@ -1626,6 +1721,14 @@ PrefabInstance:
     - target: {fileID: 8589098272386292673, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8862471019685682749, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: spawnObjects.Array.data[0].eventChance
+      value: 40.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8862471019685682749, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: spawnObjects.Array.data[1].eventChance
+      value: 62.7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5097,6 +5200,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2679941528252141523, guid: 7bf57695c5af74a168792544df2440ba, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2789857656311927356, guid: 7bf57695c5af74a168792544df2440ba, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -5664,3 +5771,4 @@ SceneRoots:
   - {fileID: 3444029391932211907}
   - {fileID: 5002408972191815034}
   - {fileID: 1022501002}
+  - {fileID: 809764843}
