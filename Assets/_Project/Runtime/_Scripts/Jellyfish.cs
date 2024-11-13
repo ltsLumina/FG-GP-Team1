@@ -13,9 +13,6 @@ public class Jellyfish : MonoBehaviour
     [SerializeField] int chargeLevel;
     [SerializeField, ReadOnly] bool charged;
 
-    [Tooltip("The percentage of a chargeLevel to convert to a float value. E.g. 1 charge level = 10f")]
-    [SerializeField] float conversionRate = 10f;
-
     [Tab("Collider")]
     [SerializeField] Vector3 offset;
     [SerializeField] int radius;
@@ -32,7 +29,7 @@ public class Jellyfish : MonoBehaviour
     
     void Start()
     {
-        chargeLevel = Random.Range(0, 5 + 1);
+        chargeLevel = Random.Range(1, 5 + 1);
         charged = chargeLevel > 0;
 
         col = GetComponent<SphereCollider>();
@@ -85,8 +82,7 @@ public class Jellyfish : MonoBehaviour
     /// <returns></returns>
     float ConvertCharge()
     {
-        float conversion = chargeLevel * conversionRate;
-        Debug.Log(conversion);
+        float conversion = chargeLevel * 10f;
         return conversion;
     }
 }
