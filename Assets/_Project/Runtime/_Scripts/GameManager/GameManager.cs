@@ -116,8 +116,8 @@ public class GameManager : SingletonPersistent<GameManager>
     {
         if (!isIntroPlayed)
         {
-            OnIntro?.Invoke();
             isIntroPlayed = true;
+            OnIntro?.Invoke();
         }
     }
 

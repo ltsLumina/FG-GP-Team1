@@ -21,7 +21,7 @@ MonoBehaviour:
   m_OverrideGlobalSceneList: 1
   m_Scenes:
   - m_enabled: 1
-    m_path: Assets/Scenes/Sandbox.unity
+    m_path: Assets/Scenes/GoldBuild/GoldBuild.unity
   m_ScriptingDefines: []
   m_PlayerSettingsYaml:
     m_Settings:
@@ -165,7 +165,7 @@ MonoBehaviour:
     - line: '|   loadStoreDebugModeEnabled: 0'
     - line: '|   visionOSBundleVersion: 1.0'
     - line: '|   tvOSBundleVersion: 1.0'
-    - line: '|   bundleVersion: Alpha 1.5.0'
+    - line: '|   bundleVersion: Pre-Beta'
     - line: '|   preloadedAssets:'
     - line: '|   - {fileID: -944628639613478452, guid: 35845fe01580c41289b024647b1d1c53,
         type: 3}'
@@ -1004,8 +1004,8 @@ MonoBehaviour:
     - rid: 7770152048932683776
       type: {class: WindowsPlatformSettings, ns: UnityEditor.WindowsStandalone, asm: UnityEditor.WindowsStandalone.Extensions}
       data:
-        m_Development: 0
-        m_ConnectProfiler: 0
+        m_Development: 1
+        m_ConnectProfiler: 1
         m_BuildWithDeepProfilingSupport: 0
         m_AllowDebugging: 0
         m_WaitForManagedDebugger: 0
@@ -1013,7 +1013,7 @@ MonoBehaviour:
         m_ExplicitNullChecks: 0
         m_ExplicitDivideByZeroChecks: 0
         m_ExplicitArrayBoundsChecks: 0
-        m_CompressionType: 3
+        m_CompressionType: 2
         m_InstallInBuildFolder: 0
         m_WindowsBuildAndRunDeployTarget: 0
         m_Architecture: 0

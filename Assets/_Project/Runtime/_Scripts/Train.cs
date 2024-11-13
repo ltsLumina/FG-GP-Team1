@@ -23,8 +23,7 @@ public class Train : MonoBehaviour
     public VInspectorData vInspectorData;
 
     [Header("Train Settings")]
-    float speed = 5;
-
+    [SerializeField] float speed = 5;
     [SerializeField] float maxSpeed = 10;
 
     [Tab("Fuel")]
@@ -362,7 +361,8 @@ public class Train : MonoBehaviour
 
         Dive();
         FuelCalculation();
-        //ToggleLightsAtThreshold();
+
+        if (Depth < -250) ToggleLightsAtThreshold();
     }
 
     //-------------------------Added-----------------------------------
