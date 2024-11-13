@@ -9,6 +9,7 @@ TagManager:
   - Kelp
   - Rock
   - Ship
+  - GameAnimation
   layers:
   - Default
   - TransparentFX
