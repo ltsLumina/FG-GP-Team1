@@ -87,6 +87,7 @@ public class MainMenu : MonoBehaviour
         mainMenuPanel.SetActive(true);
         gameOverPanel.SetActive(false);
         pausePanel.SetActive(false);
+        Debug.Log("Restarting the game...");
     }
 
     public void BackToMain()
