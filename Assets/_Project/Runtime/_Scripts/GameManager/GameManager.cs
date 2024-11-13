@@ -1,5 +1,6 @@
 #region
 using System;
+using TMPro;
 using UnityEngine;
 #endregion
 
@@ -28,6 +29,7 @@ public class GameManager : SingletonPersistent<GameManager>
     public bool hasPlayedFirstPlay;
 
     public Scanner ShipScanner;
+    [SerializeField] TextMeshProUGUI highscoreText;
 
     public float highScore;
     public float currentDepth;
@@ -119,6 +121,8 @@ public class GameManager : SingletonPersistent<GameManager>
 
     void Update()
     {
+        highscoreText.text = $"High Score: {1 * -Mathf.RoundToInt(currentDepth)}m";
+        
         CheckVisibilityForKelp();
         CheckVisibilityForRocks();
         CheckVisibilityForJellyfish();
