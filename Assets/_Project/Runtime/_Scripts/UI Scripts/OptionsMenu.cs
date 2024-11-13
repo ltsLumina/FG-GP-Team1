@@ -29,13 +29,38 @@ public class OptionsMenu : MonoBehaviour
     {
         //Audio
         float volume = 0f;
-        masterSlider.value = volume;
+
+        if (PlayerPrefs.HasKey("MasterVol"))
+        {
+            volume = PlayerPrefs.GetFloat("MasterVol");
+        }
+        else
+        {
+            PlayerPrefs.SetFloat("MasterVol", volume);
+        }
+        masterSlider.value = PlayerPrefs.GetFloat("MasterVol");
         masterLabel.text = Mathf.RoundToInt(volume + 80).ToString();
 
-        musicSlider.value = volume;
+        if (PlayerPrefs.HasKey("MusicVol"))
+        {
+            volume = PlayerPrefs.GetFloat("MusicVol");
+        }
+        else
+        {
+            PlayerPrefs.SetFloat("MusicVol", volume);
+        }
+        musicSlider.value = PlayerPrefs.GetFloat("MusicVol");
         musicLabel.text = Mathf.RoundToInt(volume + 80).ToString();
 
-        sfxSlider.value = volume;
+        if (PlayerPrefs.HasKey("SFXVol"))
+        {
+            volume = PlayerPrefs.GetFloat("SFXVol");
+        }
+        else
+        {
+            PlayerPrefs.SetFloat("SFXVol", volume);
+        }
+        sfxSlider.value = PlayerPrefs.GetFloat("SFXVol");
         sfxLabel.text = Mathf.RoundToInt(volume + 80).ToString();
 
         //Resolution
