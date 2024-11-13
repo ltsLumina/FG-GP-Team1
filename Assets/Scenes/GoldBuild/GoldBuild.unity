@@ -129,8 +129,6 @@ GameObject:
   m_Component:
   - component: {fileID: 13125785}
   - component: {fileID: 13125784}
-  - component: {fileID: 13125783}
-  - component: {fileID: 13125782}
   - component: {fileID: 13125781}
   m_Layer: 0
   m_Name: GameManager
@@ -152,50 +150,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputKeys: 
---- !u!114 &13125782
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 13125780}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c161de272d277644915510644f70096, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  highScoreDepthText: {fileID: 0}
-  highScoreAlgaeText: {fileID: 0}
-  highScoreRepairText: {fileID: 0}
-  highScoreJellyFishText: {fileID: 0}
-  highScoreLifeFormText: {fileID: 0}
-  highScoreDepth: 0
-  highScoreAlgae: 0
-  highScoreRepair: 0
-  highScoreJellyFish: 0
-  highScoreLifeForm: 0
---- !u!114 &13125783
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 13125780}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c115964982d48f409a3efff2dee1d4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentDepthScore: {fileID: 0}
-  currentAlgaeCollected: {fileID: 0}
-  currentHolesRepaired: {fileID: 0}
-  currentJellyfishCollected: {fileID: 0}
-  currentLifeformsScanned: {fileID: 0}
-  depthScore: 0
-  algaeCollected: 0
-  holesRepaired: 0
-  jellyfishCollected: 0
-  lifeformsScanned: 0
 --- !u!114 &13125784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,7 +197,7 @@ Transform:
   m_GameObject: {fileID: 13125780}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 625.0052, y: 292.19794, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
