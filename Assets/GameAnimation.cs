@@ -10,11 +10,14 @@ public class GameAnimation : MonoBehaviour
     [SerializeField]
     Train ship;
 
+    [SerializeField]
     Animator anim;
 
-    void Start()
+    void Awake()
     {
         anim = GetComponent<Animator>();
+        // Sets itself in the gameManager
+        GameManager.Instance.gameAnimation = this;
     }
 
     void Update()
@@ -43,9 +46,19 @@ public class GameAnimation : MonoBehaviour
         GameManager.Instance.TriggerPlayIntro();
     }
 
+    public void Intro()
+    {
+        anim.SetTrigger("Intro");
+    }
+
     public void Replay()
     {
         anim.SetTrigger("Replay");
+    }
+
+    public void MainMenu()
+    {
+        anim.SetTrigger("MainMenu");
     }
 
     void DestroyPloraTitle()

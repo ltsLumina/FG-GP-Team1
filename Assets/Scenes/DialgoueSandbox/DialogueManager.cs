@@ -41,7 +41,6 @@ public class DialogueManager : MonoBehaviour
     private Dialogue currentDialogue;
     private int currentLineIndex;
     private GameObject highlightedObject;
-    private Scanner scanner => GameManager.Instance.ShipScanner;
 
     [SerializeField]
     private Dialogue testDialogue;
@@ -91,20 +90,6 @@ public class DialogueManager : MonoBehaviour
     {
         currentDialogue = dialogue;
         currentLineIndex = 0;
-        highlightedObject = highlightTarget;
-
-        // Use the ShipScanner on the GameManager if it exists and the highlighted object still exists
-        if (GameManager.Instance != null)
-        {
-            if (scanner != null && highlightedObject != null && highlightedObject.activeInHierarchy)
-            {
-                scanner.Scan(highlightedObject);
-            }
-        }
-        else
-        {
-            Debug.LogWarning("GameManager or ShipScanner not found, skipping highlight logic.");
-        }
 
         dialogueUIPanel.SetActive(true);
         Debug.Log("Starting dialogue with: " + currentDialogue.name);
@@ -213,19 +198,6 @@ public class DialogueManager : MonoBehaviour
     {
         dialogueUIPanel.SetActive(false);
         Debug.Log("Dialogue ended.");
-
-        // Use the ShipScanner on the GameManager if it exists and the highlighted object still exists
-        if (GameManager.Instance != null)
-        {
-            if (scanner != null && highlightedObject != null && highlightedObject.activeInHierarchy)
-            {
-                scanner.ResetScanner();
-            }
-        }
-        else
-        {
-            Debug.LogWarning("GameManager or ShipScanner not found, skipping highlight logic.");
-        }
 
         currentDialogue = null;
         highlightedObject = null;
