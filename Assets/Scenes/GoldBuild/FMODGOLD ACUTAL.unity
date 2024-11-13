@@ -1516,7 +1516,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1505193886760754658, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2469166811154837062, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
       propertyPath: shipBonk.Path
@@ -1548,15 +1548,15 @@ PrefabInstance:
       objectReference: {fileID: 13125784}
     - target: {fileID: 3647054809633606627, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3647054809633606627, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3748055779482578147, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4688190896561367077, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
       propertyPath: playerBonkSound.Path
@@ -3485,10 +3485,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttons:
   - name: C _ Refuel
-    tab: 
-    size: 30
-    space: 0
-  - name: C _ Clean
     tab: 
     size: 30
     space: 0
