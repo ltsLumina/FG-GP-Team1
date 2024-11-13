@@ -34,10 +34,11 @@ public class EelModelMovement : MonoBehaviour
 
         for (int i = 1; i < bodyParts.Count; i++)
         {
-            bodyParts[i].transform.right = (bodyParts[i - 1].transform.position - bodyParts[i].transform.position).normalized;
-            if (Vector3.Distance(bodyParts[i].transform.position, bodyParts[i - 1].transform.position) > jointLength)
+            Transform transform1 = bodyParts[i].transform;
+            transform1.right = (bodyParts[i - 1].transform.position - transform1.position).normalized;
+            if (Vector3.Distance(transform1.position, bodyParts[i - 1].transform.position) > jointLength)
             {
-                bodyParts[i].transform.position = Vector3.MoveTowards(bodyParts[i].transform.position, bodyParts[i - 1].transform.position, moveSpeed * Time.deltaTime);
+                transform1.position = Vector3.MoveTowards(transform1.position, bodyParts[i - 1].transform.position, moveSpeed * Time.deltaTime);
             }
 
         }

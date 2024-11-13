@@ -17,7 +17,7 @@ MonoBehaviour:
     supportSSR: 0
     supportSSRTransparent: 0
     supportSSAO: 1
-    supportSSGI: 1
+    supportSSGI: 0
     supportSubsurfaceScattering: 1
     sssSampleBudget:
       m_Values: 140000002800000050000000
@@ -166,7 +166,7 @@ MonoBehaviour:
       enabled: 1
       useMipBias: 0
       advancedUpscalersByPriority: 0001
-      DLSSPerfQualitySetting: 2
+      DLSSPerfQualitySetting: 1
       DLSSInjectionPoint: 0
       TAAUInjectionPoint: 0
       STPInjectionPoint: 0
@@ -176,7 +176,7 @@ MonoBehaviour:
       FSR2EnableSharpness: 1
       FSR2Sharpness: 0.5
       FSR2UseOptimalSettings: 1
-      FSR2QualitySetting: 0
+      FSR2QualitySetting: 1
       FSR2InjectionPoint: 0
       fsrOverrideSharpness: 0
       fsrSharpness: 0.92
