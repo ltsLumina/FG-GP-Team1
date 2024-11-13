@@ -43,10 +43,21 @@ public class GameAnimation : MonoBehaviour
         GameManager.Instance.TriggerPlayIntro();
     }
 
+    public void Intro()
+    {
+        anim.SetTrigger("Intro");
+    }
+
     public void Replay()
     {
         anim.SetTrigger("Replay");
     }
+
+    public void MainMen() {
+        anim.SetTrigger("MainMenu");
+    }
+
+    public void 
 
     void DestroyPloraTitle()
     {

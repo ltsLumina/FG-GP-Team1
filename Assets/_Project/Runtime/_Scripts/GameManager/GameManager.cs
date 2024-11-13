@@ -71,6 +71,8 @@ public class GameManager : SingletonPersistent<GameManager>
     public event Action OnFuelRefill;
     public event Action OnBatteryCharge;
 
+    public bool isGoingToMainMenu;
+
     [SerializeField]
     GameAnimation gameAnimation;
 
@@ -78,6 +80,13 @@ public class GameManager : SingletonPersistent<GameManager>
 
     void Start()
     {
+        StartGame();
+    }
+
+    public void StartGame()
+    {
+        // Find referecnes
+
         if (gameAnimation == null)
         {
             gameAnimation = GameObject
@@ -109,6 +118,23 @@ public class GameManager : SingletonPersistent<GameManager>
             {
                 Debug.LogError("ShipScanner not found!");
             }
+        }
+        currentDepth = 0;
+        isGameOver = false;
+
+        // Play the right animation
+        if (hasPlayedIntro)
+        {
+            if (isGoingToMainMenu)
+            {
+                gameAnimation.MainMenu();
+            }
+
+            gameAnimation.Replay();
+        }
+        else
+        {
+            gameAnimation.Intro();
         }
     }
 
