@@ -170,8 +170,7 @@ public class Train : MonoBehaviour
     [SerializeField]
     UnityEvent<int> onHullBreach;
 
-    [SerializeField]
-    UnityEvent<int> onHullIntegrityChanged;
+    public UnityEvent<int> onHullIntegrityChanged;
 
     [SerializeField]
     UnityEvent onDeath;

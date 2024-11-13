@@ -1490,6 +1490,10 @@ PrefabInstance:
       propertyPath: vInspectorData
       value: 
       objectReference: {fileID: 1794197808}
+    - target: {fileID: 2469166811154837062, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: onHullIntegrityChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3647054809633606627, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
@@ -3264,8 +3268,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378664c28e137488fa885ab0980b970d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ship: {fileID: 0}
   anim: {fileID: 1687047037}
   damage: 0
+  maxHullIntegrity: 3
   frontLightIntensity: 0
   sideLightIntensity: 0
 --- !u!95 &1687047037
@@ -3587,7 +3593,7 @@ MonoBehaviour:
     space: 0
   rootTab:
     name: 
-    selectedSubtabIndex: 0
+    selectedSubtabIndex: 3
     subtabs:
     - rid: 3861983204425334914
     - rid: 3861983204425334915
@@ -3651,7 +3657,7 @@ MonoBehaviour:
       type: {class: VInspectorData/Foldout, ns: VInspector, asm: VInspector}
       data:
         name: Hull
-        expanded: 0
+        expanded: 1
         subfoldouts: []
     - rid: 3861983204425334921
       type: {class: VInspectorData/Foldout, ns: VInspector, asm: VInspector}
@@ -4872,6 +4878,10 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8181237697279080662, guid: 727894c7ee2894887aa8678f5c1e7b12, type: 3}
+      propertyPath: isFakePlayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8181237697279080662, guid: 727894c7ee2894887aa8678f5c1e7b12, type: 3}
       propertyPath: dashMotorSpeed
       value: 3
       objectReference: {fileID: 0}
@@ -5115,7 +5125,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7486842195713927468, guid: 7bf57695c5af74a168792544df2440ba, type: 3}
       propertyPath: m_Name
-      value: UI
+      value: ------Canvas------
       objectReference: {fileID: 0}
     - target: {fileID: 8217821019464484856, guid: 7bf57695c5af74a168792544df2440ba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target

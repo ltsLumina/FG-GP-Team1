@@ -14,6 +14,9 @@ public class PlayerAnimation : MonoBehaviour
     InputManager input;
     public Animator Animator { get; private set; }
 
+    [SerializeField]
+    bool isFakePlayer = false;
+
     private void Start()
     {
         input = transform.parent.GetComponentInChildren<InputManager>();
@@ -70,8 +73,8 @@ public class PlayerAnimation : MonoBehaviour
     {
         // Set blend tree parameters for player movement based on input of new input system Player action Move
         // Do a smooth transition between animations
-
-        SetMovementBlendTree(input.MoveInput);
+        if (!isFakePlayer)
+            SetMovementBlendTree(input.MoveInput);
     }
 
     private void ObjectReleased() { }
