@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{fe131096-8490-4926-b011-fdd4ff52f882}">
+		<property name="assetPath">
+			<value>najs lofi jacke.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>96.969705215419495</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{7efb7576-45ea-4a77-85bc-3fc9a5cd2e61}</destination>
+		</relationship>
+	</object>
+</objects>

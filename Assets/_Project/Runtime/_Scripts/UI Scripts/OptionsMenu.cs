@@ -5,11 +5,9 @@ using TMPro;
 using System.Collections.Generic;
 
 public class OptionsMenu : MonoBehaviour
-{ 
+{
     //Audio
     [Header("Audio")]
-
-
     public TMP_Text masterLabel, musicLabel, sfxLabel;
     public Slider masterSlider, musicSlider, sfxSlider;
 
@@ -31,41 +29,13 @@ public class OptionsMenu : MonoBehaviour
     {
         //Audio
         float volume = 0f;
-
-        if (PlayerPrefs.HasKey("MasterVol"))
-        {
-            volume = PlayerPrefs.GetFloat("MasterVol");
-        }
-        else
-        {
-
-            PlayerPrefs.SetFloat("MasterVol", volume);
-        }
-        masterSlider.value = PlayerPrefs.GetFloat("MasterVol");
+        masterSlider.value = volume;
         masterLabel.text = Mathf.RoundToInt(volume + 80).ToString();
 
-        if (PlayerPrefs.HasKey("MusicVol"))
-        {
-            volume = PlayerPrefs.GetFloat("MusicVol");
-        }
-        else
-        {
-
-            PlayerPrefs.SetFloat("MusicVol", volume);
-        }
-        musicSlider.value = PlayerPrefs.GetFloat("MusicVol");
+        musicSlider.value = volume;
         musicLabel.text = Mathf.RoundToInt(volume + 80).ToString();
 
-        if (PlayerPrefs.HasKey("SFXVol"))
-        {
-            volume = PlayerPrefs.GetFloat("SFXVol");
-        }
-        else
-        {
-
-            PlayerPrefs.SetFloat("SFXVol", volume);
-        }
-        sfxSlider.value = PlayerPrefs.GetFloat("SFXVol"); ;
+        sfxSlider.value = volume;
         sfxLabel.text = Mathf.RoundToInt(volume + 80).ToString();
 
         //Resolution
@@ -98,7 +68,7 @@ public class OptionsMenu : MonoBehaviour
         vsyncToggle.onValueChanged.AddListener(SetVSync);
 
         //Graphics
-        graphicsDropdown.value = PlayerPrefs.GetInt("GraphicsQuality", PlayerPrefs.GetInt("Graphics"));
+        graphicsDropdown.value = PlayerPrefs.GetInt("GraphicsQuality", QualitySettings.GetQualityLevel());
         graphicsDropdown.onValueChanged.AddListener(SetGraphics);
 
         brightnessSlider.value = PlayerPrefs.GetFloat("Brightness", 1f);
@@ -115,25 +85,35 @@ public class OptionsMenu : MonoBehaviour
     public void SetMasterVolume()
     {
         masterLabel.text = Mathf.RoundToInt(masterSlider.value + 80).ToString();
-
+        SetMasterMixerVolume(masterSlider.value);
         PlayerPrefs.SetFloat("MasterVol", masterSlider.value);
-        //PlayerPrefs.Save();
     }
 
     public void SetMusicVolume()
     {
         musicLabel.text = Mathf.RoundToInt(musicSlider.value + 80).ToString();
-
+        SetMusicMixerVolume(musicSlider.value);
         PlayerPrefs.SetFloat("MusicVol", musicSlider.value);
-        //PlayerPrefs.Save();
     }
 
     public void SetSFXVolume()
     {
         sfxLabel.text = Mathf.RoundToInt(sfxSlider.value + 80).ToString();
-
+        SetSFXMixerVolume(sfxSlider.value);
         PlayerPrefs.SetFloat("SFXVol", sfxSlider.value);
-        //PlayerPrefs.Save();
+    }
+
+    private void SetMasterMixerVolume(float value)
+    {
+        FMODUnity.RuntimeManager.GetVCA("vca:/Master").setVolume(value);
+    }
+    private void SetMusicMixerVolume(float value)
+    {
+        FMODUnity.RuntimeManager.GetVCA("vca:/Music").setVolume(value);
+    }
+    private void SetSFXMixerVolume(float value)
+    {
+        FMODUnity.RuntimeManager.GetVCA("vca:/SFX").setVolume(value);
     }
 
     //Resolution

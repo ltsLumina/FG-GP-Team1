@@ -29,18 +29,27 @@ public class EelModelMovement : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-
+    private void FixedUpdate()
+    { 
         for (int i = 1; i < bodyParts.Count; i++)
         {
+<<<<<<< Updated upstream
             Transform transform1 = bodyParts[i].transform;
             transform1.right = (bodyParts[i - 1].transform.position - transform1.position).normalized;
             if (Vector3.Distance(transform1.position, bodyParts[i - 1].transform.position) > jointLength)
             {
                 transform1.position = Vector3.MoveTowards(transform1.position, bodyParts[i - 1].transform.position, moveSpeed * Time.deltaTime);
             }
+=======
+            var transform = bodyParts[i].transform;
+            var posAhead = bodyParts[i-1].transform.position;
+>>>>>>> Stashed changes
 
+            transform.right = (posAhead - transform.position).normalized;
+            if (Vector3.Distance(transform.position, posAhead) > jointLength)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, posAhead, moveSpeed * Time.deltaTime);
+            }
         }
     }
 

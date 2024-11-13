@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{fba4b44c-e475-47f2-ae40-6547011e2ef4}">
+		<property name="assetPath">
+			<value>breathy synth demo1.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>156</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{7efb7576-45ea-4a77-85bc-3fc9a5cd2e61}</destination>
+		</relationship>
+	</object>
+</objects>
