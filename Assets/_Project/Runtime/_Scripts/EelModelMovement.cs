@@ -1,4 +1,7 @@
+using Lumina.Essentials.Modules;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class EelModelMovement : MonoBehaviour
@@ -8,16 +11,10 @@ public class EelModelMovement : MonoBehaviour
     [SerializeField] private float jointLength;
     [SerializeField] private float moveSpeed;
 
-    static GameObject container;
-    
     private void Start()
     {
-        container = GameObject.Find("Eel Container");
-        if (container == null) container = new GameObject("Eel Container");
-        var parent = new GameObject("Eel");
-        parent.transform.SetParent(container.transform);
-        transform.SetParent(parent.transform);
-        
+
+
         foreach (Transform componentsInChild in GetComponentsInChildren<Transform>())
         {
             bodyParts.Add(componentsInChild);
@@ -25,10 +22,10 @@ public class EelModelMovement : MonoBehaviour
 
         bodyParts.RemoveAt(1);
 
-        foreach (Transform bodyPart in bodyParts)
+        for (int i = 0; i < bodyParts.Count; i++)
         {
-            bodyPart.transform.position = new Vector3(transform.position.x + bodyParts.Count * jointLength, transform.position.y, transform.position.z);
-            bodyPart.SetParent(parent.transform);
+            bodyParts[i].transform.position = new Vector3(transform.position.x + bodyParts.Count * jointLength, transform.position.y, transform.position.z);
+            bodyParts[i].SetParent(null);
         }
     }
 

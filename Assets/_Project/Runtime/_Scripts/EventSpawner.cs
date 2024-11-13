@@ -5,8 +5,8 @@ using UnityEngine;
 [ExecuteAlways]
 public class EventSpawner : MonoBehaviour
 {
-    [SerializeField]
-    private List<EventRandomizer> spawnObjects = new List<EventRandomizer>();
+
+    [SerializeField] private List<EventRandomizer> spawnObjects = new List<EventRandomizer>();
 
     public float baseSpawnRate = 1.0f;
     public float randomAdjustment = 1.0f;
@@ -15,18 +15,14 @@ public class EventSpawner : MonoBehaviour
 
     private float startLocalX;
 
-    private void OnEnable()
+    private void Start()
     {
+
         if (Application.isPlaying)
         {
             startLocalX = transform.localPosition.x;
             StartCoroutine(SpawnObject());
         }
-    }
-
-    private void OnDisable()
-    {
-        StopAllCoroutines();
     }
 
     private void Update()
@@ -46,12 +42,15 @@ public class EventSpawner : MonoBehaviour
                 spawnObjects[i].eventChance = Mathf.Max(spawnObjects[i].eventChance, 0);
             }
         }
+
     }
+
 
     private IEnumerator SpawnObject()
     {
         while (true)
         {
+
             GameObject spawnObject = RandomizeSpawn();
 
             if (spawnObject != null)
@@ -60,11 +59,12 @@ public class EventSpawner : MonoBehaviour
             }
 
             float spawnTimer = baseSpawnRate + Random.Range(-randomAdjustment, randomAdjustment);
-            spawnTimer = Mathf.Max(0.1f, spawnTimer);
+            spawnTimer = Mathf.Max(0.1f, spawnTimer); 
 
             yield return new WaitForSeconds(spawnTimer);
         }
     }
+
 
     private GameObject RandomizeSpawn()
     {
@@ -81,16 +81,15 @@ public class EventSpawner : MonoBehaviour
             }
         }
 
+
         return null;
     }
+
 }
 
 [System.Serializable]
 public class EventRandomizer
 {
     public GameObject eventToTrigger;
-
-    [SerializeField]
-    [Range(0, 100)]
-    public float eventChance;
+    [SerializeField][Range(0, 100)] public float eventChance;
 }

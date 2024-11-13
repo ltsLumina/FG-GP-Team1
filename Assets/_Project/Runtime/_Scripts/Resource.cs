@@ -32,8 +32,6 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
     Action onGrabbed;
     Action onReleased;
 
-    static GameObject container;
-    
     public IGrabbable.Items Item => item;
 
     public bool Grabbed => grabbed;
@@ -114,12 +112,6 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
         {
             Debug.Assert(standardMesh != null, "Standard mesh is not set. Please set it in the inspector.", this);
             Debug.Assert(grabbedMesh != null, "Grabbed mesh is not set. Please set it in the inspector.", this);
-        }
-        else if (Item == IGrabbable.Items.Kelp)
-        {
-            container = GameObject.Find("Resource Container");
-            if (container == null) container = new GameObject("Resource Container");
-            transform.SetParent(container.transform);
         }
         
         if (Lifetime <= 5) Debug.LogWarning("Lifetime is set too low. Object will likely be destroyed before it has left the screen bounds.");
