@@ -9,6 +9,7 @@ public class OptionsMenu : MonoBehaviour
     //Audio
     [Header("Audio")]
     public AudioMixer audioMixer;
+    string vcaPath = "vca:/VCA Name";
 
     public TMP_Text masterLabel, musicLabel, sfxLabel;
     public Slider masterSlider, musicSlider, sfxSlider;
@@ -31,8 +32,8 @@ public class OptionsMenu : MonoBehaviour
     {
         //Audio
         float volume = 0f;
-        audioMixer.GetFloat("MasterVol", out volume);
         masterSlider.value = volume;
+
         masterLabel.text = Mathf.RoundToInt(volume + 80).ToString();
 
         audioMixer.GetFloat("MusicVol", out volume);

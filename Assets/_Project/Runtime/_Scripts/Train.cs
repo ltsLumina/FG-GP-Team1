@@ -22,8 +22,10 @@ public class Train : MonoBehaviour
 
     [Header("Train Settings")]
     float speed = 5;
-
     [SerializeField] float maxSpeed = 10;
+
+    [Header("Audio")]
+    [SerializeField] FMODUnity.EventReference shipBonk;
 
     [Tab("Fuel")]
     [Tooltip("The amount of fuel the train has.")]
@@ -435,6 +437,10 @@ public class Train : MonoBehaviour
     {
         if (collision.CompareTag("Rock"))
         {
+            var bonk = FMODUnity.RuntimeManager.CreateInstance(shipBonk);
+            FMODUnity.RuntimeManager.AttachInstanceToGameObject(bonk, transform);
+            bonk.start();
+
             hullBreaches++;
             HullIntegrity = Mathf.Max(0, 3 - hullBreaches);
             onHullBreach.Invoke(hullBreaches);
