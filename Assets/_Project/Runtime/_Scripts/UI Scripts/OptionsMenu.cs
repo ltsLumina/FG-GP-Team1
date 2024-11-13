@@ -8,8 +8,6 @@ public class OptionsMenu : MonoBehaviour
 { 
     //Audio
     [Header("Audio")]
-
-
     public TMP_Text masterLabel, musicLabel, sfxLabel;
     public Slider masterSlider, musicSlider, sfxSlider;
 
@@ -27,18 +25,28 @@ public class OptionsMenu : MonoBehaviour
     public Slider brightnessSlider;
     public Toggle shadowsToggle;
 
+    // UI Contexts
+    [Header("Settings UI Contexts")]
+    [SerializeField] private GameObject mainMenuSettingsUI;
+    [SerializeField] private GameObject pauseMenuSettingsUI;
+
+    private GameObject currentSettingsUI;
+
     void Start()
     {
-        //Audio
-        float volume = 0f;
+        InitializeSettings();
+    }
 
+    void InitializeSettings()
+    {
+        // Audio Settings
+        float volume = 0f;
         if (PlayerPrefs.HasKey("MasterVol"))
         {
             volume = PlayerPrefs.GetFloat("MasterVol");
         }
         else
         {
-
             PlayerPrefs.SetFloat("MasterVol", volume);
         }
         masterSlider.value = PlayerPrefs.GetFloat("MasterVol");
@@ -50,7 +58,6 @@ public class OptionsMenu : MonoBehaviour
         }
         else
         {
-
             PlayerPrefs.SetFloat("MusicVol", volume);
         }
         musicSlider.value = PlayerPrefs.GetFloat("MusicVol");
@@ -62,13 +69,12 @@ public class OptionsMenu : MonoBehaviour
         }
         else
         {
-
             PlayerPrefs.SetFloat("SFXVol", volume);
         }
-        sfxSlider.value = PlayerPrefs.GetFloat("SFXVol"); ;
+        sfxSlider.value = PlayerPrefs.GetFloat("SFXVol");
         sfxLabel.text = Mathf.RoundToInt(volume + 80).ToString();
 
-        //Resolution
+        // Resolution Settings
         resolutions = new List<Resolution>(Screen.resolutions);
         resolutionDropdown.ClearOptions();
 
@@ -97,7 +103,7 @@ public class OptionsMenu : MonoBehaviour
         vsyncToggle.isOn = PlayerPrefs.GetInt("VSync", 1) == 1;
         vsyncToggle.onValueChanged.AddListener(SetVSync);
 
-        //Graphics
+        // Graphics Settings
         graphicsDropdown.value = PlayerPrefs.GetInt("GraphicsQuality", PlayerPrefs.GetInt("Graphics"));
         graphicsDropdown.onValueChanged.AddListener(SetGraphics);
 
@@ -108,7 +114,27 @@ public class OptionsMenu : MonoBehaviour
         shadowsToggle.onValueChanged.AddListener(SetShadows);
 
         ApplySavedSettings();
+    }
 
+    public void ShowSettingsForMainMenu()
+    {
+        if (pauseMenuSettingsUI != null) pauseMenuSettingsUI.SetActive(false);
+        if (mainMenuSettingsUI != null) mainMenuSettingsUI.SetActive(true);
+
+        currentSettingsUI = mainMenuSettingsUI;
+    }
+
+    public void ShowSettingsForPauseMenu()
+    {
+        if (mainMenuSettingsUI != null) mainMenuSettingsUI.SetActive(false);
+        if (pauseMenuSettingsUI != null) pauseMenuSettingsUI.SetActive(true);
+
+        currentSettingsUI = pauseMenuSettingsUI;
+    }
+
+    public void HideSettings()
+    {
+        if (currentSettingsUI != null) currentSettingsUI.SetActive(false);
     }
 
     //Audio

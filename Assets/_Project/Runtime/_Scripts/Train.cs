@@ -170,7 +170,10 @@ public class Train : MonoBehaviour
         get
         {
             if (hullIntegrity <= 0)
+            {
+                HandleHullIntegrityDepletion();
                 onDeath.Invoke();
+            }
             return hullIntegrity;
         }
         set
@@ -234,8 +237,6 @@ public class Train : MonoBehaviour
             onFuelDepleted.AddListener(() => onDeath.Invoke());
             onDeath.AddListener(() =>
             {
-                HandleHullIntegrityDepletion();
-                GameManager.Instance.GameStateChanger(GameManager.GameState.GameOver);
                 this.DoForEachPlayer(p => p.Animator.SetTrigger("GameOver"));
                 Debug.Log("Died");
             });
@@ -442,12 +443,6 @@ public class Train : MonoBehaviour
             onHullBreach.Invoke(hullBreaches);
             onHullIntegrityChanged.Invoke(HullIntegrity);
 
-            //---------------------Added-----------------------------
-            if (HullIntegrity <= 0)
-            {
-                HandleHullIntegrityDepletion();
-            }
-            //--------------------------------------------------------
 
             onRockCollision.Invoke(collision.GetComponent<Rock>());
 
