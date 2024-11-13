@@ -32,6 +32,12 @@ public class ShipAnimations : MonoBehaviour
         ship.onHullIntegrityChanged.AddListener(onHullIntegrityChanged);
     }
 
+    void OnDestroy()
+    {
+        //Unsubscribe from UnityEvent
+        ship.onHullIntegrityChanged.RemoveListener(onHullIntegrityChanged);
+    }
+
     void Update()
     {
         // //For debug
