@@ -53,11 +53,10 @@ public class GameAnimation : MonoBehaviour
         anim.SetTrigger("Replay");
     }
 
-    public void MainMen() {
+    public void MainMenu()
+    {
         anim.SetTrigger("MainMenu");
     }
-
-    public void 
 
     void DestroyPloraTitle()
     {
