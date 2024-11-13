@@ -35,7 +35,7 @@ public class GameManager : SingletonPersistent<GameManager>
 
     public float highScore;
     public float currentDepth;
-    private readonly float initialDepth = 22f;
+    private readonly float initialDepth = 20f;
 
     [SerializeField]
     GameObject ship;
@@ -194,7 +194,6 @@ public class GameManager : SingletonPersistent<GameManager>
     {
         currentDepth = ship.transform.position.y * -1 - initialDepth;
 
-        // Update max if needed
         if (currentDepth > highScore)
         {
             highScore = currentDepth;
@@ -242,6 +241,7 @@ public class GameManager : SingletonPersistent<GameManager>
             }
         }
     }
+
 
     // First time hull damage
     public void TriggerHullDamage()

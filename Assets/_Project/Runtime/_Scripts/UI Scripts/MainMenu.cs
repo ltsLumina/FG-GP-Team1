@@ -70,17 +70,12 @@ public class MainMenu : MonoBehaviour
 
     public void Retry()
     {
-        if (highScoreManager == null)
-            highScoreManager = Helpers.Find<HighScoreManager>();
-        highScoreManager.SaveHighScores();
-
-        if (scoreManager == null)
-            scoreManager = Helpers.Find<ScoreManager>();
-        scoreManager.ResetGame();
-
         GameManager.Instance.hasPlayedIntro = true;
         GameManager.Instance.GameStateChanger(GameManager.GameState.Play);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        mainMenuPanel.SetActive(true);
+        gameOverPanel.SetActive(false);
+        pausePanel.SetActive(false);
     }
 
     public void BackToMain()
