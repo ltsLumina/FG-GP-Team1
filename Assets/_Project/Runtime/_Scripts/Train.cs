@@ -217,20 +217,31 @@ public class Train : MonoBehaviour
 
     void Start()
     {
-        // TODO: for alpha
-        GameManager.Instance.GameStateChanger(GameManager.GameState.Play);
+        //------------------Added--------------------------
+        if (GameManager.Instance == null)
+        {
+            Debug.LogError("GameManager not found!");
+            return;
+        }
+        //------------------------------------------------
 
         Init();
 
         return;
         void Init()
         {
+            //------------------Added--------------------------
+            onFuelDepleted.AddListener(() => HandleFuelDepletion());
+            //------------------------------------------------
+
             onFuelDepleted.AddListener(() => onDeath.Invoke());
             onDeath.AddListener(() =>
             {
+                HandleHullIntegrityDepletion();
                 GameManager.Instance.GameStateChanger(GameManager.GameState.GameOver);
                 this.DoForEachPlayer(p => p.Animator.SetTrigger("GameOver"));
                 Debug.Log("Died");
+                HandleHullIntegrityDepletion();
             });
 
             DOTween.SetTweensCapacity(1000, 5);
@@ -317,6 +328,22 @@ public class Train : MonoBehaviour
         FuelCalculation();
         //ToggleLightsAtThreshold();
     }
+
+    //-------------------------Added-----------------------------------
+    // Handle fuel depletion
+    void HandleFuelDepletion()
+    {
+        Debug.Log("Fuel depleted!");
+        GameManager.Instance.TriggerGameOver("Fuel ran out");
+    }
+
+    // Handle hull integrity depletion
+    void HandleHullIntegrityDepletion()
+    {
+        Debug.Log("Hull integrity reached zero!");
+        GameManager.Instance.TriggerGameOver("Hull destroyed");
+    }
+    //--------------------------Added----------------------------------
 
     void Dive()
     {
@@ -421,6 +448,14 @@ public class Train : MonoBehaviour
             HullIntegrity = Mathf.Max(0, 3 - hullBreaches);
             onHullBreach.Invoke(hullBreaches);
             onHullIntegrityChanged.Invoke(HullIntegrity);
+
+            //---------------------Added-----------------------------
+            if (HullIntegrity <= 0)
+            {
+                HandleHullIntegrityDepletion();
+            }
+            //--------------------------------------------------------
+
             onRockCollision.Invoke(collision.GetComponent<Rock>());
 
             this.DoForEachPlayer(p => p.Animator.SetBool("HullCritical", HullIntegrity == 1));
