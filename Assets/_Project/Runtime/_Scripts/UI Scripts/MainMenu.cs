@@ -1,6 +1,7 @@
 using System;
 using DG.Tweening;
 using Lumina.Essentials.Modules;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,17 +10,29 @@ public class MainMenu : MonoBehaviour
     HighScoreManager highScoreManager;
     ScoreManager scoreManager;
 
-
     [Header("UI Elements")]
-    [SerializeField] GameObject mainMenuPanel;
+    [SerializeField]
+    GameObject mainMenuPanel;
     public GameObject MainMenuPanel => mainMenuPanel;
-    [SerializeField] GameObject pausePanel;
+
+    [SerializeField]
+    GameObject pausePanel;
     public GameObject PausePanel => pausePanel;
-    [SerializeField] GameObject gameOverPanel;
+
+    [SerializeField]
+    GameObject gameOverPanel;
+    public TextMeshProUGUI GameOverReasonText => gameOverReasonText;
+
+    [SerializeField]
+    TextMeshProUGUI gameOverReasonText;
     public GameObject GameOverPanel => gameOverPanel;
-    [SerializeField] GameObject skipTutorialButton;
+
+    [SerializeField]
+    GameObject skipTutorialButton;
     public GameObject Gradient => gradient;
-    [SerializeField] GameObject gradient;
+
+    [SerializeField]
+    GameObject gradient;
 
     public GameObject SkipTutorialButton => skipTutorialButton;
 
@@ -28,40 +41,71 @@ public class MainMenu : MonoBehaviour
         DOTween.KillAll();
     }
 
+    public void SetGameOverReason(string reason)
+    {
+        if (gameOverReasonText != null)
+        {
+            gameOverReasonText.text = reason;
+        }
+        else
+        {
+            Debug.LogWarning("GameOverReasonText is not assigned in the MainMenu!");
+        }
+    }
+
     public void StartTurtorialGame()
     {
-        // Replace later with what scene is the game scene
-        SceneManager.LoadScene(1);
+        //Start Animation for tutorial
+        Debug.Log("Starting the tutorial game...");
+        GameManager.Instance.TriggerPlayIntro();
+        mainMenuPanel.SetActive(false);
     }
 
     public void Exit()
     {
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
-    #else
+#else
         Application.Quit();
-    #endif
+#endif
     }
 
     public void SkipTutorial()
     {
-        SceneManager.LoadScene(2);
+        //Skips the tutorial button
+        Debug.Log("Skipping the tutorial...");
+        GameManager.Instance.hasPlayedIntro = true;
+        StartGame();
     }
 
     public void Retry()
     {
+        Debug.Log("Retrying the game...");
+        GameManager.Instance.hasPlayedIntro = true;
         GameManager.Instance.GameStateChanger(GameManager.GameState.Play);
-        highScoreManager = Helpers.Find<HighScoreManager>();
-        highScoreManager.SaveHighScores();
-        scoreManager = Helpers.Find<ScoreManager>();
-        scoreManager.ResetGame();
-        SceneManager.LoadScene(2);
+        GameManager.Instance.isGoingToMainMenu = false;
+        GameManager.Instance.isGameOver = false;
+        mainMenuPanel.SetActive(true);
+        gameOverPanel.SetActive(false);
+        pausePanel.SetActive(false);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Debug.Log("Restarting the game...");
     }
 
     public void BackToMain()
     {
-        GameManager.Instance.GameStateChanger(GameManager.GameState.Play);
-        SceneManager.LoadScene(0);
+        Debug.Log("Returning to the main menu...");
+        GameManager.Instance.GameStateChanger(GameManager.GameState.Menu);
+        GameManager.Instance.hasPlayedIntro = true;
+        GameManager.Instance.isGoingToMainMenu = true;
+
+        mainMenuPanel.SetActive(true);
+        pausePanel.SetActive(false);
+        gameOverPanel.SetActive(false);
+
+        if (scoreManager == null)
+            scoreManager = Helpers.Find<ScoreManager>();
+        scoreManager.ResetGame();
     }
 
     public void StartGame()
@@ -82,9 +126,13 @@ public class MainMenu : MonoBehaviour
 
     public void GameOver()
     {
+        if (highScoreManager == null)
+            highScoreManager = Helpers.Find<HighScoreManager>();
         highScoreManager.SaveHighScores();
+
         GameManager.Instance.GameStateChanger(GameManager.GameState.GameOver);
-        gameOverPanel.SetActive(false);
+
+        gameOverPanel.SetActive(true);
         pausePanel.SetActive(false);
         mainMenuPanel.SetActive(false);
     }
