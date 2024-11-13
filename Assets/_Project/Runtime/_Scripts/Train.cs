@@ -39,27 +39,6 @@ public class Train : MonoBehaviour
     [Range(1, 50)]
     [SerializeField] int kelpRestoreAmount = 25;
 
-    [Header("Algae")]
-    [Tooltip("The amount of dirtiness restored by the algae.")]
-    [Range(1, 50)]
-    [SerializeField] int algaeRestoreAmount = 10;
-
-    [Tooltip("The current dirtiness stage of the train.")]
-    [Range(1, 5)]
-    [SerializeField] int dirtinessStage = 1;
-
-    [Tooltip("The amount of dirtiness the train has.")]
-    [RangeResettable(0, 100)]
-    [SerializeField] float dirtiness;
-
-    [Tooltip("The rate at which dirtiness increases. One unit per second.")]
-    [Range(0f, 5f)]
-    [SerializeField] float dirtinessRate = 1;
-
-    [Header("Cleaning")]
-    [RangeResettable(0, 100)]
-    [SerializeField] float dirtinessCleanAmount = 25;
-
     [Tab("Hull")]
     [Tooltip("The hull integrity of the train.")]
     [RangeResettable(0, 3)]
@@ -222,24 +201,6 @@ public class Train : MonoBehaviour
         get => speed;
         set => speed = value;
     }
-
-#if UNITY_EDITOR
-    void OnGUI()
-    {
-        if (!showDebugInfo)
-            return;
-
-        var style = new GUIStyle(GUI.skin.box) { fontSize = 40 };
-        using (new GUILayout.VerticalScope("box"))
-        {
-            GUILayout.Label($"Speed: {speed}", style);
-            GUILayout.Label($"Fuel: {Fuel.Round()}", style);
-            GUILayout.Label($"Hull Integrity: {HullIntegrity}", style);
-            GUILayout.Label($"Dirtiness: {dirtiness.Round()} (Stage {dirtinessStage})", style);
-            GUILayout.Label($"Power: {Power.Round()}", style);
-        }
-    }
-#endif
 
     public static Train Instance { get; private set; }
 
@@ -497,9 +458,6 @@ public class Train : MonoBehaviour
     [EndTab]
     [Button, UsedImplicitly, ShowIf(nameof(debugMode))]
     void c_Refuel() => Fuel = 100;
-
-    [Button, UsedImplicitly, ShowIf(nameof(debugMode))]
-    void c_Clean() => dirtiness = 0;
 
     [Button, UsedImplicitly, ShowIf(nameof(debugMode))]
     void c_Repair() => HullIntegrity = 100;
