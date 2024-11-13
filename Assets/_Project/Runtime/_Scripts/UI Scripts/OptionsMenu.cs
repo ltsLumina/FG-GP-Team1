@@ -8,8 +8,6 @@ public class OptionsMenu : MonoBehaviour
 {
     //Audio
     [Header("Audio")]
-    public AudioMixer audioMixer;
-
     public TMP_Text masterLabel, musicLabel, sfxLabel;
     public Slider masterSlider, musicSlider, sfxSlider;
 
@@ -30,7 +28,7 @@ public class OptionsMenu : MonoBehaviour
     void Start()
     {
         //Audio
-        float volume;
+        float volume = 0f;
 
         if (PlayerPrefs.HasKey("MasterVol"))
         {
@@ -38,7 +36,6 @@ public class OptionsMenu : MonoBehaviour
         }
         else
         {
-            audioMixer.GetFloat("MasterVol", out volume);
             PlayerPrefs.SetFloat("MasterVol", volume);
         }
         masterSlider.value = PlayerPrefs.GetFloat("MasterVol");
@@ -50,7 +47,6 @@ public class OptionsMenu : MonoBehaviour
         }
         else
         {
-            audioMixer.GetFloat("MusicVol", out volume);
             PlayerPrefs.SetFloat("MusicVol", volume);
         }
         musicSlider.value = PlayerPrefs.GetFloat("MusicVol");
@@ -62,7 +58,6 @@ public class OptionsMenu : MonoBehaviour
         }
         else
         {
-            audioMixer.GetFloat("SFXVol", out volume);
             PlayerPrefs.SetFloat("SFXVol", volume);
         }
         sfxSlider.value = PlayerPrefs.GetFloat("SFXVol"); ;
@@ -115,7 +110,6 @@ public class OptionsMenu : MonoBehaviour
     public void SetMasterVolume()
     {
         masterLabel.text = Mathf.RoundToInt(masterSlider.value + 80).ToString();
-        audioMixer.SetFloat("MasterVol", masterSlider.value);
         PlayerPrefs.SetFloat("MasterVol", masterSlider.value);
         //PlayerPrefs.Save();
     }
@@ -123,7 +117,6 @@ public class OptionsMenu : MonoBehaviour
     public void SetMusicVolume()
     {
         musicLabel.text = Mathf.RoundToInt(musicSlider.value + 80).ToString();
-        audioMixer.SetFloat("MusicVol", musicSlider.value);
         PlayerPrefs.SetFloat("MusicVol", musicSlider.value);
         //PlayerPrefs.Save();
     }
@@ -131,7 +124,6 @@ public class OptionsMenu : MonoBehaviour
     public void SetSFXVolume()
     {
         sfxLabel.text = Mathf.RoundToInt(sfxSlider.value + 80).ToString();
-        audioMixer.SetFloat("SFXVol", sfxSlider.value);
         PlayerPrefs.SetFloat("SFXVol", sfxSlider.value);
         //PlayerPrefs.Save();
     }
