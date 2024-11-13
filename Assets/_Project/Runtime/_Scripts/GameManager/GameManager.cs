@@ -133,8 +133,9 @@ public class GameManager : SingletonPersistent<GameManager>
                 {
                     GameStateChanger(GameState.Pause);
                     mainMenu = FindAnyObjectByType<MainMenu>();
+                    mainMenu.Gradient.SetActive(true);
                     mainMenu.PausePanel.SetActive(true);
-                    mainMenu.SkipTutorialButton.SetActive(false);
+                    //mainMenu.SkipTutorialButton.SetActive(false);
                 }
                 break;
             case GameState.Pause:
@@ -142,8 +143,9 @@ public class GameManager : SingletonPersistent<GameManager>
                 {
                     GameStateChanger(GameState.Play);
                     mainMenu = FindAnyObjectByType<MainMenu>();
+                    mainMenu.Gradient.SetActive(false);
                     mainMenu.PausePanel.SetActive(false);
-                    mainMenu.SkipTutorialButton.SetActive(true);
+                    //mainMenu.SkipTutorialButton.SetActive(true);
                 }
                 break;
             case GameState.GameOver:
@@ -152,6 +154,7 @@ public class GameManager : SingletonPersistent<GameManager>
                     isGameOver = true;
                     GameStateChanger(GameState.Pause);
                     mainMenu = FindAnyObjectByType<MainMenu>();
+                    mainMenu.Gradient.SetActive(true);
                     mainMenu.GameOverPanel.SetActive(true);
                     Debug.Log("Game Over");
                 }
