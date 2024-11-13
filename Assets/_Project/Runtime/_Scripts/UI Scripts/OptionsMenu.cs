@@ -5,9 +5,11 @@ using TMPro;
 using System.Collections.Generic;
 
 public class OptionsMenu : MonoBehaviour
-{
+{ 
     //Audio
     [Header("Audio")]
+
+
     public TMP_Text masterLabel, musicLabel, sfxLabel;
     public Slider masterSlider, musicSlider, sfxSlider;
 
@@ -36,6 +38,7 @@ public class OptionsMenu : MonoBehaviour
         }
         else
         {
+
             PlayerPrefs.SetFloat("MasterVol", volume);
         }
         masterSlider.value = PlayerPrefs.GetFloat("MasterVol");
@@ -47,6 +50,7 @@ public class OptionsMenu : MonoBehaviour
         }
         else
         {
+
             PlayerPrefs.SetFloat("MusicVol", volume);
         }
         musicSlider.value = PlayerPrefs.GetFloat("MusicVol");
@@ -58,9 +62,10 @@ public class OptionsMenu : MonoBehaviour
         }
         else
         {
+
             PlayerPrefs.SetFloat("SFXVol", volume);
         }
-        sfxSlider.value = PlayerPrefs.GetFloat("SFXVol");
+        sfxSlider.value = PlayerPrefs.GetFloat("SFXVol"); ;
         sfxLabel.text = Mathf.RoundToInt(volume + 80).ToString();
 
         //Resolution
@@ -110,19 +115,25 @@ public class OptionsMenu : MonoBehaviour
     public void SetMasterVolume()
     {
         masterLabel.text = Mathf.RoundToInt(masterSlider.value + 80).ToString();
+
         PlayerPrefs.SetFloat("MasterVol", masterSlider.value);
+        //PlayerPrefs.Save();
     }
 
     public void SetMusicVolume()
     {
         musicLabel.text = Mathf.RoundToInt(musicSlider.value + 80).ToString();
+
         PlayerPrefs.SetFloat("MusicVol", musicSlider.value);
+        //PlayerPrefs.Save();
     }
 
     public void SetSFXVolume()
     {
         sfxLabel.text = Mathf.RoundToInt(sfxSlider.value + 80).ToString();
+
         PlayerPrefs.SetFloat("SFXVol", sfxSlider.value);
+        //PlayerPrefs.Save();
     }
 
     //Resolution
