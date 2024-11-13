@@ -83,10 +83,12 @@ public class MainMenu : MonoBehaviour
         Debug.Log("Retrying the game...");
         GameManager.Instance.hasPlayedIntro = true;
         GameManager.Instance.GameStateChanger(GameManager.GameState.Play);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        GameManager.Instance.isGoingToMainMenu = false;
+        GameManager.Instance.isGameOver = false;
         mainMenuPanel.SetActive(true);
         gameOverPanel.SetActive(false);
         pausePanel.SetActive(false);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Debug.Log("Restarting the game...");
     }
 
@@ -94,6 +96,8 @@ public class MainMenu : MonoBehaviour
     {
         Debug.Log("Returning to the main menu...");
         GameManager.Instance.GameStateChanger(GameManager.GameState.Menu);
+        GameManager.Instance.hasPlayedIntro = true;
+        GameManager.Instance.isGoingToMainMenu = true;
 
         mainMenuPanel.SetActive(true);
         pausePanel.SetActive(false);

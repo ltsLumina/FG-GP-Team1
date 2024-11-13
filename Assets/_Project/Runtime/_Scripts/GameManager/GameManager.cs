@@ -1,13 +1,18 @@
 #region
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 #endregion
 
 [DisallowMultipleComponent]
-public class GameManager : SingletonPersistent<GameManager>
+public class GameManager : MonoBehaviour
 {
     MainMenu mainMenu;
+
+    [SerializeField]
+    TextMeshProUGUI highscoreText;
+
     public bool isGameOver;
     public bool isIntroPlayed;
     public bool hasSeenKelp;
@@ -28,17 +33,11 @@ public class GameManager : SingletonPersistent<GameManager>
     public bool hasPlayedIntro;
     public bool hasPlayedFirstPlay;
 
-    public Scanner ShipScanner;
-
-    [SerializeField]
-    TextMeshProUGUI highscoreText;
-
     public float highScore;
     public float currentDepth;
-    private readonly float initialDepth = 22f;
+    private readonly float initialDepth = 20f;
 
-    [SerializeField]
-    GameObject ship;
+    public GameObject ship;
 
     // Add more variables as needed
 
@@ -71,23 +70,63 @@ public class GameManager : SingletonPersistent<GameManager>
     public event Action OnFuelRefill;
     public event Action OnBatteryCharge;
 
-    [SerializeField]
-    GameAnimation gameAnimation;
+    public static GameManager Instance;
 
-    [Header("Music")]
-    [SerializeField] FMODUnity.EventReference menuMusic;
-    [SerializeField] FMODUnity.EventReference gameMusic;
-    FMOD.Studio.EventInstance menuMusicInstance;
-    FMOD.Studio.EventInstance gameMusicInstance;
+    public bool isGoingToMainMenu;
+
+    public GameAnimation gameAnimation;
 
     // Add more events as needed
 
+    void Awake()
+    {
+        Time.timeScale = 1f;
+        // Set instance if there is none
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void Start()
     {
+        hasPlayedIntro = false;
+        StartGame();
+        // subscribe to SceneManager.sceneLoaded event to start game in case of reload
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void Destroy()
+    {
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(
+        UnityEngine.SceneManagement.Scene scene,
+        UnityEngine.SceneManagement.LoadSceneMode mode
+    )
+    {
+        StartGame();
+    }
+
+    // IEnumerator WaitAndStartGame()
+    // {
+    //     yield return new WaitForSeconds(5.0f);
+    //     StartGame();
+    // }
+
+    void StartGame()
+    {
+        // Find referecnes
+
         if (gameAnimation == null)
         {
             gameAnimation = GameObject
-                .FindGameObjectsWithTag("GameAnimation")[0]
+                .FindGameObjectWithTag("GameAnimation")
                 .GetComponent<GameAnimation>();
 
             if (gameAnimation == null)
@@ -100,6 +139,7 @@ public class GameManager : SingletonPersistent<GameManager>
         {
             //ship = FindObjectByTag("Player");
             ship = GameObject.FindGameObjectWithTag("Ship");
+
             // Debug
             if (ship == null)
             {
@@ -107,17 +147,23 @@ public class GameManager : SingletonPersistent<GameManager>
             }
         }
 
-        if (ShipScanner == null)
-        {
-            ShipScanner = ship.GetComponentInChildren<Scanner>();
-            if (ShipScanner == null)
-            {
-                Debug.LogError("ShipScanner not found!");
-            }
-        }
+        currentDepth = 0;
+        isGameOver = false;
 
-        menuMusicInstance = FMODUnity.RuntimeManager.CreateInstance(menuMusic);
-        gameMusicInstance = FMODUnity.RuntimeManager.CreateInstance(gameMusic);
+        // Play the right animation
+        if (hasPlayedIntro)
+        {
+            // if (isGoingToMainMenu)
+            // {
+            //     gameAnimation.MainMenu();
+            // }
+
+            gameAnimation.Replay();
+        }
+        else
+        {
+            gameAnimation.Intro();
+        }
     }
 
     public void TriggerPlayIntro()
@@ -125,7 +171,6 @@ public class GameManager : SingletonPersistent<GameManager>
         if (!isIntroPlayed)
         {
             isIntroPlayed = true;
-            menuMusicInstance.start();
             OnIntro?.Invoke();
         }
     }
@@ -139,13 +184,12 @@ public class GameManager : SingletonPersistent<GameManager>
         CheckVisibilityForKelp();
         CheckVisibilityForRocks();
         CheckVisibilityForJellyfish();
-
-        UpdateDepth();
+        if (ship != null)
+            UpdateDepth();
 
         switch (state)
         {
             case GameState.Play:
-                isGameOver = false;
                 if (Input.GetKeyDown(KeyCode.Escape))
                 {
                     GameStateChanger(GameState.Pause);
@@ -195,8 +239,7 @@ public class GameManager : SingletonPersistent<GameManager>
                 Time.timeScale = 0f;
                 break;
             case GameState.GameOver:
-                // mainMenu = FindAnyObjectByType<MainMenu>();
-                // mainMenu.GameOverPanel.SetActive(true);
+                Time.timeScale = 0f;
                 break;
         }
     }
@@ -205,7 +248,6 @@ public class GameManager : SingletonPersistent<GameManager>
     {
         currentDepth = ship.transform.position.y * -1 - initialDepth;
 
-        // Update max if needed
         if (currentDepth > highScore)
         {
             highScore = currentDepth;
@@ -327,8 +369,22 @@ public class GameManager : SingletonPersistent<GameManager>
     {
         if (!isGameOver)
         {
-            Debug.Log($"Player died due to: {reason}");
+            Debug.Log($"Game Over triggered: {reason}");
+            isGameOver = true;
+
             GameStateChanger(GameState.GameOver);
+
+            if (mainMenu == null)
+            {
+                mainMenu = FindAnyObjectByType<MainMenu>();
+            }
+
+            if (mainMenu != null)
+            {
+                mainMenu.SetGameOverReason($"Game Over: {reason}");
+                mainMenu.GameOverPanel.SetActive(true);
+            }
+
             OnGameOver?.Invoke(reason);
         }
     }
@@ -389,9 +445,6 @@ public class GameManager : SingletonPersistent<GameManager>
         hasPlayedFirstPlay = true;
         GameStateChanger(GameState.Play);
         gameAnimation.Play();
-        menuMusicInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        gameMusicInstance.start();
-
     }
 
     GameObject IsObjectInView(string tag)

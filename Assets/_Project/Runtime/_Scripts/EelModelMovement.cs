@@ -1,7 +1,4 @@
-using Lumina.Essentials.Modules;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class EelModelMovement : MonoBehaviour
@@ -11,8 +8,16 @@ public class EelModelMovement : MonoBehaviour
     [SerializeField] private float jointLength;
     [SerializeField] private float moveSpeed;
 
+    static GameObject container;
+    
     private void Start()
     {
+        container = GameObject.Find("Eel Container");
+        if (container == null) container = new GameObject("Eel Container");
+        var parent = new GameObject("Eel");
+        parent.transform.SetParent(container.transform);
+        transform.SetParent(parent.transform);
+        
         foreach (Transform componentsInChild in GetComponentsInChildren<Transform>())
         {
             bodyParts.Add(componentsInChild);
@@ -20,15 +25,16 @@ public class EelModelMovement : MonoBehaviour
 
         bodyParts.RemoveAt(1);
 
-        for (int i = 0; i < bodyParts.Count; i++)
+        foreach (Transform bodyPart in bodyParts)
         {
-            bodyParts[i].transform.position = new Vector3(transform.position.x + bodyParts.Count * jointLength, transform.position.y, transform.position.z);
-            bodyParts[i].SetParent(null);
+            bodyPart.transform.position = new Vector3(transform.position.x + bodyParts.Count * jointLength, transform.position.y, transform.position.z);
+            bodyPart.SetParent(parent.transform);
         }
     }
 
-    private void FixedUpdate()
-    { 
+    private void Update()
+    {
+
         for (int i = 1; i < bodyParts.Count; i++)
         {
             Transform transform1 = bodyParts[i].transform;
@@ -38,14 +44,6 @@ public class EelModelMovement : MonoBehaviour
                 transform1.position = Vector3.MoveTowards(transform1.position, bodyParts[i - 1].transform.position, moveSpeed * Time.deltaTime);
             }
 
-            var transform = bodyParts[i].transform;
-            var posAhead = bodyParts[i-1].transform.position;
-
-            transform.right = (posAhead - transform.position).normalized;
-            if (Vector3.Distance(transform.position, posAhead) > jointLength)
-            {
-                transform.position = Vector3.MoveTowards(transform.position, posAhead, moveSpeed * Time.deltaTime);
-            }
         }
     }
 
