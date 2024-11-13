@@ -75,6 +75,78 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &1454559343698014203
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8978661430233241730}
+  - component: {fileID: 1935205840202381410}
+  - component: {fileID: 5211559674016822761}
+  m_Layer: 5
+  m_Name: ProfileImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8978661430233241730
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1454559343698014203}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 6591177002051156265}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -190, y: 0}
+  m_SizeDelta: {x: 256, y: 256}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1935205840202381410
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1454559343698014203}
+  m_CullTransparentMesh: 1
+--- !u!114 &5211559674016822761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1454559343698014203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 0}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
 --- !u!1 &1706135377652358581
 GameObject:
   m_ObjectHideFlags: 0
@@ -105,7 +177,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 3472005175245699576}
+  - {fileID: 8978661430233241730}
   - {fileID: 2766854391521437097}
   - {fileID: 5406450099889314408}
   - {fileID: 8039485889945921392}
@@ -189,7 +261,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 62.18, y: -3.35}
-  m_SizeDelta: {x: 400, y: 100}
+  m_SizeDelta: {x: 407.2, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1521437895121107334
 CanvasRenderer:
@@ -221,8 +293,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Dialogue Text Goes here.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 37a49ff468e6ff94baae6510501ad93f, type: 2}
-  m_sharedMaterial: {fileID: -7526973247068231971, guid: 37a49ff468e6ff94baae6510501ad93f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0f31ab0c20891424ab70c9d1231acc70, type: 2}
+  m_sharedMaterial: {fileID: 1663124027218561463, guid: 0f31ab0c20891424ab70c9d1231acc70, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -284,87 +356,12 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 29.55664, w: 8.646458}
+  m_margin: {x: 5.6912003, y: 4.969084, z: 29.55664, w: 8.646458}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!1 &4032407708951264945
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3472005175245699576}
-  - component: {fileID: 2364422778047421664}
-  - component: {fileID: 67231659463568010}
-  m_Layer: 5
-  m_Name: Profile
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &3472005175245699576
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4032407708951264945}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
-  m_ConstrainProportionsScale: 1
-  m_Children: []
-  m_Father: {fileID: 6591177002051156265}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -190, y: 0}
-  m_SizeDelta: {x: 256, y: 256}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &2364422778047421664
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4032407708951264945}
-  m_CullTransparentMesh: 1
---- !u!114 &67231659463568010
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4032407708951264945}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 73cd7111ba5a44fdc822f73018d97be1, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &8524233083681222997
 GameObject:
   m_ObjectHideFlags: 0
@@ -509,6 +506,7 @@ GameObject:
   - component: {fileID: 6555228801450534230}
   - component: {fileID: 6872776999774393755}
   - component: {fileID: 1165592239024975985}
+  - component: {fileID: 7176855985535340775}
   m_Layer: 5
   m_Name: DialogueManager
   m_TagString: Untagged
@@ -558,10 +556,42 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueUIPanel: {fileID: 1706135377652358581}
   dialogueText: {fileID: 1296806615754764978}
-  profileImage: {fileID: 67231659463568010}
+  profileImage: {fileID: 5211559674016822761}
   dialogueAudioSource: {fileID: 8169619664616533932}
   staticOverlayImage: {fileID: 7932947544484855172}
   staticIntensity: 1
   staticEffectDuration: 0.2
   glitchFrameDuration: 0.05
   testDialogue: {fileID: 11400000, guid: 81b486ecabdff4e4fadaf8e70ddc8c6b, type: 2}
+--- !u!114 &7176855985535340775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8575249831327262986}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e029ea1fb36b411cab671ff9120a073, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueManager: {fileID: 1165592239024975985}
+  introDialogue: {fileID: 0}
+  gameStartedDialogue: {fileID: 0}
+  firstPlayDialogue: {fileID: 0}
+  firstKelpDialogue: {fileID: 0}
+  firstRockDialogue: {fileID: 0}
+  rockHitsShipDialogue: {fileID: 0}
+  hullBreachPressureDialogue: {fileID: 0}
+  criticalHullDamageDialogue: {fileID: 0}
+  criticalFuelLevelDialogue: {fileID: 0}
+  criticalBatteryChargeLevelDialogue: {fileID: 0}
+  deathFromRunningOutOfFuelDialogue: {fileID: 0}
+  deathFromHullDestroyedDialogue: {fileID: 0}
+  lightsOutDialogue: {fileID: 0}
+  enterTheDeepDialogue: {fileID: 0}
+  hullRepairDialogue: {fileID: 0}
+  fuelRefillDialogue: {fileID: 0}
+  batteryChargeDialogue: {fileID: 0}
+  playerStunDialogue: {fileID: 0}
+  electricFishOnScreenDialogue: {fileID: 0}

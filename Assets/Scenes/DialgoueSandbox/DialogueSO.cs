@@ -14,7 +14,7 @@ public class DialogueLine
     public string speakerName; // Name of the speaker
 
     [Tooltip("Profile picture of the speaker (optional)")]
-    public Sprite speakerProfilePicture; // Profile picture of the speaker (optional)
+    public Texture speakerProfilePicture; // Profile picture of the speaker (optional)
 
     [Tooltip("The text to display for this line of dialogue")]
     [TextArea(3, 10)]

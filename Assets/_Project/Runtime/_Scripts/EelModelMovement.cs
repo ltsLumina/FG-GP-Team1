@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using VInspector.Libs;
 
 public class EelModelMovement : MonoBehaviour
 { 
@@ -16,7 +15,10 @@ public class EelModelMovement : MonoBehaviour
     {
 
 
-        bodyParts.Add(GetComponentsInChildren<Transform>());
+        foreach (Transform componentsInChild in GetComponentsInChildren<Transform>())
+        {
+            bodyParts.Add(componentsInChild);
+        }
 
         bodyParts.RemoveAt(1);
 

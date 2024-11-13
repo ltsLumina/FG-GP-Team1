@@ -1,0 +1,257 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!200 &20000000
+ShaderVariantCollection:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Build Shaders
+  m_Shaders:
+  - first: {fileID: 10770, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 66, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 6, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 8
+  - first: {fileID: 202, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9000, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9001, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9002, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9003, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9004, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9007, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9101, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9103, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: UIE_FORCE_GAMMA
+        passType: 0
+  - first: {fileID: 19011, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: -6465566751694194690, guid: 3fda5e465882bec4d8e64161b681806c, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 13
+      - keywords: DECALS_4RT PROCEDURAL_INSTANCING_ON WATER_DECAL_PARTIAL WATER_THREE_BANDS
+        passType: 13
+      - keywords: DECALS_4RT WATER_DECAL_PARTIAL
+        passType: 13
+      - keywords: DECALS_4RT WATER_DECAL_PARTIAL WATER_THREE_BANDS
+        passType: 13
+  - first: {fileID: 4800000, guid: 020d64d10886f754e91664d240248c13, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 6e4ae4064600d784cac1e41a9e6f2e59, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 8
+      - keywords: DOTS_INSTANCING_ON
+        passType: 8
+      - keywords: 
+        passType: 13
+      - keywords: DECALS_4RT DOTS_INSTANCING_ON PROBE_VOLUMES_L1 RENDERING_LAYERS
+          USE_LEGACY_LIGHTMAPS _MASKMAP _NORMALMAP _NORMALMAP_TANGENT_SPACE
+        passType: 13
+      - keywords: DECALS_4RT DOTS_INSTANCING_ON PROBE_VOLUMES_L1 RENDERING_LAYERS
+          USE_LEGACY_LIGHTMAPS _MATERIAL_FEATURE_CLEAR_COAT _NORMALMAP _NORMALMAP_TANGENT_SPACE
+        passType: 13
+      - keywords: DECALS_4RT DOTS_INSTANCING_ON PROBE_VOLUMES_L1 RENDERING_LAYERS
+          USE_LEGACY_LIGHTMAPS _NORMALMAP _NORMALMAP_TANGENT_SPACE
+        passType: 13
+      - keywords: DECALS_4RT DOTS_INSTANCING_ON PROBE_VOLUMES_L1 RENDERING_LAYERS
+          USE_LEGACY_LIGHTMAPS _NORMALMAP_TANGENT_SPACE
+        passType: 13
+      - keywords: DECALS_4RT PROBE_VOLUMES_L1 RENDERING_LAYERS USE_LEGACY_LIGHTMAPS
+          _MASKMAP _NORMALMAP _NORMALMAP_TANGENT_SPACE
+        passType: 13
+      - keywords: DOTS_INSTANCING_ON
+        passType: 13
+      - keywords: DOTS_INSTANCING_ON USE_LEGACY_LIGHTMAPS
+        passType: 13
+      - keywords: DOTS_INSTANCING_ON USE_LEGACY_LIGHTMAPS _NORMALMAP
+        passType: 13
+      - keywords: DOTS_INSTANCING_ON _MASKMAP _NORMALMAP _NORMALMAP_TANGENT_SPACE
+        passType: 13
+      - keywords: DOTS_INSTANCING_ON _MATERIAL_FEATURE_CLEAR_COAT _NORMALMAP _NORMALMAP_TANGENT_SPACE
+        passType: 13
+      - keywords: DOTS_INSTANCING_ON _NORMALMAP _NORMALMAP_TANGENT_SPACE
+        passType: 13
+      - keywords: DOTS_INSTANCING_ON _NORMALMAP_TANGENT_SPACE
+        passType: 13
+      - keywords: USE_LEGACY_LIGHTMAPS _NORMALMAP
+        passType: 13
+      - keywords: _MASKMAP _NORMALMAP _NORMALMAP_TANGENT_SPACE
+        passType: 13
+      - keywords: _NORMALMAP
+        passType: 13
+  - first: {fileID: 4800000, guid: 035941b63024d1943af48811c1db20d9, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 02ae56f4306413c4a96dcf005cde1971, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 8ea49ef16606acd489439e676ab84040, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 42dfcc8fe803ece4096c58630689982f, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: e22fc1942c664490980b8793dd4a163d, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 67d6171b0acc6554aad48c845ec7e67f, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 2ad7ce40f0dbaf64dadef1f58d8524d3, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+      - keywords: NEAREST_DEPTH
+        passType: 0
+  - first: {fileID: 4800000, guid: 392325671f122f540be9033ca5ae7a56, type: 3}
+    second:
+      variants:
+      - keywords: DOTS_INSTANCING_ON
+        passType: 0
+  - first: {fileID: 4800000, guid: 2e37131331fbdca449b1a2bc47a639ca, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 32f724728cf19904291226f239ec16f0, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+      - keywords: SUPPORT_WATER
+        passType: 0
+      - keywords: SUPPORT_WATER_CAUSTICS
+        passType: 0
+  - first: {fileID: 4800000, guid: 9bd32a6ece529fd4f9408b8d7e00c10d, type: 3}
+    second:
+      variants:
+      - keywords: AREA_SHADOW_MEDIUM DIRECTIONAL_SHADOW_HIGH PUNCTUAL_SHADOW_HIGH
+          USE_FPTL_LIGHTLIST
+        passType: 0
+  - first: {fileID: 4800000, guid: e3cab24f27741f44d8af1e94d006267c, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: fd532bf1795188c4daaa66ea798b8b0a, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 5ac9ef0c50282754b93c7692488e7ee7, type: 3}
+    second:
+      variants:
+      - keywords: APPLY_AFTER_POST
+        passType: 0
+  - first: {fileID: 4800000, guid: 97abfc9f0525e1849b417eaae10f0329, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 13
+  - first: {fileID: 4800000, guid: 017a05924c0b0484ca29717ed0c60343, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: eb607f5e8fc16e140b732f33d26c8c31, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 13
+  - first: {fileID: 4800000, guid: b3b05a7e50156b346b308f1006a1e2d8, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: -6465566751694194690, guid: f04fc57fec333c54e85766788d4b291e, type: 3}
+    second:
+      variants:
+      - keywords: DOTS_INSTANCING_ON _DOUBLESIDED_ON
+        passType: 13
+  - first: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 8a3e8e1270d3f40688b73ded8c1e3087, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 36e335017ad71d54fbb10842863188ae, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: b988c3b41032d244faa030e3cfc591e0, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON
+        passType: 13
