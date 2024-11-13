@@ -8,9 +8,6 @@ public class GameAnimation : MonoBehaviour
     GameObject ploraTitle;
 
     [SerializeField]
-    PlayerAnimation playerAnim;
-
-    [SerializeField]
     Train ship;
 
     Animator anim;
@@ -59,11 +56,6 @@ public class GameAnimation : MonoBehaviour
     void DestroyPloraTitle()
     {
         Destroy(ploraTitle);
-    }
-
-    void SpawnPlayer()
-    {
-        playerAnim.Spawn();
     }
 
     void ActivateShip()
