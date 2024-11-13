@@ -25,7 +25,7 @@ public class ShipAnimations : MonoBehaviour
 
     void Start()
     {
-        if (ship == null) ship = Helpers.Find<Train>();
+        if (ship == null) ship = FindObjectOfType<Train>(true);
 
         //Subscribe to UnityEvent
         ship.OnHullIntegrityChanged.AddListener(onHullIntegrityChanged);
