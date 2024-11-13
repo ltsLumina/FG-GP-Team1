@@ -52,7 +52,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: material._EmissiveExposureWeight
-    path: Electric Fish Model
+    path: Model
     classID: 23
     script: {fileID: 0}
     flags: 0
@@ -65,7 +65,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 1012255217
+      path: 374627805
       attribute: 2305669842
       script: {fileID: 0}
       typeID: 23
@@ -130,7 +130,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: material._EmissiveExposureWeight
-    path: Electric Fish Model
+    path: Model
     classID: 23
     script: {fileID: 0}
     flags: 0

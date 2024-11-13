@@ -43,9 +43,19 @@ public class GameAnimation : MonoBehaviour
         GameManager.Instance.TriggerPlayIntro();
     }
 
+    public void Intro()
+    {
+        anim.SetTrigger("Intro");
+    }
+
     public void Replay()
     {
         anim.SetTrigger("Replay");
+    }
+
+    public void MainMenu()
+    {
+        anim.SetTrigger("MainMenu");
     }
 
     void DestroyPloraTitle()
@@ -56,20 +66,7 @@ public class GameAnimation : MonoBehaviour
     void ActivateShip()
     {
         ship.gameObject.SetActive(true);
-        StartCoroutine(SpeedUpShipOverTime());
     }
 
     void SpawnPlayer() { }
-
-    IEnumerator SpeedUpShipOverTime()
-    {
-        // Speed up the ship from 0 to 5 over 15s
-        float time = 0;
-        while (time < 15)
-        {
-            time += Time.deltaTime;
-            ship.Speed = Mathf.Lerp(0, 5, time / 15);
-            yield return null;
-        }
-    }
 }
