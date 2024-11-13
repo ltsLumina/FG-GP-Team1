@@ -14,16 +14,6 @@ public class Rock : MonoBehaviour, IDestructible
     [SerializeField]
     float torque = 10;
 
-    [Tooltip(
-        "The weight of the magnetization towards the train. A higher value will make the rock move faster."
-    )]
-    [SerializeField]
-    float magnetizationStrength = 0.1f;
-
-    [Tooltip("The maximum distance at which the magnetization effect kicks in.")]
-    [SerializeField]
-    float magnetizationDistance = 5f;
-
     private bool collided = false;
 
     [SerializeField]
@@ -33,19 +23,6 @@ public class Rock : MonoBehaviour, IDestructible
     {
         var rockModel = rockModels[UnityEngine.Random.Range(0, rockModels.Count)];
         Instantiate(rockModel, transform);
-    }
-
-    void FixedUpdate()
-    {
-        // Move towards the train very slightly if within the magnetization distance
-        var train = Train.Instance;
-        var distance = Vector3.Distance(train.transform.position, transform.position);
-
-        if (!collided && distance <= magnetizationDistance)
-        {
-            var dir = (train.transform.position - transform.position).normalized;
-            transform.position += dir * magnetizationStrength / 100;
-        }
     }
 
     void OnCollisionEnter(Collision other)
