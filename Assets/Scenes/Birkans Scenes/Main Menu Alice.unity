@@ -93,7 +93,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 320f75a50d5bd8140bad1e383d7c70be, type: 2}
+  m_LightingDataAsset: {fileID: 112000000, guid: 09d1a7aaaa10fd14fb1ad388e5f2d5a7, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: c36c04815661a0842b18c17c99723f7b, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -602,7 +602,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 8000
   m_UseColorTemperature: 1
-  m_BoundingSphereOverride: {x: 2.61e-42, y: 2.524355e-29, z: 0, w: -30552768}
+  m_BoundingSphereOverride: {x: 1.469368e-39, y: 1.655909e-39, z: 2.2e-44, w: 6.2477784e-28}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ForceVisible: 0
@@ -6071,8 +6071,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: HIGH SCORE
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 92c71e47c416e564b8398624ff6a12c8, type: 2}
-  m_sharedMaterial: {fileID: -8678041759841980863, guid: 92c71e47c416e564b8398624ff6a12c8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -10506,8 +10506,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: EXIT
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 92c71e47c416e564b8398624ff6a12c8, type: 2}
-  m_sharedMaterial: {fileID: -8678041759841980863, guid: 92c71e47c416e564b8398624ff6a12c8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -12734,7 +12734,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f21af6f17ceb0f4b9b9c0fe93928461, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24100000, guid: 14858602dd5682843bdc6b6a425b359d, type: 2}
 --- !u!222 &3277680626487975158
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -14264,8 +14263,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: PLAY
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 92c71e47c416e564b8398624ff6a12c8, type: 2}
-  m_sharedMaterial: {fileID: -8678041759841980863, guid: 92c71e47c416e564b8398624ff6a12c8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -18714,8 +18713,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: CREDITS
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 92c71e47c416e564b8398624ff6a12c8, type: 2}
-  m_sharedMaterial: {fileID: -8678041759841980863, guid: 92c71e47c416e564b8398624ff6a12c8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -18857,7 +18856,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fd4eb042a47b7a43bc76dbc506094df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24100000, guid: 14858602dd5682843bdc6b6a425b359d, type: 2}
   masterLabel: {fileID: 3567658262897044679}
   musicLabel: {fileID: 2361843831059200691}
   sfxLabel: {fileID: 5918015850919584369}
@@ -22677,8 +22675,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: SETTINGS
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 92c71e47c416e564b8398624ff6a12c8, type: 2}
-  m_sharedMaterial: {fileID: -8678041759841980863, guid: 92c71e47c416e564b8398624ff6a12c8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

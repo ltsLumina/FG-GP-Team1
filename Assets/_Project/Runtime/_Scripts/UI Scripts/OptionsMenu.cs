@@ -29,7 +29,6 @@ public class OptionsMenu : MonoBehaviour
     {
         //Audio
         float volume = 0f;
-<<<<<<< HEAD
 
         if (PlayerPrefs.HasKey("MasterVol"))
         {
@@ -61,19 +60,7 @@ public class OptionsMenu : MonoBehaviour
         {
             PlayerPrefs.SetFloat("SFXVol", volume);
         }
-        sfxSlider.value = PlayerPrefs.GetFloat("SFXVol"); ;
-=======
-        audioMixer.GetFloat("MasterVol", out volume);
-        masterSlider.value = volume;
-        masterLabel.text = Mathf.RoundToInt(volume + 80).ToString();
-
-        audioMixer.GetFloat("MusicVol", out volume);
-        musicSlider.value = volume;
-        musicLabel.text = Mathf.RoundToInt(volume + 80).ToString();
-
-        audioMixer.GetFloat("SFXVol", out volume);
-        sfxSlider.value = volume;
->>>>>>> parent of 879c870 (updates on the settings that didn't work apperently)
+        sfxSlider.value = PlayerPrefs.GetFloat("SFXVol");
         sfxLabel.text = Mathf.RoundToInt(volume + 80).ToString();
 
         //Resolution
