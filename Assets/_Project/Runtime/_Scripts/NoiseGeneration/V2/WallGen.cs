@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 
 public class WallGen : MonoBehaviour
 {
-    [SerializeField] public MapDisplayV2 Display;
+    [SerializeField] public GameObject CoralParent;
 
     [SerializeField] MeshFilter plane1;
     [SerializeField] MeshFilter plane2;
@@ -303,6 +303,7 @@ public class WallGen : MonoBehaviour
 
             GameObject coral = ObjectPoolStaticBatch.Instance.GetObject(CoralPrefabs[coralPrefabIndex].name);
             coral.name = CoralPrefabs[coralPrefabIndex].name;
+            coral.transform.SetParent(CoralParent.transform);
             coral.transform.position = centre;
             coral.transform.rotation = Quaternion.Euler(normal);
             coral.transform.localScale = new Vector3(3, 3, 3);

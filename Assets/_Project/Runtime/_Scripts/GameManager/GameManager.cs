@@ -29,7 +29,9 @@ public class GameManager : SingletonPersistent<GameManager>
     public bool hasPlayedFirstPlay;
 
     public Scanner ShipScanner;
-    [SerializeField] TextMeshProUGUI highscoreText;
+
+    [SerializeField]
+    TextMeshProUGUI highscoreText;
 
     public float highScore;
     public float currentDepth;
@@ -107,13 +109,14 @@ public class GameManager : SingletonPersistent<GameManager>
                 Debug.LogError("ShipScanner not found!");
             }
         }
+    }
 
-        // Add more initialization as needed
-
+    public void TriggerPlayIntro()
+    {
         if (!isIntroPlayed)
         {
-            isIntroPlayed = true;
             OnIntro?.Invoke();
+            isIntroPlayed = true;
         }
     }
 
@@ -122,7 +125,7 @@ public class GameManager : SingletonPersistent<GameManager>
     void Update()
     {
         highscoreText.text = $"High Score: {1 * -Mathf.RoundToInt(currentDepth)}m";
-        
+
         CheckVisibilityForKelp();
         CheckVisibilityForRocks();
         CheckVisibilityForJellyfish();

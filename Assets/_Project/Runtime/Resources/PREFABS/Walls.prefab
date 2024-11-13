@@ -119,7 +119,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8959773188377936217}
   - component: {fileID: 6750015925898390748}
-  - component: {fileID: 8349971662610666768}
   m_Layer: 0
   m_Name: WallGen (1)
   m_TagString: Untagged
@@ -157,7 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6fbc415453e48648a205fb14ba05edf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Display: {fileID: 8349971662610666768}
+  CoralParent: {fileID: 8710362448144888957}
   plane1: {fileID: 1239710954486011558}
   plane2: {fileID: 4349463666641694859}
   plane3: {fileID: 5780574367298845697}
@@ -179,21 +178,6 @@ MonoBehaviour:
   - {fileID: 2947715999815865860, guid: e3b65d0070b2b544c839a118591df8d2, type: 3}
   - {fileID: 7647910961313182791, guid: c69ace905a864644babc6736ebbcebe1, type: 3}
   - {fileID: 8768699437855887584, guid: a6df4fc3711bebf489a0d96bcc6d8a8e, type: 3}
---- !u!114 &8349971662610666768
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 803028648659103132}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af7f5bd42eb30fc41a70ae9108a95781, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textureRenderer: {fileID: 0}
-  meshFilter: {fileID: 1239710954486011558}
-  meshRenderer: {fileID: 110924734060752323}
 --- !u!1 &2253202078956554190
 GameObject:
   m_ObjectHideFlags: 0
@@ -335,6 +319,8 @@ Transform:
   m_Children:
   - {fileID: 3880974281028379893}
   - {fileID: 8959773188377936217}
+  - {fileID: 2131995708392545234}
+  - {fileID: 7916390073732601654}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5705493931538769184
@@ -567,6 +553,37 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!1 &4380092612257957713
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2131995708392545234}
+  m_Layer: 0
+  m_Name: CoralLeftWall
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2131995708392545234
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4380092612257957713}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -10, y: 0, z: -25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3279909054012991696}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5105573572223916528
 GameObject:
   m_ObjectHideFlags: 0
@@ -686,7 +703,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3880974281028379893}
   - component: {fileID: 3055213813340400393}
-  - component: {fileID: 4852888117147254933}
   m_Layer: 0
   m_Name: WallGen
   m_TagString: Untagged
@@ -724,7 +740,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6fbc415453e48648a205fb14ba05edf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Display: {fileID: 4852888117147254933}
+  CoralParent: {fileID: 4380092612257957713}
   plane1: {fileID: 2341538335602162765}
   plane2: {fileID: 5362635271454199895}
   plane3: {fileID: 7906971742800875622}
@@ -746,21 +762,37 @@ MonoBehaviour:
   - {fileID: 2947715999815865860, guid: e3b65d0070b2b544c839a118591df8d2, type: 3}
   - {fileID: 7647910961313182791, guid: c69ace905a864644babc6736ebbcebe1, type: 3}
   - {fileID: 8768699437855887584, guid: a6df4fc3711bebf489a0d96bcc6d8a8e, type: 3}
---- !u!114 &4852888117147254933
-MonoBehaviour:
+--- !u!1 &8710362448144888957
+GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8687763824129002049}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af7f5bd42eb30fc41a70ae9108a95781, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textureRenderer: {fileID: 0}
-  meshFilter: {fileID: 2341538335602162765}
-  meshRenderer: {fileID: 4879650550781667061}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7916390073732601654}
+  m_Layer: 0
+  m_Name: CoralRightWall
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7916390073732601654
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8710362448144888957}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -10, y: 0, z: -25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3279909054012991696}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9033834406372032774
 GameObject:
   m_ObjectHideFlags: 0
