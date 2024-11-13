@@ -8,20 +8,12 @@ public class GameAnimation : MonoBehaviour
     GameObject ploraTitle;
 
     [SerializeField]
-    PlayerAnimation playerAnim;
-
-    [SerializeField]
     Train ship;
 
     Animator anim;
 
     void Start()
     {
-        if (playerAnim == null)
-        {
-            playerAnim = FindFirstObjectByType<PlayerAnimation>();
-        }
-
         anim = GetComponent<Animator>();
     }
 
@@ -61,15 +53,15 @@ public class GameAnimation : MonoBehaviour
         Destroy(ploraTitle);
     }
 
-    void SpawnPlayer()
-    {
-        playerAnim.Spawn();
-    }
-
     void ActivateShip()
     {
         ship.gameObject.SetActive(true);
         StartCoroutine(SpeedUpShipOverTime());
+    }
+
+    void SpawnPlayer()
+    {
+        
     }
 
     IEnumerator SpeedUpShipOverTime()

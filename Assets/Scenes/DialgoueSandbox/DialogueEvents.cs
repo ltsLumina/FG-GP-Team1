@@ -97,45 +97,47 @@ public class DialogueEvents : MonoBehaviour
 
     private void Start()
     {
+        // shame on you turner
+        
         // Check for missing dialogues
-        if (introDialogue == null)
-            Debug.LogWarning("Intro dialogue is missing.");
-        if (gameStartedDialogue == null)
-            Debug.LogWarning("Game started dialogue is missing.");
-        if (firstPlayDialogue == null)
-            Debug.LogWarning("First play dialogue is missing.");
-        if (firstKelpDialogue == null)
-            Debug.LogWarning("First kelp dialogue is missing.");
-        if (firstRockDialogue == null)
-            Debug.LogWarning("First rock dialogue is missing.");
-        if (rockHitsShipDialogue == null)
-            Debug.LogWarning("Rock hits ship dialogue is missing.");
-        if (hullBreachPressureDialogue == null)
-            Debug.LogWarning("Hull breach pressure dialogue is missing.");
-        if (criticalHullDamageDialogue == null)
-            Debug.LogWarning("Critical hull damage dialogue is missing.");
-        if (criticalFuelLevelDialogue == null)
-            Debug.LogWarning("Critical fuel level dialogue is missing.");
-        if (criticalBatteryChargeLevelDialogue == null)
-            Debug.LogWarning("Critical battery charge level dialogue is missing.");
-        if (deathFromRunningOutOfFuelDialogue == null)
-            Debug.LogWarning("Death from running out of fuel dialogue is missing.");
-        if (deathFromHullDestroyedDialogue == null)
-            Debug.LogWarning("Death from hull destroyed dialogue is missing.");
-        if (lightsOutDialogue == null)
-            Debug.LogWarning("Lights out dialogue is missing.");
-        if (enterTheDeepDialogue == null)
-            Debug.LogWarning("Enter the deep dialogue is missing.");
-        if (hullRepairDialogue == null)
-            Debug.LogWarning("Hull repair dialogue is missing.");
-        if (fuelRefillDialogue == null)
-            Debug.LogWarning("Fuel refill dialogue is missing.");
-        if (batteryChargeDialogue == null)
-            Debug.LogWarning("Battery charge dialogue is missing.");
-        if (playerStunDialogue == null)
-            Debug.LogWarning("Player stun dialogue is missing.");
-        if (electricFishOnScreenDialogue == null)
-            Debug.LogWarning("Electric fish on screen dialogue is missing.");
+        // if (introDialogue == null)
+        //     Debug.LogWarning("Intro dialogue is missing.");
+        // if (gameStartedDialogue == null)
+        //     Debug.LogWarning("Game started dialogue is missing.");
+        // if (firstPlayDialogue == null)
+        //     Debug.LogWarning("First play dialogue is missing.");
+        // if (firstKelpDialogue == null)
+        //     Debug.LogWarning("First kelp dialogue is missing.");
+        // if (firstRockDialogue == null)
+        //     Debug.LogWarning("First rock dialogue is missing.");
+        // if (rockHitsShipDialogue == null)
+        //     Debug.LogWarning("Rock hits ship dialogue is missing.");
+        // if (hullBreachPressureDialogue == null)
+        //     Debug.LogWarning("Hull breach pressure dialogue is missing.");
+        // if (criticalHullDamageDialogue == null)
+        //     Debug.LogWarning("Critical hull damage dialogue is missing.");
+        // if (criticalFuelLevelDialogue == null)
+        //     Debug.LogWarning("Critical fuel level dialogue is missing.");
+        // if (criticalBatteryChargeLevelDialogue == null)
+        //     Debug.LogWarning("Critical battery charge level dialogue is missing.");
+        // if (deathFromRunningOutOfFuelDialogue == null)
+        //     Debug.LogWarning("Death from running out of fuel dialogue is missing.");
+        // if (deathFromHullDestroyedDialogue == null)
+        //     Debug.LogWarning("Death from hull destroyed dialogue is missing.");
+        // if (lightsOutDialogue == null)
+        //     Debug.LogWarning("Lights out dialogue is missing.");
+        // if (enterTheDeepDialogue == null)
+        //     Debug.LogWarning("Enter the deep dialogue is missing.");
+        // if (hullRepairDialogue == null)
+        //     Debug.LogWarning("Hull repair dialogue is missing.");
+        // if (fuelRefillDialogue == null)
+        //     Debug.LogWarning("Fuel refill dialogue is missing.");
+        // if (batteryChargeDialogue == null)
+        //     Debug.LogWarning("Battery charge dialogue is missing.");
+        // if (playerStunDialogue == null)
+        //     Debug.LogWarning("Player stun dialogue is missing.");
+        // if (electricFishOnScreenDialogue == null)
+        //     Debug.LogWarning("Electric fish on screen dialogue is missing.");
 
         // Subscribe to GameManager events
         if (GameManager.Instance != null)
