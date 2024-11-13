@@ -32,7 +32,7 @@ MonoBehaviour:
     supportLightLayers: 1
     renderingLayerMaskBuffer: 0
     supportWater: 1
-    waterSimulationResolution: 128
+    waterSimulationResolution: 64
     supportWaterExclusion: 0
     supportWaterDecals: 0
     waterDecalAtlasSize: 1024
@@ -182,7 +182,7 @@ MonoBehaviour:
       fsrSharpness: 0.92
       maxPercentage: 100
       minPercentage: 100
-      dynResType: 0
+      dynResType: 1
       upsampleFilter: 1
       forceResolution: 0
       forcedPercentage: 100
@@ -314,7 +314,7 @@ MonoBehaviour:
     gpuResidentDrawerSettings:
       mode: 1
       smallMeshScreenPercentage: 0
-      enableOcclusionCullingInCameras: 0
+      enableOcclusionCullingInCameras: 1
       useDepthPrepassForOccluders: 1
     m_ObsoleteLightLayerName0: Light LayerDefault
     m_ObsoleteLightLayerName1: InteriorOnly

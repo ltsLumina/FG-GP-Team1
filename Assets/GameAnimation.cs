@@ -79,7 +79,7 @@ public class GameAnimation : MonoBehaviour
         while (time < 15)
         {
             time += Time.deltaTime;
-            ship.speed = Mathf.Lerp(0, 5, time / 15);
+            ship.Speed = Mathf.Lerp(0, 5, time / 15);
             yield return null;
         }
     }
