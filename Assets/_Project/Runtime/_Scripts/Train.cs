@@ -120,7 +120,7 @@ public class Train : MonoBehaviour
     [SerializeField]
     UnityEvent<int> onHullBreach;
 
-    UnityEvent<int> onHullIntegrityChanged;
+    public UnityEvent<int> onHullIntegrityChanged;
 
     [SerializeField]
     UnityEvent onDeath;
@@ -220,13 +220,6 @@ public class Train : MonoBehaviour
     {
         get => speed;
         set => speed = value;
-    }
-
-    // ReSharper disable once ConvertToAutoPropertyWhenPossible
-    public UnityEvent<int> OnHullIntegrityChanged
-    {
-        get => onHullIntegrityChanged;
-        set => onHullIntegrityChanged = value;
     }
 
 #if UNITY_EDITOR
