@@ -8,20 +8,12 @@ public class GameAnimation : MonoBehaviour
     GameObject ploraTitle;
 
     [SerializeField]
-    PlayerAnimation playerAnim;
-
-    [SerializeField]
     Train ship;
 
     Animator anim;
 
     void Start()
     {
-        if (playerAnim == null)
-        {
-            playerAnim = FindFirstObjectByType<PlayerAnimation>();
-        }
-
         anim = GetComponent<Animator>();
     }
 
@@ -61,11 +53,6 @@ public class GameAnimation : MonoBehaviour
         Destroy(ploraTitle);
     }
 
-    void SpawnPlayer()
-    {
-        playerAnim.Spawn();
-    }
-
     void ActivateShip()
     {
         ship.gameObject.SetActive(true);
@@ -79,7 +66,7 @@ public class GameAnimation : MonoBehaviour
         while (time < 15)
         {
             time += Time.deltaTime;
-            ship.speed = Mathf.Lerp(0, 5, time / 15);
+            ship.Speed = Mathf.Lerp(0, 5, time / 15);
             yield return null;
         }
     }

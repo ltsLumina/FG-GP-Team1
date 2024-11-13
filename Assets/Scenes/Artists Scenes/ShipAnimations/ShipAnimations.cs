@@ -29,13 +29,13 @@ public class ShipAnimations : MonoBehaviour
             ship = GameObject.FindGameObjectWithTag("Ship").GetComponent<Train>();
         }
         //Subscribe to UnityEvent
-        ship.onHullIntegrityChanged.AddListener(onHullIntegrityChanged);
+        ship.OnHullIntegrityChanged.AddListener(onHullIntegrityChanged);
     }
 
     void OnDestroy()
     {
         //Unsubscribe from UnityEvent
-        ship.onHullIntegrityChanged.RemoveListener(onHullIntegrityChanged);
+        ship.OnHullIntegrityChanged.RemoveListener(onHullIntegrityChanged);
     }
 
     void onHullIntegrityChanged(int hullIntegrity)
