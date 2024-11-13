@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 188892833489537968}
   - component: {fileID: 2752956366383475324}
   - component: {fileID: 7055556921073645724}
+  - component: {fileID: 7822412676549276895}
   m_Layer: 0
   m_Name: Electric Fish
   m_TagString: Jellyfish
@@ -138,6 +139,28 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!95 &7822412676549276895
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4597449756645802583}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7ca81e06c738143a78a5901b3e2b621f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &4108900421130729435
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -189,6 +212,10 @@ PrefabInstance:
     - target: {fileID: 6582430426045196712, guid: 0140267d7df974786b8c9d47fe18137c, type: 3}
       propertyPath: m_Name
       value: Model
+      objectReference: {fileID: 0}
+    - target: {fileID: 6582430426045196712, guid: 0140267d7df974786b8c9d47fe18137c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
