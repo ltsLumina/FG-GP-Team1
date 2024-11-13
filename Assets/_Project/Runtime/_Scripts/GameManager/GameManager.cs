@@ -32,6 +32,9 @@ public class GameManager : SingletonPersistent<GameManager>
     public float highScore;
     public float currentDepth;
 
+    [SerializeField]
+    GameObject ship;
+
     // Add more variables as needed
 
     public GameState state;
@@ -80,6 +83,14 @@ public class GameManager : SingletonPersistent<GameManager>
             ShipScanner = FindFirstObjectByType<Scanner>();
         }
 
+        if (ship == null)
+        {
+            //ship = FindObjectByTag("Player");
+            ship = GameObject.FindGameObjectWithTag("Ship");
+        }
+
+        // Add more initialization as needed
+
         if (!isIntroPlayed)
         {
             isIntroPlayed = true;
@@ -94,6 +105,8 @@ public class GameManager : SingletonPersistent<GameManager>
         CheckVisibilityForKelp();
         CheckVisibilityForRocks();
         CheckVisibilityForJellyfish();
+
+        UpdateDepth();
 
         switch (state)
         {
@@ -148,6 +161,17 @@ public class GameManager : SingletonPersistent<GameManager>
                 // mainMenu = FindAnyObjectByType<MainMenu>();
                 // mainMenu.GameOverPanel.SetActive(true);
                 break;
+        }
+    }
+
+    void UpdateDepth()
+    {
+        currentDepth = ship.transform.position.y * -1;
+
+        // Update max if needed
+        if (currentDepth > highScore)
+        {
+            highScore = currentDepth;
         }
     }
 

@@ -14,7 +14,7 @@ public class DialogueManager : MonoBehaviour
     [Tooltip("The text component where dialogue lines will be displayed")]
     public TMP_Text dialogueText;
 
-    [Tooltip("The image component for the speaker's profile picture")]
+    [Tooltip("The image component where the speaker's profile picture will be displayed")]
     public RawImage profileImage;
 
     [Tooltip("The audio source for playing voice-over clips")]
@@ -32,6 +32,10 @@ public class DialogueManager : MonoBehaviour
 
     [Tooltip("The duration each glitch frame lasts")]
     public float glitchFrameDuration = 0.05f;
+
+    [Tooltip("Typing duration modifier (0 = instant, 1 = full duration)")]
+    [Range(0, 1)]
+    public float typingDuration = 0.5f;
 
     private Queue<Dialogue> dialogueQueue = new Queue<Dialogue>();
     private Dialogue currentDialogue;
@@ -108,7 +112,6 @@ public class DialogueManager : MonoBehaviour
         }
 
         DialogueLine line = currentDialogue.dialogueLines[currentLineIndex];
-        dialogueText.text = line.dialogueText;
         profileImage.texture = line.speakerProfilePicture;
 
         if (line.voiceOverClip != null)
@@ -117,9 +120,36 @@ public class DialogueManager : MonoBehaviour
             dialogueAudioSource.Play();
         }
 
+        // Start the typing effect coroutine
+        StartCoroutine(TypeDialogueText(line.dialogueText, line.timing));
+
         // Start the static effect coroutine
         StartCoroutine(ApplyStaticEffect(line.timing));
         currentLineIndex++;
+    }
+
+    // Coroutine for typing effect
+    private IEnumerator TypeDialogueText(string text, float lineDuration)
+    {
+        dialogueText.text = "";
+        float adjustedDuration = lineDuration * typingDuration; // Adjust the total duration based on typingDuration slider
+        float typingSpeed = adjustedDuration / text.Length;
+        float accumulatedTime = 0f;
+        int currentIndex = 0;
+
+        while (currentIndex < text.Length)
+        {
+            accumulatedTime += Time.unscaledDeltaTime;
+
+            while (accumulatedTime >= typingSpeed && currentIndex < text.Length)
+            {
+                dialogueText.text += text[currentIndex];
+                currentIndex++;
+                accumulatedTime -= typingSpeed;
+            }
+
+            yield return null; // Wait until the next frame
+        }
     }
 
     // Coroutine to wait for the timing duration before displaying the next line
