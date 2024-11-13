@@ -1,3 +1,4 @@
+using Lumina.Essentials.Modules;
 using UnityEngine;
 
 public class ShipAnimations : MonoBehaviour
@@ -24,18 +25,10 @@ public class ShipAnimations : MonoBehaviour
 
     void Start()
     {
-        if (ship == null)
-        {
-            ship = GameObject.FindGameObjectWithTag("Ship").GetComponent<Train>();
-        }
+        if (ship == null) ship = FindObjectOfType<Train>(true);
+
         //Subscribe to UnityEvent
         ship.OnHullIntegrityChanged.AddListener(onHullIntegrityChanged);
-    }
-
-    void OnDestroy()
-    {
-        //Unsubscribe from UnityEvent
-        ship.OnHullIntegrityChanged.RemoveListener(onHullIntegrityChanged);
     }
 
     void onHullIntegrityChanged(int hullIntegrity)

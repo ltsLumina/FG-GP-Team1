@@ -59,6 +59,11 @@ public class GameAnimation : MonoBehaviour
         StartCoroutine(SpeedUpShipOverTime());
     }
 
+    void SpawnPlayer()
+    {
+        
+    }
+
     IEnumerator SpeedUpShipOverTime()
     {
         // Speed up the ship from 0 to 5 over 15s
