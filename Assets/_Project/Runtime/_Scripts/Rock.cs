@@ -12,17 +12,20 @@ public class Rock : MonoBehaviour, IDestructible
     float force = 10;
 
     [SerializeField]
-    float torque = 10;
-
-    private bool collided = false;
-
-    [SerializeField]
     List<GameObject> rockModels;
+
+    bool collided = false;
 
     void Start()
     {
         var rockModel = rockModels[UnityEngine.Random.Range(0, rockModels.Count)];
         Instantiate(rockModel, transform);
+        rockModel.transform.position = Vector3.zero;
+    }
+
+    void FixedUpdate()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, Train.Instance.transform.position, 0.05f);
     }
 
     void OnCollisionEnter(Collision other)
@@ -30,10 +33,12 @@ public class Rock : MonoBehaviour, IDestructible
         // add force and torque to the rock
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Ship"))
         {
-            var rb = GetComponent<Rigidbody>();
+            if (collided) return;
             collided = true;
+            
+            var rb = GetComponent<Rigidbody>();
+            rb.constraints = RigidbodyConstraints.None;
             rb.AddForce(direction * force, ForceMode.Impulse);
-            rb.AddTorque(Vector3.up * torque, ForceMode.Impulse);
         }
     }
 }

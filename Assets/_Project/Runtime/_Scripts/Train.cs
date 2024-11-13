@@ -440,6 +440,7 @@ public class Train : MonoBehaviour
         switch (other.gameObject.tag)
         {
             case "Rock":
+                Debug.Log("hit", other.gameObject);
                 OnCollision(other.gameObject);
                 break;
         }
