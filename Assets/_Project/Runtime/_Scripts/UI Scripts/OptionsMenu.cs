@@ -93,7 +93,7 @@ public class OptionsMenu : MonoBehaviour
         vsyncToggle.onValueChanged.AddListener(SetVSync);
 
         //Graphics
-        graphicsDropdown.value = PlayerPrefs.GetInt("GraphicsQuality", QualitySettings.GetQualityLevel());
+        graphicsDropdown.value = PlayerPrefs.GetInt("GraphicsQuality", PlayerPrefs.GetInt("Graphics"));
         graphicsDropdown.onValueChanged.AddListener(SetGraphics);
 
         brightnessSlider.value = PlayerPrefs.GetFloat("Brightness", 1f);
