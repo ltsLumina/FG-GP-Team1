@@ -31,21 +31,12 @@ public class MainMenu : MonoBehaviour
     public void StartTurtorialGame()
     {
         // Replace later with what scene is the game scene
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("GoldBuild");
     }
 
     public void Exit()
     {
-    #if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-    #else
         Application.Quit();
-    #endif
-    }
-
-    public void SkipTutorial()
-    {
-        SceneManager.LoadScene(2);
     }
 
     public void Retry()
@@ -55,7 +46,7 @@ public class MainMenu : MonoBehaviour
         highScoreManager.SaveHighScores();
         scoreManager = Helpers.Find<ScoreManager>();
         scoreManager.ResetGame();
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene("GoldBuild");
     }
 
     public void BackToMain()
