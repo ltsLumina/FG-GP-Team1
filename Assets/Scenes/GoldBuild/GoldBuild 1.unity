@@ -1476,6 +1476,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1794197808}
     - target: {fileID: 2469166811154837062, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: fuelDepletionRate
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469166811154837062, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
       propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -1730,7 +1734,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7279632049659785561, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1858097772}
   m_SourcePrefab: {fileID: 100100000, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
 --- !u!4 &895494831 stripped
 Transform:
@@ -3005,10 +3012,6 @@ MonoBehaviour:
     tab: 
     size: 30
     space: 0
-  - name: C _ Clean
-    tab: 
-    size: 30
-    space: 0
   - name: C _ Repair
     tab: 
     size: 30
@@ -3027,7 +3030,7 @@ MonoBehaviour:
     space: 0
   rootTab:
     name: 
-    selectedSubtabIndex: 2
+    selectedSubtabIndex: 0
     subtabs:
     - rid: 3861983204425334914
     - rid: 3861983204425334915
@@ -3105,6 +3108,25 @@ MonoBehaviour:
         name: Rocks
         expanded: 1
         subfoldouts: []
+--- !u!1 &1858097768 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7279632049659785561, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+  m_PrefabInstance: {fileID: 895494830}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1858097772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1858097768}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30a28bdee4bf740dca22370cf0147102, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instanceMaterial: {fileID: 2100000, guid: 5fcd877e556bb6b448c88584445825c8, type: 2}
+  animatedArrayIndex: 6.8
 --- !u!1 &1870652699
 GameObject:
   m_ObjectHideFlags: 0

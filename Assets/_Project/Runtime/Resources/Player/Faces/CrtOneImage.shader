@@ -1,7 +1,6 @@
-Shader "Custom/CRTShaderWithArray" {
+Shader "Custom/CRTShaderSingleTexture" {
     Properties {
-        _MainTexArray ("Texture Array", 2DArray) = "" {}
-        _ArrayIndex ("Array Index", Range(0, 30)) = 0
+        _MainTex ("Texture", 2D) = "white" {}
         _ScanlineIntensity ("Scanline Intensity", Range(0, 1)) = 0.5
         _DistortionAmount ("Distortion Amount", Range(0, 1)) = 0.1
         _AberrationAmount ("Aberration Amount", Range(0, 0.1)) = 0.03
@@ -32,9 +31,8 @@ Shader "Custom/CRTShaderWithArray" {
                 float4 vertex : SV_POSITION;
             };
 
-            // Declare texture array
-            UNITY_DECLARE_TEX2DARRAY(_MainTexArray);
-            float _ArrayIndex;
+            // Declare the main texture
+            sampler2D _MainTex;
             float _ScanlineIntensity;
             float _DistortionAmount;
             float _AberrationAmount;
@@ -46,12 +44,12 @@ Shader "Custom/CRTShaderWithArray" {
                 return o;
             }
 
-            float3 ApplyAberration(float2 uv, float amount, int arrayIndex) {
+            float3 ApplyAberration(float2 uv, float amount) {
                 // Apply chromatic aberration by shifting color channels
                 float3 color;
-                color.r = UNITY_SAMPLE_TEX2DARRAY(_MainTexArray, float3(uv + amount, arrayIndex)).r;
-                color.g = UNITY_SAMPLE_TEX2DARRAY(_MainTexArray, float3(uv, arrayIndex)).g;
-                color.b = UNITY_SAMPLE_TEX2DARRAY(_MainTexArray, float3(uv - amount, arrayIndex)).b;
+                color.r = tex2D(_MainTex, uv + amount).r;
+                color.g = tex2D(_MainTex, uv).g;
+                color.b = tex2D(_MainTex, uv - amount).b;
                 return color;
             }
 
@@ -69,14 +67,9 @@ Shader "Custom/CRTShaderWithArray" {
             }
 
             fixed4 frag (v2f i) : SV_Target {
-                // Convert _ArrayIndex to an integer to prevent interpolation issues
-                int arrayIndex = round(_ArrayIndex);  // Ensure the index is an integer
-
-                // Apply distortion, aberration, and scanlines
                 float2 distortedUV = ApplyDistortion(i.uv, _DistortionAmount);
-                float3 color = ApplyAberration(distortedUV, _AberrationAmount, arrayIndex);
+                float3 color = ApplyAberration(distortedUV, _AberrationAmount);
                 color = ApplyScanlines(color, i.uv);
-
                 return float4(color, 1.0);
             }
             ENDCG

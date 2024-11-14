@@ -6038,7 +6038,7 @@ MonoBehaviour:
   speed: 5
   maxSpeed: 10
   fuel: 100
-  fuelDepletionRate: 3
+  fuelDepletionRate: 2
   kelpRestoreAmount: 10
   hullIntegrity: 3
   repairAmount: 1
