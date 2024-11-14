@@ -77,7 +77,10 @@ public class PlayerAnimation : MonoBehaviour
             SetMovementBlendTree(input.MoveInput);
     }
 
-    private void ObjectReleased() { }
+    private void ObjectReleased()
+    {
+        // TODO Make object release correctly
+    }
 
     // Set blend tree parameters for player movement based on input of new input system Player action Move
     public void SetMovementBlendTree(Vector2 movement)

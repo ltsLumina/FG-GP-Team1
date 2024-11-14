@@ -12,12 +12,14 @@ public class GameAnimation : MonoBehaviour
 
     [SerializeField]
     Animator anim;
+    MainMenu menuManager;
 
     void Awake()
     {
         anim = GetComponent<Animator>();
         // Sets itself in the gameManager
         GameManager.Instance.gameAnimation = this;
+        menuManager = GetComponentInChildren<MainMenu>();
     }
 
     void Update()
@@ -49,6 +51,12 @@ public class GameAnimation : MonoBehaviour
     public void Intro()
     {
         anim.SetTrigger("Intro");
+    }
+
+    public void TurnOnMainMenu()
+    {
+        Debug.Log("Turn on main menu");
+        menuManager.MainMenuPanel.SetActive(true);
     }
 
     public void Replay()
