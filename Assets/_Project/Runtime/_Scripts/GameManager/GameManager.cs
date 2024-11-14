@@ -181,6 +181,9 @@ public class GameManager : MonoBehaviour
         switch (state)
         {
             case GameState.Play:
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+                
                 if (Input.GetKeyDown(KeyCode.Escape))
                 {
                     GameStateChanger(GameState.Pause);
@@ -192,6 +195,9 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case GameState.Pause:
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+                
                 if (Input.GetKeyDown(KeyCode.Escape))
                 {
                     GameStateChanger(GameState.Play);
@@ -204,6 +210,9 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case GameState.GameOver:
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+                
                 if (!isGameOver)
                 {
                     isGameOver = true;
@@ -433,6 +442,7 @@ public class GameManager : MonoBehaviour
         GameStateChanger(GameState.Play);
         gameAnimation.Play();
         menuMusicInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        menuMusicInstance.release();
         gameMusicInstance.start();
 
     }

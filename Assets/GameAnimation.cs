@@ -24,18 +24,8 @@ public class GameAnimation : MonoBehaviour
 
     void Update()
     {
-        // Only modify the animation speed if we are in the editor
-        if (Application.isEditor)
-        {
-            if (Input.GetKey(KeyCode.F))
-            {
-                anim.speed = 5f; // Increase animation speed by 5 when 'F' is held down
-            }
-            else
-            {
-                anim.speed = 1f; // Reset to normal speed
-            }
-        }
+        // Only modify the animation speed
+        anim.speed = Input.GetKey(KeyCode.F) ? 5f : 1f;
     }
 
     public void Play()

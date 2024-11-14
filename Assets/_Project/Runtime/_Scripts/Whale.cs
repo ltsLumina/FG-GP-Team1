@@ -6,7 +6,7 @@ public class Whale : MonoBehaviour
 {
     public static int SpawnCounter = 0;
 
-    private float _movementSpeed = 5f;
+    private float _movementSpeed = 4.75f;
 
     void Start()
     {

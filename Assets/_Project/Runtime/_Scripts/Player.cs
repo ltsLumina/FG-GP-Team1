@@ -96,6 +96,8 @@ public class Player : MonoBehaviour
     // Player moves in parallel with the train if it's a child of the train. Simplest solution.
     void Start()
     {
+        moveSpeed = 5000;
+        
         transform.SetParent(Train.Instance.transform);
         transform.position = transform.parent.position + new Vector3(-5, -5, 0);
         transform.rotation = new Quaternion(0, 180, 0, 0); // i dont know why but this must be done
@@ -265,6 +267,8 @@ public class Player : MonoBehaviour
         Freeze(true);
         yield return new WaitForSeconds(stunDuration);
         Freeze(false);
+
+        moveSpeed = 5000;
     }
 
 }

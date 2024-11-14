@@ -205,6 +205,7 @@ public class Task : MonoBehaviour
 
     void CompleteTask()
     {
+        Helpers.Find<Player>().Animator.SetBool("HullCritical", false);
         player.PlayerAnimation.Animator.SetTrigger("StopRepairing");
         player.transform.DORotate(new (player.transform.rotation.x, 180, player.transform.rotation.z), 0.5f);
         

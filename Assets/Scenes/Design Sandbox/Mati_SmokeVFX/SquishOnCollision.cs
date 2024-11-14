@@ -16,7 +16,21 @@ public class SquishOnCollision : MonoBehaviour
     Vector3 originalScale;
     bool isOnCooldown;
 
-    void Start() => originalScale = transform.localScale;
+    void Start()
+    {
+        originalScale = transform.localScale;
+        transform.localScale = new Vector3(1,1,1);
+        StartCoroutine(ResetScaleCoroutine());
+    }
+
+    IEnumerator ResetScaleCoroutine()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(10);
+            transform.localScale = originalScale;
+        }
+    }
 
     void OnCollisionEnter(Collision collision)
     {
@@ -34,7 +48,10 @@ public class SquishOnCollision : MonoBehaviour
     }
 
     void SquishEffect() => transform.DOScale(new Vector3(originalScale.x * squishAmount, originalScale.y * 1.2f, originalScale.z * squishAmount), squishDuration)
-                                    .OnComplete(() => { transform.DOScale(originalScale, squishDuration); });
+                                    .OnComplete(() =>
+                                     {
+                                         transform.DOScale(originalScale, squishDuration).OnComplete(() => transform.localScale = originalScale);
+                                     });
 
     IEnumerator CooldownCoroutine()
     {

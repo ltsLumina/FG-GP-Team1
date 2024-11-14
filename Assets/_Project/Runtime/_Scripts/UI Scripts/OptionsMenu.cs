@@ -51,14 +51,14 @@ public class OptionsMenu : MonoBehaviour
         {
             PlayerPrefs.SetFloat("MasterVol", volume);
         }*/
-        masterSlider.value = PlayerPrefs.GetFloat("MasterVol");
+        masterSlider.value = PlayerPrefs.GetFloat("MasterVol", 100);
         masterLabel.text = Mathf.RoundToInt(masterSlider.value * 100).ToString();
         SetMasterMixerVolume(masterSlider.value);
 
-        musicSlider.value = PlayerPrefs.GetFloat("MusicVol"); ;
+        musicSlider.value = PlayerPrefs.GetFloat("MusicVol", 100);
         musicLabel.text = Mathf.RoundToInt(musicSlider.value * 100).ToString();
 
-        sfxSlider.value = PlayerPrefs.GetFloat("SFXVol"); ;
+        sfxSlider.value = PlayerPrefs.GetFloat("SFXVol", 100);
         sfxLabel.text = Mathf.RoundToInt(sfxSlider.value * 100).ToString();
 
         SetMasterMixerVolume(masterSlider.value);

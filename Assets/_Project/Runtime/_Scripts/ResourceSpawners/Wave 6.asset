@@ -13,4 +13,16 @@ MonoBehaviour:
   m_Name: Wave 6
   m_EditorClassIdentifier: 
   depth: 800
-  spawnObjects: []
+  spawnObjects:
+  - objectToSpawn: {fileID: 5581981930496451382, guid: feb31393fc9cd08459262f0f3deda43b, type: 3}
+    amountToSpawn: 3
+    spawnInterval: 5
+    spawnOnWall: 0
+  - objectToSpawn: {fileID: 4781570308072900306, guid: 38d6cdba11a866b4ca0c74aca4355d0f, type: 3}
+    amountToSpawn: 2
+    spawnInterval: 10
+    spawnOnWall: 0
+  - objectToSpawn: {fileID: 4597449756645802583, guid: 750fd1bd8324fc84c98778924c9ebaf3, type: 3}
+    amountToSpawn: 1
+    spawnInterval: 10
+    spawnOnWall: 0

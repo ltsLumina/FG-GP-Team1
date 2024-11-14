@@ -23,7 +23,7 @@ public class Train : MonoBehaviour
     public VInspectorData vInspectorData;
 
     [Header("Train Settings")]
-    float speed = 5;
+    [SerializeField] float speed = 5;
     [SerializeField] float maxSpeed = 10;
 
     [Header("Audio")]
@@ -59,7 +59,7 @@ public class Train : MonoBehaviour
 
     [Tab("Power")]
     [Tooltip("Whether the headlights are active, and which ones are active.")]
-    [SerializeField] SerializedDictionary<GameObject, bool> lights;
+    [SerializeField] List<GameObject> lights;
 
     [Tooltip("The thresholds for the power level when the lights start to dim.")]
     [SerializeField] SerializedDictionary<GameObject, float> lightSwitchThresholds;
@@ -237,74 +237,54 @@ public class Train : MonoBehaviour
         return;
         void Init()
         {
-            onFuelDepleted.AddListener(() => HandleFuelDepletion());
+            onFuelDepleted.AddListener(HandleFuelDepletion);
 
-            onDeath.AddListener(() => HandleHullIntegrityDepletion());
+            onDeath.AddListener(HandleHullIntegrityDepletion);
 
             onFuelDepleted.AddListener(() => onDeath.Invoke());
             onDeath.AddListener(() =>
             {
                 Helpers.Find<Player>().Animator.SetTrigger("GameOver");
                 Debug.Log("Died");
-                HandleHullIntegrityDepletion();
             });
-
-            DOTween.SetTweensCapacity(1000, 5);
 
             OnLightDim.AddListener(light =>
             {
-                var hdLightData = light.GetComponent<HDAdditionalLightData>();
-                DOVirtual
-                    .Float(
-                        hdLightData.volumetricDimmer,
-                        0,
-                        1,
-                        x => hdLightData.volumetricDimmer = x
-                    )
-                    .OnComplete(() =>
-                    {
-                        lights[light.gameObject] = false;
-                    });
+                float volumetricDimmer = light.GetComponent<HDAdditionalLightData>().volumetricDimmer;
+                light.GetComponent<HDAdditionalLightData>().volumetricDimmer = Mathf.Lerp(volumetricDimmer, 0, 1);
             });
 
             onPowerRestored.AddListener(() =>
             {
                 foreach (var light in lights)
                 {
-                    var hdLightData = light.Key.GetComponent<HDAdditionalLightData>();
-                    DOVirtual
-                        .Float(
-                            hdLightData.volumetricDimmer,
-                            1,
-                            1,
-                            x => hdLightData.volumetricDimmer = x
-                        )
-                        .OnComplete(() =>
-                        {
-                            lights[light.Key] = true;
-                        });
+                    var hdLight = light.GetComponent<HDAdditionalLightData>();
+                    hdLight.volumetricDimmer = Mathf.Lerp(hdLight.volumetricDimmer, 2, 1);
                 }
             });
+            
+            // on start, set activestate false
+            foreach (var light in lights)
+            {
+                light.SetActive(false);
+            }
 
             if (partyMode)
             {
                 StartCoroutine(RGBLights());
             }
 
-            foreach (var light in lights)
-            {
-                light.Key.SetActive(false);
-            }
+            DOTween.Kill(this);
         }
     }
-
+    
     IEnumerator RGBLights()
     {
         while (true)
         {
             foreach (var light in lights)
             {
-                light.Key.GetComponent<Light>().color = new
+                light.GetComponent<Light>().color = new
                 (Random.value, Random.value, Random.value
                 );
             }
@@ -316,7 +296,7 @@ public class Train : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P)) StartCoroutine(RGBLights());
 
-        if (transform.position.y < -250)
+        if (transform.position.y < -500)
         {
             GameManager.Instance.TriggerEnterTheDeep();
             Debug.Log("deep");
@@ -352,28 +332,33 @@ public class Train : MonoBehaviour
     void FuelCalculation()
     {
         Fuel -= fuelDepletionRate * Time.deltaTime;
-      Helpers.Find<Player>().Animator.SetBool("FuelCritical", Fuel < 20);
+        Helpers.Find<Player>().Animator.SetBool("FuelCritical", Fuel < 20);
     }
 
     void ToggleLightsAtThreshold()
     {
+        Helpers.Find<Player>().Animator.SetBool("LightsCritical", Power < 20);
+        
+        // If the power is below the threshold, dim the lights
         foreach (var light in lights)
         {
-            Helpers.Find<Player>().Animator.SetBool("LightsCritical", Power < 20);
-            if (Power <= lightSwitchThresholds[light.Key])
+            var battery = Helpers.Find<Battery>().GetComponent<Resource>();
+            light.SetActive(!battery.Grabbed);
+            
+            if (Power <= lightSwitchThresholds[light])
             {
-                OnLightDim.Invoke(light.Key.GetComponent<Light>());
-                Helpers.Find<Player>().Animator.SetTrigger("LightsOut");
+                OnLightDim.Invoke(light.GetComponent<Light>());
             }
             else // Power has been restored above the threshold
             {
                 onPowerRestored.Invoke();
             }
         }
-
-        foreach (var light in lights)
+        
+        // if no lights are on
+        if (Power <= 0)
         {
-            light.Key.SetActive(light.Value);
+            Helpers.Find<Player>().Animator.SetTrigger("LightsOut");
         }
     }
 

@@ -121,6 +121,9 @@ public class MainMenu : MonoBehaviour
 
     public void Retry()
     {
+        GameManager.Instance.GameMusicInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        GameManager.Instance.GameMusicInstance.release();
+        
         Debug.Log("Retrying the game...");
         GameManager.Instance.hasPlayedIntro = true;
         GameManager.Instance.GameStateChanger(GameManager.GameState.Play);
