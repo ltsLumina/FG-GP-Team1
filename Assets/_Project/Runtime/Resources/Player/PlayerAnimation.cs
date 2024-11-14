@@ -35,6 +35,11 @@ public class PlayerAnimation : MonoBehaviour
         Animator.SetTrigger("Spawn");
     }
 
+    public void PlayRepairAudioHit()
+    {
+        // TODO: Implement repair audio hit
+    }
+
     public void StopDash()
     {
         SetMotorSpeed(motorSpeed);
