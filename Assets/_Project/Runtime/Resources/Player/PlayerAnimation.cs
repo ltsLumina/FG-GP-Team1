@@ -35,6 +35,11 @@ public class PlayerAnimation : MonoBehaviour
         Animator.SetTrigger("Spawn");
     }
 
+    public void PlayRepairAudioHit()
+    {
+        // TODO: Implement repair audio hit
+    }
+
     public void StopDash()
     {
         SetMotorSpeed(motorSpeed);
@@ -79,6 +84,7 @@ public class PlayerAnimation : MonoBehaviour
 
     private void ObjectReleased()
     {
+        // TODO Make object release correctly
         
     }
 
