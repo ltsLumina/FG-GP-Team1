@@ -171,6 +171,7 @@ public class Train : MonoBehaviour
         {
             if (hullIntegrity <= 0)
             {
+                HandleHullIntegrityDepletion();
                 onDeath.Invoke();
             }
             return hullIntegrity;
@@ -226,6 +227,8 @@ public class Train : MonoBehaviour
         void Init()
         {
             onFuelDepleted.AddListener(() => HandleFuelDepletion());
+
+            onDeath.AddListener(() => HandleHullIntegrityDepletion());
 
             onFuelDepleted.AddListener(() => onDeath.Invoke());
             onDeath.AddListener(() =>
@@ -314,11 +317,17 @@ public class Train : MonoBehaviour
         FuelCalculation();
     }
 
-    // Handle fuel depletion
+
     void HandleFuelDepletion()
     {
         Debug.Log("Fuel depleted!");
         GameManager.Instance.TriggerGameOver("Fuel ran out");
+    }
+
+    void HandleHullIntegrityDepletion()
+    {
+        Debug.Log("Hull integrity reached zero!");
+        GameManager.Instance.TriggerGameOver("Hull destroyed");
     }
 
     void Dive()
@@ -423,7 +432,6 @@ public class Train : MonoBehaviour
             if (!firstHit)
             {
                 firstHit = true;
-                GameManager.Instance.TriggerHullDamage();
             }
 
             hullBreaches++;

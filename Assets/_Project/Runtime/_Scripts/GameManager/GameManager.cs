@@ -339,13 +339,13 @@ public class GameManager : MonoBehaviour
     }
 
     // Game Over
-    public void TriggerGameOver(string reason)
+    public void TriggerGameOver(string reason = "Hull Destroyed")
     {
         if (isGameOver)
             return;
 
-        Debug.Log($"Game Over triggered: {reason}");
         isGameOver = true;
+        Debug.Log($"Game Over triggered: {reason}");
 
         GameStateChanger(GameState.GameOver);
 
@@ -354,17 +354,19 @@ public class GameManager : MonoBehaviour
             mainMenu = FindAnyObjectByType<MainMenu>();
             if (mainMenu == null)
             {
-                Debug.LogError("MainMenu not found. Cannot update GameOver UI.");
+                Debug.LogError("MainMenu not found!");
                 return;
             }
         }
 
-        mainMenu.SetGameOverReason($"Game Over: {reason}");
+        if (reason == "")
+        {
+            reason = "Hull Destroyed";
+        }
 
+        mainMenu.SetGameOverReason($"Game Over: {reason}");
         mainMenu.GameOverPanel.SetActive(true);
         mainMenu.ScoreUI.SetActive(false);
-
-        OnGameOver?.Invoke(reason);
     }
 
     // Enter the deep

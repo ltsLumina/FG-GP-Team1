@@ -48,7 +48,7 @@ public class MainMenu : MonoBehaviour
 
     public GameObject SkipTutorialButton => skipTutorialButton;
 
-    public void SetGameOverReason(string reason)
+    public void SetGameOverReason(string reason = "Hull Destroyed")
     {
         if (gameOverReasonText != null)
         {
