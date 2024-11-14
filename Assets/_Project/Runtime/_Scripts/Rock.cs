@@ -21,6 +21,7 @@ public class Rock : MonoBehaviour, IDestructible
         var rockModel = rockModels[UnityEngine.Random.Range(0, rockModels.Count)];
         Instantiate(rockModel, transform);
         rockModel.transform.position = Vector3.zero;
+        rockModel.transform.rotation = Quaternion.identity;
     }
 
     void FixedUpdate()

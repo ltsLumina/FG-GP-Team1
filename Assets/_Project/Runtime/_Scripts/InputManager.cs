@@ -39,18 +39,27 @@ public class InputManager : MonoBehaviour
     
     public void OnGrabAndRelease(InputAction.CallbackContext context)
     {
-        switch (context.interaction)
+        if (Player.HoldingResource(out Resource _))
         {
-            case TapInteraction:
-                OnTapInteraction?.Invoke();
-                player.Grab();
-                break;
-
-            case HoldInteraction:
-                OnHoldInteraction?.Invoke();
-                player.Release();
-                break;
+            player.Release();
         }
+        else
+        {
+            player.Grab();
+        }
+        
+        // switch (context.interaction)
+        // {
+        //     case TapInteraction:
+        //         OnTapInteraction?.Invoke();
+        //         player.Grab();
+        //         break;
+        //
+        //     case HoldInteraction:
+        //         OnHoldInteraction?.Invoke();
+        //         player.Release();
+        //         break;
+        // }
     }
     
     public void OnRepair(InputAction.CallbackContext context)
