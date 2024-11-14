@@ -35,6 +35,11 @@ public class PlayerAnimation : MonoBehaviour
         Animator.SetTrigger("Spawn");
     }
 
+    public void PlayRepairAudioHit()
+    {
+        // TODO: Implement repair audio hit
+    }
+
     public void StopDash()
     {
         SetMotorSpeed(motorSpeed);
@@ -66,7 +71,7 @@ public class PlayerAnimation : MonoBehaviour
     public void Stun(float stunDuration)
     {
         Debug.Log("Stun animation not implemented");
-        // anim.SetTrigger("Stun");
+        Animator.SetTrigger("Stunned");
     }
 
     private void Update()
@@ -77,7 +82,11 @@ public class PlayerAnimation : MonoBehaviour
             SetMovementBlendTree(input.MoveInput);
     }
 
-    private void ObjectReleased() { }
+    private void ObjectReleased()
+    {
+        // TODO Make object release correctly
+        
+    }
 
     // Set blend tree parameters for player movement based on input of new input system Player action Move
     public void SetMovementBlendTree(Vector2 movement)

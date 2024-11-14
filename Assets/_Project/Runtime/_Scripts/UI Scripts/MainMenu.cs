@@ -10,7 +10,6 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     HighScoreManager highScoreManager;
-    ScoreManager scoreManager;
 
     [Header("UI Elements")]
     [SerializeField]
@@ -109,7 +108,6 @@ public class MainMenu : MonoBehaviour
         GameManager.Instance.GameStateChanger(GameManager.GameState.Play);
         GameManager.Instance.isGoingToMainMenu = false;
         GameManager.Instance.isGameOver = false;
-        mainMenuPanel.SetActive(true);
         gameOverPanel.SetActive(false);
         pausePanel.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -123,7 +121,6 @@ public class MainMenu : MonoBehaviour
         GameManager.Instance.hasPlayedIntro = true;
         GameManager.Instance.isGoingToMainMenu = true;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        mainMenuPanel.SetActive(true);
         SetPauseUIsActive(false);
         gameOverPanel.SetActive(false);
     }

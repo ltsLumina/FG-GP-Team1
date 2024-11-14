@@ -173,7 +173,10 @@ public class Train : MonoBehaviour
         get
         {
             if (hullIntegrity <= 0)
+            {
+                HandleHullIntegrityDepletion();
                 onDeath.Invoke();
+            }
             return hullIntegrity;
         }
         set
@@ -237,9 +240,7 @@ public class Train : MonoBehaviour
             onFuelDepleted.AddListener(() => onDeath.Invoke());
             onDeath.AddListener(() =>
             {
-                HandleHullIntegrityDepletion();
-                GameManager.Instance.GameStateChanger(GameManager.GameState.GameOver);
-                this.DoForEachPlayer(p => p.Animator.SetTrigger("GameOver"));
+                Helpers.Find<Player>().Animator.SetTrigger("GameOver");
                 Debug.Log("Died");
                 HandleHullIntegrityDepletion();
             });
@@ -355,18 +356,18 @@ public class Train : MonoBehaviour
     void FuelCalculation()
     {
         Fuel -= fuelDepletionRate * Time.deltaTime;
-        this.DoForEachPlayer(p => p.Animator.SetBool("FuelCritical", Fuel < 20));
+      Helpers.Find<Player>().Animator.SetBool("FuelCritical", Fuel < 20);
     }
 
     void ToggleLightsAtThreshold()
     {
         foreach (var light in lights)
         {
-            this.DoForEachPlayer(p => p.Animator.SetBool("LightsCritical", Power < 20));
+            Helpers.Find<Player>().Animator.SetBool("LightsCritical", Power < 20);
             if (Power <= lightSwitchThresholds[light.Key])
             {
                 OnLightDim.Invoke(light.Key.GetComponent<Light>());
-                this.DoForEachPlayer(p => p.Animator.SetTrigger("LightsOut"));
+                Helpers.Find<Player>().Animator.SetTrigger("LightsOut");
             }
             else // Power has been restored above the threshold
             {
@@ -449,16 +450,10 @@ public class Train : MonoBehaviour
             onHullBreach.Invoke(hullBreaches);
             onHullIntegrityChanged.Invoke(HullIntegrity);
 
-            //---------------------Added-----------------------------
-            if (HullIntegrity <= 0)
-            {
-                HandleHullIntegrityDepletion();
-            }
-            //--------------------------------------------------------
 
             onRockCollision.Invoke(collision.GetComponent<Rock>());
 
-            this.DoForEachPlayer(p => p.Animator.SetBool("HullCritical", HullIntegrity == 1));
+            Helpers.Find<Player>().Animator.SetBool("HullCritical", HullIntegrity == 1);
         }
     }
     #endregion
