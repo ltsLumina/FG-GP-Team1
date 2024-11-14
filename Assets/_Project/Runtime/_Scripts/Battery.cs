@@ -1,4 +1,6 @@
 #region
+using System;
+using Lumina.Essentials.Modules;
 using UnityEngine;
 using VInspector;
 using static Lumina.Essentials.Modules.Helpers;
@@ -31,7 +33,7 @@ public class Battery : MonoBehaviour
 
         charge = 0;
     }
-    
+
     /// <summary>
     /// Deposits the battery into the train.
     /// </summary>
