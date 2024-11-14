@@ -10,11 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 35a8c9e13e169f54aae58c1e16119a65, type: 3}
-  m_Name: Wave 0
+  m_Name: Wave 6
   m_EditorClassIdentifier: 
-  depth: 20
-  spawnObjects:
-  - objectToSpawn: {fileID: 5581981930496451382, guid: feb31393fc9cd08459262f0f3deda43b, type: 3}
-    amountToSpawn: 1
-    spawnInterval: 3
-    spawnOnWall: 0
+  depth: 800
+  spawnObjects: []

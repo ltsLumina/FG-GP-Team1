@@ -30,7 +30,7 @@ MonoBehaviour:
     timing: 3
   - speakerName: Plora
     speakerProfilePicture: {fileID: 2800000, guid: 77ebb1ae41ab646eaa08275ebc8f606d, type: 3}
-    dialogueText: Use [W][A][S][D] to pilot the drone.
+    dialogueText: Use WASD to pilot the drone.
     voiceOverClip: {fileID: 0}
     timing: 2
   - speakerName: P1

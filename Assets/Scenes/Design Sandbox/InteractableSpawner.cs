@@ -21,6 +21,7 @@ public class InteractableSpawner : MonoBehaviour
 
     private float startYOffset; // Starting Y offset of the spawner
     private ResourceWaves currentWave;
+    private int currentWaveIndex = 0;
     private Dictionary<RandomizeObjectsSpawn, float> spawnTimers =
         new Dictionary<RandomizeObjectsSpawn, float>();
     private Dictionary<RandomizeObjectsSpawn, int> spawnedCount =
@@ -45,7 +46,7 @@ public class InteractableSpawner : MonoBehaviour
         }
 
         startYOffset = transform.position.y - trackTransform.position.y;
-        StartWave(spawnWaves[0]);
+        StartWave(spawnWaves[currentWaveIndex]);
     }
 
     private void Update()
@@ -57,7 +58,17 @@ public class InteractableSpawner : MonoBehaviour
             transform.position.z
         );
 
-        // Check if we should start spawning based on the depth
+        // Check if we should transition to the next wave
+        if (
+            currentWaveIndex < spawnWaves.Count - 1
+            && trackTransform.position.y <= -spawnWaves[currentWaveIndex + 1].depth
+        )
+        {
+            currentWaveIndex++;
+            StartWave(spawnWaves[currentWaveIndex]);
+        }
+
+        // Continue spawning objects for the current wave
         if (currentWave != null && trackTransform.position.y <= -currentWave.depth)
         {
             foreach (var spawnObject in currentWave.spawnObjects)
@@ -106,6 +117,7 @@ public class InteractableSpawner : MonoBehaviour
 
     private void StartWave(ResourceWaves wave)
     {
+        Debug.Log("Starting wave: " + wave.name);
         currentWave = wave;
         spawnTimers.Clear();
         spawnedCount.Clear();

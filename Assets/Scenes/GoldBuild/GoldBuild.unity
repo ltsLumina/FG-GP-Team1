@@ -24,7 +24,7 @@ RenderSettings:
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 0
+  m_AmbientMode: 4
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
@@ -1071,6 +1071,26 @@ PrefabInstance:
       propertyPath: onPowerDepleted.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 3139968387828256574, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: spawnWaves.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3139968387828256574, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: 'spawnWaves.Array.data[4]'
+      value: 
+      objectReference: {fileID: 11400000, guid: f18cda625d2ea4cf79370231604fc39b, type: 2}
+    - target: {fileID: 3139968387828256574, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: 'spawnWaves.Array.data[5]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 529ef956308a94f83b8f810fceba58ed, type: 2}
+    - target: {fileID: 3139968387828256574, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: 'spawnWaves.Array.data[6]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 776999d0a527a49d5886fce5b8c67bf3, type: 2}
+    - target: {fileID: 3139968387828256574, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: 'spawnWaves.Array.data[7]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 776999d0a527a49d5886fce5b8c67bf3, type: 2}
     - target: {fileID: 3647054809633606627, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
