@@ -21,11 +21,15 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 2100000, guid: 305769e5f4ee142fb95610f1a5bd05f9, type: 2}
+      value: {fileID: 2100000, guid: 3eb84ac565f334130a5f5271c7847652, type: 2}
     - time: 0.16666667
-      value: {fileID: 2100000, guid: cbeb8d7245f5e4520b550db02140442a, type: 2}
+      value: {fileID: 2100000, guid: cff1f7ca1c45d452db7aee8efd660378, type: 2}
     - time: 0.29166666
-      value: {fileID: 2100000, guid: 305769e5f4ee142fb95610f1a5bd05f9, type: 2}
+      value: {fileID: 2100000, guid: 3eb84ac565f334130a5f5271c7847652, type: 2}
+    - time: 0.41666666
+      value: {fileID: 2100000, guid: cff1f7ca1c45d452db7aee8efd660378, type: 2}
+    - time: 0.5416667
+      value: {fileID: 2100000, guid: 3eb84ac565f334130a5f5271c7847652, type: 2}
     attribute: 'm_Materials.Array.data[1]'
     path: Geo_Robot_01_v1/Screen
     classID: 23
@@ -48,15 +52,17 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 2100000, guid: 305769e5f4ee142fb95610f1a5bd05f9, type: 2}
-    - {fileID: 2100000, guid: cbeb8d7245f5e4520b550db02140442a, type: 2}
-    - {fileID: 2100000, guid: 305769e5f4ee142fb95610f1a5bd05f9, type: 2}
+    - {fileID: 2100000, guid: 3eb84ac565f334130a5f5271c7847652, type: 2}
+    - {fileID: 2100000, guid: cff1f7ca1c45d452db7aee8efd660378, type: 2}
+    - {fileID: 2100000, guid: 3eb84ac565f334130a5f5271c7847652, type: 2}
+    - {fileID: 2100000, guid: cff1f7ca1c45d452db7aee8efd660378, type: 2}
+    - {fileID: 2100000, guid: 3eb84ac565f334130a5f5271c7847652, type: 2}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.3333333
+    m_StopTime: 0.5833334
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

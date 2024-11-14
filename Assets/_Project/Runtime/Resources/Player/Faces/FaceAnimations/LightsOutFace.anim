@@ -16,65 +16,33 @@ AnimationClip:
   m_EulerCurves: []
   m_PositionCurves: []
   m_ScaleCurves: []
-  m_FloatCurves:
+  m_FloatCurves: []
+  m_PPtrCurves:
   - serializedVersion: 2
     curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 18
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 1
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.125
-        value: 19
-        inSlope: Infinity
-        outSlope: Infinity
-        tangentMode: 103
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.25
-        value: 18
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.375
-        value: 19
-        inSlope: Infinity
-        outSlope: Infinity
-        tangentMode: 103
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.5
-        value: 18
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: material._ArrayIndex
+    - time: 0
+      value: {fileID: 2100000, guid: e4a8388a917b24da9a508ba19dcac137, type: 2}
+    - time: 0.125
+      value: {fileID: 2100000, guid: ed3ab399908774d8db54705227c0838a, type: 2}
+    - time: 0.25
+      value: {fileID: 2100000, guid: e4a8388a917b24da9a508ba19dcac137, type: 2}
+    - time: 0.375
+      value: {fileID: 2100000, guid: ed3ab399908774d8db54705227c0838a, type: 2}
+    - time: 0.5
+      value: {fileID: 2100000, guid: e4a8388a917b24da9a508ba19dcac137, type: 2}
+    - time: 0.625
+      value: {fileID: 2100000, guid: ed3ab399908774d8db54705227c0838a, type: 2}
+    - time: 0.75
+      value: {fileID: 2100000, guid: e4a8388a917b24da9a508ba19dcac137, type: 2}
+    - time: 0.875
+      value: {fileID: 2100000, guid: ed3ab399908774d8db54705227c0838a, type: 2}
+    - time: 1
+      value: {fileID: 2100000, guid: e4a8388a917b24da9a508ba19dcac137, type: 2}
+    attribute: 'm_Materials.Array.data[1]'
     path: Geo_Robot_01_v1/Screen
     classID: 23
     script: {fileID: 0}
-    flags: 0
-  m_PPtrCurves: []
+    flags: 2
   m_SampleRate: 24
   m_WrapMode: 0
   m_Bounds:
@@ -84,20 +52,29 @@ AnimationClip:
     genericBindings:
     - serializedVersion: 2
       path: 3654437738
-      attribute: 2279943534
+      attribute: 1
       script: {fileID: 0}
       typeID: 23
-      customType: 22
-      isPPtrCurve: 0
+      customType: 21
+      isPPtrCurve: 1
       isIntCurve: 0
       isSerializeReferenceCurve: 0
-    pptrCurveMapping: []
+    pptrCurveMapping:
+    - {fileID: 2100000, guid: e4a8388a917b24da9a508ba19dcac137, type: 2}
+    - {fileID: 2100000, guid: ed3ab399908774d8db54705227c0838a, type: 2}
+    - {fileID: 2100000, guid: e4a8388a917b24da9a508ba19dcac137, type: 2}
+    - {fileID: 2100000, guid: ed3ab399908774d8db54705227c0838a, type: 2}
+    - {fileID: 2100000, guid: e4a8388a917b24da9a508ba19dcac137, type: 2}
+    - {fileID: 2100000, guid: ed3ab399908774d8db54705227c0838a, type: 2}
+    - {fileID: 2100000, guid: e4a8388a917b24da9a508ba19dcac137, type: 2}
+    - {fileID: 2100000, guid: ed3ab399908774d8db54705227c0838a, type: 2}
+    - {fileID: 2100000, guid: e4a8388a917b24da9a508ba19dcac137, type: 2}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.5
+    m_StopTime: 1.0416666
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -112,64 +89,7 @@ AnimationClip:
     m_KeepOriginalPositionXZ: 0
     m_HeightFromFeet: 0
     m_Mirror: 0
-  m_EditorCurves:
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 18
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 1
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.125
-        value: 19
-        inSlope: Infinity
-        outSlope: Infinity
-        tangentMode: 103
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.25
-        value: 18
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.375
-        value: 19
-        inSlope: Infinity
-        outSlope: Infinity
-        tangentMode: 103
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.5
-        value: 18
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: material._ArrayIndex
-    path: Geo_Robot_01_v1/Screen
-    classID: 23
-    script: {fileID: 0}
-    flags: 0
+  m_EditorCurves: []
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
