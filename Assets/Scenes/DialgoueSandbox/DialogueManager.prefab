@@ -293,8 +293,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Dialogue Text Goes here.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0f31ab0c20891424ab70c9d1231acc70, type: 2}
-  m_sharedMaterial: {fileID: 1663124027218561463, guid: 0f31ab0c20891424ab70c9d1231acc70, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -577,7 +577,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueManager: {fileID: 1165592239024975985}
-  introDialogue: {fileID: 11400000, guid: 81b486ecabdff4e4fadaf8e70ddc8c6b, type: 2}
+  introDialogue: {fileID: 0}
   gameStartedDialogue: {fileID: 0}
   firstPlayDialogue: {fileID: 0}
   firstKelpDialogue: {fileID: 0}

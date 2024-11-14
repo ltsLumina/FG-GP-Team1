@@ -1,4 +1,6 @@
+
 using System;
+using System.Collections.Generic;
 using DG.Tweening;
 using Lumina.Essentials.Modules;
 using TMPro;
@@ -8,7 +10,6 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     HighScoreManager highScoreManager;
-    ScoreManager scoreManager;
 
     [Header("UI Elements")]
     [SerializeField]
@@ -29,10 +30,21 @@ public class MainMenu : MonoBehaviour
 
     [SerializeField]
     GameObject skipTutorialButton;
-    public GameObject Gradient => gradient;
+
 
     [SerializeField]
     GameObject gradient;
+    public GameObject Gradient => gradient;
+
+    [SerializeField]
+    GameObject scoreUI;
+    public GameObject ScoreUI => scoreUI;
+
+    [Header("Pause UIs")]
+    [SerializeField]
+    List<GameObject> pauseUIs;
+    public List<GameObject> PauseUIs => pauseUIs;
+
 
     public GameObject SkipTutorialButton => skipTutorialButton;
 
@@ -61,6 +73,17 @@ public class MainMenu : MonoBehaviour
         mainMenuPanel.SetActive(false);
     }
 
+    public void SetPauseUIsActive(bool isActive)
+    {
+        foreach (GameObject ui in pauseUIs)
+        {
+            if (ui != null)
+            {
+                ui.SetActive(isActive);
+            }
+        }
+    }
+
     public void Exit()
     {
 #if UNITY_EDITOR
@@ -85,7 +108,6 @@ public class MainMenu : MonoBehaviour
         GameManager.Instance.GameStateChanger(GameManager.GameState.Play);
         GameManager.Instance.isGoingToMainMenu = false;
         GameManager.Instance.isGameOver = false;
-        mainMenuPanel.SetActive(true);
         gameOverPanel.SetActive(false);
         pausePanel.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -98,14 +120,9 @@ public class MainMenu : MonoBehaviour
         GameManager.Instance.GameStateChanger(GameManager.GameState.Menu);
         GameManager.Instance.hasPlayedIntro = true;
         GameManager.Instance.isGoingToMainMenu = true;
-
-        mainMenuPanel.SetActive(true);
-        pausePanel.SetActive(false);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SetPauseUIsActive(false);
         gameOverPanel.SetActive(false);
-
-        if (scoreManager == null)
-            scoreManager = Helpers.Find<ScoreManager>();
-        scoreManager.ResetGame();
     }
 
     public void StartGame()
