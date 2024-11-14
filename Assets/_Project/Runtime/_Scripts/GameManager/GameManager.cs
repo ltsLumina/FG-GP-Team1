@@ -33,10 +33,6 @@ public class GameManager : MonoBehaviour
     public bool hasPlayedIntro;
     public bool hasPlayedFirstPlay;
 
-    public float highScore;
-    public float currentDepth;
-    private readonly float initialDepth = 20f;
-
     public GameObject ship;
 
     // Add more variables as needed
@@ -134,7 +130,6 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        currentDepth = 0;
         isGameOver = false;
 
         // Play the right animation
@@ -166,13 +161,9 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        highscoreText.text = $"High Score: {1 * -Mathf.RoundToInt(currentDepth)}m";
-
         CheckVisibilityForKelp();
         CheckVisibilityForRocks();
         CheckVisibilityForJellyfish();
-        if (ship != null)
-            UpdateDepth();
 
         switch (state)
         {
@@ -232,16 +223,6 @@ public class GameManager : MonoBehaviour
             case GameState.GameOver:
                 Time.timeScale = 0f;
                 break;
-        }
-    }
-
-    void UpdateDepth()
-    {
-        currentDepth = ship.transform.position.y * -1 - initialDepth;
-
-        if (currentDepth > highScore)
-        {
-            highScore = currentDepth;
         }
     }
 
