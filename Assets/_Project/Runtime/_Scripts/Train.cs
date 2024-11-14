@@ -177,11 +177,9 @@ public class Train : MonoBehaviour
         }
         set
         {
-            if (invincible)
-                return;
+            if (invincible) return;
             hullIntegrity = Mathf.Clamp(value, 0, 3);
-            if (hullIntegrity <= 0)
-                onDeath.Invoke();
+            if (hullIntegrity <= 0) onDeath.Invoke();
         }
     }
 
@@ -303,23 +301,17 @@ public class Train : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P)) StartCoroutine(RGBLights());
 
-        if (transform.position.y < -300)
+        if (transform.position.y < -250)
         {
             GameManager.Instance.TriggerEnterTheDeep();
             Debug.Log("deep");
 
             Power -= powerDepletionRate * Time.deltaTime;
-
-            foreach (var light in lights)
-            {
-                light.Key.SetActive(true);
-            }
+            ToggleLightsAtThreshold();
         }
 
         Dive();
         FuelCalculation();
-
-        if (Depth < -250) ToggleLightsAtThreshold();
     }
 
     // Handle fuel depletion
@@ -420,16 +412,24 @@ public class Train : MonoBehaviour
         }
     }
 
+    bool firstHit;
+    
     void OnCollision(GameObject collision)
     {
+        if (invincible) return;
+        
         if (collision.CompareTag("Rock"))
         {
+            if (!firstHit)
+            {
+                firstHit = true;
+                GameManager.Instance.TriggerHullDamage();
+            }
+
             hullBreaches++;
             HullIntegrity = Mathf.Max(0, 3 - hullBreaches);
             onHullBreach.Invoke(hullBreaches);
             onHullIntegrityChanged.Invoke(HullIntegrity);
-
-
             onRockCollision.Invoke(collision.GetComponent<Rock>());
 
             Helpers.Find<Player>().Animator.SetBool("HullCritical", HullIntegrity == 1);

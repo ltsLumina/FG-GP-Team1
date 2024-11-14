@@ -13,7 +13,7 @@ internal interface IDestructible
     /// <summary>
     /// The lifetime of the object in seconds.
     /// </summary>
-    float Lifetime => 60f;
+    float Lifetime => 30f;
 
     /// <summary>
     /// Bypass the destruction of this object.
@@ -38,10 +38,10 @@ public class GlobalCleanupManager : MonoBehaviour
             }
         }
 
-        // Destroy all ILifetime objects every 60 seconds
+        // Mark all objects with a lifetime to be destroyed after their lifetime has expired.
         while (true)
         {
-            yield return new WaitForSeconds(60);
+            yield return new WaitForSeconds(15);
             var destructibles = Helpers.FindMultiple<MonoBehaviour>().OfType<IDestructible>();
 
             foreach (var destructible in destructibles)
@@ -51,7 +51,7 @@ public class GlobalCleanupManager : MonoBehaviour
                     if (destructible.Bypass) continue;
                     
                     Destroy(monoBehaviour.gameObject, destructible.Lifetime);
-                    Logger.LogWarning($"Destroying {monoBehaviour.gameObject.name} in {destructible.Lifetime} seconds. as part of global cleanup of lifetime objects.", monoBehaviour.gameObject);
+                    //Logger.LogWarning($"Destroying {monoBehaviour.gameObject.name} in {destructible.Lifetime} seconds. as part of global cleanup of lifetime objects.", monoBehaviour.gameObject);
                 }
             }
         }

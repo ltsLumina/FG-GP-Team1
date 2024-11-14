@@ -100,15 +100,15 @@ public class Player : MonoBehaviour
     {
         Move();
         
-        // Blinking
-        if (blinkTimer > 0)
+        // blink every 5 seconds if the animator is playing the idle animation
+        if (Animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
         {
-            blinkTimer -= Time.deltaTime;
-            PlayerAnimation.Animator.SetTrigger("Blink");
-        }
-        else
-        {
-            blinkTimer = 5f;
+            blinkTimer += Time.deltaTime;
+            if (blinkTimer >= 5)
+            {
+                Animator.SetTrigger("Blink");
+                blinkTimer = 0;
+            }
         }
         
         Animator.SetBool("Grabbing", heldResource != null);
@@ -213,7 +213,6 @@ public class Player : MonoBehaviour
 
         if (closest.Reach > Vector3.Distance(transform.position, closest.transform.position))
         {
-            Animator.SetTrigger("CanGrab");
             closest.Grab(this);
             heldResource = closest;
         }

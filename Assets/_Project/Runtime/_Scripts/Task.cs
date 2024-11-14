@@ -149,7 +149,16 @@ public class Task : MonoBehaviour
     void StartTask()
     {
         player.PlayerAnimation.Animator.SetTrigger("StartRepairing");
-        player.transform.DOLookAt(transform.position, 0.3f);
+
+        // if player is on the left side of the transform
+        if (player.transform.position.x < transform.position.x)
+        {
+            player.transform.DORotate(new (player.transform.rotation.x, 120, player.transform.rotation.z), 0.5f);
+        }
+        else
+        {
+            player.transform.DORotate(new (player.transform.rotation.x, -120, player.transform.rotation.z), 0.5f);
+        }
         
         chargeCircle.color = completedColor;
         this.FindPlayer(1).Freeze(true);
@@ -159,6 +168,8 @@ public class Task : MonoBehaviour
     void CancelTask()
     {
         player.PlayerAnimation.Animator.SetTrigger("StopRepairing");
+        player.Animator.Play("IdleHands");
+        player.Animator.Play("Idle");
         player.transform.DORotate(new (player.transform.rotation.x, 180, player.transform.rotation.z), 0.5f);
         
         if (taskCoroutine != null)
