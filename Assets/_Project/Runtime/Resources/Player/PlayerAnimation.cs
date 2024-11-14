@@ -71,7 +71,7 @@ public class PlayerAnimation : MonoBehaviour
     public void Stun(float stunDuration)
     {
         Debug.Log("Stun animation not implemented");
-        // anim.SetTrigger("Stun");
+        Animator.SetTrigger("Stunned");
     }
 
     private void Update()
@@ -85,6 +85,7 @@ public class PlayerAnimation : MonoBehaviour
     private void ObjectReleased()
     {
         // TODO Make object release correctly
+        
     }
 
     // Set blend tree parameters for player movement based on input of new input system Player action Move

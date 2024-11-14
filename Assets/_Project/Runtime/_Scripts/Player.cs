@@ -94,9 +94,22 @@ public class Player : MonoBehaviour
         transform.rotation = new Quaternion(0, 180, 0, 0); // i dont know why but this must be done
     }
 
+    float blinkTimer;
+    
     void Update()
     {
         Move();
+        
+        // Blinking
+        if (blinkTimer > 0)
+        {
+            blinkTimer -= Time.deltaTime;
+            PlayerAnimation.Animator.SetTrigger("Blink");
+        }
+        else
+        {
+            blinkTimer = 5f;
+        }
         
         Animator.SetBool("Grabbing", heldResource != null);
     }
@@ -117,9 +130,9 @@ public class Player : MonoBehaviour
     public void Dash()
     {
         if (dashTimer > 0) return;
+        PlayerAnimation.Dash();
         StartCoroutine(DashRoutine(rb));
         onDash?.Invoke(true);
-        PlayerAnimation.Dash();
     }
 
     IEnumerator DashRoutine(Rigidbody rb)
@@ -200,6 +213,7 @@ public class Player : MonoBehaviour
 
         if (closest.Reach > Vector3.Distance(transform.position, closest.transform.position))
         {
+            Animator.SetTrigger("CanGrab");
             closest.Grab(this);
             heldResource = closest;
         }
@@ -212,16 +226,15 @@ public class Player : MonoBehaviour
         if (heldResource.Item == IGrabbable.Items.Battery)
         {
            if (!heldResource.GetComponent<Battery>().Deposit()) return;
+        }
 
-           heldResource.Release();
-           heldResource = null;
-        }
-        else
-        {
-            heldResource.Release();
-            heldResource = null;
-            Debug.Log("Released");
-        }
+        heldResource.Release();
+        heldResource = null;
+    }
+
+    void OnCollisionEnter(Collision other)
+    {
+        Animator.SetTrigger("Collide");
     }
 
     public void Stun() => StartCoroutine(StunRoutine());
@@ -231,7 +244,6 @@ public class Player : MonoBehaviour
         Animator.SetTrigger("Stunned");
         
         Freeze(true);
-        PlayerAnimation.Stun(stunDuration);
         yield return new WaitForSeconds(stunDuration);
         Freeze(false);
     }
