@@ -56,7 +56,7 @@
 			<destination>{4d19347c-58ad-440f-999f-95b482961104}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{9fb1d617-63c7-48ff-8b68-f03b2fe5a859}</destination>
+			<destination>{5ba945f2-a444-40fe-9429-20476efcd015}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{83f91aa6-e4da-435f-81f8-58d4693d205f}">
@@ -88,6 +88,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{dd614286-d2a3-4eed-8c24-20e68b10bc0f}">
+		<property name="volume">
+			<value>9</value>
+		</property>
 		<relationship name="effectChain">
 			<destination>{6780ff25-03ee-437a-aaa2-d908c3c18895}</destination>
 		</relationship>
@@ -106,7 +109,10 @@
 	<object class="MixerBusPanner" id="{4d19347c-58ad-440f-999f-95b482961104}" />
 	<object class="SingleSound" id="{9220a1a1-3860-47bc-9a20-74fe971a6a49}">
 		<property name="length">
-			<value>2.1795464852607709</value>
+			<value>0.9375</value>
+		</property>
+		<property name="pitch">
+			<value>6.5</value>
 		</property>
 		<relationship name="fadeOutCurve">
 			<destination>{69230f90-6b18-491f-b16c-94215e80c9bb}</destination>
@@ -116,6 +122,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{8bf61e5b-2c00-4fa6-9e39-8f5c7041abec}">
+		<property name="volume">
+			<value>-10.5</value>
+		</property>
 		<property name="name">
 			<value>Audio 1</value>
 		</property>
@@ -155,7 +164,7 @@
 	<object class="SpatialiserEffect" id="{9f2496f5-e76c-4a66-8090-4324c7a6c9b2}" />
 	<object class="AutomationPoint" id="{436da1f9-2e55-4874-baf0-b5a38454603d}">
 		<property name="position">
-			<value>1</value>
+			<value>0.25</value>
 		</property>
 		<property name="value">
 			<value>1</value>
@@ -166,7 +175,7 @@
 	</object>
 	<object class="AutomationPoint" id="{f4dddfee-5f73-4c8b-ab88-0f02b7cfffe5}">
 		<property name="position">
-			<value>2.1795464852607709</value>
+			<value>0.9375</value>
 		</property>
 		<property name="value">
 			<value>0</value>

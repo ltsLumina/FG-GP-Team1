@@ -14,6 +14,8 @@ public class Battery : MonoBehaviour
     [RangeResettable(0,100)]
     [SerializeField] float charge = 100f;
 
+    [SerializeField] FMODUnity.EventReference batteryCharge;
+
     public float Charge
     {
         get => charge;
@@ -42,7 +44,11 @@ public class Battery : MonoBehaviour
     {
         // If the battery is not within range of the train, return false.
         if (Vector3.Distance(transform.position, startPos.position) > batteryReturnDistance) return false;
-        
+
+
+        var chargeSound = FMODUnity.RuntimeManager.CreateInstance(batteryCharge);
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(chargeSound, transform);
+        chargeSound.start();
         transform.position = startPos.position;
         train.Power += charge;
         charge = 0;

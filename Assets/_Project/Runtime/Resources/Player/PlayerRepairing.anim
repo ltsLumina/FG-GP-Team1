@@ -1283,14 +1283,7 @@ AnimationClip:
   - time: 0.33333334
     functionName: PlayRepairAudioHit
     data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.81666666
-    functionName: PlayRepairAudioHit
-    data: 
-    objectReferenceParameter: {fileID: 0}
+    objectReferenceParameter: {fileID: 11500000, guid: 6146dbb41a4783b468fc22ea8dc8a690, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0

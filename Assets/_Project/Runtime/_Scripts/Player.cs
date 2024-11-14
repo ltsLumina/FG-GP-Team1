@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
     [SerializeField] FMODUnity.EventReference playerStunned;
 
 
+
     float dashTimer;
     bool canMove = true;
 
@@ -265,6 +266,7 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(stunDuration);
         Freeze(false);
     }
+
 }
 
 public static class PlayerExtensions

@@ -56,7 +56,7 @@
 			<destination>{2fb6ae02-01e6-4dcf-a458-3b9c320bb775}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{9fb1d617-63c7-48ff-8b68-f03b2fe5a859}</destination>
+			<destination>{5ba945f2-a444-40fe-9429-20476efcd015}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{d74bce6b-f513-47ac-a4cf-e273013e8804}">
@@ -82,6 +82,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{615fb034-02a5-472d-bc82-0af38ebab591}">
+		<property name="volume">
+			<value>9</value>
+		</property>
 		<relationship name="effectChain">
 			<destination>{9683b4a1-fb37-436e-afcd-e3982c4b65df}</destination>
 		</relationship>
@@ -177,7 +180,7 @@
 	<object class="SpatialiserEffect" id="{c600e01a-180f-4668-b2b9-3d86da97d788}" />
 	<object class="AutomationPoint" id="{9c8acb31-fedc-4429-a136-7fcc75843fa3}">
 		<property name="position">
-			<value>0.25</value>
+			<value>0.1015625</value>
 		</property>
 		<property name="value">
 			<value>1</value>

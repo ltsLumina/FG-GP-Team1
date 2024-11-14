@@ -17,6 +17,8 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField]
     bool isFakePlayer = false;
 
+    [SerializeField] FMODUnity.EventReference repairSound;
+
     private void Start()
     {
         input = transform.parent.GetComponentInChildren<InputManager>();
@@ -37,7 +39,9 @@ public class PlayerAnimation : MonoBehaviour
 
     public void PlayRepairAudioHit()
     {
-        // TODO: Implement repair audio hit
+        var repair = FMODUnity.RuntimeManager.CreateInstance(repairSound);
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(repair, transform);
+        repair.start();
     }
 
     public void StopDash()

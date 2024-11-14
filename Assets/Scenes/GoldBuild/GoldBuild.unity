@@ -303,6 +303,55 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 48181922}
   m_Mesh: {fileID: -3328073962769703958, guid: 13564b4d6979fa848bc5f1948fe5589d, type: 3}
+--- !u!114 &72392766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89b7ac12dedcd467992b1d9eb3139ab5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttons: []
+  rootTab:
+    name: 
+    selectedSubtabIndex: 0
+    subtabs:
+    - rid: 1653924202265706586
+    - rid: 1653924202265706587
+    - rid: 1653924202265706588
+    subtabsDrawn: 1
+  rootFoldout:
+    name: 
+    expanded: 1
+    subfoldouts: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 1653924202265706586
+      type: {class: VInspectorData/Tab, ns: VInspector, asm: VInspector}
+      data:
+        name: Collider
+        selectedSubtabIndex: 0
+        subtabs: []
+        subtabsDrawn: 0
+    - rid: 1653924202265706587
+      type: {class: VInspectorData/Tab, ns: VInspector, asm: VInspector}
+      data:
+        name: Task
+        selectedSubtabIndex: 0
+        subtabs: []
+        subtabsDrawn: 0
+    - rid: 1653924202265706588
+      type: {class: VInspectorData/Tab, ns: VInspector, asm: VInspector}
+      data:
+        name: UI
+        selectedSubtabIndex: 0
+        subtabs: []
+        subtabsDrawn: 0
 --- !u!1 &179295365
 GameObject:
   m_ObjectHideFlags: 0
@@ -1544,6 +1593,10 @@ PrefabInstance:
       value: event:/SFX/Dash
       objectReference: {fileID: 0}
     - target: {fileID: 15357328352406294, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: repairSound.Path
+      value: event:/SFX/Repair
+      objectReference: {fileID: 0}
+    - target: {fileID: 15357328352406294, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
       propertyPath: pickKelpSound.Path
       value: event:/SFX/CollectFuel
       objectReference: {fileID: 0}
@@ -1566,6 +1619,22 @@ PrefabInstance:
     - target: {fileID: 15357328352406294, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
       propertyPath: dashSound.Guid.Data4
       value: 1624466022
+      objectReference: {fileID: 0}
+    - target: {fileID: 15357328352406294, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: repairSound.Guid.Data1
+      value: 364613788
+      objectReference: {fileID: 0}
+    - target: {fileID: 15357328352406294, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: repairSound.Guid.Data2
+      value: 1170163148
+      objectReference: {fileID: 0}
+    - target: {fileID: 15357328352406294, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: repairSound.Guid.Data3
+      value: -1495486336
+      objectReference: {fileID: 0}
+    - target: {fileID: 15357328352406294, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: repairSound.Guid.Data4
+      value: -182950892
       objectReference: {fileID: 0}
     - target: {fileID: 15357328352406294, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
       propertyPath: pickKelpSound.Guid.Data1
@@ -1879,6 +1948,26 @@ PrefabInstance:
       propertyPath: playerBonkSound.Guid.Data4
       value: 635193084
       objectReference: {fileID: 0}
+    - target: {fileID: 6592777913537497106, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: repairSound.Path
+      value: event:/SFX/Repair
+      objectReference: {fileID: 0}
+    - target: {fileID: 6592777913537497106, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: repairSound.Guid.Data1
+      value: 364613788
+      objectReference: {fileID: 0}
+    - target: {fileID: 6592777913537497106, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: repairSound.Guid.Data2
+      value: 1170163148
+      objectReference: {fileID: 0}
+    - target: {fileID: 6592777913537497106, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: repairSound.Guid.Data3
+      value: -1495486336
+      objectReference: {fileID: 0}
+    - target: {fileID: 6592777913537497106, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: repairSound.Guid.Data4
+      value: -182950892
+      objectReference: {fileID: 0}
     - target: {fileID: 6648263637887443729, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
       propertyPath: m_LocalPosition.y
       value: -65
@@ -1886,6 +1975,26 @@ PrefabInstance:
     - target: {fileID: 6648263637887443729, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
       propertyPath: m_LocalPosition.z
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7223694263872748342, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: batteryCharge.Path
+      value: event:/SFX/LightsOn
+      objectReference: {fileID: 0}
+    - target: {fileID: 7223694263872748342, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: batteryCharge.Guid.Data1
+      value: 1751048478
+      objectReference: {fileID: 0}
+    - target: {fileID: 7223694263872748342, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: batteryCharge.Guid.Data2
+      value: 1292499626
+      objectReference: {fileID: 0}
+    - target: {fileID: 7223694263872748342, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: batteryCharge.Guid.Data3
+      value: 1244723900
+      objectReference: {fileID: 0}
+    - target: {fileID: 7223694263872748342, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: batteryCharge.Guid.Data4
+      value: 894868041
       objectReference: {fileID: 0}
     - target: {fileID: 8589098272386292673, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
       propertyPath: m_LocalPosition.x
