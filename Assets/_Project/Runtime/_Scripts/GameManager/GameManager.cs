@@ -100,8 +100,10 @@ public class GameManager : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene,
-        UnityEngine.SceneManagement.LoadSceneMode mode)
+    void OnSceneLoaded(
+        UnityEngine.SceneManagement.Scene scene,
+        UnityEngine.SceneManagement.LoadSceneMode mode
+    )
     {
         StartGame();
     }
@@ -435,7 +437,6 @@ public class GameManager : MonoBehaviour
 
     public void TriggerPlay()
     {
-        Debug.Log("playing the game.");
         OnPlay?.Invoke();
         hasPlayedFirstPlay = true;
         GameStateChanger(GameState.Play);

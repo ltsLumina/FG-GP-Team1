@@ -98,7 +98,7 @@ public class DialogueEvents : MonoBehaviour
     private void Start()
     {
         // shame on you turner
-        
+
         // Check for missing dialogues
         // if (introDialogue == null)
         //     Debug.LogWarning("Intro dialogue is missing.");
@@ -146,7 +146,7 @@ public class DialogueEvents : MonoBehaviour
             GameManager.Instance.OnPlay += TriggerFirstPlayDialogue;
             GameManager.Instance.OnFirstKelp += TriggerFirstKelpDialogue;
             GameManager.Instance.OnFirstRock += TriggerFirstRockDialogue;
-            GameManager.Instance.OnPressureEvent += TriggerRockHitsShipDialogue;
+            GameManager.Instance.OnHullDamage += TriggerRockHitsShipDialogue;
             GameManager.Instance.OnCriticalHull += TriggerCriticalHullDialogue;
             GameManager.Instance.OnLowFuel += TriggerCriticalFuelDialogue;
             GameManager.Instance.OnLowBattery += TriggerCriticalBatteryDialogue;
