@@ -452,6 +452,7 @@ public class GameManager : MonoBehaviour
         GameStateChanger(GameState.Play);
         gameAnimation.Play();
         menuMusicInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        menuMusicInstance.release();
         gameMusicInstance.start();
 
     }
