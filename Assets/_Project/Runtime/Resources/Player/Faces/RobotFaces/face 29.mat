@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: face 12
+  m_Name: face 29
   m_Shader: {fileID: 4800000, guid: ca5640983ab0c4161b9c6fc9d80413c7, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -86,7 +86,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 07dd5d40f2be24142bbd53024a018e9a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 06e1f93ab672e47c5a6a348123a059e2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTexArray:
