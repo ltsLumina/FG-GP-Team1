@@ -104,7 +104,7 @@ public class Player : MonoBehaviour
         if (blinkTimer > 0)
         {
             blinkTimer -= Time.deltaTime;
-            PlayerAnimation.Animator.SetTrigger("Blinking");
+            PlayerAnimation.Animator.SetTrigger("Blink");
         }
         else
         {
@@ -226,16 +226,10 @@ public class Player : MonoBehaviour
         if (heldResource.Item == IGrabbable.Items.Battery)
         {
            if (!heldResource.GetComponent<Battery>().Deposit()) return;
+        }
 
-           heldResource.Release();
-           heldResource = null;
-        }
-        else
-        {
-            heldResource.Release();
-            heldResource = null;
-            Debug.Log("Released");
-        }
+        heldResource.Release();
+        heldResource = null;
     }
 
     void OnCollisionEnter(Collision other)
