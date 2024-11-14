@@ -21,14 +21,13 @@ public class Rock : MonoBehaviour, IDestructible
         var rockModel = rockModels[UnityEngine.Random.Range(0, rockModels.Count)];
         Instantiate(rockModel, transform);
         rockModel.transform.position = Vector3.zero;
+        rockModel.transform.rotation = Quaternion.identity;
     }
 
     void FixedUpdate()
     {
-        if (!collided)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, Train.Instance.transform.position, 0.05f);
-        }
+        if (collided) return;
+        transform.position = Vector3.MoveTowards(transform.position, Train.Instance.transform.position, 0.05f);
     }
 
     void OnCollisionEnter(Collision other)

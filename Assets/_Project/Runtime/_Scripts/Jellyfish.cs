@@ -29,6 +29,8 @@ public class Jellyfish : MonoBehaviour
         col.center = offset;
     }
 
+    bool canStun = true;
+
     void OnTriggerEnter(Collider other)
     {
         Shock();
@@ -48,9 +50,11 @@ public class Jellyfish : MonoBehaviour
                 {
                     Debug.Log("Battery charged");
                     battery.Charge = 100;
+                    canStun = false;
                 }
                 else
                 {
+                    if (!canStun) return;
                     Debug.Log("Player stunned");
                     player.Stun();
                 }

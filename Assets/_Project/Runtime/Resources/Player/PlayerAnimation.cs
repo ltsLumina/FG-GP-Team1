@@ -86,9 +86,10 @@ public class PlayerAnimation : MonoBehaviour
             SetMovementBlendTree(input.MoveInput);
     }
 
-    private void ObjectReleased()
+    public void ObjectReleased()
     {
         // TODO Make object release correctly
+        //???
         
     }
 

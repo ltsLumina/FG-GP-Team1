@@ -91,6 +91,7 @@ public class Task : MonoBehaviour
     Coroutine taskCoroutine;
     bool isInTrigger;
     InputAction repairAction;
+    Player player;
     
     void Awake() => train = GetComponentInParent<Train>();
     
@@ -98,6 +99,8 @@ public class Task : MonoBehaviour
 
     void Start()
     {
+        player = this.FindPlayer(1);
+        
         taskCoroutine = null;
         chargeCircle.fillAmount = 0;
 
@@ -145,9 +148,17 @@ public class Task : MonoBehaviour
 
     void StartTask()
     {
-        var player = Helpers.Find<Player>();
         player.PlayerAnimation.Animator.SetTrigger("StartRepairing");
-        player.transform.DORotate(new (player.transform.rotation.x, 120, player.transform.rotation.z), 0.5f);
+
+        // if player is on the left side of the transform
+        if (player.transform.position.x < transform.position.x)
+        {
+            player.transform.DORotate(new (player.transform.rotation.x, 120, player.transform.rotation.z), 0.5f);
+        }
+        else
+        {
+            player.transform.DORotate(new (player.transform.rotation.x, -120, player.transform.rotation.z), 0.5f);
+        }
         
         chargeCircle.color = completedColor;
         this.FindPlayer(1).Freeze(true);
@@ -156,8 +167,9 @@ public class Task : MonoBehaviour
 
     void CancelTask()
     {
-        this.FindPlayer(1).PlayerAnimation.Animator.SetTrigger("StopRepairing");
-        var player = Helpers.Find<Player>();
+        player.PlayerAnimation.Animator.SetTrigger("StopRepairing");
+        player.Animator.Play("IdleHands");
+        player.Animator.Play("Idle");
         player.transform.DORotate(new (player.transform.rotation.x, 180, player.transform.rotation.z), 0.5f);
         
         if (taskCoroutine != null)
@@ -193,15 +205,14 @@ public class Task : MonoBehaviour
 
     void CompleteTask()
     {
-        this.FindPlayer(1).PlayerAnimation.Animator.SetTrigger("StopRepairing");
-        var player = Helpers.Find<Player>();
+        player.PlayerAnimation.Animator.SetTrigger("StopRepairing");
         player.transform.DORotate(new (player.transform.rotation.x, 180, player.transform.rotation.z), 0.5f);
         
         taskCoroutine = null;
         train.SetTaskStatus(task);
         onTaskPerformed?.Invoke();
 
-        this.FindPlayer(1).Freeze(false);
+        player.Freeze(false);
         
         if (train.IsTaskComplete(task)) onTaskComplete?.Invoke(task);
         else StartTask();
@@ -216,6 +227,8 @@ public class Task : MonoBehaviour
                 {
                     train.SetTaskStatus(Tasks.Refuel);
                     Destroy(heldResource.gameObject);
+                    var fuelModel = GameObject.Find("FuelModel");
+                    fuelModel.GetComponent<MeshRenderer>().enabled = false;
                 }
 
                 // Prevents non-grabbed resources such as base kelp, for instance, from being destroyed.
@@ -227,7 +240,7 @@ public class Task : MonoBehaviour
                 break;
             
             case Tasks.Repair:
-                repairAction         =  this.FindPlayer(1).PlayerInput.actions["Repair"];
+                repairAction         =  player.PlayerInput.actions["Repair"];
                 isInTrigger          =  true;
                 repairAction.started += HandleInteract;
                 break;

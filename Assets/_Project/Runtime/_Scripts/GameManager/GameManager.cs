@@ -33,10 +33,6 @@ public class GameManager : MonoBehaviour
     public bool hasPlayedIntro;
     public bool hasPlayedFirstPlay;
 
-    public float highScore;
-    public float currentDepth;
-    private readonly float initialDepth = 20f;
-
     public GameObject ship;
 
     // Add more variables as needed
@@ -110,8 +106,10 @@ public class GameManager : MonoBehaviour
         gameMusicInstance = FMODUnity.RuntimeManager.CreateInstance(gameMusic);
     }
 
-    void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene,
-        UnityEngine.SceneManagement.LoadSceneMode mode)
+    void OnSceneLoaded(
+        UnityEngine.SceneManagement.Scene scene,
+        UnityEngine.SceneManagement.LoadSceneMode mode
+    )
     {
         StartGame();
     }
@@ -144,7 +142,6 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        currentDepth = 0;
         isGameOver = false;
 
         // Play the right animation
@@ -177,13 +174,9 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        highscoreText.text = $"High Score: {1 * -Mathf.RoundToInt(currentDepth)}m";
-
         CheckVisibilityForKelp();
         CheckVisibilityForRocks();
         CheckVisibilityForJellyfish();
-        if (ship != null)
-            UpdateDepth();
 
         switch (state)
         {
@@ -243,16 +236,6 @@ public class GameManager : MonoBehaviour
             case GameState.GameOver:
                 Time.timeScale = 0f;
                 break;
-        }
-    }
-
-    void UpdateDepth()
-    {
-        currentDepth = ship.transform.position.y * -1 - initialDepth;
-
-        if (currentDepth > highScore)
-        {
-            highScore = currentDepth;
         }
     }
 
@@ -446,7 +429,6 @@ public class GameManager : MonoBehaviour
 
     public void TriggerPlay()
     {
-        Debug.Log("playing the game.");
         OnPlay?.Invoke();
         hasPlayedFirstPlay = true;
         GameStateChanger(GameState.Play);

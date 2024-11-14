@@ -176,7 +176,7 @@ Material:
     - _AlphaRemapMin: 0
     - _AlphaSrcBlend: 1
     - _Anisotropy: 0
-    - _ArrayIndex: 2
+    - _ArrayIndex: 1
     - _BlendMode: 0
     - _BumpScale: 1
     - _CoatMask: 0

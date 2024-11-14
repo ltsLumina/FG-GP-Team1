@@ -1,6 +1,7 @@
 using System;
 using DG.Tweening;
 using Lumina.Essentials.Attributes;
+using Lumina.Essentials.Modules;
 using UnityEngine;
 using static Lumina.Essentials.Modules.Helpers;
 
@@ -85,8 +86,8 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
         var moveInput = player.InputManager.MoveInput;
         if (moveInput == Vector2.down)
         {
-            const float y = 8f; // don't change
-            transform.position += Vector3.down * y;
+            // const float y = 8f; // don't change
+            // transform.position += Vector3.down * y;
             rb.AddForce(Vector3.down * throwForce, ForceMode.Impulse);
         }
         else
@@ -100,13 +101,35 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
         grabbed = true;
         currentPlayer = player;
         onGrabbed?.Invoke();
+
+        if (Item != IGrabbable.Items.Battery)
+        {
+            const string fuelModelName = "FuelModel";
+            var fuelModel = GameObject.Find(fuelModelName);
+            transform.position = fuelModel.transform.position;
+            grabbedMesh.gameObject.SetActive(false);
+            fuelModel.GetComponent<MeshRenderer>().enabled = true;
+        }
     }
     
     public void Release()
     {
+        if (Item != IGrabbable.Items.Battery)
+        {
+            const string fuelModelName = "FuelModel";
+            var fuelModel = GameObject.Find(fuelModelName);
+
+            fuelModel.GetComponent<MeshRenderer>().enabled = false;
+            grabbedMesh.gameObject.SetActive(true);
+        }
+        
         grabbed = false;
         onReleased?.Invoke();
+        
+        Find<Player>().PlayerAnimation.ObjectReleased();
     }
+
+    void Awake() => Bypass = item == IGrabbable.Items.Battery; // Don't destroy the battery. (obviously, lol)
 
     void Start()
     {
@@ -123,19 +146,18 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
         }
         
         if (Lifetime <= 5) Debug.LogWarning("Lifetime is set too low. Object will likely be destroyed before it has left the screen bounds.");
-        Bypass = item == IGrabbable.Items.Battery; // Don't destroy the battery. (obviously, lol)
     }
 
     void Update()
     {
-        if (!Grabbed || currentPlayer == null) return;
-
-        var moveInput = currentPlayer.InputManager.MoveInput;
-        var offset    = new Vector3(moveInput.x * 2f, 3.5f);
-
-        transform.position = currentPlayer.transform.position + offset;
+        if (Grabbed)
+        {
+            const string fuelModelName = "FuelModel";
+            var fuelModel = GameObject.Find(fuelModelName);
+            transform.position = fuelModel.transform.position;
+        }
     }
-    
+
     void SetMesh(bool useGrabbedMesh)
     {
         if (Item == IGrabbable.Items.Battery) return;

@@ -1,7 +1,7 @@
 Shader "Custom/CRTShaderWithArray" {
     Properties {
         _MainTexArray ("Texture Array", 2DArray) = "" {}
-        _ArrayIndex ("Array Index", Float) = 0
+        _ArrayIndex ("Array Index", Range(0, 30)) = 0
         _ScanlineIntensity ("Scanline Intensity", Range(0, 1)) = 0.5
         _DistortionAmount ("Distortion Amount", Range(0, 1)) = 0.1
         _AberrationAmount ("Aberration Amount", Range(0, 0.1)) = 0.03
@@ -46,12 +46,12 @@ Shader "Custom/CRTShaderWithArray" {
                 return o;
             }
 
-            float3 ApplyAberration(float2 uv, float amount) {
+            float3 ApplyAberration(float2 uv, float amount, int arrayIndex) {
                 // Apply chromatic aberration by shifting color channels
                 float3 color;
-                color.r = UNITY_SAMPLE_TEX2DARRAY(_MainTexArray, float3(uv + amount, _ArrayIndex)).r;
-                color.g = UNITY_SAMPLE_TEX2DARRAY(_MainTexArray, float3(uv, _ArrayIndex)).g;
-                color.b = UNITY_SAMPLE_TEX2DARRAY(_MainTexArray, float3(uv - amount, _ArrayIndex)).b;
+                color.r = UNITY_SAMPLE_TEX2DARRAY(_MainTexArray, float3(uv + amount, arrayIndex)).r;
+                color.g = UNITY_SAMPLE_TEX2DARRAY(_MainTexArray, float3(uv, arrayIndex)).g;
+                color.b = UNITY_SAMPLE_TEX2DARRAY(_MainTexArray, float3(uv - amount, arrayIndex)).b;
                 return color;
             }
 
@@ -69,9 +69,14 @@ Shader "Custom/CRTShaderWithArray" {
             }
 
             fixed4 frag (v2f i) : SV_Target {
+                // Convert _ArrayIndex to an integer to prevent interpolation issues
+                int arrayIndex = round(_ArrayIndex);  // Ensure the index is an integer
+
+                // Apply distortion, aberration, and scanlines
                 float2 distortedUV = ApplyDistortion(i.uv, _DistortionAmount);
-                float3 color = ApplyAberration(distortedUV, _AberrationAmount);
+                float3 color = ApplyAberration(distortedUV, _AberrationAmount, arrayIndex);
                 color = ApplyScanlines(color, i.uv);
+
                 return float4(color, 1.0);
             }
             ENDCG

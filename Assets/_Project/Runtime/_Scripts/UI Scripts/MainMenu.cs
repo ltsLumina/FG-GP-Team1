@@ -48,11 +48,6 @@ public class MainMenu : MonoBehaviour
 
     public GameObject SkipTutorialButton => skipTutorialButton;
 
-    void Start()
-    {
-        DOTween.KillAll();
-    }
-
     public void SetGameOverReason(string reason)
     {
         if (gameOverReasonText != null)

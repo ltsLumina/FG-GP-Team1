@@ -180,18 +180,15 @@ public class Train : MonoBehaviour
         {
             if (hullIntegrity <= 0)
             {
-                HandleHullIntegrityDepletion();
                 onDeath.Invoke();
             }
             return hullIntegrity;
         }
         set
         {
-            if (invincible)
-                return;
+            if (invincible) return;
             hullIntegrity = Mathf.Clamp(value, 0, 3);
-            if (hullIntegrity <= 0)
-                onDeath.Invoke();
+            if (hullIntegrity <= 0) onDeath.Invoke();
         }
     }
 
@@ -226,13 +223,11 @@ public class Train : MonoBehaviour
 
     void Start()
     {
-        //------------------Added--------------------------
         if (GameManager.Instance == null)
         {
             Debug.LogError("GameManager not found!");
             return;
         }
-        //------------------------------------------------
 
         Init();
 
@@ -241,9 +236,7 @@ public class Train : MonoBehaviour
         return;
         void Init()
         {
-            //------------------Added--------------------------
             onFuelDepleted.AddListener(() => HandleFuelDepletion());
-            //------------------------------------------------
 
             onFuelDepleted.AddListener(() => onDeath.Invoke());
             onDeath.AddListener(() =>
@@ -320,39 +313,25 @@ public class Train : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P)) StartCoroutine(RGBLights());
 
-        if (transform.position.y < -300)
+        if (transform.position.y < -250)
         {
             GameManager.Instance.TriggerEnterTheDeep();
             Debug.Log("deep");
 
             Power -= powerDepletionRate * Time.deltaTime;
-
-            foreach (var light in lights)
-            {
-                light.Key.SetActive(true);
-            }
+            ToggleLightsAtThreshold();
         }
 
         Dive();
         FuelCalculation();
-        //ToggleLightsAtThreshold();
     }
 
-    //-------------------------Added-----------------------------------
     // Handle fuel depletion
     void HandleFuelDepletion()
     {
         Debug.Log("Fuel depleted!");
         GameManager.Instance.TriggerGameOver("Fuel ran out");
     }
-
-    // Handle hull integrity depletion
-    void HandleHullIntegrityDepletion()
-    {
-        Debug.Log("Hull integrity reached zero!");
-        GameManager.Instance.TriggerGameOver("Hull destroyed");
-    }
-    //--------------------------Added----------------------------------
 
     void Dive()
     {
@@ -448,10 +427,20 @@ public class Train : MonoBehaviour
         }
     }
 
+    bool firstHit;
+    
     void OnCollision(GameObject collision)
     {
+        if (invincible) return;
+        
         if (collision.CompareTag("Rock"))
         {
+            if (!firstHit)
+            {
+                firstHit = true;
+                GameManager.Instance.TriggerHullDamage();
+            }
+
             var bonk = FMODUnity.RuntimeManager.CreateInstance(shipBonk);
             FMODUnity.RuntimeManager.AttachInstanceToGameObject(bonk, transform);
             bonk.start();
@@ -460,8 +449,6 @@ public class Train : MonoBehaviour
             HullIntegrity = Mathf.Max(0, 3 - hullBreaches);
             onHullBreach.Invoke(hullBreaches);
             onHullIntegrityChanged.Invoke(HullIntegrity);
-
-
             onRockCollision.Invoke(collision.GetComponent<Rock>());
 
             Helpers.Find<Player>().Animator.SetBool("HullCritical", HullIntegrity == 1);

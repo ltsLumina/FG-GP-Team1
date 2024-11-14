@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8ab3877cc142418e81bf8d1467b71f1, type: 3}
+  m_Name: Death
+  m_EditorClassIdentifier: 
+  dialogueLines:
+  - speakerName: repair
+    speakerProfilePicture: {fileID: 2800000, guid: 18c2613cd7232496c846450c83a4ce3e, type: 3}
+    dialogueText: 
+    voiceOverClip: {fileID: 0}
+    timing: 0
