@@ -65,6 +65,29 @@ public class MainMenu : MonoBehaviour
         }
     }
 
+    public void OnBackButtonPressed()
+    {
+        switch (GameManager.Instance.state)
+        {
+            case GameManager.GameState.Menu:
+                Debug.Log("Back button pressed in Menu state");
+                mainMenuPanel.SetActive(true);
+                pausePanel.SetActive(false);
+                break;
+
+            case GameManager.GameState.Pause:
+                Debug.Log("Back button pressed in Play state");
+                pausePanel.SetActive(true);
+                mainMenuPanel.SetActive(false);
+                GameManager.Instance.GameStateChanger(GameManager.GameState.Pause);
+                break;
+
+            default:
+                Debug.LogWarning("Back button pressed in unexpected state: " + GameManager.Instance.state);
+                break;
+        }
+    }
+
     public void StartTurtorialGame()
     {
         //Start Animation for tutorial

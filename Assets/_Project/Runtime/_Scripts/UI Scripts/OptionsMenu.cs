@@ -40,39 +40,17 @@ public class OptionsMenu : MonoBehaviour
     void InitializeSettings()
     {
         // Audio Settings
-
-        /*if (PlayerPrefs.HasKey("MasterVol"))
-        {
-            volume = PlayerPrefs.GetFloat("MasterVol");
-        }
-        else
-        {
-            PlayerPrefs.SetFloat("MasterVol", volume);
-        }*/
+        // Master Volume
         masterSlider.value = PlayerPrefs.GetFloat("MasterVol");
         masterLabel.text = Mathf.RoundToInt(masterSlider.value * 100).ToString();
         SetMasterMixerVolume(masterSlider.value);
 
-        /*if (PlayerPrefs.HasKey("MusicVol"))
-        {
-            volume = PlayerPrefs.GetFloat("MusicVol");
-        }
-        else
-        {
-            PlayerPrefs.SetFloat("MusicVol", volume);
-        }*/
+        // Music Volume
         musicSlider.value = PlayerPrefs.GetFloat("MusicVol");
         musicLabel.text = Mathf.RoundToInt(musicSlider.value * 100).ToString();
         SetMusicMixerVolume(musicSlider.value);
 
-        /*if (PlayerPrefs.HasKey("SFXVol"))
-        {
-            volume = PlayerPrefs.GetFloat("SFXVol");
-        }
-        else
-        {
-            PlayerPrefs.SetFloat("SFXVol", volume);
-        }*/
+        // SFX Volume
         sfxSlider.value = PlayerPrefs.GetFloat("SFXVol");
         sfxLabel.text = Mathf.RoundToInt(sfxSlider.value * 100).ToString();
         SetSFXMixerVolume(sfxSlider.value);
@@ -167,16 +145,18 @@ public class OptionsMenu : MonoBehaviour
 
     void SetMasterMixerVolume(float value)
     {
-        //TODO: has to be turned on before turn in!
-        //FMODUnity.RuntimeManager.GetVCA("vca:/Master").setVolume(value);
+        // TODO: has to be turned on before turn in!
+        // FMODUnity.RuntimeManager.GetVCA("vca:/Master").setVolume(value);
     }
     void SetMusicMixerVolume(float value)
     {
-        //FMODUnity.RuntimeManager.GetVCA("vca:/Music").setVolume(value);
+        // TODO: has to be turned on before turn in!
+        // FMODUnity.RuntimeManager.GetVCA("vca:/Music").setVolume(value);
     }
     void SetSFXMixerVolume(float value)
     {
-        //FMODUnity.RuntimeManager.GetVCA("vca:/SFX").setVolume(value);
+        // TODO: has to be turned on before turn in!
+        // FMODUnity.RuntimeManager.GetVCA("vca:/SFX").setVolume(value);
     }
 
     //Resolution
