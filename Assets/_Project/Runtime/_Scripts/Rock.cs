@@ -26,10 +26,8 @@ public class Rock : MonoBehaviour, IDestructible
 
     void FixedUpdate()
     {
-        if (!collided)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, Train.Instance.transform.position, 0.05f);
-        }
+        if (collided) return;
+        transform.position = Vector3.MoveTowards(transform.position, Train.Instance.transform.position, 0.05f);
     }
 
     void OnCollisionEnter(Collision other)

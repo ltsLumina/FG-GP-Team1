@@ -86,8 +86,8 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
         var moveInput = player.InputManager.MoveInput;
         if (moveInput == Vector2.down)
         {
-            const float y = 8f; // don't change
-            transform.position += Vector3.down * y;
+            // const float y = 8f; // don't change
+            // transform.position += Vector3.down * y;
             rb.AddForce(Vector3.down * throwForce, ForceMode.Impulse);
         }
         else
@@ -129,6 +129,8 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
         Find<Player>().PlayerAnimation.ObjectReleased();
     }
 
+    void Awake() => Bypass = item == IGrabbable.Items.Battery; // Don't destroy the battery. (obviously, lol)
+
     void Start()
     {
         if (Item != IGrabbable.Items.Battery)
@@ -144,7 +146,6 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
         }
         
         if (Lifetime <= 5) Debug.LogWarning("Lifetime is set too low. Object will likely be destroyed before it has left the screen bounds.");
-        Bypass = item == IGrabbable.Items.Battery; // Don't destroy the battery. (obviously, lol)
     }
 
     void Update()
