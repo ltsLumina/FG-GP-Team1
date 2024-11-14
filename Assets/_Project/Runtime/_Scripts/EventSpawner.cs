@@ -21,6 +21,7 @@ public class EventSpawner : MonoBehaviour
         {
             startLocalX = transform.localPosition.x;
             StartCoroutine(SpawnObject());
+            Whale.SpawnCounter = 0;
         }
     }
 
