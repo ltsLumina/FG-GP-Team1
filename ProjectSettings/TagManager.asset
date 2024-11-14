@@ -10,6 +10,7 @@ TagManager:
   - Rock
   - Ship
   - GameAnimation
+  - FakeFuel
   layers:
   - Default
   - TransparentFX
