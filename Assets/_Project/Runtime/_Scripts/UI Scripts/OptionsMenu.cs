@@ -27,8 +27,8 @@ public class OptionsMenu : MonoBehaviour
 
     // UI Contexts
     [Header("Settings UI Contexts")]
-    [SerializeField] private GameObject mainMenuSettingsUI;
-    [SerializeField] private GameObject pauseMenuSettingsUI;
+    [SerializeField] GameObject mainMenuSettingsUI;
+    [SerializeField] GameObject pauseMenuSettingsUI;
 
     private GameObject currentSettingsUI;
 
@@ -40,39 +40,20 @@ public class OptionsMenu : MonoBehaviour
     void InitializeSettings()
     {
         // Audio Settings
-        float volume = 0f;
-        if (PlayerPrefs.HasKey("MasterVol"))
-        {
-            volume = PlayerPrefs.GetFloat("MasterVol");
-        }
-        else
-        {
-            PlayerPrefs.SetFloat("MasterVol", volume);
-        }
+        // Master Volume
         masterSlider.value = PlayerPrefs.GetFloat("MasterVol");
-        masterLabel.text = Mathf.RoundToInt(volume + 80).ToString();
+        masterLabel.text = Mathf.RoundToInt(masterSlider.value * 100).ToString();
+        SetMasterMixerVolume(masterSlider.value);
 
-        if (PlayerPrefs.HasKey("MusicVol"))
-        {
-            volume = PlayerPrefs.GetFloat("MusicVol");
-        }
-        else
-        {
-            PlayerPrefs.SetFloat("MusicVol", volume);
-        }
+        // Music Volume
         musicSlider.value = PlayerPrefs.GetFloat("MusicVol");
-        musicLabel.text = Mathf.RoundToInt(volume + 80).ToString();
+        musicLabel.text = Mathf.RoundToInt(musicSlider.value * 100).ToString();
+        SetMusicMixerVolume(musicSlider.value);
 
-        if (PlayerPrefs.HasKey("SFXVol"))
-        {
-            volume = PlayerPrefs.GetFloat("SFXVol");
-        }
-        else
-        {
-            PlayerPrefs.SetFloat("SFXVol", volume);
-        }
+        // SFX Volume
         sfxSlider.value = PlayerPrefs.GetFloat("SFXVol");
-        sfxLabel.text = Mathf.RoundToInt(volume + 80).ToString();
+        sfxLabel.text = Mathf.RoundToInt(sfxSlider.value * 100).ToString();
+        SetSFXMixerVolume(sfxSlider.value);
 
         // Resolution Settings
         resolutions = new List<Resolution>(Screen.resolutions);
@@ -140,26 +121,42 @@ public class OptionsMenu : MonoBehaviour
     //Audio
     public void SetMasterVolume()
     {
-        masterLabel.text = Mathf.RoundToInt(masterSlider.value + 80).ToString();
-
+        masterLabel.text = Mathf.RoundToInt(masterSlider.value * 100).ToString();
+        SetMasterMixerVolume(masterSlider.value);
         PlayerPrefs.SetFloat("MasterVol", masterSlider.value);
         //PlayerPrefs.Save();
     }
 
     public void SetMusicVolume()
     {
-        musicLabel.text = Mathf.RoundToInt(musicSlider.value + 80).ToString();
-
+        musicLabel.text = Mathf.RoundToInt(musicSlider.value * 100).ToString();
+        SetMusicMixerVolume(musicSlider.value);
         PlayerPrefs.SetFloat("MusicVol", musicSlider.value);
         //PlayerPrefs.Save();
     }
 
     public void SetSFXVolume()
     {
-        sfxLabel.text = Mathf.RoundToInt(sfxSlider.value + 80).ToString();
-
+        sfxLabel.text = Mathf.RoundToInt(sfxSlider.value * 100).ToString();
+        SetSFXMixerVolume(sfxSlider.value);
         PlayerPrefs.SetFloat("SFXVol", sfxSlider.value);
         //PlayerPrefs.Save();
+    }
+
+    void SetMasterMixerVolume(float value)
+    {
+        // TODO: has to be turned on before turn in!
+        // FMODUnity.RuntimeManager.GetVCA("vca:/Master").setVolume(value);
+    }
+    void SetMusicMixerVolume(float value)
+    {
+        // TODO: has to be turned on before turn in!
+        // FMODUnity.RuntimeManager.GetVCA("vca:/Music").setVolume(value);
+    }
+    void SetSFXMixerVolume(float value)
+    {
+        // TODO: has to be turned on before turn in!
+        // FMODUnity.RuntimeManager.GetVCA("vca:/SFX").setVolume(value);
     }
 
     //Resolution
