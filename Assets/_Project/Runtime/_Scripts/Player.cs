@@ -34,6 +34,7 @@ public class Player : MonoBehaviour
     [Header("Audio")]
     [SerializeField] FMODUnity.EventReference dashSound;
     [SerializeField] FMODUnity.EventReference pickKelpSound;
+    [SerializeField] FMODUnity.EventReference playerStunned;
 
 
     float dashTimer;
@@ -255,7 +256,11 @@ public class Player : MonoBehaviour
     IEnumerator StunRoutine()
     {
         Animator.SetTrigger("Stunned");
-        
+
+        var stun = FMODUnity.RuntimeManager.CreateInstance(playerStunned);
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(stun, transform);
+        stun.start();
+
         Freeze(true);
         yield return new WaitForSeconds(stunDuration);
         Freeze(false);

@@ -28,6 +28,8 @@ public class Train : MonoBehaviour
 
     [Header("Audio")]
     [SerializeField] FMODUnity.EventReference shipBonk;
+    [SerializeField] FMODUnity.EventReference refuel;
+    private FMOD.Studio.EventInstance gameMusic;
 
     [Tab("Fuel")]
     [Tooltip("The amount of fuel the train has.")]
@@ -139,8 +141,10 @@ public class Train : MonoBehaviour
 
     [SerializeField]
     bool partyMode;
-    
+
     [EndIf]
+
+
 
     // <- Cached references. ->
 
@@ -162,6 +166,8 @@ public class Train : MonoBehaviour
         private set
         {
             fuel = Mathf.Clamp(value, 0, 100);
+            gameMusic.setParameterByName("Stress", (100-fuel)/100); 
+
             if (fuel <= 0)
                 onFuelDepleted.Invoke();
         }
@@ -229,6 +235,8 @@ public class Train : MonoBehaviour
         //------------------------------------------------
 
         Init();
+
+        gameMusic = GameManager.Instance.GameMusicInstance;
 
         return;
         void Init()
@@ -388,6 +396,9 @@ public class Train : MonoBehaviour
         {
             case Tasks.Refuel:
                 Fuel += kelpRestoreAmount;
+                var fuel = FMODUnity.RuntimeManager.CreateInstance(refuel);
+                FMODUnity.RuntimeManager.AttachInstanceToGameObject(fuel, transform);
+                fuel.start();
                 break;
 
             case Tasks.Repair:

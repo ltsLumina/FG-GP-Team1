@@ -10,6 +10,8 @@ public class OptionsMenu : MonoBehaviour
     [Header("Audio")]
     public TMP_Text masterLabel, musicLabel, sfxLabel;
     public Slider masterSlider, musicSlider, sfxSlider;
+    [SerializeField] FMODUnity.EventReference playSound, settingSound, inSettingSound, backSound, creditSound;
+
 
     //Resolution
     public List<Resolution> resolutions;
@@ -160,6 +162,39 @@ public class OptionsMenu : MonoBehaviour
     {
         FMODUnity.RuntimeManager.GetVCA("vca:/SFX").setVolume(value);
     }
+
+    public void PlayPlaySound()
+    {
+        var sound = FMODUnity.RuntimeManager.CreateInstance(playSound);
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(sound, transform);
+        sound.start();
+    }
+    public void PlaySettingSound()
+    {
+        var sound = FMODUnity.RuntimeManager.CreateInstance(settingSound);
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(sound, transform);
+        sound.start();
+    }
+    public void PlayInSettingSound()
+    {
+        var sound = FMODUnity.RuntimeManager.CreateInstance(inSettingSound);
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(sound, transform);
+        sound.start();
+    }
+    public void PlayBackSound()
+    {
+        var sound = FMODUnity.RuntimeManager.CreateInstance(backSound);
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(sound, transform);
+        sound.start();
+    }
+    public void PlayCreditSound()
+    {
+        var sound = FMODUnity.RuntimeManager.CreateInstance(creditSound);
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(sound, transform);
+        sound.start();
+    }
+
+
 
     //Resolution
     public void SetFullscreen(bool isFullscreen)

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{19f0a1c3-1ee9-48b3-bb07-7e5b63e1fcda}">
+		<property name="name">
+			<value>Stress</value>
+		</property>
+		<relationship name="folder">
+			<destination>{79d3066b-0475-47e3-a8bc-a17f229d0ff1}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{1a441892-8810-4712-a8c1-e4cc43475344}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{1a441892-8810-4712-a8c1-e4cc43475344}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<property name="seekSpeed">
+			<value>1.1000000238418579</value>
+		</property>
+	</object>
+</objects>

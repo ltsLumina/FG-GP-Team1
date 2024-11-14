@@ -84,6 +84,7 @@ public class GameManager : MonoBehaviour
 
     // Add more events as needed
 
+
     void Awake()
     {
         Time.timeScale = 1f;
@@ -475,6 +476,11 @@ public class GameManager : MonoBehaviour
         }
 
         return null;
+    }
+
+    public FMOD.Studio.EventInstance GameMusicInstance
+    {
+        get => gameMusicInstance;
     }
 }
 
