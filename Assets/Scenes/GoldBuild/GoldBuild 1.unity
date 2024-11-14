@@ -3502,10 +3502,18 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
       objectReference: {fileID: 793944065616846641}
+    - target: {fileID: 2679941528252141523, guid: 7bf57695c5af74a168792544df2440ba, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3042413712703112217, guid: 7bf57695c5af74a168792544df2440ba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
       objectReference: {fileID: 793944065616846641}
+    - target: {fileID: 3504622072738819627, guid: 7bf57695c5af74a168792544df2440ba, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4478655267154634138, guid: 7bf57695c5af74a168792544df2440ba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -3514,6 +3522,26 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
       objectReference: {fileID: 536466042}
+    - target: {fileID: 5622433484794940132, guid: 7bf57695c5af74a168792544df2440ba, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5838118630038110849, guid: 7bf57695c5af74a168792544df2440ba, type: 3}
+      propertyPath: introDialogue
+      value: 
+      objectReference: {fileID: 11400000, guid: 22d5f29b1ecfc413a931d7fc4aca70c5, type: 2}
+    - target: {fileID: 5838118630038110849, guid: 7bf57695c5af74a168792544df2440ba, type: 3}
+      propertyPath: firstKelpDialogue
+      value: 
+      objectReference: {fileID: 11400000, guid: 4ae1799d101594bf3b00bc526a4db7a7, type: 2}
+    - target: {fileID: 5838118630038110849, guid: 7bf57695c5af74a168792544df2440ba, type: 3}
+      propertyPath: gameStartedDialogue
+      value: 
+      objectReference: {fileID: 11400000, guid: 12799f4924d564004899dc4dcdc50a0b, type: 2}
+    - target: {fileID: 5838118630038110849, guid: 7bf57695c5af74a168792544df2440ba, type: 3}
+      propertyPath: rockHitsShipDialogue
+      value: 
+      objectReference: {fileID: 11400000, guid: 87683de67593c453abc405676027db51, type: 2}
     - target: {fileID: 5891598551037785231, guid: 7bf57695c5af74a168792544df2440ba, type: 3}
       propertyPath: m_LocalPosition.x
       value: 627.97644
@@ -3574,6 +3602,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 793944065616846641}
+    - target: {fileID: 8849384570785539983, guid: 7bf57695c5af74a168792544df2440ba, type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 2800000, guid: 99a5142e15d624eb8a9e7938d4c9929d, type: 3}
     - target: {fileID: 9099207719333497023, guid: 7bf57695c5af74a168792544df2440ba, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
