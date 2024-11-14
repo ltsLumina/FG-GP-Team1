@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8ab3877cc142418e81bf8d1467b71f1, type: 3}
+  m_Name: Play
+  m_EditorClassIdentifier: 
+  dialogueLines:
+  - speakerName: P1
+    speakerProfilePicture: {fileID: 2800000, guid: 1ba0d1fee83134eb1bef0f8b29ff22eb, type: 3}
+    dialogueText: Plora, system status? What's the biz?
+    voiceOverClip: {fileID: 0}
+    timing: 2
+  - speakerName: Plora
+    speakerProfilePicture: {fileID: 2800000, guid: 1ba0d1fee83134eb1bef0f8b29ff22eb, type: 3}
+    dialogueText: 'Automatic Navigation Offline. '
+    voiceOverClip: {fileID: 0}
+    timing: 2
+  - speakerName: P2
+    speakerProfilePicture: {fileID: 2800000, guid: 1ba0d1fee83134eb1bef0f8b29ff22eb, type: 3}
+    dialogueText: Manual Control! Dibs. How does this work?
+    voiceOverClip: {fileID: 0}
+    timing: 3
+  - speakerName: Plora
+    speakerProfilePicture: {fileID: 2800000, guid: 1ba0d1fee83134eb1bef0f8b29ff22eb, type: 3}
+    dialogueText: WASD to pilot the drone.
+    voiceOverClip: {fileID: 0}
+    timing: 2
+  - speakerName: P1
+    speakerProfilePicture: {fileID: 2800000, guid: 1ba0d1fee83134eb1bef0f8b29ff22eb, type: 3}
+    dialogueText: It's like you've never played a video game before...
+    voiceOverClip: {fileID: 0}
+    timing: 2

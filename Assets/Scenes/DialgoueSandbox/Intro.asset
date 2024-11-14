@@ -10,11 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a8ab3877cc142418e81bf8d1467b71f1, type: 3}
-  m_Name: 2FuelDialgoue
+  m_Name: Intro
   m_EditorClassIdentifier: 
   dialogueLines:
-  - speakerName: 
-    speakerProfilePicture: {fileID: 2800000, guid: 18c2613cd7232496c846450c83a4ce3e, type: 3}
-    dialogueText: fuel
+  - speakerName: Plora
+    speakerProfilePicture: {fileID: 2800000, guid: 99a5142e15d624eb8a9e7938d4c9929d, type: 3}
+    dialogueText: 
     voiceOverClip: {fileID: 0}
-    timing: 0
+    timing: 1
+  - speakerName: s2
+    speakerProfilePicture: {fileID: 2800000, guid: 1ba0d1fee83134eb1bef0f8b29ff22eb, type: 3}
+    dialogueText: Yes?
+    voiceOverClip: {fileID: 0}
+    timing: 2

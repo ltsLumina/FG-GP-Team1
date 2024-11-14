@@ -2308,7 +2308,31 @@ PrefabInstance:
     - target: {fileID: 5838118630038110849, guid: 7bf57695c5af74a168792544df2440ba, type: 3}
       propertyPath: introDialogue
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 11400000, guid: 22d5f29b1ecfc413a931d7fc4aca70c5, type: 2}
+    - target: {fileID: 5838118630038110849, guid: 7bf57695c5af74a168792544df2440ba, type: 3}
+      propertyPath: firstKelpDialogue
+      value: 
+      objectReference: {fileID: 11400000, guid: 4ae1799d101594bf3b00bc526a4db7a7, type: 2}
+    - target: {fileID: 5838118630038110849, guid: 7bf57695c5af74a168792544df2440ba, type: 3}
+      propertyPath: firstPlayDialogue
+      value: 
+      objectReference: {fileID: 11400000, guid: 12799f4924d564004899dc4dcdc50a0b, type: 2}
+    - target: {fileID: 5838118630038110849, guid: 7bf57695c5af74a168792544df2440ba, type: 3}
+      propertyPath: hullRepairDialogue
+      value: 
+      objectReference: {fileID: 11400000, guid: dbd73d29a46b54a4ebb6b4b06ec03a07, type: 2}
+    - target: {fileID: 5838118630038110849, guid: 7bf57695c5af74a168792544df2440ba, type: 3}
+      propertyPath: rockHitsShipDialogue
+      value: 
+      objectReference: {fileID: 11400000, guid: 87683de67593c453abc405676027db51, type: 2}
+    - target: {fileID: 5838118630038110849, guid: 7bf57695c5af74a168792544df2440ba, type: 3}
+      propertyPath: deathFromHullDestroyedDialogue
+      value: 
+      objectReference: {fileID: 11400000, guid: 79e70c186b1894c61ba490336f988a55, type: 2}
+    - target: {fileID: 5838118630038110849, guid: 7bf57695c5af74a168792544df2440ba, type: 3}
+      propertyPath: deathFromRunningOutOfFuelDialogue
+      value: 
+      objectReference: {fileID: 11400000, guid: 79e70c186b1894c61ba490336f988a55, type: 2}
     - target: {fileID: 5891598551037785231, guid: 7bf57695c5af74a168792544df2440ba, type: 3}
       propertyPath: m_LocalPosition.x
       value: 627.97644
