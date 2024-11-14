@@ -145,7 +145,9 @@ public class Task : MonoBehaviour
 
     void StartTask()
     {
-        this.FindPlayer(1).PlayerAnimation.Animator.SetTrigger("StartRepairing");
+        var player = Helpers.Find<Player>();
+        player.PlayerAnimation.Animator.SetTrigger("StartRepairing");
+        player.transform.DORotate(new (player.transform.rotation.x, 120, player.transform.rotation.z), 0.5f);
         
         chargeCircle.color = completedColor;
         this.FindPlayer(1).Freeze(true);
@@ -155,6 +157,8 @@ public class Task : MonoBehaviour
     void CancelTask()
     {
         this.FindPlayer(1).PlayerAnimation.Animator.SetTrigger("StopRepairing");
+        var player = Helpers.Find<Player>();
+        player.transform.DORotate(new (player.transform.rotation.x, 180, player.transform.rotation.z), 0.5f);
         
         if (taskCoroutine != null)
         {
@@ -190,6 +194,8 @@ public class Task : MonoBehaviour
     void CompleteTask()
     {
         this.FindPlayer(1).PlayerAnimation.Animator.SetTrigger("StopRepairing");
+        var player = Helpers.Find<Player>();
+        player.transform.DORotate(new (player.transform.rotation.x, 180, player.transform.rotation.z), 0.5f);
         
         taskCoroutine = null;
         train.SetTaskStatus(task);
