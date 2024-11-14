@@ -216,6 +216,8 @@ public class Task : MonoBehaviour
                 {
                     train.SetTaskStatus(Tasks.Refuel);
                     Destroy(heldResource.gameObject);
+                    var fuelModel = GameObject.Find("FuelModel");
+                    fuelModel.GetComponent<MeshRenderer>().enabled = false;
                 }
 
                 // Prevents non-grabbed resources such as base kelp, for instance, from being destroyed.

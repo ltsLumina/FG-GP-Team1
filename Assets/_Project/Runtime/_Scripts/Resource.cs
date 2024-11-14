@@ -81,15 +81,6 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
 
     void Throw(Player player)
     {
-        if (Item != IGrabbable.Items.Battery)
-        {
-            const string fuelModelName = "FuelModel";
-            var fuelModel = GameObject.Find(fuelModelName);
-
-            fuelModel.GetComponent<MeshRenderer>().enabled = false;
-            grabbedMesh.gameObject.SetActive(true);
-        }
-        
         TryGetComponent(out Rigidbody rb);
         if (rb == null || !player) return;
         var moveInput = player.InputManager.MoveInput;
@@ -123,6 +114,15 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
     
     public void Release()
     {
+        if (Item != IGrabbable.Items.Battery)
+        {
+            const string fuelModelName = "FuelModel";
+            var fuelModel = GameObject.Find(fuelModelName);
+
+            fuelModel.GetComponent<MeshRenderer>().enabled = false;
+            grabbedMesh.gameObject.SetActive(true);
+        }
+        
         grabbed = false;
         onReleased?.Invoke();
         
