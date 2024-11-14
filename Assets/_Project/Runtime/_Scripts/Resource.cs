@@ -1,6 +1,7 @@
 using System;
 using DG.Tweening;
 using Lumina.Essentials.Attributes;
+using Lumina.Essentials.Modules;
 using UnityEngine;
 using static Lumina.Essentials.Modules.Helpers;
 
@@ -80,6 +81,15 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
 
     void Throw(Player player)
     {
+        if (Item != IGrabbable.Items.Battery)
+        {
+            const string fuelModelName = "FuelModel";
+            var fuelModel = GameObject.Find(fuelModelName);
+
+            fuelModel.GetComponent<MeshRenderer>().enabled = false;
+            grabbedMesh.gameObject.SetActive(true);
+        }
+        
         TryGetComponent(out Rigidbody rb);
         if (rb == null || !player) return;
         var moveInput = player.InputManager.MoveInput;
@@ -100,12 +110,23 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
         grabbed = true;
         currentPlayer = player;
         onGrabbed?.Invoke();
+
+        if (Item != IGrabbable.Items.Battery)
+        {
+            const string fuelModelName = "FuelModel";
+            var fuelModel = GameObject.Find(fuelModelName);
+            transform.position = fuelModel.transform.position;
+            grabbedMesh.gameObject.SetActive(false);
+            fuelModel.GetComponent<MeshRenderer>().enabled = true;
+        }
     }
     
     public void Release()
     {
         grabbed = false;
         onReleased?.Invoke();
+        
+        Find<Player>().PlayerAnimation.ObjectReleased();
     }
 
     void Start()
@@ -128,14 +149,14 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
 
     void Update()
     {
-        if (!Grabbed || currentPlayer == null) return;
-
-        var moveInput = currentPlayer.InputManager.MoveInput;
-        var offset    = new Vector3(moveInput.x * 2f, 3.5f);
-
-        transform.position = currentPlayer.transform.position + offset;
+        if (Grabbed)
+        {
+            const string fuelModelName = "FuelModel";
+            var fuelModel = GameObject.Find(fuelModelName);
+            transform.position = fuelModel.transform.position;
+        }
     }
-    
+
     void SetMesh(bool useGrabbedMesh)
     {
         if (Item == IGrabbable.Items.Battery) return;
