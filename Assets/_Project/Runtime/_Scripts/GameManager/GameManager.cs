@@ -392,11 +392,8 @@ public class GameManager : MonoBehaviour
     // Fuel refill
     public void TriggerFuelRefill()
     {
-        if (!hasRefilledFuel)
-        {
-            OnFuelRefill?.Invoke();
-            hasRefilledFuel = true;
-        }
+        OnFuelRefill?.Invoke();
+        hasRefilledFuel = true;
     }
 
     // Battery charge

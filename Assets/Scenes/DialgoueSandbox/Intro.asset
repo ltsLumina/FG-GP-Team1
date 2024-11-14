@@ -14,12 +14,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueLines:
   - speakerName: Plora
-    speakerProfilePicture: {fileID: 2800000, guid: 99a5142e15d624eb8a9e7938d4c9929d, type: 3}
-    dialogueText: 
+    speakerProfilePicture: {fileID: 2800000, guid: 77ebb1ae41ab646eaa08275ebc8f606d, type: 3}
+    dialogueText: 'Plora Status: Initiating Landing Sequence on Ocean World Flora
+      IV'
+    voiceOverClip: {fileID: 0}
+    timing: 2.1
+  - speakerName: Plora
+    speakerProfilePicture: {fileID: 2800000, guid: 77ebb1ae41ab646eaa08275ebc8f606d, type: 3}
+    dialogueText: Fuel reserves low. Generators Offline.
+    voiceOverClip: {fileID: 0}
+    timing: 1.55
+  - speakerName: p2
+    speakerProfilePicture: {fileID: 2800000, guid: 72ba7d8b3ee954df5b43e62f41eefc47, type: 3}
+    dialogueText: She made it!
+    voiceOverClip: {fileID: 0}
+    timing: 1.5
+  - speakerName: P1
+    speakerProfilePicture: {fileID: 2800000, guid: c58c6e9a7caef4bb99048610d65613b7, type: 3}
+    dialogueText: Of course she did.
     voiceOverClip: {fileID: 0}
     timing: 1
-  - speakerName: s2
-    speakerProfilePicture: {fileID: 2800000, guid: 1ba0d1fee83134eb1bef0f8b29ff22eb, type: 3}
-    dialogueText: Yes?
+  - speakerName: P1
+    speakerProfilePicture: {fileID: 2800000, guid: c58c6e9a7caef4bb99048610d65613b7, type: 3}
+    dialogueText: We won't have long at those fuel levels. Let's see what's down
+      there.
     voiceOverClip: {fileID: 0}
-    timing: 2
+    timing: 3.1
+  - speakerName: Plora
+    speakerProfilePicture: {fileID: 2800000, guid: 77ebb1ae41ab646eaa08275ebc8f606d, type: 3}
+    dialogueText: I've always loved the ocean.
+    voiceOverClip: {fileID: 0}
+    timing: 0.65
