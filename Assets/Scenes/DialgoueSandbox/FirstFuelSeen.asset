@@ -10,21 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a8ab3877cc142418e81bf8d1467b71f1, type: 3}
-  m_Name: Death
+  m_Name: FirstFuelSeen
   m_EditorClassIdentifier: 
   dialogueLines:
-  - speakerName: repair
-    speakerProfilePicture: {fileID: 2800000, guid: c58c6e9a7caef4bb99048610d65613b7, type: 3}
-    dialogueText: 
+  - speakerName: P2
+    speakerProfilePicture: {fileID: 2800000, guid: 72ba7d8b3ee954df5b43e62f41eefc47, type: 3}
+    dialogueText: Hey, what's that?
     voiceOverClip: {fileID: 0}
-    timing: 0
-  - speakerName: repair
+    timing: 1.5
+  - speakerName: P2
     speakerProfilePicture: {fileID: 2800000, guid: c58c6e9a7caef4bb99048610d65613b7, type: 3}
-    dialogueText: 
+    dialogueText: "Sj\xF6gr\xE4s!"
     voiceOverClip: {fileID: 0}
-    timing: 0
-  - speakerName: repair
+    timing: 1
+  - speakerName: P2
     speakerProfilePicture: {fileID: 2800000, guid: 77ebb1ae41ab646eaa08275ebc8f606d, type: 3}
-    dialogueText: Time to sleep.
+    dialogueText: 'We can use that for fuel. Go pick it up with [E]'
     voiceOverClip: {fileID: 0}
-    timing: 0
+    timing: 3
+  - speakerName: Plora
+    speakerProfilePicture: {fileID: 2800000, guid: 77ebb1ae41ab646eaa08275ebc8f606d, type: 3}
+    dialogueText: Feed me!
+    voiceOverClip: {fileID: 0}
+    timing: 1
