@@ -44,10 +44,8 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
     public float Lifetime => lifetime;
 
     public bool Bypass { get; private set; }
-
-    // Duct-tape fix
-    bool GrabbedMeshActive => grabbedMesh.gameObject.activeSelf;
-    public bool HasBeenGrabbed => GrabbedMeshActive;
+    
+    public bool HasBeenGrabbed { get; private set; }
 
     Player currentPlayer;
     
@@ -108,6 +106,7 @@ public class Resource : MonoBehaviour, IGrabbable, IDestructible
             var fuelModel = GameObject.Find(fuelModelName);
             transform.position = fuelModel.transform.position;
             grabbedMesh.gameObject.SetActive(false);
+            HasBeenGrabbed = true;
             fuelModel.GetComponent<MeshRenderer>().enabled = true;
         }
     }

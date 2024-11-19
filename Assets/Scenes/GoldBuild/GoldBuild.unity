@@ -2111,7 +2111,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3139968387828256574, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
       propertyPath: spawnWaves.Array.size
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 3139968387828256574, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
       propertyPath: 'spawnWaves.Array.data[4]'
@@ -2132,9 +2132,13 @@ PrefabInstance:
     - target: {fileID: 3139968387828256574, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
       propertyPath: 'spawnWaves.Array.data[8]'
       value: 
-      objectReference: {fileID: 11400000, guid: 776999d0a527a49d5886fce5b8c67bf3, type: 2}
+      objectReference: {fileID: 11400000, guid: 4c7690c9724a0834ea42ba4ddf3275d0, type: 2}
     - target: {fileID: 3139968387828256574, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
       propertyPath: 'spawnWaves.Array.data[9]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 776999d0a527a49d5886fce5b8c67bf3, type: 2}
+    - target: {fileID: 3139968387828256574, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: 'spawnWaves.Array.data[10]'
       value: 
       objectReference: {fileID: 11400000, guid: 5cb0f3bd891f49a419ff4427c52570f3, type: 2}
     - target: {fileID: 3647054809633606627, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
@@ -2315,7 +2319,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8862471019685682749, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
       propertyPath: spawnObjects.Array.data[0].eventChance
-      value: 22
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 8862471019685682749, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
       propertyPath: spawnObjects.Array.data[1].eventChance
@@ -2326,9 +2330,17 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8862471019685682749, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: spawnObjects.Array.data[3].eventChance
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8862471019685682749, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
       propertyPath: spawnObjects.Array.data[2].eventToTrigger
       value: 
       objectReference: {fileID: 3428818262367479163, guid: 28bf9303e7a21654b81bb3b8f2ca612b, type: 3}
+    - target: {fileID: 8862471019685682749, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
+      propertyPath: spawnObjects.Array.data[3].eventToTrigger
+      value: 
+      objectReference: {fileID: 3507563590799358362, guid: 562da018342b8c54b9e1cccdcf696f15, type: 3}
     - target: {fileID: 8880950582627939355, guid: adf1a4d54c97d47fb8770636baaf616a, type: 3}
       propertyPath: m_IsActive
       value: 1

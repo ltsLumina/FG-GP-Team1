@@ -1,10 +1,8 @@
 #region
-using System;
 using System.Collections;
 using DG.Tweening;
 using JetBrains.Annotations;
 using Lumina.Essentials.Modules;
-using Unity.Collections;
 using UnityEngine;
 using UnityEngine.Custom.Attributes;
 using UnityEngine.Events;
@@ -219,24 +217,32 @@ public class Task : MonoBehaviour
         else StartTask();
     }
 
+    bool isInRefuelTrigger;
+    
     void OnTriggerEnter(Collider other)
     {
         switch (task)
         {
             case Tasks.Refuel:
-                if (Player.HoldingResource(out Resource heldResource) && heldResource.Item == IGrabbable.Items.Kelp && task == Tasks.Refuel)
-                {
-                    train.SetTaskStatus(Tasks.Refuel);
-                    Destroy(heldResource.gameObject);
-                    var fuelModel = GameObject.Find("FuelModel");
-                    fuelModel.GetComponent<MeshRenderer>().enabled = false;
-                }
+                // if (Player.HoldingResource(out Resource heldResource) && heldResource.Item == IGrabbable.Items.Kelp && task == Tasks.Refuel)
+                // {
+                //     train.SetTaskStatus(Tasks.Refuel);
+                //     Destroy(heldResource.gameObject);
+                //     var fuelModel = GameObject.Find("FuelModel");
+                //     fuelModel.GetComponent<MeshRenderer>().enabled = false;
+                // }
 
                 // Prevents non-grabbed resources such as base kelp, for instance, from being destroyed.
                 if (other.TryGetComponent(out Resource resource) && resource.Item == IGrabbable.Items.Kelp && resource.HasBeenGrabbed)
                 {
                     train.SetTaskStatus(Tasks.Refuel);
                     Destroy(resource.gameObject);
+
+                    if (Player.HoldingResource(out Resource heldResource) && heldResource == resource)
+                    {
+                        var fuelModel = GameObject.Find("FuelModel");
+                        fuelModel.GetComponent<MeshRenderer>().enabled = false;
+                    }
                 }
                 break;
             

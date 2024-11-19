@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f393c73292781f34092d5f6eb761d454, type: 3}
+  m_Name: Angler frfr
+  m_EditorClassIdentifier: 
+  moveSpeed: 8
+  turnSpeed: 7
+  wallContext: 5
+  seperationContext: 3
+  seperationStrength: 5
+  alignmentContext: 7
+  alignmentStrength: 2.8
+  cohesionContext: 10
+  cohesionStrength: 2
+  fleeingMoveSpeedMult: 3
+  fleeContext: 5
+  fleeTimeSeconds: 0.2
+  prefab: {fileID: 8779854975744554584, guid: 3333578c731bbff4a971325ef8abbbe1, type: 3}
+  material: {fileID: 2100000, guid: 45fcb86df74267e42a9895cb7733f3f6, type: 2}

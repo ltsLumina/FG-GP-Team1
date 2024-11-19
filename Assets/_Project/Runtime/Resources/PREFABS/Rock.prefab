@@ -50,9 +50,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: {x: 1, y: 1, z: 3}
   force: 1.25
-  torque: 0.2
-  magnetizationStrength: 15
-  magnetizationDistance: 25
   rockModels:
   - {fileID: 5226338540731633465, guid: 2e4504acec2cfc042a608df80f4d376b, type: 3}
   - {fileID: 583531556197013093, guid: 34db13fcf15d092429003e307f22ae7d, type: 3}

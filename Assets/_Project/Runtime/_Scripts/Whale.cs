@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class Whale : MonoBehaviour
@@ -13,7 +14,7 @@ public class Whale : MonoBehaviour
         SpawnCounter++;
         if (SpawnCounter < 3)
         {
-            Destroy(gameObject, 60);
+            Destroy(gameObject, 75);
         }
         else
         {

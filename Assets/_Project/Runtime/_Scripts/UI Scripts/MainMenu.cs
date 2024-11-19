@@ -137,6 +137,9 @@ public class MainMenu : MonoBehaviour
 
     public void BackToMain()
     {
+        GameManager.Instance.GameMusicInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        GameManager.Instance.GameMusicInstance.release();
+        
         Debug.Log("Returning to the main menu...");
         GameManager.Instance.GameStateChanger(GameManager.GameState.Menu);
         GameManager.Instance.hasPlayedIntro = true;

@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-[ExecuteAlways]
 public class EventSpawner : MonoBehaviour
 {
     [SerializeField]
@@ -53,15 +54,15 @@ public class EventSpawner : MonoBehaviour
     {
         while (true)
         {
-            GameObject spawnObject = RandomizeSpawn();
-
-            if (spawnObject != null)
-            {
-                Instantiate(spawnObject, transform.position, Quaternion.identity);
-            }
-
             float spawnTimer = baseSpawnRate + Random.Range(-randomAdjustment, randomAdjustment);
             spawnTimer = Mathf.Max(0.1f, spawnTimer);
+            
+            if (GameManager.Instance.state == GameManager.GameState.Play)
+            {
+                GameObject spawnObject = RandomizeSpawn();
+
+                if (spawnObject != null) { Instantiate(spawnObject, transform.position, Quaternion.identity); }
+            }
 
             yield return new WaitForSeconds(spawnTimer);
         }
